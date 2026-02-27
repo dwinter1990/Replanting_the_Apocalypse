@@ -22,9 +22,14 @@ public class Growing : MonoBehaviour
     private float nextBounceThreshold;
     private bool hasFullyGrown = false;
 
+    private BoxCollider plantCollider;
     private void Start()
     {
         nextBounceThreshold = transform.localScale.x + growthStep;
+        plantCollider = GetComponent<BoxCollider>();
+        float minMaxScale = maxScale * 0.75f;
+        float maxMaxScale = maxScale * 1.5f;
+        maxScale = Random.Range(minMaxScale, maxMaxScale);
     }
 
     private void OnParticleCollision(GameObject other)
@@ -122,5 +127,7 @@ public class Growing : MonoBehaviour
             finalDuration,
             8,
             0.6f));
+
+        plantCollider.enabled = false;
     }
 }
