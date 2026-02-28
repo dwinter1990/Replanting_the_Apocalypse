@@ -1,35 +1,57 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+[RequireComponent(typeof(Rigidbody))]
+public class FirstPersonController : MonoBehaviour
 {
-    [Header("Player Movement Stats")]
-    [SerializeField] float moveSpeed;
+    [Header("Movement")]
+    public float moveSpeed = 5f;
+    public float groundDrag = 5f;
 
-    private Vector2 moveInput;
+    [Header("Camera")]
+    public Transform cameraTransform; // Cinemachine camera or player head
+
     private Rigidbody rb;
+    private Vector2 moveInput;
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        rb.linearDamping = groundDrag;
+    }
+
+    // Input System callback
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
     }
 
     private void FixedUpdate()
     {
-        HandleMovement();
-    }
+        // Convert input to movement direction relative to camera
+        Vector3 inputDir = new Vector3(moveInput.x, 0f, moveInput.y);
 
-    private void HandleMovement()
-    {
-        Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
+        if (inputDir.sqrMagnitude < 0.01f)
+        {
+            rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, Vector3.zero, 0.2f);
+            return;
+        }
 
-        Vector3 newVelocity = new Vector3(move.x * moveSpeed, rb.linearVelocity.y, move.z * moveSpeed);
+        Vector3 camForward = cameraTransform.forward;
+        camForward.y = 0f;
+        camForward.Normalize();
 
-        rb.linearVelocity = newVelocity;
-    }
+        Vector3 camRight = cameraTransform.right;
+        camRight.y = 0f;
+        camRight.Normalize();
 
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        moveInput = context.ReadValue<Vector2>();
+        Vector3 moveDir = camForward * inputDir.z + camRight * inputDir.x;
+        moveDir.Normalize();
+
+        // Apply movement using velocity change (physics-friendly)
+        Vector3 targetVelocity = moveDir * moveSpeed;
+        Vector3 velocityChange = targetVelocity - rb.linearVelocity;
+        velocityChange.y = 0f; // don’t affect vertical velocity
+        rb.AddForce(velocityChange, ForceMode.VelocityChange);
     }
 }

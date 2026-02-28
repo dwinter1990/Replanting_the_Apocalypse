@@ -1,39 +1,47 @@
 using UnityEngine;
 using DG.Tweening;
 
+[RequireComponent(typeof(TweenQueue))]
 public class Growing : MonoBehaviour
 {
-    [Header("Growth")]
-    [SerializeField] private float growthSpeed = 0.5f;
-    [SerializeField] private float growthStep = 0.15f;
-    [SerializeField] private float maxScale = 2f;
+    [SerializeField] private GrowthSO profile;
 
-    [Header("Juice")]
-    [SerializeField] private float squashAmount = 0.15f;
-    [SerializeField] private float overshoot = 0.25f;
+    private TweenQueue tweenQueue;
 
-    [Header("Final Bounce")]
-    [SerializeField] private float finalOvershoot = 0.5f;
-    [SerializeField] private float finalDuration = 0.4f;
+    private float currentScale;
+    private float maxScale;
+    private float nextBounceThreshold;
 
     private bool isBeingWatered;
     private float waterTimer;
+    private bool hasFullyGrown;
 
-    private float nextBounceThreshold;
-    private bool hasFullyGrown = false;
+    private int plantLayer;
+    private int ignoreWaterLayer;
+    private void Awake()
+    {
 
-    private BoxCollider plantCollider;
+        tweenQueue = GetComponent<TweenQueue>();
+        plantLayer = LayerMask.NameToLayer("Plants");
+        ignoreWaterLayer = LayerMask.NameToLayer("IgnoreWater");
+    }
+
     private void Start()
     {
-        nextBounceThreshold = transform.localScale.x + growthStep;
-        plantCollider = GetComponent<BoxCollider>();
-        float minMaxScale = maxScale * 0.75f;
-        float maxMaxScale = maxScale * 1.5f;
-        maxScale = Random.Range(minMaxScale, maxMaxScale);
+        maxScale = Random.Range(
+            profile.maxScale * 0.75f,
+            profile.maxScale * 1.5f);
+
+        currentScale = transform.localScale.x;
+        nextBounceThreshold = currentScale + profile.growthStep;
     }
 
     private void OnParticleCollision(GameObject other)
     {
+        if (this.hasFullyGrown)
+        {
+            return;
+        }
         isBeingWatered = true;
         waterTimer = 0.15f;
     }
@@ -43,91 +51,99 @@ public class Growing : MonoBehaviour
         if (hasFullyGrown)
             return;
 
-        // Water timeout
-        if (waterTimer > 0)
-            waterTimer -= Time.deltaTime;
-        else
-            isBeingWatered = false;
+        HandleWater();
 
         if (!isBeingWatered)
             return;
 
-        if (transform.localScale.x >= maxScale)
+        Grow();
+    }
+
+    private void HandleWater()
+    {
+        if (waterTimer > 0)
+            waterTimer -= Time.deltaTime;
+        else
+            isBeingWatered = false;
+    }
+
+    private void Grow()
+    {
+        if (currentScale >= maxScale)
         {
-            transform.localScale = Vector3.one * maxScale;
-            TriggerFinalBounce();
+            currentScale = maxScale;
+            SetScale(currentScale);
+            FinalBounce();
             return;
         }
 
-        // Smooth growth
-        float growAmount = growthSpeed * Time.deltaTime;
-        transform.localScale += Vector3.one * growAmount;
+        currentScale += profile.growthSpeed * Time.deltaTime;
+        currentScale = Mathf.Min(currentScale, maxScale);
 
-        if (transform.localScale.x > maxScale)
-            transform.localScale = Vector3.one * maxScale;
+        SetScale(currentScale);
 
-        // Step bounce
-        if (transform.localScale.x >= nextBounceThreshold)
+        if (currentScale >= nextBounceThreshold)
         {
-            PlayJuicyBounce();
-            nextBounceThreshold += growthStep;
+            StepBounce();
+            nextBounceThreshold += profile.growthStep;
         }
     }
 
-    private void PlayJuicyBounce()
+    private void SetScale(float scale)
     {
-        Vector3 baseScale = transform.localScale;
-
-        Sequence step = DOTween.Sequence();
-
-        step.Append(transform.DOScale(
-            new Vector3(baseScale.x + squashAmount,
-                        baseScale.y - squashAmount,
-                        baseScale.z + squashAmount),
-            0.1f));
-
-        step.Append(transform.DOScale(
-            baseScale + Vector3.up * overshoot,
-            0.1f));
-
-        step.Append(transform.DOPunchScale(
-            baseScale,
-            0.15f,5,0.5f).SetEase(Ease.OutBack));
-
-        step.Join(transform.DOPunchRotation(
-            new Vector3(0, 0, 5f),
-            0.2f,
-            5,
-            0.5f));
+        transform.localScale = Vector3.one * scale;
     }
 
-    private void TriggerFinalBounce()
+    private void StepBounce()
+    {
+        float baseScale = currentScale;
+
+        var seq = tweenQueue.CreateSequence("Scale");
+
+        seq.Append(transform.DOScale(
+            new Vector3(baseScale, baseScale * 0.92f, baseScale),
+            0.08f));
+
+        seq.Append(transform.DOScale(
+            new Vector3(baseScale, baseScale * (1f + profile.stepOvershoot), baseScale),
+            0.12f));
+
+        seq.Append(transform.DOScale(
+            Vector3.one * baseScale,
+            0.15f).SetEase(Ease.OutBack, 2f));
+    }
+
+    private void FinalBounce()
     {
         if (hasFullyGrown)
             return;
 
         hasFullyGrown = true;
 
-        Sequence final = DOTween.Sequence();
+        tweenQueue.KillChannel("Scale");
+        tweenQueue.KillChannel("Rotate");
 
-        final.Append(transform.DOScale(
-            Vector3.one * (maxScale * 0.9f),
-            finalDuration * 0.3f));
+        Vector3 baseScale = Vector3.one * maxScale;
 
-        final.Append(transform.DOPunchScale(
-            Vector3.one * (maxScale + finalOvershoot),
-            finalDuration * 0.4f).SetEase(Ease.OutQuad));
+        var seq = tweenQueue.CreateSequence("Scale");
 
-        final.Append(transform.DOPunchScale(
-            Vector3.one * maxScale,
-            finalDuration * 0.3f, 5, 0.5f).SetEase(Ease.OutBack, 2f));
+        seq.Append(transform.DOScale(
+            baseScale * (1f + profile.finalOvershoot),
+            profile.finalDuration * 0.4f).SetEase(Ease.OutQuad));
 
-        final.Join(transform.DOPunchRotation(
-            new Vector3(0, 0, 15f),
-            finalDuration,
-            8,
-            0.6f));
+        seq.Append(transform.DOScale(
+            baseScale,
+            profile.finalDuration * 0.6f).SetEase(Ease.OutBack, 2f));
 
-        plantCollider.enabled = false;
+        tweenQueue.CreateTween(
+            transform.DOPunchRotation(
+                new Vector3(0, 0, profile.wobbleAmount),
+                profile.finalDuration,
+                8,
+                0.7f),
+            "Rotate");
+
+        gameObject.layer = ignoreWaterLayer;
+        Debug.Log(gameObject.name + " has gone to the " + gameObject.layer + " layer!");
     }
 }

@@ -15,7 +15,6 @@ public class PlayerLook : MonoBehaviour
     private void Awake()
     {
         mainCam = GetComponentInChildren<Camera>();
-        
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,7 +24,7 @@ public class PlayerLook : MonoBehaviour
         Cursor.visible = false;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         HandleLook();
     }
