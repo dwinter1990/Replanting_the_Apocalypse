@@ -88,12 +88,12 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ShootSeed",
+                    "name": "ShootSeedInput",
                     "type": "Button",
                     "id": "9766d08a-3ff2-4921-8835-e6ac029201bb",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 }
             ],
@@ -490,7 +490,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "ShootSeed",
+                    "action": "ShootSeedInput",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

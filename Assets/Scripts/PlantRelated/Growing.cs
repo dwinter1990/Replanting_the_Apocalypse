@@ -4,8 +4,9 @@ using DG.Tweening;
 [RequireComponent(typeof(TweenQueue))]
 public class Growing : MonoBehaviour
 {
-    [SerializeField] private GrowthSO profile;
+    [SerializeField] public GrowthSO profile;
 
+    [Header("Animation settings")]
     private TweenQueue tweenQueue;
 
     private float currentScale;
@@ -15,12 +16,15 @@ public class Growing : MonoBehaviour
     private bool isBeingWatered;
     private float waterTimer;
     private bool hasFullyGrown;
+    private bool bounceInProgress;
 
     private int plantLayer;
     private int ignoreWaterLayer;
+
+    private GameObject spawnedMound;
+
     private void Awake()
     {
-
         tweenQueue = GetComponent<TweenQueue>();
         plantLayer = LayerMask.NameToLayer("Plants");
         ignoreWaterLayer = LayerMask.NameToLayer("IgnoreWater");
@@ -38,10 +42,9 @@ public class Growing : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        if (this.hasFullyGrown)
-        {
+        if (hasFullyGrown)
             return;
-        }
+
         isBeingWatered = true;
         waterTimer = 0.15f;
     }
@@ -56,7 +59,7 @@ public class Growing : MonoBehaviour
         if (!isBeingWatered)
             return;
 
-        Grow();
+        GrowSmooth();
     }
 
     private void HandleWater()
@@ -67,7 +70,12 @@ public class Growing : MonoBehaviour
             isBeingWatered = false;
     }
 
-    private void Grow()
+    public void SetSpawnedMound(GameObject mound)
+    {
+        spawnedMound = mound;
+    }
+
+    private void GrowSmooth()
     {
         if (currentScale >= maxScale)
         {
@@ -77,28 +85,35 @@ public class Growing : MonoBehaviour
             return;
         }
 
-        currentScale += profile.growthSpeed * Time.deltaTime;
-        currentScale = Mathf.Min(currentScale, maxScale);
-
-        SetScale(currentScale);
-
-        if (currentScale >= nextBounceThreshold)
+        // Return mound once plant starts growing
+        if (currentScale >= maxScale * 0.25f && spawnedMound != null)
         {
+            MoundPool.instance.Return(spawnedMound);
+            spawnedMound = null;
+        }
+
+        // Smooth growth interpolation
+        float targetScale = currentScale + profile.growthSpeed * Time.deltaTime;
+        currentScale = Mathf.Min(targetScale, maxScale);
+
+        // Interpolate scale for smoother visuals
+        Vector3 newScale = Vector3.Lerp(transform.localScale, Vector3.one * currentScale, Time.deltaTime * 10f);
+        transform.localScale = newScale;
+
+        // Bounce when crossing thresholds
+        if (currentScale >= nextBounceThreshold && !bounceInProgress)
+        {
+            bounceInProgress = true;
             StepBounce();
             nextBounceThreshold += profile.growthStep;
         }
-    }
-
-    private void SetScale(float scale)
-    {
-        transform.localScale = Vector3.one * scale;
     }
 
     private void StepBounce()
     {
         float baseScale = currentScale;
 
-        var seq = tweenQueue.CreateSequence("Scale");
+        var seq = tweenQueue.CreateSequence("Scale"); // Separate channel for scale
 
         seq.Append(transform.DOScale(
             new Vector3(baseScale, baseScale * 0.92f, baseScale),
@@ -111,6 +126,8 @@ public class Growing : MonoBehaviour
         seq.Append(transform.DOScale(
             Vector3.one * baseScale,
             0.15f).SetEase(Ease.OutBack, 2f));
+
+        seq.OnComplete(() => bounceInProgress = false);
     }
 
     private void FinalBounce()
@@ -145,5 +162,10 @@ public class Growing : MonoBehaviour
 
         gameObject.layer = ignoreWaterLayer;
         Debug.Log(gameObject.name + " has gone to the " + gameObject.layer + " layer!");
+    }
+
+    private void SetScale(float scale)
+    {
+        transform.localScale = Vector3.one * scale;
     }
 }

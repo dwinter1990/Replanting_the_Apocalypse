@@ -18,6 +18,10 @@ public class FirstPersonController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.linearDamping = groundDrag;
+        rb.freezeRotation = true;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false; 
     }
 
     // Input System callback
@@ -52,6 +56,8 @@ public class FirstPersonController : MonoBehaviour
         Vector3 targetVelocity = moveDir * moveSpeed;
         Vector3 velocityChange = targetVelocity - rb.linearVelocity;
         velocityChange.y = 0f; // don’t affect vertical velocity
-        rb.AddForce(velocityChange, ForceMode.VelocityChange);
+        //rb.AddForce(velocityChange, ForceMode.VelocityChange);
+
+        transform.position += moveDir * moveSpeed * Time.fixedDeltaTime;
     }
 }
