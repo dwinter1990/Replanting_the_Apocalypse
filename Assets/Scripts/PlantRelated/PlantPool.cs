@@ -1,8 +1,19 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+[System.Serializable] 
+
+public enum PlantType
+{
+    Grass,
+    Flower,
+    Bush,
+    Tree
+}
 public class PlantPool : MonoBehaviour
 {
+    public PlantType plantType;
+
     [SerializeField] private GameObject prefab;
     [SerializeField] private int preloadAmount = 20;
 

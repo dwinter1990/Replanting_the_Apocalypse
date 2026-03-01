@@ -38,15 +38,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4132584643862712596, guid: eb16140d76ecc904c86e523ad605c503, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.001564
+      value: -5.9339743
       objectReference: {fileID: 0}
     - target: {fileID: 4132584643862712596, guid: eb16140d76ecc904c86e523ad605c503, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.000025462852
       objectReference: {fileID: 0}
     - target: {fileID: 4132584643862712596, guid: eb16140d76ecc904c86e523ad605c503, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.003575
+      value: 5.15707
       objectReference: {fileID: 0}
     - target: {fileID: 4132584643862712596, guid: eb16140d76ecc904c86e523ad605c503, type: 3}
       propertyPath: m_LocalRotation.w
@@ -78,6 +78,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4132584643862712596, guid: eb16140d76ecc904c86e523ad605c503, type: 3}
       propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5573756757986615577, guid: eb16140d76ecc904c86e523ad605c503, type: 3}
+      propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

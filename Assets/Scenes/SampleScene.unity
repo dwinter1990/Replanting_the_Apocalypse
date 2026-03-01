@@ -119,6 +119,53 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &3969398
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3969400}
+  - component: {fileID: 3969399}
+  m_Layer: 0
+  m_Name: PlantPool (49)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &3969399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3969398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 5840722747867799655, guid: 5ba97c5d53adfb943b7756ebce17bfef, type: 3}
+  preloadAmount: 10
+--- !u!4 &3969400
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3969398}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &11081825
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,6 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantType: 1
   prefab: {fileID: 1527378451313244788, guid: c58c282d3f4c6c74dbbfa7e8190d65c0, type: 3}
   preloadAmount: 10
 --- !u!4 &11081827
@@ -163,7 +211,148 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1324233329}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &46818295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 46818297}
+  - component: {fileID: 46818296}
+  m_Layer: 0
+  m_Name: PlantPool (19)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &46818296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46818295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 1
+  prefab: {fileID: 6344123407949237309, guid: 6922e2e73ccbbd24ca58647a1218b65b, type: 3}
+  preloadAmount: 10
+--- !u!4 &46818297
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46818295}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1324233329}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &50308686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 50308688}
+  - component: {fileID: 50308687}
+  m_Layer: 0
+  m_Name: PlantPool (27)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &50308687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50308686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 0
+  prefab: {fileID: 3687679064891213462, guid: 67ab5247a740751489fdb8d82cf9fa28, type: 3}
+  preloadAmount: 10
+--- !u!4 &50308688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50308686}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1291398569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &54939709
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 54939711}
+  - component: {fileID: 54939710}
+  m_Layer: 0
+  m_Name: PlantPool (24)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &54939710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54939709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 0
+  prefab: {fileID: 1546860849939158235, guid: 8447391e092445d498ed9e87503990c9, type: 3}
+  preloadAmount: 10
+--- !u!4 &54939711
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54939709}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1291398569}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &120230327
 GameObject:
@@ -194,6 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantType: 1
   prefab: {fileID: 2440969906564438741, guid: d411c66c57fe6904c84e93e2c02ab86c, type: 3}
   preloadAmount: 10
 --- !u!4 &120230329
@@ -209,7 +399,54 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1324233329}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &143199348
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 143199350}
+  - component: {fileID: 143199349}
+  m_Layer: 0
+  m_Name: PlantPool (15)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &143199349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143199348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 1
+  prefab: {fileID: 5938654572000515357, guid: 7bdb1b10cad330647a182d114baba1b8, type: 3}
+  preloadAmount: 10
+--- !u!4 &143199350
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143199348}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1324233329}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &155155184
 GameObject:
@@ -303,6 +540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantType: 1
   prefab: {fileID: 3273213391447943327, guid: 57516d9d299566e4895e7ef0fd73187a, type: 3}
   preloadAmount: 10
 --- !u!4 &203159382
@@ -318,7 +556,148 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1324233329}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &214015090
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 214015092}
+  - component: {fileID: 214015091}
+  m_Layer: 0
+  m_Name: PlantPool (43)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &214015091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214015090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 3972301722726773205, guid: 512c4844ede40cd46aea381ba6186f43, type: 3}
+  preloadAmount: 10
+--- !u!4 &214015092
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214015090}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &347243316
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 347243318}
+  - component: {fileID: 347243317}
+  m_Layer: 0
+  m_Name: PlantPool (14)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &347243317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347243316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 1
+  prefab: {fileID: 8597617559514208127, guid: 73718ed518c6e3048aa25793a6c8e622, type: 3}
+  preloadAmount: 10
+--- !u!4 &347243318
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347243316}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1324233329}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &367877037
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 367877039}
+  - component: {fileID: 367877038}
+  m_Layer: 0
+  m_Name: PlantPool (38)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &367877038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367877037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 9014074089688908389, guid: ca0fa6ac7c316cd41bb2bd10ac4445c2, type: 3}
+  preloadAmount: 10
+--- !u!4 &367877039
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367877037}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &399191756
 GameObject:
@@ -550,6 +929,295 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1 &418210022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 418210024}
+  - component: {fileID: 418210023}
+  m_Layer: 0
+  m_Name: PlantPool (50)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &418210023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418210022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 7636114321142879606, guid: 169952983c8b67541a2c64adb4167f7f, type: 3}
+  preloadAmount: 10
+--- !u!4 &418210024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418210022}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &478661608
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 478661610}
+  - component: {fileID: 478661609}
+  m_Layer: 0
+  m_Name: PlantPool (25)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &478661609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478661608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 0
+  prefab: {fileID: 5981922068815638749, guid: 6495f318c02edb541af3d582fa31de02, type: 3}
+  preloadAmount: 10
+--- !u!4 &478661610
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478661608}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1291398569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &492143236
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 492143238}
+  - component: {fileID: 492143237}
+  m_Layer: 0
+  m_Name: PlantPool (36)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &492143237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492143236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 8335499320482475738, guid: b4e043096bbfcd14baaf1b39776e3887, type: 3}
+  preloadAmount: 10
+--- !u!4 &492143238
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492143236}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &523748849
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 523748850}
+  m_Layer: 0
+  m_Name: PlantPool_Tree
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &523748850
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523748849}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1776080436}
+  - {fileID: 536254661}
+  - {fileID: 1614387036}
+  - {fileID: 492143238}
+  - {fileID: 1901130128}
+  - {fileID: 367877039}
+  - {fileID: 703242101}
+  - {fileID: 701019190}
+  - {fileID: 1955731841}
+  - {fileID: 1093644955}
+  - {fileID: 214015092}
+  - {fileID: 2137279615}
+  - {fileID: 785611642}
+  - {fileID: 1249965185}
+  - {fileID: 957962732}
+  - {fileID: 1703316493}
+  - {fileID: 3969400}
+  - {fileID: 418210024}
+  - {fileID: 1918223053}
+  - {fileID: 902431418}
+  - {fileID: 1016368056}
+  - {fileID: 2137175579}
+  - {fileID: 841924310}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &531990556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 531990558}
+  - component: {fileID: 531990557}
+  m_Layer: 0
+  m_Name: PlantPool (26)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &531990557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531990556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 0
+  prefab: {fileID: 1663161211488450339, guid: 542407cf41cfb844dbeb20153cc76fb0, type: 3}
+  preloadAmount: 10
+--- !u!4 &531990558
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531990556}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1291398569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &536254659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 536254661}
+  - component: {fileID: 536254660}
+  m_Layer: 0
+  m_Name: PlantPool (34)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &536254660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536254659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 2179878337148567337, guid: 95b50f5a272653940934878ef6cc82d2, type: 3}
+  preloadAmount: 10
+--- !u!4 &536254661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536254659}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &606010004
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,6 +1247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantType: 2
   prefab: {fileID: 4211992013879242884, guid: ce7a1d99896ee09448ef2b0d10dd6207, type: 3}
   preloadAmount: 10
 --- !u!4 &606010006
@@ -594,7 +1263,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2083286246}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &679157870
 GameObject:
@@ -656,6 +1325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantType: 1
   prefab: {fileID: 6739163303319649737, guid: 62432bbcffc9c0f4c9b5567c4c4c3bfa, type: 3}
   preloadAmount: 10
 --- !u!4 &683180316
@@ -671,7 +1341,101 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1324233329}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &701019188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 701019190}
+  - component: {fileID: 701019189}
+  m_Layer: 0
+  m_Name: PlantPool (40)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &701019189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701019188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 6780041315599947657, guid: 206750c0d243520498c7d697984d925e, type: 3}
+  preloadAmount: 10
+--- !u!4 &701019190
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701019188}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &703242099
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 703242101}
+  - component: {fileID: 703242100}
+  m_Layer: 0
+  m_Name: PlantPool (39)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &703242100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703242099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 3511653082887807123, guid: 2b6b374fcfa3bc7408e104bb5a688505, type: 3}
+  preloadAmount: 10
+--- !u!4 &703242101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703242099}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &738361011
 GameObject:
@@ -702,6 +1466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantType: 2
   prefab: {fileID: 4516341604817359366, guid: 144e2df36ae1ae84eb9ac6473f40f119, type: 3}
   preloadAmount: 10
 --- !u!4 &738361013
@@ -717,7 +1482,148 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2083286246}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &785611640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 785611642}
+  - component: {fileID: 785611641}
+  m_Layer: 0
+  m_Name: PlantPool (45)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &785611641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785611640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 8087569439903537320, guid: 50df07ad84bdcdb4abc5cd2d56aa4b79, type: 3}
+  preloadAmount: 10
+--- !u!4 &785611642
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785611640}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &841924308
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 841924310}
+  - component: {fileID: 841924309}
+  m_Layer: 0
+  m_Name: PlantPool (55)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &841924309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841924308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 6826521421891352116, guid: 56a0f8ba9020c8f46afadba3f9afc5a0, type: 3}
+  preloadAmount: 10
+--- !u!4 &841924310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841924308}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &902431416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 902431418}
+  - component: {fileID: 902431417}
+  m_Layer: 0
+  m_Name: PlantPool (52)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &902431417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902431416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 1102690579117163972, guid: ea053fe5491cab84bb9893f0837a1239, type: 3}
+  preloadAmount: 10
+--- !u!4 &902431418
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902431416}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &905850566
 GameObject:
@@ -748,6 +1654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantType: 1
   prefab: {fileID: 5198593990228819251, guid: 183336bae36a97e4880c1f07c959ebf1, type: 3}
   preloadAmount: 10
 --- !u!4 &905850568
@@ -763,7 +1670,54 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1324233329}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &957962730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 957962732}
+  - component: {fileID: 957962731}
+  m_Layer: 0
+  m_Name: PlantPool (47)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &957962731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957962730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 552987155840522923, guid: 2fc821a46b15e4241b45da3e31612aa6, type: 3}
+  preloadAmount: 10
+--- !u!4 &957962732
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957962730}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &988594794
 GameObject:
@@ -795,11 +1749,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantPools:
-  - {fileID: 1068300766}
-  - {fileID: 2011961365}
-  - {fileID: 606010005}
-  - {fileID: 738361012}
-  - {fileID: 2138501060}
+  - {fileID: 1841861539}
+  - {fileID: 1337116984}
+  - {fileID: 2088000462}
+  - {fileID: 54939710}
+  - {fileID: 478661609}
+  - {fileID: 531990557}
+  - {fileID: 50308687}
+  - {fileID: 1773063700}
+  - {fileID: 1358592356}
+  - {fileID: 1595431413}
+  - {fileID: 1946412856}
+  - {fileID: 1479292976}
   - {fileID: 203159381}
   - {fileID: 1153009075}
   - {fileID: 120230328}
@@ -809,6 +1770,42 @@ MonoBehaviour:
   - {fileID: 905850567}
   - {fileID: 2086136701}
   - {fileID: 683180315}
+  - {fileID: 347243317}
+  - {fileID: 143199349}
+  - {fileID: 1502415210}
+  - {fileID: 1913922741}
+  - {fileID: 1541994985}
+  - {fileID: 46818296}
+  - {fileID: 1556017567}
+  - {fileID: 1068300766}
+  - {fileID: 2011961365}
+  - {fileID: 606010005}
+  - {fileID: 738361012}
+  - {fileID: 2138501060}
+  - {fileID: 1776080435}
+  - {fileID: 536254660}
+  - {fileID: 1614387035}
+  - {fileID: 492143237}
+  - {fileID: 1901130127}
+  - {fileID: 367877038}
+  - {fileID: 703242100}
+  - {fileID: 701019189}
+  - {fileID: 1955731840}
+  - {fileID: 1093644954}
+  - {fileID: 214015091}
+  - {fileID: 2137279614}
+  - {fileID: 785611641}
+  - {fileID: 1249965184}
+  - {fileID: 957962731}
+  - {fileID: 1703316492}
+  - {fileID: 3969399}
+  - {fileID: 418210023}
+  - {fileID: 1918223052}
+  - {fileID: 902431417}
+  - {fileID: 1016368055}
+  - {fileID: 2137175578}
+  - {fileID: 841924309}
+  selectedType: 3
 --- !u!4 &988594796
 Transform:
   m_ObjectHideFlags: 0
@@ -823,6 +1820,53 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1016368054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1016368056}
+  - component: {fileID: 1016368055}
+  m_Layer: 0
+  m_Name: PlantPool (53)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1016368055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016368054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 2306588362515523570, guid: 8539648bd40ddec48b3216172c85be7c, type: 3}
+  preloadAmount: 10
+--- !u!4 &1016368056
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016368054}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1068300765
 GameObject:
@@ -853,6 +1897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantType: 2
   prefab: {fileID: 3461819196513668044, guid: a6f0eb1e8df01aa42ac6dd94fc1314ef, type: 3}
   preloadAmount: 10
 --- !u!4 &1068300767
@@ -868,7 +1913,54 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2083286246}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1093644953
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1093644955}
+  - component: {fileID: 1093644954}
+  m_Layer: 0
+  m_Name: PlantPool (42)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1093644954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093644953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 1584711449705388276, guid: 98e95fa4fe185b24ebc9a29a2e8ef2e1, type: 3}
+  preloadAmount: 10
+--- !u!4 &1093644955
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093644953}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1130761987
 GameObject:
@@ -899,6 +1991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantType: 1
   prefab: {fileID: 645843139822150079, guid: 9d3230d912002ed4d9f733f60fe9f63c, type: 3}
   preloadAmount: 10
 --- !u!4 &1130761989
@@ -914,7 +2007,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1324233329}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1153009074
 GameObject:
@@ -945,6 +2038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantType: 1
   prefab: {fileID: 5743115450717117314, guid: 34e66f4f5f830b442b74d6a3c4ece259, type: 3}
   preloadAmount: 10
 --- !u!4 &1153009076
@@ -960,7 +2054,661 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
+  m_Father: {fileID: 1324233329}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1249965183
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1249965185}
+  - component: {fileID: 1249965184}
+  m_Layer: 0
+  m_Name: PlantPool (46)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1249965184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249965183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 1203026994842755087, guid: 6ac9dce466c313243bee915fbe4f3488, type: 3}
+  preloadAmount: 10
+--- !u!4 &1249965185
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249965183}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1291398568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1291398569}
+  m_Layer: 0
+  m_Name: PlantPool_Grass
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1291398569
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291398568}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1841861540}
+  - {fileID: 1337116985}
+  - {fileID: 2088000463}
+  - {fileID: 54939711}
+  - {fileID: 478661610}
+  - {fileID: 531990558}
+  - {fileID: 50308688}
+  - {fileID: 1773063701}
+  - {fileID: 1358592357}
+  - {fileID: 1595431414}
+  - {fileID: 1946412857}
+  - {fileID: 1479292977}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1324233328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1324233329}
+  m_Layer: 0
+  m_Name: PlantPool_Flower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1324233329
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324233328}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 203159382}
+  - {fileID: 1153009076}
+  - {fileID: 120230329}
+  - {fileID: 1130761989}
+  - {fileID: 11081827}
+  - {fileID: 1828058294}
+  - {fileID: 905850568}
+  - {fileID: 2086136702}
+  - {fileID: 683180316}
+  - {fileID: 347243318}
+  - {fileID: 143199350}
+  - {fileID: 1502415211}
+  - {fileID: 1913922742}
+  - {fileID: 1541994986}
+  - {fileID: 46818297}
+  - {fileID: 1556017568}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1337116983
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1337116985}
+  - component: {fileID: 1337116984}
+  m_Layer: 0
+  m_Name: PlantPool (22)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1337116984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337116983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 0
+  prefab: {fileID: 6804192355287361088, guid: 9527d0b2e56936744a309d7a6f5fff71, type: 3}
+  preloadAmount: 10
+--- !u!4 &1337116985
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337116983}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1291398569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1358592355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1358592357}
+  - component: {fileID: 1358592356}
+  m_Layer: 0
+  m_Name: PlantPool (29)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1358592356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358592355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 0
+  prefab: {fileID: 2385341467414286616, guid: 26dde71d83a11fb4aba8e5a7a57a4869, type: 3}
+  preloadAmount: 10
+--- !u!4 &1358592357
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358592355}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1291398569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1479292975
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1479292977}
+  - component: {fileID: 1479292976}
+  m_Layer: 0
+  m_Name: PlantPool (32)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1479292976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479292975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 0
+  prefab: {fileID: 3807317947036168224, guid: d7198333c8248554c9df177b27d7334b, type: 3}
+  preloadAmount: 10
+--- !u!4 &1479292977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479292975}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1291398569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1502415209
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1502415211}
+  - component: {fileID: 1502415210}
+  m_Layer: 0
+  m_Name: PlantPool (16)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1502415210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502415209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 1
+  prefab: {fileID: 7791660496557532024, guid: d11b77469e9eb7641b68c37724a8672a, type: 3}
+  preloadAmount: 10
+--- !u!4 &1502415211
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502415209}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1324233329}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1541994984
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1541994986}
+  - component: {fileID: 1541994985}
+  m_Layer: 0
+  m_Name: PlantPool (18)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1541994985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541994984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 1
+  prefab: {fileID: 843813061365124248, guid: 8c53c59451166a0408bc55b9f58d3a99, type: 3}
+  preloadAmount: 10
+--- !u!4 &1541994986
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541994984}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1324233329}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1556017566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1556017568}
+  - component: {fileID: 1556017567}
+  m_Layer: 0
+  m_Name: PlantPool (20)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1556017567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556017566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 1
+  prefab: {fileID: 8431524188480741287, guid: c87cc14040f4fc141b25b1959506393b, type: 3}
+  preloadAmount: 10
+--- !u!4 &1556017568
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556017566}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1324233329}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1595431412
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1595431414}
+  - component: {fileID: 1595431413}
+  m_Layer: 0
+  m_Name: PlantPool (30)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1595431413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595431412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 0
+  prefab: {fileID: 7445574622822742485, guid: b6403231060d67d4eace081fd11ed946, type: 3}
+  preloadAmount: 10
+--- !u!4 &1595431414
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595431412}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1291398569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1614387034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1614387036}
+  - component: {fileID: 1614387035}
+  m_Layer: 0
+  m_Name: PlantPool (35)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1614387035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614387034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 2934097620514297202, guid: 5cd82f0000afea34abcff73117f7d7f5, type: 3}
+  preloadAmount: 10
+--- !u!4 &1614387036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614387034}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1703316491
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1703316493}
+  - component: {fileID: 1703316492}
+  m_Layer: 0
+  m_Name: PlantPool (48)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1703316492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1703316491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 1524578149651816183, guid: 4eea34a8cb90efe49aee7565bce72a21, type: 3}
+  preloadAmount: 10
+--- !u!4 &1703316493
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1703316491}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1773063699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1773063701}
+  - component: {fileID: 1773063700}
+  m_Layer: 0
+  m_Name: PlantPool (28)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1773063700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773063699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 0
+  prefab: {fileID: 4025531929570093716, guid: 4374f6b2b2e7a00489e5bb1f91bff41c, type: 3}
+  preloadAmount: 10
+--- !u!4 &1773063701
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773063699}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1291398569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1776080434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1776080436}
+  - component: {fileID: 1776080435}
+  m_Layer: 0
+  m_Name: PlantPool (33)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1776080435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776080434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 5306673680662349584, guid: b21e72eea0bd4a848b7ec2fab4b692b5, type: 3}
+  preloadAmount: 10
+--- !u!4 &1776080436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776080434}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1828058292
 GameObject:
@@ -991,6 +2739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantType: 1
   prefab: {fileID: 235920359831562422, guid: db1bec44a26647e4f85eb60046110d98, type: 3}
   preloadAmount: 10
 --- !u!4 &1828058294
@@ -1006,7 +2755,289 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1324233329}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1841861538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1841861540}
+  - component: {fileID: 1841861539}
+  m_Layer: 0
+  m_Name: PlantPool (21)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1841861539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841861538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 0
+  prefab: {fileID: 6239684088099941245, guid: c900f7782c92a1048aa88fbfb5a57344, type: 3}
+  preloadAmount: 10
+--- !u!4 &1841861540
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841861538}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1291398569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1901130126
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1901130128}
+  - component: {fileID: 1901130127}
+  m_Layer: 0
+  m_Name: PlantPool (37)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1901130127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901130126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 5055161282401729822, guid: 78c4ef068a96a7d478537537dad07be9, type: 3}
+  preloadAmount: 10
+--- !u!4 &1901130128
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901130126}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1913922740
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1913922742}
+  - component: {fileID: 1913922741}
+  m_Layer: 0
+  m_Name: PlantPool (17)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1913922741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913922740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 1
+  prefab: {fileID: 9010621801431218358, guid: 64fc59ac8f68ecb45b0e50662a981dd2, type: 3}
+  preloadAmount: 10
+--- !u!4 &1913922742
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913922740}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1324233329}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1918223051
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1918223053}
+  - component: {fileID: 1918223052}
+  m_Layer: 0
+  m_Name: PlantPool (51)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1918223052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918223051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 1519585633416009411, guid: 19307ed98eb992c488b483afaea178a1, type: 3}
+  preloadAmount: 10
+--- !u!4 &1918223053
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918223051}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1946412855
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1946412857}
+  - component: {fileID: 1946412856}
+  m_Layer: 0
+  m_Name: PlantPool (31)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1946412856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946412855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 0
+  prefab: {fileID: 4037373460035285617, guid: dba7ced0fbc8fbd4aa49bead3ee838a4, type: 3}
+  preloadAmount: 10
+--- !u!4 &1946412857
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946412855}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1291398569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1955731839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1955731841}
+  - component: {fileID: 1955731840}
+  m_Layer: 0
+  m_Name: PlantPool (41)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1955731840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955731839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 4313235309027267050, guid: b0b52c48606927d4cad85f575b02aefb, type: 3}
+  preloadAmount: 10
+--- !u!4 &1955731841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955731839}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2011961364
 GameObject:
@@ -1037,6 +3068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantType: 2
   prefab: {fileID: 7857502403576149699, guid: 21b46180bf6370a409a820dbdf5af547, type: 3}
   preloadAmount: 10
 --- !u!4 &2011961366
@@ -1052,6 +3084,42 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
+  m_Father: {fileID: 2083286246}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2083286245
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2083286246}
+  m_Layer: 0
+  m_Name: PlantPool_Bush
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2083286246
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083286245}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1068300767}
+  - {fileID: 2011961366}
+  - {fileID: 606010006}
+  - {fileID: 738361013}
+  - {fileID: 2138501061}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2086136700
@@ -1083,6 +3151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantType: 1
   prefab: {fileID: 7909332430578507031, guid: 33cf917f71a5383479f4a01668090e21, type: 3}
   preloadAmount: 10
 --- !u!4 &2086136702
@@ -1098,7 +3167,54 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1324233329}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2088000461
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2088000463}
+  - component: {fileID: 2088000462}
+  m_Layer: 0
+  m_Name: PlantPool (23)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2088000462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088000461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 0
+  prefab: {fileID: 3866131090055005214, guid: b9a652520261b79489cbbee8396b1f45, type: 3}
+  preloadAmount: 10
+--- !u!4 &2088000463
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088000461}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1291398569}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2135863202
 GameObject:
@@ -1146,6 +3262,100 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2137175577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2137175579}
+  - component: {fileID: 2137175578}
+  m_Layer: 0
+  m_Name: PlantPool (54)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2137175578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137175577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 8293028891949362218, guid: fac71f7b52e726e4ebcf05998e97629a, type: 3}
+  preloadAmount: 10
+--- !u!4 &2137175579
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137175577}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2137279613
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2137279615}
+  - component: {fileID: 2137279614}
+  m_Layer: 0
+  m_Name: PlantPool (44)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2137279614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137279613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: 3
+  prefab: {fileID: 721995345952350488, guid: e6811e0e268887a42b879c2540f4853a, type: 3}
+  preloadAmount: 10
+--- !u!4 &2137279615
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137279613}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 523748850}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2138501059
 GameObject:
   m_ObjectHideFlags: 0
@@ -1175,6 +3385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantType: 2
   prefab: {fileID: 8228886159429981933, guid: 44c56f3d549bff14ba1f9a9ab051561f, type: 3}
   preloadAmount: 10
 --- !u!4 &2138501061
@@ -1190,7 +3401,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2083286246}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!81 &1418938388756766491
 AudioListener:
@@ -1296,15 +3507,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2011348734693824865, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
       propertyPath: m_ActionEvents.Array.size
-      value: 20
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 2011348734693824865, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
       propertyPath: m_ActionEvents.Array.data[19].m_ActionId
       value: 9766d08a-3ff2-4921-8835-e6ac029201bb
       objectReference: {fileID: 0}
     - target: {fileID: 2011348734693824865, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_ActionId
+      value: 97caddec-d7e4-470b-b44e-11df45a10439
+      objectReference: {fileID: 0}
+    - target: {fileID: 2011348734693824865, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
       propertyPath: m_ActionEvents.Array.data[19].m_ActionName
       value: 'Player/ShootSeed[/Mouse/rightButton]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2011348734693824865, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_ActionName
+      value: 'Player/Scroll[/Mouse/scroll]'
       objectReference: {fileID: 0}
     - target: {fileID: 2011348734693824865, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
       propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.size
@@ -1315,7 +3534,15 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2011348734693824865, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2011348734693824865, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
       propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2011348734693824865, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2011348734693824865, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
@@ -1323,7 +3550,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 155155185}
     - target: {fileID: 2011348734693824865, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6331476138607074715}
+    - target: {fileID: 2011348734693824865, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
       propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2011348734693824865, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2011348734693824865, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
@@ -1331,11 +3566,23 @@ PrefabInstance:
       value: OnShootSeedInput
       objectReference: {fileID: 0}
     - target: {fileID: 2011348734693824865, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnChangePlantType
+      objectReference: {fileID: 0}
+    - target: {fileID: 2011348734693824865, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
       propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: SeedManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2011348734693824865, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlantSelector, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2011348734693824865, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
       propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2011348734693824865, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5116849152146687293, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
@@ -1388,13 +3635,33 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 913799420262521511, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 679157871}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9142817005847245816, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
+      insertIndex: 6
+      addedObject: {fileID: 6331476138607074715}
   m_SourcePrefab: {fileID: 100100000, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
 --- !u!4 &6331476138607074713 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 913799420262521511, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
   m_PrefabInstance: {fileID: 6331476138607074712}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6331476138607074714 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9142817005847245816, guid: 2f28e1b3e99ca2746aff04680eb64fe6, type: 3}
+  m_PrefabInstance: {fileID: 6331476138607074712}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6331476138607074715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6331476138607074714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b76a0739ac38d244e8e8ef91b8a6c595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6972790123303850226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1482,17 +3749,7 @@ SceneRoots:
   - {fileID: 155155186}
   - {fileID: 2135863204}
   - {fileID: 988594796}
-  - {fileID: 1068300767}
-  - {fileID: 2011961366}
-  - {fileID: 606010006}
-  - {fileID: 738361013}
-  - {fileID: 2138501061}
-  - {fileID: 203159382}
-  - {fileID: 1153009076}
-  - {fileID: 120230329}
-  - {fileID: 1130761989}
-  - {fileID: 11081827}
-  - {fileID: 1828058294}
-  - {fileID: 905850568}
-  - {fileID: 2086136702}
-  - {fileID: 683180316}
+  - {fileID: 1291398569}
+  - {fileID: 1324233329}
+  - {fileID: 2083286246}
+  - {fileID: 523748850}

@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 5173552065122824246, guid: f50c6a840d7f55345b57186aecf2fe63, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7345221650873638924, guid: f50c6a840d7f55345b57186aecf2fe63, type: 3}
       propertyPath: m_Name
       value: Tree_16_Spring Variant
@@ -38,15 +42,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7972682509578451638, guid: f50c6a840d7f55345b57186aecf2fe63, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.001493
+      value: -5.9339743
       objectReference: {fileID: 0}
     - target: {fileID: 7972682509578451638, guid: f50c6a840d7f55345b57186aecf2fe63, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.0000099063245
       objectReference: {fileID: 0}
     - target: {fileID: 7972682509578451638, guid: f50c6a840d7f55345b57186aecf2fe63, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.9975185
+      value: 5.15707
       objectReference: {fileID: 0}
     - target: {fileID: 7972682509578451638, guid: f50c6a840d7f55345b57186aecf2fe63, type: 3}
       propertyPath: m_LocalRotation.w

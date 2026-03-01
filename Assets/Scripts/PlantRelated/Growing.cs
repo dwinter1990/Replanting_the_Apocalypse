@@ -42,9 +42,16 @@ public class Growing : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        if (hasFullyGrown)
-            return;
+        Growing growingScript = other.GetComponent<Growing>();
 
+        if (growingScript == null)
+        {
+            growingScript = GetComponentInParent<Growing>();
+        }
+        if (growingScript == null || growingScript.hasFullyGrown)
+        {
+            return;
+        }
         isBeingWatered = true;
         waterTimer = 0.15f;
     }

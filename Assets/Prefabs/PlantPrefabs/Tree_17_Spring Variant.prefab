@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1170992074284938622, guid: 68615dc7459e15c439e908a0fb0eca20, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1311056765529353926, guid: 68615dc7459e15c439e908a0fb0eca20, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.01
@@ -22,15 +26,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1311056765529353926, guid: 68615dc7459e15c439e908a0fb0eca20, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.0014915
+      value: -5.9339743
       objectReference: {fileID: 0}
     - target: {fileID: 1311056765529353926, guid: 68615dc7459e15c439e908a0fb0eca20, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.00036674595
       objectReference: {fileID: 0}
     - target: {fileID: 1311056765529353926, guid: 68615dc7459e15c439e908a0fb0eca20, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.002481
+      value: 5.15707
       objectReference: {fileID: 0}
     - target: {fileID: 1311056765529353926, guid: 68615dc7459e15c439e908a0fb0eca20, type: 3}
       propertyPath: m_LocalRotation.w
