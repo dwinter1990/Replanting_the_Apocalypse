@@ -31,15 +31,27 @@ public class PlantPool : MonoBehaviour
 
     public GameObject Get()
     {
+        GameObject obj;
+
         if (pool.Count > 0)
         {
-            GameObject obj = pool.Dequeue();
-            obj.SetActive(true);
-            return obj;
+            obj = pool.Dequeue();
+        }
+        else
+        {
+            obj = Instantiate(prefab);
         }
 
-        // Optional fallback if pool empties
-        return Instantiate(prefab);
+        obj.SetActive(true);
+
+        // Tell the plant which pool it came from
+        Growing growing = obj.GetComponent<Growing>();
+        if (growing != null)
+        {
+            growing.SetPool(this);
+        }
+
+        return obj;
     }
 
     public void Return(GameObject obj)

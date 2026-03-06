@@ -28,18 +28,18 @@ public class WaterHose : MonoBehaviour
         PlayerStats.Instance.UseWater(waterUsageRate);
         emission.rateOverTime = new ParticleSystem.MinMaxCurve(waterUsageRate);
     }
-    public void OnAttack(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            StartSpray();
-        }
+    //public void OnAttack(InputAction.CallbackContext context)
+    //{
+    //    if (context.performed)
+    //    {
+    //        StartSpray();
+    //    }
 
-        if (context.canceled)
-        {
-            StopSpray();
-        }
-    }
+    //    if (context.canceled)
+    //    {
+    //        StopSpray();
+    //    }
+    //}
     public void StartSpray()
     {
         if(PlayerStats.Instance.currentWaterCapacity <= 0)

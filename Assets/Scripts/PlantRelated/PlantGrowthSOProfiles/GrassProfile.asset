@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9c90dcd5e72f6649a193b9341317115, type: 3}
   m_Name: GrassProfile
   m_EditorClassIdentifier: 
+  startScale: {x: 0.05, y: 0.05, z: 0.05}
   growthSpeed: 0.75
   growthStep: 0.5
   maxScale: 1.5
+  totalGrowTime: 3
   stepOvershoot: 0.5
   finalOvershoot: 0.5
   finalDuration: 0.25

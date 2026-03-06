@@ -38,20 +38,12 @@ public class SeedManager : MonoBehaviour
         GameObject seed = pool.GetObject();
         seed.transform.position = seedSpawnPoint.position;
         seed.transform.rotation = seedSpawnPoint.rotation;
-        
+        seed.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
         Rigidbody rb = seed.GetComponent<Rigidbody>();
 
         if(rb != null)
         {
             rb.linearVelocity = seed.transform.up * seedSpeed;
         }
-
-        //StartCoroutine(DeactivateSeed(seed));
-    }
-
-    IEnumerator DeactivateSeed(GameObject seed)
-    {
-        yield return new WaitForSeconds(2f);
-        pool.ReturnObject(seed);
     }
 }

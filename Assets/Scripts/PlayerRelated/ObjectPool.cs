@@ -20,6 +20,17 @@ public class ObjectPool : MonoBehaviour
 
     public void ReturnObject(GameObject obj) 
     {
+        var growing = obj.GetComponent<Growing>();
+        if (growing != null)
+        {
+            obj.transform.localScale = growing.profile.startScale;
+            obj.transform.localRotation = growing.startRotation;
+        }
+        else
+        {
+            obj.transform.localScale = Vector3.one;
+            obj.transform.localRotation = Quaternion.identity;
+        }
         obj.SetActive(false);
         pool.Enqueue(obj);
     }
