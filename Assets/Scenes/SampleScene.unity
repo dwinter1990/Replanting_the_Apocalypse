@@ -4282,7 +4282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7b213ae68d5c1847a0a9bffb47d7f70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWaterCapacity: 100
+  maxWaterCapacity: 1e+12
   currentWaterCapacity: 100
   moveSpeed: 5
 --- !u!114 &6972790123303850226
