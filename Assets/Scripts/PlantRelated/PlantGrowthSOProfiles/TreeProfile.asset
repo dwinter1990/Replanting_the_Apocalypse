@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9c90dcd5e72f6649a193b9341317115, type: 3}
   m_Name: TreeProfile
   m_EditorClassIdentifier: 
+  minGrowthSpeed: 0.8
+  maxGrowthSpeed: 1.2
+  growthSteps: 12
+  waterMemory: 0.4
+  growthDuration: 8
   startScale: {x: 0.05, y: 0.05, z: 0.05}
-  growthSpeed: 0.25
-  growthStep: 0.1
-  maxScale: 3
-  totalGrowTime: 10
+  minScale: 0.75
+  maxScale: 1.5
+  maxScaleMultiplier: 2
   stepOvershoot: 0.25
   finalOvershoot: 0.4
   finalDuration: 0.8

@@ -25,31 +25,23 @@ public class HandManager : MonoBehaviour
     {
         if (!context.performed || hands.Length == 0) return;
 
-        // Deactivate current hand
-        hands[activeHandIndex].handObject.SetActive(false);
-
-        // Stop watering if it was active
+        // Stop watering if the current hand is water
         if (hands[activeHandIndex].handType == HandType.Water)
         {
             waterHose.StopSpray();
         }
 
-        // Move to next hand
         activeHandIndex = (activeHandIndex + 1) % hands.Length;
 
-        // Activate new hand
         UpdateHands();
     }
 
     private void UpdateHands()
     {
-        Hand activeHand = hands[activeHandIndex];
-        activeHand.handObject.SetActive(true);
-
-        //if (activeHand.handType == HandType.Water)
-        //{
-
-        //}
+        for (int i = 0; i < hands.Length; i++)
+        {
+            hands[i].handObject.SetActive(i == activeHandIndex);
+        }
     }
 
     public HandType GetActiveHandType()

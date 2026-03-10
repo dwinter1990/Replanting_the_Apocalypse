@@ -6,7 +6,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private HandManager handManager;
     [SerializeField] private WaterHose waterHose;
     [SerializeField] private float interactDistance = 5f;
-
+    [SerializeField] Camera playerCam;
     // Called by the Input System "Attack" action
     public void OnAttack(InputAction.CallbackContext context)
     {
@@ -39,7 +39,7 @@ public class PlayerInteraction : MonoBehaviour
     private void TryHarvest()
     {
         // Raycast from camera to mouse position
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Ray ray = playerCam.ScreenPointToRay(Mouse.current.position.ReadValue());
         if (Physics.Raycast(ray, out RaycastHit hit, interactDistance))
         {
             var growing = hit.collider.GetComponent<Growing>();

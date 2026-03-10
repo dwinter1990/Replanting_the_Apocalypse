@@ -3,12 +3,12 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats Instance {get; private set;}
-
+    [Header("Watering stats")]
     public float maxWaterCapacity = 100;
     public float currentWaterCapacity;
     public float moveSpeed;
-
-    
+    public float waterDrainRate;
+    public float waterRefillRate;
     private void Awake()
     {
         if(Instance != null && Instance != this)
@@ -26,17 +26,20 @@ public class PlayerStats : MonoBehaviour
     {
         maxWaterCapacity += amount;
     }
-
-    public void UseWater(float amount)
+    public bool HasWater()
     {
-        currentWaterCapacity -= amount * Time.deltaTime;
+        return currentWaterCapacity > 0f;
+    }
+    public void UseWater()
+    {
+        currentWaterCapacity -= waterDrainRate * Time.deltaTime;
         currentWaterCapacity = Mathf.Clamp(currentWaterCapacity, 0, maxWaterCapacity);
         Debug.Log("Water left: " + currentWaterCapacity + " : " + maxWaterCapacity);
     }
 
-    public void RefillWater(float amount)
+    public void RefillWater()
     {
-        currentWaterCapacity += amount  * Time.deltaTime;
+        currentWaterCapacity += waterRefillRate * Time.deltaTime;
         currentWaterCapacity = Mathf.Clamp(currentWaterCapacity, 0, maxWaterCapacity);
         Debug.Log("Water has been filled to: " + currentWaterCapacity + " : " + maxWaterCapacity);
     }

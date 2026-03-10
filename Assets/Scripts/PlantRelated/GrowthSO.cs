@@ -1,21 +1,24 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GrowthSO", menuName = "Scriptable Objects/GrowthSO")]
+[CreateAssetMenu(menuName = "Plants/Growth Profile")]
 public class GrowthSO : ScriptableObject
 {
     [Header("Growth")]
-    public Vector3 startScale = new Vector3(0.05f, 0.05f, 0.05f);
-    public float growthSpeed = 0.5f;
-    public float growthStep = 0.15f;
-    public float maxScale = 2f;
-    public float totalGrowTime; 
+    public float minGrowthSpeed = 0.8f;
+    public float maxGrowthSpeed = 1.2f;
+    public float growthSteps = 0.15f;
+    public float waterMemory = 0.4f;
+    public float growthDuration = 10f;
 
-    [Header("Step Bounce")]
+    [Header("Scale")]
+    public Vector3 startScale = Vector3.one;
+    public float minScale = 0.75f;
+    public float maxScale = 1.5f;
+    public float maxScaleMultiplier = 2f;
+
+    [Header("Animation")]
     public float stepOvershoot = 0.15f;
-
-    [Header("Final Bounce")]
-    public float finalOvershoot = 0.2f;
-    public float finalDuration = 0.5f;
-    public float wobbleAmount = 6f;
+    public float finalOvershoot = 0.3f;
+    public float finalDuration = 0.6f;
+    public float wobbleAmount = 10f;
 }
-

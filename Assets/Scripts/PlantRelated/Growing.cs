@@ -7,101 +7,76 @@ public class Growing : MonoBehaviour
 {
     [SerializeField] public GrowthSO profile;
     private PlantPool originPool;
+    [Header("Watering settings")]
+    private bool hasFullyGrown;
+    private int ignoreWaterLayer;
+    private float lastWateredTime;
+    private float waterDuration;
+    private float stepDuration;
+    private float scalePerStep;
+    private float nextGrowthTimer;
 
     [Header("Animation settings")]
     private TweenQueue tweenQueue;
-   // private Tween growTween;
     private Tween stepBounceTween;
     private Tween finalBounceTween;
     private Tween rotateTween;
+    private Tweener scaleTween;
 
     public Vector3 startScale;
     public Quaternion startRotation;
 
     private float currentScale;
     private float maxScale;
-    private float nextBounceThreshold;
-
-    private bool isBeingWatered;
-    private float growthProgress;
-    private float waterTimer;
-    private bool hasFullyGrown;
-    private bool bounceInProgress;
-
-    private int plantLayer;
-    private int ignoreWaterLayer;
 
     private GameObject spawnedMound;
-    private bool pendingHarvest;
+
     private void Awake()
     {
         tweenQueue = GetComponent<TweenQueue>();
-        plantLayer = LayerMask.NameToLayer("Plants");
         ignoreWaterLayer = LayerMask.NameToLayer("IgnoreWater");
         
     }
 
     private void Start()
     {
-        startScale = profile.startScale;
-        startRotation = transform.rotation;
+        
+            startScale = profile.startScale;
+            startRotation = transform.rotation;
+            transform.localScale = startScale;
 
-        transform.localScale = startScale;
+            waterDuration = profile.waterMemory;
 
-        maxScale = Random.Range(
-            profile.maxScale * 0.75f,
-            profile.maxScale * 1.5f);
+            maxScale = profile.maxScale * Random.Range(profile.minScale, profile.maxScaleMultiplier);
 
-        currentScale = transform.localScale.x;
-        nextBounceThreshold = currentScale + profile.growthStep;
+            stepDuration = profile.growthDuration / profile.growthSteps;
 
-        CreateTweens();
+            scalePerStep = (maxScale - startScale.x) / profile.growthSteps;
+
+            currentScale = transform.localScale.x;
+
+            CreateTweens();
     }
     void OnDisable()
     {
-        DOTween.Kill(transform);
+        stepBounceTween?.Pause();
+        finalBounceTween?.Pause();
+        rotateTween?.Pause();
+        scaleTween?.Pause();
     }
     private void CreateTweens()
     {
-        // STEP BOUNCE (small squash + pop)
-        stepBounceTween = DOTween.Sequence()
-            .AppendCallback(() =>
-            {
-                float baseScale = transform.localScale.x;
+        Vector3 punch = Vector3.up * profile.stepOvershoot;
+        stepBounceTween = transform
+            .DOPunchScale(punch, 0.25f, 6, 0.5f)
+            .SetAutoKill(false)
+            .Pause();
 
-                transform.DOScale(
-                    new Vector3(baseScale, baseScale * 0.92f, baseScale),
-                    0.08f);
-            })
-            .AppendInterval(0.08f)
-
-            .AppendCallback(() =>
-            {
-                float baseScale = transform.localScale.x;
-
-                transform.DOScale(
-                    new Vector3(baseScale, baseScale * (1f + profile.stepOvershoot), baseScale),
-                    0.12f);
-            })
-            .AppendInterval(0.12f)
-
-            .AppendCallback(() =>
-            {
-                float baseScale = transform.localScale.x;
-
-                transform.DOScale(
-                    Vector3.one * baseScale,
-                    0.15f).SetEase(Ease.OutBack, 2f);
-            })
-            .AppendInterval(0.15f)
-
-            .OnComplete(() =>
-            {
-                bounceInProgress = false;
-            })
-            .Pause()
-            .SetAutoKill(false);
-
+        scaleTween = transform
+            .DOScale(Vector3.one, 0.25f)
+            .SetEase(Ease.OutBack, 2f)
+            .SetAutoKill(false)
+            .Pause();
 
         // FINAL BOUNCE (when fully grown)
         finalBounceTween = DOTween.Sequence()
@@ -122,8 +97,9 @@ public class Growing : MonoBehaviour
 
 
         // WOBBLE ROTATION
+        Vector3 wobble = Vector3.forward * profile.wobbleAmount;
         rotateTween = transform.DOPunchRotation(
-            new Vector3(0, 0, profile.wobbleAmount),
+            wobble,
             profile.finalDuration,
             8,
             0.7f)
@@ -134,43 +110,44 @@ public class Growing : MonoBehaviour
     {
         originPool = pool;
     }
-    private void OnParticleCollision(GameObject other)
+
+
+    public void Water()
     {
         if (hasFullyGrown)
-        {
             return;
-        }
 
-        isBeingWatered = true;
-        waterTimer = 0.15f;
+        lastWateredTime = Time.time;
+
+        if (nextGrowthTimer == 0f)
+            nextGrowthTimer = Time.time + stepDuration;
+
+        PlantGrowthManager.Instance.Register(this);
     }
-
-    private void Update()
+    public bool UpdateGrowth(float time)
     {
         if (hasFullyGrown)
-            return;
+            return false;
 
-        HandleWater();
+        if (time - lastWateredTime > waterDuration)
+            return false;
 
-        if (!isBeingWatered)
-            return;
-
-        growthProgress += profile.growthSpeed * Time.deltaTime;
-
-        if (growthProgress >= profile.growthStep)
+        if (time >= nextGrowthTimer)
         {
-            growthProgress = 0f;
+            nextGrowthTimer += stepDuration;
             GrowOneStep();
         }
+
+        return true;
     }
+
     void GrowOneStep()
     {
-        if (bounceInProgress || hasFullyGrown)
+        if (hasFullyGrown)
             return;
 
-        currentScale += profile.growthStep;
+        currentScale += scalePerStep;
 
-        // Return mound once plant starts growing
         if (currentScale >= maxScale * 0.25f && spawnedMound != null)
         {
             MoundPool.instance.Return(spawnedMound);
@@ -182,33 +159,24 @@ public class Growing : MonoBehaviour
             currentScale = maxScale;
             hasFullyGrown = true;
 
-            transform.DOScale(Vector3.one * currentScale, 0.35f)
-                .SetEase(Ease.OutQuad)
-                .OnComplete(() =>
-                {
-                    finalBounceTween.Restart();
-                    rotateTween.Restart();
-                });
+            scaleTween.ChangeEndValue(Vector3.one * currentScale);
+            scaleTween.OnComplete(() =>
+            {
+                finalBounceTween.Restart();
+                rotateTween.Restart();
+            });
+
+            scaleTween.Restart(true);
 
             gameObject.layer = ignoreWaterLayer;
             return;
         }
 
-        bounceInProgress = true;
+        scaleTween.ChangeEndValue(Vector3.one * currentScale);
+        scaleTween.OnComplete(() => { });
+        scaleTween.Restart(true);
 
-        transform.DOScale(Vector3.one * currentScale, 0.25f)
-            .SetEase(Ease.OutQuad)
-            .OnComplete(() =>
-            {
-                stepBounceTween.Restart();
-            });
-    }
-    private void HandleWater()
-    {
-        if (waterTimer > 0)
-            waterTimer -= Time.deltaTime;
-        else
-            isBeingWatered = false;
+        stepBounceTween.Restart();
     }
 
     public void SetSpawnedMound(GameObject mound)
@@ -221,6 +189,7 @@ public class Growing : MonoBehaviour
         stepBounceTween.Rewind();
         finalBounceTween.Rewind();
         rotateTween.Rewind();
+        scaleTween.Rewind();
     }
 
     private void SetScale(float scale)
@@ -253,16 +222,14 @@ public class Growing : MonoBehaviour
         stepBounceTween.Rewind();
         finalBounceTween.Rewind();
         rotateTween.Rewind();
+        scaleTween.Rewind();
 
         transform.localScale = profile.startScale;
         transform.rotation = startRotation;
 
         currentScale = startScale.x;
-        nextBounceThreshold = currentScale + profile.growthStep;
+        nextGrowthTimer = 0f;
 
         hasFullyGrown = false;
-        isBeingWatered = false;
-        bounceInProgress = false;
-        pendingHarvest = false;
     }
 }
