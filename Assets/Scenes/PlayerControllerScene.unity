@@ -927,7 +927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plantType: 1
+  plantType: 2
   prefab: {fileID: 3273213391447943327, guid: 57516d9d299566e4895e7ef0fd73187a, type: 3}
   preloadAmount: 10
 --- !u!4 &203159382
@@ -943,7 +943,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1324233329}
+  m_Father: {fileID: 2083286246}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &214015090
 GameObject:
@@ -2296,6 +2296,7 @@ MonoBehaviour:
   - {fileID: 1016368055}
   - {fileID: 2137175578}
   - {fileID: 841924309}
+  researchPointsPerPoolUnlock: 10
   selectedType: 3
 --- !u!4 &988594796
 Transform:
@@ -2666,7 +2667,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 203159382}
   - {fileID: 1153009076}
   - {fileID: 120230329}
   - {fileID: 1130761989}
@@ -3959,6 +3959,7 @@ Transform:
   - {fileID: 606010006}
   - {fileID: 738361013}
   - {fileID: 2138501061}
+  - {fileID: 203159382}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2086136700

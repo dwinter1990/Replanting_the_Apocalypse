@@ -37,14 +37,12 @@ public class PlayerStats : MonoBehaviour
     {
         currentWaterCapacity -= waterDrainRate * Time.deltaTime;
         currentWaterCapacity = Mathf.Clamp(currentWaterCapacity, 0, maxWaterCapacity);
-        Debug.Log("Water left: " + currentWaterCapacity + " : " + maxWaterCapacity);
     }
 
     public void RefillWater()
     {
         currentWaterCapacity += waterRefillRate * Time.deltaTime;
         currentWaterCapacity = Mathf.Clamp(currentWaterCapacity, 0, maxWaterCapacity);
-        Debug.Log("Water has been filled to: " + currentWaterCapacity + " : " + maxWaterCapacity);
     }
 
     public void AddResearchPoints(int amount)
