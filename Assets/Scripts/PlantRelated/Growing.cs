@@ -211,7 +211,16 @@ public class Growing : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Harvesting: " + gameObject.name);
+            string plantId = profile != null ? profile.name : gameObject.name.Replace("(Clone)", string.Empty).Trim();
+            int researchPointsValue = profile != null ? profile.researchPointValue : 1;
+
+            HarvestTracker tracker = HarvestTracker.Instance;
+            if (tracker != null)
+                tracker.RecordHarvest(originPool.plantType, plantId, researchPointsValue);
+            else
+                Debug.LogWarning("HarvestTracker is missing in the scene; harvest was not tracked.");
+
+            Debug.LogWarning("Harvesting: " + plantId);
             ResetPlant();
             originPool.Return(gameObject);
         }

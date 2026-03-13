@@ -10,6 +10,9 @@ public class GrowthSO : ScriptableObject
     public float waterMemory = 0.4f;
     public float growthDuration = 10f;
 
+    [Header("Research")]
+    public int researchPointValue;
+
     [Header("Scale")]
     public Vector3 startScale = Vector3.one;
     public float minScale = 0.75f;
@@ -21,4 +24,5 @@ public class GrowthSO : ScriptableObject
     public float finalOvershoot = 0.3f;
     public float finalDuration = 0.6f;
     public float wobbleAmount = 10f;
+
 }

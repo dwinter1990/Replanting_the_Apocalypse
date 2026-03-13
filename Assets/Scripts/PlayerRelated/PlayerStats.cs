@@ -9,6 +9,9 @@ public class PlayerStats : MonoBehaviour
     public float moveSpeed;
     public float waterDrainRate;
     public float waterRefillRate;
+
+    [Header("Research")]
+    public int researchPoints;
     private void Awake()
     {
         if(Instance != null && Instance != this)
@@ -42,5 +45,16 @@ public class PlayerStats : MonoBehaviour
         currentWaterCapacity += waterRefillRate * Time.deltaTime;
         currentWaterCapacity = Mathf.Clamp(currentWaterCapacity, 0, maxWaterCapacity);
         Debug.Log("Water has been filled to: " + currentWaterCapacity + " : " + maxWaterCapacity);
+    }
+
+    public void AddResearchPoints(int amount)
+    {
+        if(amount <= 0)
+        {
+            return;
+        }
+
+        researchPoints += amount;
+        Debug.Log("Research points gained: " + amount + ". Total: " + researchPoints);
     }
 }
