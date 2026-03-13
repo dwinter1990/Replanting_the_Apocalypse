@@ -608,7 +608,7 @@ GameObject:
   - component: {fileID: 141415424}
   - component: {fileID: 141415423}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: HarvestToResearchTriggerCylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

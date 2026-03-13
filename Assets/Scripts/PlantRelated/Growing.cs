@@ -7,6 +7,8 @@ public class Growing : MonoBehaviour
 {
     [SerializeField] public GrowthSO profile;
     private PlantPool originPool;
+    private int startingLayer;
+
     [Header("Watering settings")]
     private bool hasFullyGrown;
     private int ignoreWaterLayer;
@@ -35,7 +37,7 @@ public class Growing : MonoBehaviour
     {
         tweenQueue = GetComponent<TweenQueue>();
         ignoreWaterLayer = LayerMask.NameToLayer("IgnoreWater");
-        
+        startingLayer = gameObject.layer;
     }
 
     private void Start()
@@ -238,7 +240,7 @@ public class Growing : MonoBehaviour
 
         currentScale = startScale.x;
         nextGrowthTimer = 0f;
-
+        gameObject.layer = startingLayer;
         hasFullyGrown = false;
     }
 }

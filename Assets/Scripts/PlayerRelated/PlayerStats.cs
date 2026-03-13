@@ -49,12 +49,16 @@ public class PlayerStats : MonoBehaviour
 
     public void AddResearchPoints(int amount)
     {
-        if(amount <= 0)
-        {
+        if (amount <= 0)
             return;
-        }
 
         researchPoints += amount;
-        Debug.Log("Research points gained: " + amount + ". Total: " + researchPoints);
+        Debug.Log("Research points gained: " + amount + ", total: " + researchPoints);
+
+        if (PlantPoolManager.PlantPoolManagerInstance != null)
+        {
+            PlantPoolManager.PlantPoolManagerInstance.RefreshUnlockedPools(researchPoints);
+        }
     }
+
 }
