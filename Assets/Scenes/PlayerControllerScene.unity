@@ -2307,7 +2307,7 @@ MonoBehaviour:
   - plantType: 3
     button: {fileID: 1613502571}
     label: {fileID: 1613502569}
-  researchPointsText: {fileID: 249748206}
+  researchPointsLabel: {fileID: 249748206}
 --- !u!1 &679157870
 GameObject:
   m_ObjectHideFlags: 0
