@@ -44,6 +44,24 @@ public class PlayerStats : MonoBehaviour
         currentWaterCapacity += waterRefillRate * Time.deltaTime;
         currentWaterCapacity = Mathf.Clamp(currentWaterCapacity, 0, maxWaterCapacity);
     }
+    public bool TrySpendResearchPoints(int amount)
+    {
+        if (amount <= 0)
+            return true;
+
+        if (researchPoints < amount)
+            return false;
+
+        researchPoints -= amount;
+        Debug.Log("Research points spent: " + amount + ", total: " + researchPoints);
+
+        if (PlantPoolManager.PlantPoolManagerInstance != null)
+        {
+            PlantPoolManager.PlantPoolManagerInstance.RefreshUnlockedPools();
+        }
+
+        return true;
+    }
 
     public void AddResearchPoints(int amount)
     {
@@ -55,8 +73,9 @@ public class PlayerStats : MonoBehaviour
 
         if (PlantPoolManager.PlantPoolManagerInstance != null)
         {
-            PlantPoolManager.PlantPoolManagerInstance.RefreshUnlockedPools(researchPoints);
+            PlantPoolManager.PlantPoolManagerInstance.RefreshUnlockedPools();
         }
     }
+
 
 }

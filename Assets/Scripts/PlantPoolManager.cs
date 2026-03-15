@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlantPoolManager : MonoBehaviour
 {
     public static PlantPoolManager PlantPoolManagerInstance;
@@ -13,26 +14,22 @@ public class PlantPoolManager : MonoBehaviour
     private readonly Dictionary<PlantType, int> unlockedPoolCountByType = new Dictionary<PlantType, int>();
     private readonly Dictionary<PlantType, int> totalPoolCountByType = new Dictionary<PlantType, int>();
 
-    // Progression requested: first Grass is available at start,
-    // then each 10 points unlocks Bush -> Tree -> Flower -> Grass and repeats.
-    private static readonly PlantType[] unlockCycleOrder =
-    {
-        PlantType.Bush,
-        PlantType.Tree,
-        PlantType.Flower,
-        PlantType.Grass
-    };
-
     public PlantType selectedType = PlantType.Grass;
+
+    public int ResearchPointsPerPoolUnlock => researchPointsPerPoolUnlock;
 
     private void Awake()
     {
         PlantPoolManagerInstance = this;
+        RebuildPoolTypeCounts();
+        ResetUnlockedCounts();
+        EnsureInitialUnlockState();
         RefreshUnlockedPools();
     }
 
     public GameObject GetRandomPlant(PlantType type)
     {
+
         var filteredPools = System.Array.FindAll(plantPools, p => p != null && p.plantType == type && IsPoolUnlocked(p));
         if (filteredPools.Length == 0)
         {
@@ -65,66 +62,52 @@ public class PlantPoolManager : MonoBehaviour
 
     public void RefreshUnlockedPools()
     {
-        int points = PlayerStats.Instance != null ? PlayerStats.Instance.researchPoints : 0;
-        RefreshUnlockedPools(points);
-    }
-
-    public void RefreshUnlockedPools(int currentResearchPoints)
-    {
         RebuildPoolTypeCounts();
-        ResetUnlockedCounts();
-
-        int totalPools = GetTotalPoolCount();
-        if (totalPools <= 0)
-            return;
-
-        // First grass pool is available from the start.
-        TryUnlockPoolForType(PlantType.Grass);
-
-        int unlockSteps = Mathf.Max(0, currentResearchPoints) / researchPointsPerPoolUnlock;
-        int cycleIndex = 0;
-
-        for (int step = 0; step < unlockSteps; step++)
-        {
-            if (GetTotalUnlockedPoolCount() >= totalPools)
-                break;
-
-            bool unlocked = TryUnlockFromCycle(ref cycleIndex);
-            if (!unlocked)
-                break;
-        }
+        EnsureInitialUnlockState();
 
         if (!HasUnlockedPoolForType(selectedType))
             SetFirstAvailableSelectedType();
 
-        Debug.Log("Unlocked pools by type -> " + BuildUnlockSummary(currentResearchPoints));
+        int currentResearch = PlayerStats.Instance != null ? PlayerStats.Instance.researchPoints : 0;
+        Debug.Log("Unlocked pools by type -> " + BuildUnlockSummary(currentResearch));
     }
 
-    private bool TryUnlockFromCycle(ref int cycleIndex)
+    public List<PlantType> GetUnlockableTypes()
     {
-        int attempts = unlockCycleOrder.Length;
-        for (int i = 0; i < attempts; i++)
-        {
-            PlantType candidate = unlockCycleOrder[cycleIndex];
-            cycleIndex = (cycleIndex + 1) % unlockCycleOrder.Length;
+        List<PlantType> types = new List<PlantType>();
 
-            if (TryUnlockPoolForType(candidate))
-                return true;
+        foreach (PlantType type in System.Enum.GetValues(typeof(PlantType)))
+        {
+            if (CanUnlockType(type))
+                types.Add(type);
         }
 
-        return false;
+        return types;
     }
 
-    private bool TryUnlockPoolForType(PlantType type)
+    public bool CanUnlockType(PlantType type)
     {
-        int unlockedForType = GetUnlockedCountForType(type);
-        int totalForType = GetTotalPoolCountForType(type);
+        return GetUnlockedCountForType(type) < GetTotalPoolCountForType(type);
+    }
 
-        if (unlockedForType >= totalForType)
+    public bool TryUnlockNextPool(PlantType type)
+    {
+        if (!CanUnlockType(type))
             return false;
 
-        unlockedPoolCountByType[type] = unlockedForType + 1;
+        unlockedPoolCountByType[type] = GetUnlockedCountForType(type) + 1;
+        Debug.Log("Unlocked " + type + " seed pool " + GetUnlockedCountForType(type) + "/" + GetTotalPoolCountForType(type));
+
+        if (!HasUnlockedPoolForType(selectedType))
+            SetFirstAvailableSelectedType();
+
         return true;
+    }
+
+    private void EnsureInitialUnlockState()
+    {
+        if (GetTotalPoolCountForType(PlantType.Grass) > 0 && GetUnlockedCountForType(PlantType.Grass) == 0)
+            unlockedPoolCountByType[PlantType.Grass] = 1;
     }
 
     private bool IsPoolUnlocked(PlantPool pool)
@@ -209,22 +192,6 @@ public class PlantPoolManager : MonoBehaviour
 
         foreach (PlantType type in System.Enum.GetValues(typeof(PlantType)))
             unlockedPoolCountByType[type] = 0;
-    }
-
-    private int GetTotalPoolCount()
-    {
-        int total = 0;
-        foreach (PlantType type in System.Enum.GetValues(typeof(PlantType)))
-            total += GetTotalPoolCountForType(type);
-        return total;
-    }
-
-    private int GetTotalUnlockedPoolCount()
-    {
-        int total = 0;
-        foreach (PlantType type in System.Enum.GetValues(typeof(PlantType)))
-            total += GetUnlockedCountForType(type);
-        return total;
     }
 
     private int GetTotalPoolCountForType(PlantType type)

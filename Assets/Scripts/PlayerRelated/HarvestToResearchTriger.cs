@@ -30,5 +30,14 @@ public class HarvestToResearchTrigger : MonoBehaviour
 
         PlayerStats.Instance.AddResearchPoints(awardedResearchPoints);
         Debug.Log("Converted harvested plants to research points: " + awardedResearchPoints);
+
+        if (SeedUnlockMenuUI.Instance != null)
+        {
+            SeedUnlockMenuUI.Instance.ShowMenu();
+        }
+        else
+        {
+            Debug.LogWarning("SeedUnlockMenuUI instance is missing; unlock menu was not shown.");
+        }
     }
 }
