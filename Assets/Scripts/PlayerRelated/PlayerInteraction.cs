@@ -6,8 +6,10 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private HandManager handManager;
     [SerializeField] private WaterHose waterHose;
     [SerializeField] private float interactDistance = 5f;
-    [SerializeField] Camera playerCam;
-    // Called by the Input System "Attack" action
+    [SerializeField] private Camera playerCam;
+
+
+
     public void OnAttack(InputAction.CallbackContext context)
     {
         HandType activeHand = handManager.GetActiveHandType();

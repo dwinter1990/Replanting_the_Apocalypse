@@ -29,6 +29,7 @@ public class Growing : MonoBehaviour
     private float currentScale;
     private float maxScale;
 
+
     private GameObject spawnedMound;
 
     private void Awake()

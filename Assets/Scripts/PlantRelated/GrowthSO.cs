@@ -25,9 +25,4 @@ public class GrowthSO : ScriptableObject
     public float finalDuration = 0.6f;
     public float wobbleAmount = 10f;
 
-    [Header("Visuals")]
-    public string fullyGrownColorProperty = "_FullyGrownColor";
-    public Color growingColor;
-    public Color fullyGrownColor;
-
 }

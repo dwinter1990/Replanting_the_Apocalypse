@@ -26,5 +26,10 @@ MonoBehaviour:
   finalOvershoot: 0.5
   finalDuration: 0.25
   wobbleAmount: 9
-  needsWater: {r: 0.8301887, g: 0.26237094, b: 0.35388884, a: 1}
-  readyForHarvest: {r: 0.16135636, g: 0.9245283, b: 0.26511237, a: 1}
+  fullyGrownColorProperty: _FullyGrownColor
+  growingColor: {r: 1, g: 1, b: 1, a: 1}
+  fullyGrownColor: {r: 0.4949739, g: 1, b: 0, a: 1}
+  outlineEnabledProperty: _OutlineEnabled
+  outlineColorProperty: _OutlineColor
+  outlineNeedsWaterColor: {r: 0.015686274, g: 1, b: 0.9206166, a: 1}
+  outlineFullyGrownColor: {r: 0.49411768, g: 1, b: 0, a: 1}
