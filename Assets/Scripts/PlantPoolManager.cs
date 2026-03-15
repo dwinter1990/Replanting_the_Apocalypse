@@ -29,7 +29,6 @@ public class PlantPoolManager : MonoBehaviour
 
     public GameObject GetRandomPlant(PlantType type)
     {
-
         var filteredPools = System.Array.FindAll(plantPools, p => p != null && p.plantType == type && IsPoolUnlocked(p));
         if (filteredPools.Length == 0)
         {

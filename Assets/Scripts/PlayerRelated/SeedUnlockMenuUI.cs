@@ -1,18 +1,25 @@
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SeedUnlockMenuUI : MonoBehaviour
 {
+    [System.Serializable]
+    private class PlantTypeUnlockButton
+    {
+        public PlantType plantType;
+        public Button button;
+        public TMP_Text label;
+    }
+
     public static SeedUnlockMenuUI Instance { get; private set; }
+    [Header("Player UI")]
+    [SerializeField] private GameObject playerUI;
 
+    [Header("Research point shop UI")]
     [SerializeField] private GameObject panelRoot;
-    [SerializeField] private Transform buttonContainer;
-    [SerializeField] private Button unlockButtonPrefab;
     [SerializeField] private Button closeButton;
-
-    [SerializeField] private GameObject playerUiRoot;
-    private readonly List<Button> spawnedButtons = new List<Button>();
+    [SerializeField] private PlantTypeUnlockButton[] unlockButtons;
 
     private void Awake()
     {
@@ -27,6 +34,7 @@ public class SeedUnlockMenuUI : MonoBehaviour
         if (closeButton != null)
             closeButton.onClick.AddListener(HideMenu);
 
+        BindUnlockButtons();
         HideMenu();
     }
 
@@ -37,55 +45,78 @@ public class SeedUnlockMenuUI : MonoBehaviour
             Debug.LogWarning("Cannot open seed unlock menu. PlantPoolManager or PlayerStats is missing.");
             return;
         }
-        playerUiRoot.SetActive(false);
+        playerUI.SetActive(false);
 
-        RebuildButtons();
+        RefreshButtons();
         if (panelRoot != null)
             panelRoot.SetActive(true);
     }
 
     public void HideMenu()
     {
+        playerUI.SetActive(true);
+
         if (panelRoot != null)
             panelRoot.SetActive(false);
-
-        playerUiRoot.SetActive(true);
     }
 
-    private void RebuildButtons()
+    private void BindUnlockButtons()
     {
-        ClearButtons();
+        if (unlockButtons == null)
+            return;
 
-        if (buttonContainer == null || unlockButtonPrefab == null)
+        for (int i = 0; i < unlockButtons.Length; i++)
         {
-            Debug.LogWarning("SeedUnlockMenuUI is missing button references.");
+            PlantTypeUnlockButton entry = unlockButtons[i];
+
+            unlockButtons[i].button.transform.position = -35 * unlockButtons[i].button.transform.position.y;
+            if (entry == null || entry.button == null)
+                continue;
+
+            PlantType capturedType = entry.plantType;
+            entry.button.onClick.RemoveAllListeners();
+            entry.button.onClick.AddListener(() => OnUnlockClicked(capturedType));
+        }
+    }
+
+    private void RefreshButtons()
+    {
+        if (unlockButtons == null || unlockButtons.Length == 0)
+        {
+            Debug.LogWarning("SeedUnlockMenuUI has no unlock buttons configured.");
             return;
         }
 
         PlantPoolManager manager = PlantPoolManager.PlantPoolManagerInstance;
-        List<PlantType> unlockableTypes = manager.GetUnlockableTypes();
+        PlayerStats stats = PlayerStats.Instance;
+
+        if (manager == null || stats == null)
+            return;
+
         int unlockCost = manager.ResearchPointsPerPoolUnlock;
 
-        for (int i = 0; i < unlockableTypes.Count; i++)
+        for (int i = 0; i < unlockButtons.Length; i++)
         {
-            PlantType type = unlockableTypes[i];
-            Button button = Instantiate(unlockButtonPrefab, buttonContainer);
-            spawnedButtons.Add(button);
+            PlantTypeUnlockButton entry = unlockButtons[i];
+            
+            if (entry == null || entry.button == null)
+                continue;
 
-            Text label = button.GetComponentInChildren<Text>();
-            if (label != null)
-                label.text = "Unlock " + type + " Seed (" + unlockCost + " RP)";
+            bool canUnlockType = manager.CanUnlockType(entry.plantType);
+            bool canAfford = stats.researchPoints >= unlockCost;
+            entry.button.interactable = canUnlockType && canAfford;
 
-            bool canAfford = PlayerStats.Instance.researchPoints >= unlockCost;
-            button.interactable = canAfford;
-            button.onClick.AddListener(() => OnClick(type));
+            if (entry.label != null)
+            {
+                if (canUnlockType)
+                    entry.label.text = "Unlock " + entry.plantType + " Seed (" + unlockCost + " RP)";
+                else
+                    entry.label.text = entry.plantType + " Fully Unlocked";
+            }
         }
-
-        if (unlockableTypes.Count == 0)
-            HideMenu();
     }
 
-    private void OnClick(PlantType type)
+    private void OnUnlockClicked(PlantType type)
     {
         PlantPoolManager manager = PlantPoolManager.PlantPoolManagerInstance;
         PlayerStats stats = PlayerStats.Instance;
@@ -94,24 +125,16 @@ public class SeedUnlockMenuUI : MonoBehaviour
             return;
 
         int unlockCost = manager.ResearchPointsPerPoolUnlock;
+
         if (!manager.CanUnlockType(type))
             return;
 
         if (!stats.TrySpendResearchPoints(unlockCost))
             return;
 
-        manager.TryUnlockNextPool(type);
-        RebuildButtons();
-    }
+        if (!manager.TryUnlockNextPool(type))
+            return;
 
-    private void ClearButtons()
-    {
-        for (int i = 0; i < spawnedButtons.Count; i++)
-        {
-            if (spawnedButtons[i] != null)
-                Destroy(spawnedButtons[i].gameObject);
-        }
-
-        spawnedButtons.Clear();
+        RefreshButtons();
     }
 }
