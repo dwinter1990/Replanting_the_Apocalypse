@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5014167164855690319, guid: 80226811445119940b93772ea46ea51d, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014167164855690319, guid: 80226811445119940b93772ea46ea51d, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5985be4ba51fb2a489f26b6e60c097e2, type: 2}
     - target: {fileID: 6187605747228565280, guid: 80226811445119940b93772ea46ea51d, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.05
@@ -113,3 +121,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 11400000, guid: f071fc539a082a644963c1bfd6e28ad4, type: 2}
+  startScale: {x: 0, y: 0, z: 0}
+  startRotation: {x: 0, y: 0, z: 0, w: 0}

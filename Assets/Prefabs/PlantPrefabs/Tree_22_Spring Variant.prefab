@@ -76,6 +76,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5903033923348904776, guid: c62d86b5a6cde164d9b059ac42e31b30, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903033923348904776, guid: c62d86b5a6cde164d9b059ac42e31b30, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5985be4ba51fb2a489f26b6e60c097e2, type: 2}
     - target: {fileID: 6551957590599436539, guid: c62d86b5a6cde164d9b059ac42e31b30, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -125,3 +133,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 11400000, guid: ea528e8da2a62dd44b8cba1141470e28, type: 2}
+  startScale: {x: 0, y: 0, z: 0}
+  startRotation: {x: 0, y: 0, z: 0, w: 0}

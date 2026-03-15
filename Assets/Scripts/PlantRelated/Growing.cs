@@ -24,10 +24,8 @@ public class Growing : MonoBehaviour
     private Tween finalBounceTween;
     private Tween rotateTween;
     private Tweener scaleTween;
-
     public Vector3 startScale;
     public Quaternion startRotation;
-
     private float currentScale;
     private float maxScale;
 
@@ -128,8 +126,10 @@ public class Growing : MonoBehaviour
     }
     public bool UpdateGrowth(float time)
     {
-        if (hasFullyGrown)
+        if (hasFullyGrown) 
+        {
             return false;
+        }
 
         if (time - lastWateredTime > waterDuration)
             return false;
@@ -146,8 +146,9 @@ public class Growing : MonoBehaviour
     void GrowOneStep()
     {
         if (hasFullyGrown)
+        {
             return;
-
+        }
         currentScale += scalePerStep;
 
         if (currentScale >= maxScale * 0.25f && spawnedMound != null)

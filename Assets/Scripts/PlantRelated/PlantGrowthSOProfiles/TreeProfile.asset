@@ -26,3 +26,5 @@ MonoBehaviour:
   finalOvershoot: 0.4
   finalDuration: 0.8
   wobbleAmount: 12
+  needsWater: {r: 0.22241013, g: 0.9622642, b: 0.95729864, a: 1}
+  readyForHarvest: {r: 0.16135636, g: 0.9245283, b: 0.26511237, a: 1}
