@@ -53,6 +53,8 @@ public class PlayerStats : MonoBehaviour
             return false;
 
         researchPoints -= amount;
+
+        SeedUnlockMenuUI.Instance.
         Debug.Log("Research points spent: " + amount + ", total: " + researchPoints);
 
         if (PlantPoolManager.PlantPoolManagerInstance != null)

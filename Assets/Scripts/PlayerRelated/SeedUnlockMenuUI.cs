@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.InputSystem;
 public class SeedUnlockMenuUI : MonoBehaviour
 {
     [System.Serializable]
@@ -20,7 +20,7 @@ public class SeedUnlockMenuUI : MonoBehaviour
     [SerializeField] private GameObject panelRoot;
     [SerializeField] private Button closeButton;
     [SerializeField] private PlantTypeUnlockButton[] unlockButtons;
-
+    [SerializeField] private TMP_Text researchPointsText;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -34,7 +34,7 @@ public class SeedUnlockMenuUI : MonoBehaviour
         if (closeButton != null)
             closeButton.onClick.AddListener(HideMenu);
 
-        BindUnlockButtons();
+        ValidateUnlockButtons();
         HideMenu();
     }
 
@@ -46,6 +46,8 @@ public class SeedUnlockMenuUI : MonoBehaviour
             return;
         }
         playerUI.SetActive(false);
+
+        UpdateAndShowResearhPoints();
 
         RefreshButtons();
         if (panelRoot != null)
@@ -60,7 +62,7 @@ public class SeedUnlockMenuUI : MonoBehaviour
             panelRoot.SetActive(false);
     }
 
-    private void BindUnlockButtons()
+    private void ValidateUnlockButtons()
     {
         if (unlockButtons == null)
             return;
@@ -69,15 +71,73 @@ public class SeedUnlockMenuUI : MonoBehaviour
         {
             PlantTypeUnlockButton entry = unlockButtons[i];
 
-            unlockButtons[i].button.transform.position = -35 * unlockButtons[i].button.transform.position.y;
             if (entry == null || entry.button == null)
                 continue;
-
-            PlantType capturedType = entry.plantType;
-            entry.button.onClick.RemoveAllListeners();
-            entry.button.onClick.AddListener(() => OnUnlockClicked(capturedType));
         }
     }
+
+    private void UpdateAndShowResearhPoints()
+    {
+        int researchPointsAmount = PlayerStats.Instance.researchPoints;
+        researchPointsText.text = $"Current research points: {researchPointsAmount}";
+    }
+    //private void UpdateResearchPoints()
+    //{
+
+    //}
+    public void OnUnlockButtonPressed(int plantTypeIndex)
+    {
+        if (!System.Enum.IsDefined(typeof(PlantType), plantTypeIndex))
+            return;
+
+        OnUnlockClicked((PlantType)plantTypeIndex);
+    }
+
+    public void OnUnlockGrassButton()
+    {
+        OnUnlockClicked(PlantType.Grass);
+    }
+
+    public void OnUnlockFlowerButton()
+    {
+        OnUnlockClicked(PlantType.Flower);
+    }
+
+    public void OnUnlockBushButton()
+    {
+        OnUnlockClicked(PlantType.Bush);
+    }
+
+    public void OnUnlockTreeButton()
+    {
+        OnUnlockClicked(PlantType.Tree);
+    }
+
+    public void OnUnlockGrass(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            OnUnlockClicked(PlantType.Grass);
+    }
+
+    public void OnUnlockFlower(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            OnUnlockClicked(PlantType.Flower);
+    }
+
+    public void OnUnlockBush(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            OnUnlockClicked(PlantType.Bush);
+    }
+
+    public void OnUnlockTree(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            OnUnlockClicked(PlantType.Tree);
+    }
+
+
 
     private void RefreshButtons()
     {
@@ -93,14 +153,14 @@ public class SeedUnlockMenuUI : MonoBehaviour
         if (manager == null || stats == null)
             return;
 
-        int unlockCost = manager.ResearchPointsPerPoolUnlock;
-
         for (int i = 0; i < unlockButtons.Length; i++)
         {
             PlantTypeUnlockButton entry = unlockButtons[i];
             
             if (entry == null || entry.button == null)
                 continue;
+
+            int unlockCost = manager.GetUnlockCost(entry.plantType);
 
             bool canUnlockType = manager.CanUnlockType(entry.plantType);
             bool canAfford = stats.researchPoints >= unlockCost;
@@ -109,7 +169,12 @@ public class SeedUnlockMenuUI : MonoBehaviour
             if (entry.label != null)
             {
                 if (canUnlockType)
-                    entry.label.text = "Unlock " + entry.plantType + " Seed (" + unlockCost + " RP)";
+                {
+                    int unlocked = manager.GetUnlockedCount(entry.plantType);
+                    int total = manager.GetTotalCount(entry.plantType);
+                    entry.label.text = "Unlock next " + entry.plantType + " seed (" + unlockCost + " RP)\n" + unlocked + "/" + total + " unlocked";
+                }
+
                 else
                     entry.label.text = entry.plantType + " Fully Unlocked";
             }
@@ -124,10 +189,10 @@ public class SeedUnlockMenuUI : MonoBehaviour
         if (manager == null || stats == null)
             return;
 
-        int unlockCost = manager.ResearchPointsPerPoolUnlock;
-
         if (!manager.CanUnlockType(type))
             return;
+
+        int unlockCost = manager.GetUnlockCost(type);
 
         if (!stats.TrySpendResearchPoints(unlockCost))
             return;
@@ -136,5 +201,6 @@ public class SeedUnlockMenuUI : MonoBehaviour
             return;
 
         RefreshButtons();
+        ShowResearhPoints();
     }
 }

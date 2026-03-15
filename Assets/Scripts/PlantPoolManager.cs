@@ -4,27 +4,44 @@ using UnityEngine;
 
 public class PlantPoolManager : MonoBehaviour
 {
+    [System.Serializable]
+    private class PlantUnlockPricing
+    {
+        public PlantType plantType;
+        [Min(1)] public int baseResearchCost = 10;
+        [Min(1f)] public float costGrowthPerUnlock = 1.25f;
+    }
+
+
     public static PlantPoolManager PlantPoolManagerInstance;
 
     public PlantPool[] plantPools;
 
     [Header("Research unlock settings")]
-    [Min(1)][SerializeField] private int researchPointsPerPoolUnlock = 10;
+    [SerializeField] private PlantUnlockPricing[] unlockPricingByType;
 
     private readonly Dictionary<PlantType, int> unlockedPoolCountByType = new Dictionary<PlantType, int>();
     private readonly Dictionary<PlantType, int> totalPoolCountByType = new Dictionary<PlantType, int>();
+    private readonly Dictionary<PlantType, PlantUnlockPricing> unlockPricingLookup = new Dictionary<PlantType, PlantUnlockPricing>();
 
     public PlantType selectedType = PlantType.Grass;
-
-    public int ResearchPointsPerPoolUnlock => researchPointsPerPoolUnlock;
 
     private void Awake()
     {
         PlantPoolManagerInstance = this;
+        BuildUnlockPricingLookup();
         RebuildPoolTypeCounts();
         ResetUnlockedCounts();
         EnsureInitialUnlockState();
         RefreshUnlockedPools();
+    }
+
+    public int GetUnlockCost(PlantType type)
+    {
+        PlantUnlockPricing pricing = GetPricingForType(type);
+        int unlocksAlreadyPurchased = GetPurchasedUnlockCount(type);
+        float scaledCost = pricing.baseResearchCost * Mathf.Pow(pricing.costGrowthPerUnlock, unlocksAlreadyPurchased);
+        return Mathf.Max(1, Mathf.RoundToInt(scaledCost));
     }
 
     public GameObject GetRandomPlant(PlantType type)
@@ -88,6 +105,17 @@ public class PlantPoolManager : MonoBehaviour
     {
         return GetUnlockedCountForType(type) < GetTotalPoolCountForType(type);
     }
+
+    public int GetUnlockedCount(PlantType type)
+    {
+        return GetUnlockedCountForType(type);
+    }
+
+    public int GetTotalCount(PlantType type)
+    {
+        return GetTotalPoolCountForType(type);
+    }
+
 
     public bool TryUnlockNextPool(PlantType type)
     {
@@ -184,6 +212,64 @@ public class PlantPoolManager : MonoBehaviour
             totalPoolCountByType[pool.plantType]++;
         }
     }
+    private void BuildUnlockPricingLookup()
+    {
+        unlockPricingLookup.Clear();
+
+        foreach (PlantType type in System.Enum.GetValues(typeof(PlantType)))
+            unlockPricingLookup[type] = null;
+
+        if (unlockPricingByType != null)
+        {
+            for (int i = 0; i < unlockPricingByType.Length; i++)
+            {
+                PlantUnlockPricing pricing = unlockPricingByType[i];
+                if (pricing == null)
+                    continue;
+
+                unlockPricingLookup[pricing.plantType] = pricing;
+            }
+        }
+
+        foreach (PlantType type in System.Enum.GetValues(typeof(PlantType)))
+        {
+            if (unlockPricingLookup[type] == null)
+            {
+                unlockPricingLookup[type] = new PlantUnlockPricing
+                {
+                    plantType = type,
+                    baseResearchCost = 10,
+                    costGrowthPerUnlock = 1.25f
+                };
+            }
+        }
+    }
+
+    private PlantUnlockPricing GetPricingForType(PlantType type)
+    {
+        if (!unlockPricingLookup.TryGetValue(type, out PlantUnlockPricing pricing) || pricing == null)
+        {
+            pricing = new PlantUnlockPricing
+            {
+                plantType = type,
+                baseResearchCost = 10,
+                costGrowthPerUnlock = 1.25f
+            };
+            unlockPricingLookup[type] = pricing;
+        }
+
+        return pricing;
+    }
+
+    private int GetPurchasedUnlockCount(PlantType type)
+    {
+        int unlockedCount = GetUnlockedCountForType(type);
+        int freeUnlocks = type == PlantType.Grass ? 1 : 0;
+        return Mathf.Max(0, unlockedCount - freeUnlocks);
+    }
+
+
+
 
     private void ResetUnlockedCounts()
     {
