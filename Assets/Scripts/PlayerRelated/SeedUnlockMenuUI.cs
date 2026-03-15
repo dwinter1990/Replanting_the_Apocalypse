@@ -20,7 +20,7 @@ public class SeedUnlockMenuUI : MonoBehaviour
     [SerializeField] private GameObject panelRoot;
     [SerializeField] private Button closeButton;
     [SerializeField] private PlantTypeUnlockButton[] unlockButtons;
-    [SerializeField] private TMP_Text researchPointsText;
+    [SerializeField] private TMP_Text researchPointsLabel;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -36,9 +36,23 @@ public class SeedUnlockMenuUI : MonoBehaviour
 
         ValidateUnlockButtons();
         HideMenu();
+        RefreshResearchPointsLabel();
     }
 
-    public void ShowMenu()
+    private void OnEnable()
+    {
+        PlayerStats.ResearchPointsChanged += HandleResearchPointsChanged;
+    }
+
+    private void OnDisable()
+    {
+        PlayerStats.ResearchPointsChanged -= HandleResearchPointsChanged;
+    }
+
+
+
+
+public void ShowMenu()
     {
         if (PlantPoolManager.PlantPoolManagerInstance == null || PlayerStats.Instance == null)
         {
@@ -46,8 +60,6 @@ public class SeedUnlockMenuUI : MonoBehaviour
             return;
         }
         playerUI.SetActive(false);
-
-        UpdateAndShowResearhPoints();
 
         RefreshButtons();
         if (panelRoot != null)
@@ -76,15 +88,6 @@ public class SeedUnlockMenuUI : MonoBehaviour
         }
     }
 
-    private void UpdateAndShowResearhPoints()
-    {
-        int researchPointsAmount = PlayerStats.Instance.researchPoints;
-        researchPointsText.text = $"Current research points: {researchPointsAmount}";
-    }
-    //private void UpdateResearchPoints()
-    //{
-
-    //}
     public void OnUnlockButtonPressed(int plantTypeIndex)
     {
         if (!System.Enum.IsDefined(typeof(PlantType), plantTypeIndex))
@@ -180,6 +183,27 @@ public class SeedUnlockMenuUI : MonoBehaviour
             }
         }
     }
+    private void HandleResearchPointsChanged(int currentResearchPoints)
+    {
+        RefreshResearchPointsLabel(currentResearchPoints);
+
+        if (panelRoot != null && panelRoot.activeSelf)
+            RefreshButtons();
+    }
+
+    private void RefreshResearchPointsLabel()
+    {
+        int currentResearchPoints = PlayerStats.Instance != null ? PlayerStats.Instance.researchPoints : 0;
+        RefreshResearchPointsLabel(currentResearchPoints);
+    }
+
+    private void RefreshResearchPointsLabel(int currentResearchPoints)
+    {
+        if (researchPointsLabel == null)
+            return;
+
+        researchPointsLabel.text = "Research Points: " + currentResearchPoints;
+    }
 
     private void OnUnlockClicked(PlantType type)
     {
@@ -201,6 +225,5 @@ public class SeedUnlockMenuUI : MonoBehaviour
             return;
 
         RefreshButtons();
-        ShowResearhPoints();
     }
 }

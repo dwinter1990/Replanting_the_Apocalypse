@@ -1,7 +1,8 @@
 using UnityEngine;
-
+using System;
 public class PlayerStats : MonoBehaviour
 {
+    public static event Action<int> ResearchPointsChanged;
     public static PlayerStats Instance {get; private set;}
     [Header("Watering stats")]
     public float maxWaterCapacity = 100;
@@ -23,6 +24,7 @@ public class PlayerStats : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
 
         currentWaterCapacity = maxWaterCapacity;
+        ResearchPointsChanged?.Invoke(researchPoints);
     }
 
     public void IncreaseWaterCapacity(float amount)
@@ -54,8 +56,8 @@ public class PlayerStats : MonoBehaviour
 
         researchPoints -= amount;
 
-        SeedUnlockMenuUI.Instance.
         Debug.Log("Research points spent: " + amount + ", total: " + researchPoints);
+        ResearchPointsChanged?.Invoke(researchPoints);
 
         if (PlantPoolManager.PlantPoolManagerInstance != null)
         {
@@ -72,7 +74,7 @@ public class PlayerStats : MonoBehaviour
 
         researchPoints += amount;
         Debug.Log("Research points gained: " + amount + ", total: " + researchPoints);
-
+        ResearchPointsChanged?.Invoke(researchPoints);
         if (PlantPoolManager.PlantPoolManagerInstance != null)
         {
             PlantPoolManager.PlantPoolManagerInstance.RefreshUnlockedPools();
