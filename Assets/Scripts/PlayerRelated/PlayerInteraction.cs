@@ -34,7 +34,6 @@ public class PlayerInteraction : MonoBehaviour
             {
                 waterHose.StopSpray();
             }
-            // Harvest doesn’t need stopping
         }
     }
 

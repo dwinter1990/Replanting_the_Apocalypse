@@ -15,6 +15,7 @@ public class SeedUnlockMenuUI : MonoBehaviour
     public static SeedUnlockMenuUI Instance { get; private set; }
     [Header("Player UI")]
     [SerializeField] private GameObject playerUI;
+    [SerializeField] private PlayerInput playerInput;
 
     [Header("Research point shop UI")]
     [SerializeField] private GameObject panelRoot;
@@ -61,6 +62,8 @@ public void ShowMenu()
         }
         playerUI.SetActive(false);
 
+        playerInput.SwitchCurrentActionMap("UI");
+
         RefreshButtons();
         if (panelRoot != null)
             panelRoot.SetActive(true);
@@ -70,6 +73,7 @@ public void ShowMenu()
     {
         playerUI.SetActive(true);
 
+        playerInput.SwitchCurrentActionMap("Player");
         if (panelRoot != null)
             panelRoot.SetActive(false);
     }
@@ -86,6 +90,12 @@ public void ShowMenu()
             if (entry == null || entry.button == null)
                 continue;
         }
+    }
+
+    public void OnCloseClicked(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            HideMenu();
     }
 
     public void OnUnlockButtonPressed(int plantTypeIndex)
