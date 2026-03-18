@@ -96,9 +96,19 @@ public class WaterHose : MonoBehaviour
 
             if (dot >= coneDot)
             {
-                if (col.TryGetComponent(out Growing plant))
+                if (col.CompareTag("Plant"))
                 {
-                    plant.Water();
+                    if (col.TryGetComponent(out Growing plant))
+                    {
+                        plant.Water();
+                    }
+                }
+                else if (col.CompareTag("Tool"))
+                {
+                    if (col.TryGetComponent(out AutoWaterer autoWaterer))
+                    {
+                        autoWaterer.RefillWater();
+                    }
                 }
             }
         }

@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4386852002896328206, guid: 3e197db906bdce8418e61e528949b304, type: 3}
+      propertyPath: m_TagString
+      value: Plant
+      objectReference: {fileID: 0}
     - target: {fileID: 6608834093301723005, guid: 3e197db906bdce8418e61e528949b304, type: 3}
       propertyPath: m_IsTrigger
       value: 1

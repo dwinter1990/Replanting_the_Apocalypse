@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 8354345068689936062, guid: 23019f22ed1b505499678623b3cf2d4d, type: 3}
+      propertyPath: m_TagString
+      value: Plant
+      objectReference: {fileID: 0}
     - target: {fileID: 8699626541639570436, guid: 23019f22ed1b505499678623b3cf2d4d, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.05
