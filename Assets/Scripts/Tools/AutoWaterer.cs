@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -21,6 +22,7 @@ public class AutoWaterer : MonoBehaviour
     [Header("Water Hit Detection")]
     [SerializeField] private float range;
     [SerializeField] private LayerMask plantLayerMask;
+    private HashSet<Growing> wateredThisCycle = new HashSet<Growing>();
 
     private Collider[] plantBuffer = new Collider[30];
     private void Awake()
@@ -46,6 +48,7 @@ public class AutoWaterer : MonoBehaviour
             {
                 waterSpoutPS.Play();
                 currentWaterCapacity -= waterDrain;
+                yield return new WaitForSeconds(0.5f);
                 WaterHitCheck();
                 yield return new WaitForSeconds(sprayTime);
             }

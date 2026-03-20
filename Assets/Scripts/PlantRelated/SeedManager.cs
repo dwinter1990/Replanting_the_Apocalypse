@@ -1,20 +1,31 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
+
+public enum ShotType
+{
+    seed,
+    grenade
+}
+
 public class SeedManager : MonoBehaviour
 {
     public static SeedManager SMInstance;
 
+    [SerializeField] private ShotType currentShotType;
     public ObjectPool pool;
+    public PayloadPool payloadPool;
+    
+
     [SerializeField] float seedSpeed;
     [SerializeField] Transform seedSpawnPoint;
-
+    
     [Header("Shoot stats")]
     [SerializeField] float timeBetweenShots;
     private float shootTime;
-    private bool canShoot = false;
 
     private void Awake()
     {
@@ -26,6 +37,7 @@ public class SeedManager : MonoBehaviour
     }
     public void OnShootSeedInput(InputAction.CallbackContext context)
     {
+        
         if (context.started && shootTime <= 0f)
         {
             ShootSeed();
@@ -35,15 +47,41 @@ public class SeedManager : MonoBehaviour
     }
     public void ShootSeed()
     {
-        GameObject seed = pool.GetObject();
+        GameObject seed = null;
+
+        switch (currentShotType)
+        {
+            case ShotType.seed:
+                seed = pool.GetObject();
+                break;
+
+            case ShotType.grenade:
+                seed = payloadPool.GetObject();
+
+                SeedGrenade grenade = seed.GetComponent<SeedGrenade>();
+                if (grenade != null)
+                {
+                    grenade.payloadPool = payloadPool;
+                    grenade.pool = pool;
+                }
+                break;
+        }
+
+        if (seed == null)
+        {
+            Debug.LogError("No seed spawned!");
+            return;
+        }
+
+        seed.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
         seed.transform.position = seedSpawnPoint.position;
         seed.transform.rotation = seedSpawnPoint.rotation;
-        seed.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
-        Rigidbody rb = seed.GetComponent<Rigidbody>();
 
-        if(rb != null)
+        Rigidbody rb = seed.GetComponent<Rigidbody>();
+        if (rb != null)
         {
             rb.linearVelocity = seed.transform.up * seedSpeed;
         }
     }
+
 }

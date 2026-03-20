@@ -993,6 +993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pool: {fileID: 2135863203}
+  payloadPool: {fileID: 1755147665}
   seedSpeed: 10
   seedSpawnPoint: {fileID: 679157871}
   timeBetweenShots: 0.25
@@ -1221,7 +1222,7 @@ MonoBehaviour:
   waterTimer: 3
   maxWaterCapacity: 3
   waterDrain: 1
-  range: 20
+  range: 5
   plantLayerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -9769,6 +9770,52 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1706492765}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1755147662
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1755147664}
+  - component: {fileID: 1755147665}
+  m_Layer: 0
+  m_Name: PayloadPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1755147664
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755147662}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1755147665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755147662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bb201ec3d0af3344885bfee54496e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootPoint: {fileID: 679157871}
+  prefab: {fileID: 8941035693105548871, guid: c3ec6848115997b47ac88ecb261a02c2, type: 3}
 --- !u!1 &1773063699
 GameObject:
   m_ObjectHideFlags: 0
@@ -11001,6 +11048,10 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 155155185}
+    - target: {fileID: 4655657859866990561, guid: e5550355d55751a419146e0c5605355a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnShootSeedInput
+      objectReference: {fileID: 0}
     - target: {fileID: 8818229630669956546, guid: e5550355d55751a419146e0c5605355a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -11167,6 +11218,7 @@ SceneRoots:
   - {fileID: 399191760}
   - {fileID: 5572567880208049800}
   - {fileID: 155155186}
+  - {fileID: 1755147664}
   - {fileID: 2135863204}
   - {fileID: 988594796}
   - {fileID: 1291398569}

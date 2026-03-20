@@ -118,12 +118,7 @@ public class Growing : MonoBehaviour
         if (hasFullyGrown)
             return;
 
-        lastWateredTime = Time.time;
-
-        if (nextGrowthTimer == 0f)
-            nextGrowthTimer = Time.time + stepDuration;
-
-        PlantGrowthManager.Instance.Register(this);
+        GrowOneStep();
     }
     public bool UpdateGrowth(float time)
     {
