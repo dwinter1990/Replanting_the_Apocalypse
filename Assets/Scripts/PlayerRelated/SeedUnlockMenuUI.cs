@@ -23,7 +23,12 @@ public class SeedUnlockMenuUI : MonoBehaviour
     [SerializeField] private Button closeButton;
     [SerializeField] private PlantTypeUnlockButton[] unlockButtons;
     [SerializeField] private TMP_Text researchPointsLabel;
+
     private GameObject previouslySelectedObject;
+    private CursorLockMode previousCursorLockMode;
+    private bool previousCursorVisibility;
+
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -34,13 +39,14 @@ public class SeedUnlockMenuUI : MonoBehaviour
 
         Instance = this;
 
-        if (closeButton != null)
-            closeButton.onClick.AddListener(HideMenu);
+        previousCursorLockMode = Cursor.lockState;
+        previousCursorVisibility = Cursor.visible;
 
         ValidateUnlockButtons();
         HideMenu();
         RefreshResearchPointsLabel();
     }
+
     private void OnDestroy()
     {
         if (Instance == this)
@@ -49,6 +55,8 @@ public class SeedUnlockMenuUI : MonoBehaviour
         if (closeButton != null)
             closeButton.onClick.RemoveListener(HideMenu);
     }
+
+
 
     private void OnEnable()
     {
@@ -70,9 +78,12 @@ public class SeedUnlockMenuUI : MonoBehaviour
             Debug.LogWarning("Cannot open seed unlock menu. PlantPoolManager or PlayerStats is missing.");
             return;
         }
-
-
         previouslySelectedObject = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
+        previousCursorLockMode = Cursor.lockState;
+        previousCursorVisibility = Cursor.visible;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         if (playerUI != null)
         {
@@ -107,6 +118,10 @@ public class SeedUnlockMenuUI : MonoBehaviour
 
         if (playerInput != null)
             playerInput.SwitchCurrentActionMap("Player");
+
+
+        Cursor.lockState = previousCursorLockMode;
+        Cursor.visible = previousCursorVisibility;
 
         RestorePreviousSelection();
     }
