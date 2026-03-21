@@ -1,7 +1,8 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 public class SeedUnlockMenuUI : MonoBehaviour
 {
     [System.Serializable]
@@ -22,6 +23,7 @@ public class SeedUnlockMenuUI : MonoBehaviour
     [SerializeField] private Button closeButton;
     [SerializeField] private PlantTypeUnlockButton[] unlockButtons;
     [SerializeField] private TMP_Text researchPointsLabel;
+    private GameObject previouslySelectedObject;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -39,6 +41,14 @@ public class SeedUnlockMenuUI : MonoBehaviour
         HideMenu();
         RefreshResearchPointsLabel();
     }
+    private void OnDestroy()
+    {
+        if (Instance == this)
+            Instance = null;
+
+        if (closeButton != null)
+            closeButton.onClick.RemoveListener(HideMenu);
+    }
 
     private void OnEnable()
     {
@@ -53,33 +63,60 @@ public class SeedUnlockMenuUI : MonoBehaviour
 
 
 
-public void ShowMenu()
+    public void ShowMenu()
     {
         if (PlantPoolManager.PlantPoolManagerInstance == null || PlayerStats.Instance == null)
         {
             Debug.LogWarning("Cannot open seed unlock menu. PlantPoolManager or PlayerStats is missing.");
             return;
         }
-        playerUI.SetActive(false);
 
-        playerInput.SwitchCurrentActionMap("UI");
+
+        previouslySelectedObject = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
+
+        if (playerUI != null)
+        {
+            playerUI.SetActive(false);
+
+        }
+
+        if (panelRoot != null)
+        {
+            panelRoot.SetActive(true);
+        }
+
+        if (playerInput != null)
+        {
+            playerInput.SwitchCurrentActionMap("UI");
+        }
 
         RefreshButtons();
-        if (panelRoot != null)
-            panelRoot.SetActive(true);
+        RefreshResearchPointsLabel();
+        SelectDefaultButton();
+
     }
 
     public void HideMenu()
     {
-        playerUI.SetActive(true);
+        if (playerUI != null)
+            playerUI.SetActive(true);
 
-        playerInput.SwitchCurrentActionMap("Player");
+
         if (panelRoot != null)
             panelRoot.SetActive(false);
+
+        if (playerInput != null)
+            playerInput.SwitchCurrentActionMap("Player");
+
+        RestorePreviousSelection();
     }
 
     private void ValidateUnlockButtons()
     {
+        if (closeButton != null && closeButton.onClick.GetPersistentEventCount() == 0)
+            closeButton.onClick.AddListener(HideMenu);
+
+
         if (unlockButtons == null)
             return;
 
@@ -87,16 +124,11 @@ public void ShowMenu()
         {
             PlantTypeUnlockButton entry = unlockButtons[i];
 
-            if (entry == null || entry.button == null)
+            if (entry?.button == null)
                 continue;
         }
     }
 
-    public void OnCloseClicked(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-            HideMenu();
-    }
 
     public void OnUnlockButtonPressed(int plantTypeIndex)
     {
@@ -105,49 +137,14 @@ public void ShowMenu()
 
         OnUnlockClicked((PlantType)plantTypeIndex);
     }
-
-    public void OnUnlockGrassButton()
+    
+    public void OnCancel(InputAction.CallbackContext context)
     {
-        OnUnlockClicked(PlantType.Grass);
-    }
-
-    public void OnUnlockFlowerButton()
-    {
-        OnUnlockClicked(PlantType.Flower);
-    }
-
-    public void OnUnlockBushButton()
-    {
-        OnUnlockClicked(PlantType.Bush);
-    }
-
-    public void OnUnlockTreeButton()
-    {
-        OnUnlockClicked(PlantType.Tree);
-    }
-
-    public void OnUnlockGrass(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-            OnUnlockClicked(PlantType.Grass);
-    }
-
-    public void OnUnlockFlower(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-            OnUnlockClicked(PlantType.Flower);
-    }
-
-    public void OnUnlockBush(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-            OnUnlockClicked(PlantType.Bush);
-    }
-
-    public void OnUnlockTree(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-            OnUnlockClicked(PlantType.Tree);
+        if(context.performed && panelRoot != null && panelRoot.activeSelf)
+        {
+            Debug.Log("Close button clicked");
+            HideMenu();
+        }
     }
 
 
@@ -170,7 +167,7 @@ public void ShowMenu()
         {
             PlantTypeUnlockButton entry = unlockButtons[i];
             
-            if (entry == null || entry.button == null)
+            if (entry?.button == null)
                 continue;
 
             int unlockCost = manager.GetUnlockCost(entry.plantType);
@@ -179,18 +176,22 @@ public void ShowMenu()
             bool canAfford = stats.researchPoints >= unlockCost;
             entry.button.interactable = canUnlockType && canAfford;
 
-            if (entry.label != null)
+            if (entry.label == null)
+                continue;
+            
+            if (canUnlockType)
             {
-                if (canUnlockType)
-                {
-                    int unlocked = manager.GetUnlockedCount(entry.plantType);
-                    int total = manager.GetTotalCount(entry.plantType);
-                    entry.label.text = "Unlock next " + entry.plantType + " seed (" + unlockCost + " RP)\n" + unlocked + "/" + total + " unlocked";
-                }
-
-                else
-                    entry.label.text = entry.plantType + " Fully Unlocked";
+                int unlocked = manager.GetUnlockedCount(entry.plantType);
+                int total = manager.GetTotalCount(entry.plantType);
+                entry.label.text = "Unlock next " + entry.plantType + " seed (" + unlockCost + " RP)\n" + unlocked + "/" + total + " unlocked";
             }
+            else
+            {
+                entry.label.text = entry.plantType + " Fully Unlocked!";
+            }
+
+
+
         }
     }
     private void HandleResearchPointsChanged(int currentResearchPoints)
@@ -234,6 +235,37 @@ public void ShowMenu()
         if (!manager.TryUnlockNextPool(type))
             return;
 
+        Debug.Log("button clicked");
         RefreshButtons();
+        SelectDefaultButton();
+    }
+
+    private void SelectDefaultButton()
+    {
+        if (EventSystem.current == null)
+            return;
+
+        for (int i = 0; i < unlockButtons.Length; i++)
+        {
+            PlantTypeUnlockButton entry = unlockButtons[i];
+
+            if (entry?.button != null && entry.button.interactable)
+            {
+                EventSystem.current.SetSelectedGameObject(entry.button.gameObject);
+                return;
+            }
+        }
+
+        if (closeButton != null)
+            EventSystem.current.SetSelectedGameObject(closeButton.gameObject);
+    }
+
+    private void RestorePreviousSelection()
+    {
+        if (EventSystem.current == null)
+            return;
+
+        EventSystem.current.SetSelectedGameObject(previouslySelectedObject);
+
     }
 }
