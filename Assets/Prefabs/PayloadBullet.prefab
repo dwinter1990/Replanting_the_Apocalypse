@@ -154,5 +154,5 @@ MonoBehaviour:
   seedDelay: 0.1
   pool: {fileID: 0}
   payloadPool: {fileID: 0}
-  seedsToLaunch: 4
+  seedsToLaunch: 12
   payloadPrefab: {fileID: 8941035693105548871}

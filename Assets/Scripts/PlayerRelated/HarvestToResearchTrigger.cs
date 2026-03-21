@@ -6,10 +6,11 @@ public class HarvestToResearchTrigger : MonoBehaviour
     {
         if (!other.CompareTag("Player"))
             return;
-        //if (SeedUnlockMenuUI.Instance != null)
-        //{
-        //    SeedUnlockMenuUI.Instance.ShowMenu();
-        //}
+
+        if (SeedUnlockMenuUI.Instance != null)
+        {
+            SeedUnlockMenuUI.Instance.ShowMenu();
+        }
         else
         {
             Debug.LogWarning("SeedUnlockMenuUI instance is missing; unlock menu was not shown.");
@@ -39,16 +40,4 @@ public class HarvestToResearchTrigger : MonoBehaviour
         PlayerStats.Instance.AddResearchPoints(awardedResearchPoints);
         Debug.Log("Converted harvested plants to research points: " + awardedResearchPoints);
     }
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (!other.CompareTag("Player"))
-    //    {
-    //        return;
-    //    }
-    //    else
-    //    {
-    //        SeedUnlockMenuUI.Instance.HideMenu();
-    //    }
-    //}
 }

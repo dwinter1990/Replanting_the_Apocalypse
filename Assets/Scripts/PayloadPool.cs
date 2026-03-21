@@ -26,7 +26,9 @@ public class PayloadPool : MonoBehaviour
 
     public void ReturnObject(GameObject obj)
     {
-        
+        Rigidbody rb = obj.GetComponent<Rigidbody>();
+
+        rb.constraints = RigidbodyConstraints.None;
         obj.transform.localScale = Vector3.one;
         obj.transform.localRotation = Quaternion.identity;
         

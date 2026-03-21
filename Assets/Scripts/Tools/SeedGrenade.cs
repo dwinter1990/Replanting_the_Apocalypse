@@ -29,13 +29,14 @@ public class SeedGrenade : MonoBehaviour
 
         yield return new WaitForSeconds(0.25f);
         //rb.freezeRotation = true;
-        //rb.constraints = RigidbodyConstraints.FreezePosition;
+        rb.constraints = RigidbodyConstraints.FreezePosition;
         //Initiate Stage 3
         StartCoroutine(SpraySeeds());
     }
 
     private IEnumerator SpraySeeds()
     {
+        
         float angleStep = 360f / seedsToLaunch;
         float angle = 0f;
 

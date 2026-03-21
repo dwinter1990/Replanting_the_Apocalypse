@@ -611,36 +611,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "UnlockGrass",
+                    "name": "UnlockClicked",
                     "type": "Button",
-                    "id": "cf6f5e73-92c2-4eb6-9c47-cea11c3ed069",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "UnlockBush",
-                    "type": "Button",
-                    "id": "4b6f2fb9-ab10-465e-b543-88e90a815579",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "UnlockFlower",
-                    "type": "Button",
-                    "id": "b3fb6361-9eff-4e6b-bc7b-5b1cc0bab8a2",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "UnlockTree",
-                    "type": "Button",
-                    "id": "a08743bd-ad54-404a-bfa5-873d962733a0",
+                    "id": "2abd2589-c801-4dd3-b442-3d3f9f8714b2",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -1068,45 +1041,12 @@
                 },
                 {
                     "name": "",
-                    "id": "cc52eb8a-3939-4b19-9ea4-fa359f0d2134",
+                    "id": "4262beb5-b434-41c8-a341-9ff7393f961e",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "UnlockGrass",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2d779878-d6b1-4b78-aec8-560f874912bc",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "UnlockBush",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "bbc7d891-5a0e-4fb7-83fb-a186c6115136",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "UnlockFlower",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ced3d41e-9cee-49f2-8e5c-ed4edec8c9b5",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "UnlockTree",
+                    "action": "UnlockClicked",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
