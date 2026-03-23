@@ -19,7 +19,7 @@ public class GroundCollision : MonoBehaviour
 
         // Spawn plant
         plant.transform.position = spawnPoint;
-        plant.transform.rotation = Quaternion.Euler(0f,Random.Range(0,359),0f);
+        plant.transform.rotation = Quaternion.Euler(90f,Random.Range(0,359),0f);
 
         // Spawn mound at same position
         GameObject mound = MoundPool.instance.Get();

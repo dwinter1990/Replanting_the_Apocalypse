@@ -15,17 +15,19 @@ public class SeedManager : MonoBehaviour
 {
     public static SeedManager SMInstance;
 
+    [Header("Seeds and other things to be launched")]
     [SerializeField] private ShotType currentShotType;
     public ObjectPool pool;
     public PayloadPool payloadPool;
     
-
+    [Header("Shoot stats")]
     [SerializeField] float seedSpeed;
     [SerializeField] Transform seedSpawnPoint;
-    
-    [Header("Shoot stats")]
     [SerializeField] float timeBetweenShots;
     private float shootTime;
+
+    [Header("Launcher animations")]
+    [SerializeField] private Animator launcherAnimator;
 
     private void Awake()
     {
@@ -73,6 +75,8 @@ public class SeedManager : MonoBehaviour
             return;
         }
 
+        //Trigger seed launching animation
+        launcherAnimator.SetTrigger("FireTrigger");
         seed.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
         seed.transform.position = seedSpawnPoint.position;
         seed.transform.rotation = seedSpawnPoint.rotation;
