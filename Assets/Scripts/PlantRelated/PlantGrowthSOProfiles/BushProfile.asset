@@ -19,17 +19,10 @@ MonoBehaviour:
   growthDuration: 4
   researchPointValue: 3
   startScale: {x: 0.05, y: 0.05, z: 0.05}
-  minScale: 0.75
-  maxScale: 1.25
-  maxScaleMultiplier: 2
+  minScale: 0.25
+  maxScale: 0.8
+  maxScaleMultiplier: 1.1
   stepOvershoot: 0.25
   finalOvershoot: 0.25
   finalDuration: 0.6
   wobbleAmount: 6
-  fullyGrownColorProperty: _FullyGrownColor
-  growingColor: {r: 1, g: 1, b: 1, a: 1}
-  fullyGrownColor: {r: 0.4949739, g: 1, b: 0, a: 1}
-  outlineEnabledProperty: _OutlineEnabled
-  outlineColorProperty: _OutlineColor
-  outlineNeedsWaterColor: {r: 0.015686274, g: 1, b: 0.9206166, a: 1}
-  outlineFullyGrownColor: {r: 0.49411768, g: 1, b: 0, a: 1}
