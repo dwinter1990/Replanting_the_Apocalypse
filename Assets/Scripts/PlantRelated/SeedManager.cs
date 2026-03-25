@@ -51,6 +51,8 @@ public class SeedManager : MonoBehaviour
     {
         GameObject seed = null;
 
+        launcherAnimator.SetTrigger("FireTrigger");
+
         switch (currentShotType)
         {
             case ShotType.seed:
@@ -76,7 +78,7 @@ public class SeedManager : MonoBehaviour
         }
 
         //Trigger seed launching animation
-        launcherAnimator.SetTrigger("FireTrigger");
+        Debug.Log("Firing seed: " + seed.name);
         seed.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
         seed.transform.position = seedSpawnPoint.position;
         seed.transform.rotation = seedSpawnPoint.rotation;

@@ -18,6 +18,7 @@ public class PayloadPool : MonoBehaviour
         if (pool.Count > 0)
         {
             GameObject obj = pool.Dequeue();
+            //obj.transform.localScale = Vector3.one * 10f;
             obj.SetActive(true);
             return obj;
         }
@@ -29,7 +30,7 @@ public class PayloadPool : MonoBehaviour
         Rigidbody rb = obj.GetComponent<Rigidbody>();
 
         rb.constraints = RigidbodyConstraints.None;
-        obj.transform.localScale = Vector3.one;
+        //obj.transform.localScale = Vector3.one;
         obj.transform.localRotation = Quaternion.identity;
         
         obj.SetActive(false);

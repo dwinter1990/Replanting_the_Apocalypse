@@ -11,12 +11,18 @@ public class SeedGrenade : MonoBehaviour
     [SerializeField] private int seedsToLaunch;
     [SerializeField] GameObject payloadPrefab;
 
+    private void OnEnable()
+    {
+        payloadPool = FindFirstObjectByType<PayloadPool>();
+        pool = FindFirstObjectByType<ObjectPool>();
+    }
 
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Ground"))
         {
             //Initiate stage 2
+            Debug.Log("seed touched the " + collision.gameObject.name);
             StartCoroutine(LaunchUpwards());
         }
     }
@@ -47,6 +53,7 @@ public class SeedGrenade : MonoBehaviour
         {
             
             GameObject seed = pool.GetObject();
+
             if (pool == null)
             {
                 Debug.LogError("ObjectPool is NULL on SeedGrenade!");
