@@ -5,11 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 
-public enum ShotType
-{
-    seed,
-    grenade
-}
+
 
 public class SeedManager : MonoBehaviour
 {
@@ -79,7 +75,7 @@ public class SeedManager : MonoBehaviour
 
         //Trigger seed launching animation
         Debug.Log("Firing seed: " + seed.name);
-        seed.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+        //seed.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
         seed.transform.position = seedSpawnPoint.position;
         seed.transform.rotation = seedSpawnPoint.rotation;
 

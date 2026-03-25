@@ -34,9 +34,12 @@ public class ObjectPool : MonoBehaviour
         }
         else
         {
-            obj.transform.localScale = Vector3.one * .25f;
+            //obj.transform.localScale = Vector3.one;
             obj.transform.localRotation = Quaternion.identity;
         }
+        Rigidbody rb = obj.GetComponent<Rigidbody>();
+        rb.angularVelocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;   
         obj.SetActive(false);
         pool.Enqueue(obj);
     }

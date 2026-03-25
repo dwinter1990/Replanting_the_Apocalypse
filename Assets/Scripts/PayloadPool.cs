@@ -30,6 +30,7 @@ public class PayloadPool : MonoBehaviour
         Rigidbody rb = obj.GetComponent<Rigidbody>();
 
         rb.constraints = RigidbodyConstraints.None;
+        rb.angularVelocity = Vector3.zero;
         //obj.transform.localScale = Vector3.one;
         obj.transform.localRotation = Quaternion.identity;
         

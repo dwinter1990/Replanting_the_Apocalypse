@@ -97,9 +97,9 @@ GameObject:
   - component: {fileID: 6282392662922815888}
   - component: {fileID: 9181789283589652839}
   - component: {fileID: 6992915776515469825}
-  - component: {fileID: 6789553829939328805}
   - component: {fileID: 7442113697332771305}
   - component: {fileID: 4822667362240951332}
+  - component: {fileID: 8352340446326215961}
   m_Layer: 0
   m_Name: Seed Grenade
   m_TagString: Untagged
@@ -179,7 +179,53 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &6789553829939328805
+--- !u!114 &7442113697332771305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4180483233568746228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa34af26266f524cb2f8494de3c3d01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upForce: 12
+  seedLaunchForce: 3
+  seedDelay: 0.05
+  pool: {fileID: 0}
+  payloadPool: {fileID: 0}
+  seedsToLaunch: 4
+  payloadPrefab: {fileID: 4180483233568746228}
+--- !u!54 &4822667362240951332
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4180483233568746228}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0.25
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 2
+--- !u!135 &8352340446326215961
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,54 +244,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.01
+  m_Radius: 0.015
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7442113697332771305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4180483233568746228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fa34af26266f524cb2f8494de3c3d01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  upForce: 12
-  seedLaunchForce: 3
-  seedDelay: 0.05
-  pool: {fileID: 0}
-  payloadPool: {fileID: 0}
-  seedsToLaunch: 8
-  payloadPrefab: {fileID: 4180483233568746228}
---- !u!54 &4822667362240951332
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4180483233568746228}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &5246978927955970424
 GameObject:
   m_ObjectHideFlags: 0

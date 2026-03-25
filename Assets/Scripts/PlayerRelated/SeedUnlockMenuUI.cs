@@ -22,6 +22,7 @@ public class SeedUnlockMenuUI : MonoBehaviour
     [SerializeField] private GameObject panelRoot;
     [SerializeField] private Button closeButton;
     [SerializeField] private PlantTypeUnlockButton[] unlockButtons;
+    
     [SerializeField] private TMP_Text researchPointsLabel;
 
     private GameObject previouslySelectedObject;

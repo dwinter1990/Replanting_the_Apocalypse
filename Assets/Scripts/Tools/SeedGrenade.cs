@@ -40,7 +40,7 @@ public class SeedGrenade : MonoBehaviour
         StartCoroutine(SpraySeeds());
     }
 
-    private IEnumerator SpraySeeds()
+    IEnumerator SpraySeeds()
     {
         
         float angleStep = 360f / seedsToLaunch;
