@@ -28,7 +28,7 @@ public class ShowComic : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         fade.FadeIn();
-        yield return new WaitForSeconds(fade.fadeSpeed);
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("PlayerControllerScene");
     }
 }
