@@ -37,7 +37,7 @@ public class SeedUnlockMenuUI : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
+        
         Instance = this;
 
         previousCursorLockMode = Cursor.lockState;
@@ -110,6 +110,7 @@ public class SeedUnlockMenuUI : MonoBehaviour
 
     public void HideMenu()
     {
+        
         if (playerUI != null)
             playerUI.SetActive(true);
 

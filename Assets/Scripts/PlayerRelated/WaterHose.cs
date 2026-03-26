@@ -4,15 +4,18 @@ using Unity.VisualScripting;
 
 public class WaterHose : MonoBehaviour
 {
+    [Header("Particle System Settings")]
     [SerializeField] private ParticleSystem waterParticles;
     [SerializeField] private Transform nozzle;
 
+    [Header("Hit Detection Settings")]
     [SerializeField] private float range = 8f;
     [SerializeField] private float coneAngle = 25f;
     [SerializeField] private float sprayInterval = 0.25f;
-
     [SerializeField] private LayerMask plantMask;
 
+    [Header("WaterGun Animation")]
+    [SerializeField] private Animator waterGunAnim;
     private Coroutine sprayRoutine;
     private Collider[] plantBuffer = new Collider[64];
     private float coneDot;
@@ -45,6 +48,7 @@ public class WaterHose : MonoBehaviour
             sprayRoutine = null;
         }
 
+        waterGunAnim.SetBool("isFiring", false);
         waterParticles.Stop();
     }
 
@@ -67,7 +71,7 @@ public class WaterHose : MonoBehaviour
                 StopSpray();
                 yield break;
             }
-
+            waterGunAnim.SetBool("isFiring", true);
             FireCone();
 
             yield return wait;
