@@ -13,6 +13,7 @@ public class ShowComic : MonoBehaviour
     {
         fade = GetComponent<Fade>();
         fade.FadeOut();
+
         comic0.SetActive(false);
         comic1.SetActive(false);
         comic2.SetActive(false);

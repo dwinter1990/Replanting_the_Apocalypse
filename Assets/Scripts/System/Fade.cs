@@ -6,7 +6,7 @@ public class Fade : MonoBehaviour
     public Image blackScreen;
     public float fadeSpeed = 1.0f;
     private bool isFading = false;
-    private float targetAlpha = 0;
+    private float targetAlpha;
 
     void Update()
     {

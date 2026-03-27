@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,46 +9,53 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private float interactDistance = 5f;
     [SerializeField] private Camera playerCam;
 
-
-
     public void OnAttack(InputAction.CallbackContext context)
     {
-        HandType activeHand = handManager.GetActiveHandType();
+        HandTypeRight activeHand = handManager.GetActiveHandRightType();
 
         // Start action when button is pressed
         if (context.performed)
         {
-            if (activeHand == HandType.Water)
+            if (activeHand == HandTypeRight.Water)
             {
                 waterHose.StartSpray();
             }
-            else if (activeHand == HandType.Harvest)
+            else if (activeHand == HandTypeRight.Harvest)
             {
-                TryHarvest();
+                StartCoroutine("TryHarvest");
             }
         }
 
         // Stop action when button is released
         if (context.canceled)
         {
-            if (activeHand == HandType.Water)
+            if (activeHand == HandTypeRight.Water)
             {
                 waterHose.StopSpray();
+            }
+
+            if(activeHand == HandTypeRight.Harvest)
+            {
+                StopCoroutine("TryHarvest");
             }
         }
     }
 
-    private void TryHarvest()
+    IEnumerator TryHarvest()
     {
-        // Raycast from camera to mouse position
-        Ray ray = playerCam.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (Physics.Raycast(ray, out RaycastHit hit, interactDistance))
+        while (true)
         {
-            var growing = hit.collider.GetComponent<Growing>();
-            if (growing != null)
+            yield return new WaitForSeconds(0.5f);
+            // Raycast from camera to mouse position
+            Ray ray = playerCam.ScreenPointToRay(Mouse.current.position.ReadValue());
+            if (Physics.Raycast(ray, out RaycastHit hit, interactDistance))
             {
-                growing.Harvest();
+                var growing = hit.collider.GetComponent<Growing>();
+                if (growing != null)
+                {
+                    growing.Harvest();
+                }
             }
-        }
+        } 
     }
 }

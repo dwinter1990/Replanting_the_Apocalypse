@@ -4,48 +4,86 @@ using UnityEngine.InputSystem;
 public class HandManager : MonoBehaviour
 {
     [System.Serializable]
-    public class Hand
+    public class RightHand
     {
         public GameObject handObject;
-        public HandType handType;
+        public HandTypeRight handType;
+    }
+    [System.Serializable]
+    public class LeftHand
+    {
+        public GameObject handObject;
+        public HandTypeLeft handType;
     }
 
-    [SerializeField] private Hand[] hands;
-    private int activeHandIndex = 0;
+    [Header("Right hand")]
+    [SerializeField] private RightHand[] rightHands;
+    private int activeRightHandIndex = 0;
 
     // References to scripts for actions
     [SerializeField] private WaterHose waterHose;
 
+
+    [Header("Left hand")]
+    [SerializeField] private LeftHand[] leftHands;
+    private int activeLeftHandIndex = 0;
     private void Start()
     {
-        UpdateHands();
+        UpdateRightHands();
+        UpdateLeftHands();
     }
 
     public void OnNext(InputAction.CallbackContext context)
     {
-        if (!context.performed || hands.Length == 0) return;
+        if (!context.performed || rightHands.Length == 0) return;
 
         // Stop watering if the current hand is water
-        if (hands[activeHandIndex].handType == HandType.Water)
+        if (rightHands[activeRightHandIndex].handType == HandTypeRight.Water)
         {
             waterHose.StopSpray();
         }
 
-        activeHandIndex = (activeHandIndex + 1) % hands.Length;
+        activeRightHandIndex = (activeRightHandIndex + 1) % rightHands.Length;
 
-        UpdateHands();
+        UpdateRightHands();
     }
 
-    private void UpdateHands()
+    public void OnLeftNext(InputAction.CallbackContext context)
     {
-        for (int i = 0; i < hands.Length; i++)
+        Debug.Log("Should be changing left hand now");
+        if (!context.performed || leftHands.Length == 0)
         {
-            hands[i].handObject.SetActive(i == activeHandIndex);
+            return;
         }
+
+        activeRightHandIndex = (activeLeftHandIndex + 1) % leftHands.Length;
+
+        UpdateLeftHands();
+    }
+    private void UpdateRightHands()
+    {
+        for (int i = 0; i < rightHands.Length; i++)
+        {
+            rightHands[i].handObject.SetActive(i == activeRightHandIndex);
+        }
+
+    }
+    private void UpdateLeftHands()
+    {
+        for (int i = 0; i < leftHands.Length; i++)
+        {
+            leftHands[i].handObject.SetActive(i == activeLeftHandIndex);
+        }
+        Debug.Log("Should be Updating left hand now: " + activeLeftHandIndex);
+    }
+    public HandTypeRight GetActiveHandRightType()
+    {
+        return rightHands[activeRightHandIndex].handType;
+        
     }
 
-    public HandType GetActiveHandType()
+    public HandTypeLeft GetActiveHandTypeLeft()
     {
-        return hands[activeHandIndex].handType;
+        return leftHands[activeLeftHandIndex].handType;
     }
 }

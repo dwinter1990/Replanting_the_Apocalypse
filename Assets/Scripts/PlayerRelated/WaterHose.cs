@@ -81,7 +81,7 @@ public class WaterHose : MonoBehaviour
     void FireCone()
     {
         Vector3 center = nozzle.position + nozzle.forward * range * 0.55f;
-
+        
         int hitCount = Physics.OverlapSphereNonAlloc(
             center,
             range * 0.5f,

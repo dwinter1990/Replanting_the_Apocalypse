@@ -14,6 +14,9 @@ public class FirstPersonController : MonoBehaviour
     private Rigidbody rb;
     private Vector2 moveInput;
 
+    [Header("Wifi Range Settings")]
+    [SerializeField] private float range = 3f;
+    [SerializeField] Transform centrePoint;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -30,8 +33,12 @@ public class FirstPersonController : MonoBehaviour
         moveInput = context.ReadValue<Vector2>();
     }
 
+
     private void FixedUpdate()
     {
+        Vector3 offset = transform.position - centrePoint.position;
+        Vector3 directionFromCentre = offset.normalized;
+
         // Convert input to movement direction relative to camera
         Vector3 inputDir = new Vector3(moveInput.x, 0f, moveInput.y);
 
@@ -52,12 +59,17 @@ public class FirstPersonController : MonoBehaviour
         Vector3 moveDir = camForward * inputDir.z + camRight * inputDir.x;
         moveDir.Normalize();
 
-        // Apply movement using velocity change (physics-friendly)
         Vector3 targetVelocity = moveDir * moveSpeed;
         Vector3 velocityChange = targetVelocity - rb.linearVelocity;
         velocityChange.y = 0f; // don’t affect vertical velocity
-        //rb.AddForce(velocityChange, ForceMode.VelocityChange);
+
+
+        if (offset.magnitude >= range && Vector3.Dot(moveDir, directionFromCentre) > 0)
+        {
+            moveDir = Vector3.ProjectOnPlane(moveDir, directionFromCentre);
+        }
 
         transform.position += moveDir * moveSpeed * Time.fixedDeltaTime;
+
     }
 }

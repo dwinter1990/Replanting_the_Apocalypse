@@ -5,8 +5,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 
-
-
 public class SeedManager : MonoBehaviour
 {
     public static SeedManager SMInstance;
@@ -42,6 +40,21 @@ public class SeedManager : MonoBehaviour
             shootTime = timeBetweenShots;
         }
         
+    }
+
+    public void OnShotTypeChange(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (currentShotType == ShotType.seed)
+            {
+                currentShotType = ShotType.grenade;
+            }
+            else if(currentShotType == ShotType.grenade)
+            {
+                currentShotType = ShotType.seed;
+            }
+        }
     }
     public void ShootSeed()
     {

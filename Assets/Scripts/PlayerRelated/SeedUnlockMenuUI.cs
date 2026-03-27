@@ -12,6 +12,12 @@ public class SeedUnlockMenuUI : MonoBehaviour
         public Button button;
         public TMP_Text label;
     }
+    private class ToolUnlockButton
+    {
+        public ToolType toolType;
+        public Button button;
+        public TMP_Text label;
+    }
 
     public static SeedUnlockMenuUI Instance { get; private set; }
     [Header("Player UI")]
@@ -22,7 +28,7 @@ public class SeedUnlockMenuUI : MonoBehaviour
     [SerializeField] private GameObject panelRoot;
     [SerializeField] private Button closeButton;
     [SerializeField] private PlantTypeUnlockButton[] unlockButtons;
-    
+    [SerializeField] private ToolUnlockButton[] toolUnlockButtons;
     [SerializeField] private TMP_Text researchPointsLabel;
 
     private GameObject previouslySelectedObject;
