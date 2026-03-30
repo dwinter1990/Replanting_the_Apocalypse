@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 5553435b648d3154b89bf4383b44c861, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.68258214
+      value: -0.851264
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5553435b648d3154b89bf4383b44c861, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.30428267
+      value: 0.4429965
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5553435b648d3154b89bf4383b44c861, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.561508
+      value: 16.253225
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5553435b648d3154b89bf4383b44c861, type: 3}
       propertyPath: m_LocalRotation.w
@@ -77,6 +77,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5553435b648d3154b89bf4383b44c861, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4293118422067201346}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5553435b648d3154b89bf4383b44c861, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4078667742675073905}
   m_SourcePrefab: {fileID: 100100000, guid: 5553435b648d3154b89bf4383b44c861, type: 3}
 --- !u!1 &1582883605635666365 stripped
 GameObject:
@@ -132,3 +135,21 @@ MonoBehaviour:
   profile: {fileID: 11400000, guid: e812d98703eea294e97962b628ee9b8d, type: 2}
   startScale: {x: 0.025, y: 0.025, z: 0.025}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4078667742675073905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582883605635666365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.95003825, b: 0, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

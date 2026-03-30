@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private float interactDistance = 5f;
     [SerializeField] private Camera playerCam;
 
+    private Outline currentOutline;
     public void OnAttack(InputAction.CallbackContext context)
     {
         HandTypeRight activeHand = handManager.GetActiveHandRightType();
@@ -22,6 +24,7 @@ public class PlayerInteraction : MonoBehaviour
             }
             else if (activeHand == HandTypeRight.Harvest)
             {
+                //harvestTry = true;
                 StartCoroutine("TryHarvest");
             }
         }
@@ -36,16 +39,50 @@ public class PlayerInteraction : MonoBehaviour
 
             if(activeHand == HandTypeRight.Harvest)
             {
+                //harvestTry = false;
                 StopCoroutine("TryHarvest");
             }
         }
     }
 
+    private void Update()
+    {
+        if (playerCam == null || Mouse.current == null)
+        {
+            return;
+        }
+
+        Ray objectCast = playerCam.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+        Outline newOutline = null;
+        if (Physics.Raycast(objectCast, out RaycastHit hitinfo, interactDistance))
+        {
+            Growing growing = hitinfo.collider.GetComponent<Growing>();
+            if (growing != null)
+            {
+                newOutline = growing.GetComponent<Outline>();
+                if (newOutline != null)
+                {
+                    Debug.Log("Now looking at: " + hitinfo.collider.gameObject.name);
+                    newOutline.OutlineMode = Outline.Mode.OutlineVisible;
+                    newOutline.OutlineColor = growing.HasFullyGrown ? Color.green : Color.blue;
+                }
+            }
+        }
+
+        if (currentOutline != null && currentOutline != newOutline)
+        {
+            Debug.Log("no longer looking at: " + hitinfo.collider.gameObject.name);
+            currentOutline.OutlineMode = Outline.Mode.OutlineHidden;
+        }
+
+        currentOutline = newOutline;
+    }
     IEnumerator TryHarvest()
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.25f);
             // Raycast from camera to mouse position
             Ray ray = playerCam.ScreenPointToRay(Mouse.current.position.ReadValue());
             if (Physics.Raycast(ray, out RaycastHit hit, interactDistance))

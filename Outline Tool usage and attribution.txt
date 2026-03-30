@@ -1,0 +1,8 @@
+I grabbed the outline tool from https://assetstore.unity.com/packages/tools/particles-effects/quick-outline-115488
+
+So what am I trying to do with this outline?
+When the player looks at any particular plant I want the outline tool to turn on and highlight which plant is being looked at.
+	I want that outline to show whether the plant is fully grown by changing the colour.
+
+When the player looks away from that object, I want the outline to turn off.
+

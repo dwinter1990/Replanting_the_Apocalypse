@@ -11,6 +11,7 @@ public class Growing : MonoBehaviour
 
     [Header("Watering settings")]
     private bool hasFullyGrown;
+    public bool HasFullyGrown => hasFullyGrown;
     private int ignoreWaterLayer;
     private float lastWateredTime;
     private float waterDuration;
@@ -28,17 +29,25 @@ public class Growing : MonoBehaviour
     public Quaternion startRotation;
     private float currentScale;
     private float maxScale;
-
+    private Outline outline;
 
     private GameObject spawnedMound;
+
 
     private void Awake()
     {
         tweenQueue = GetComponent<TweenQueue>();
         ignoreWaterLayer = LayerMask.NameToLayer("IgnoreWater");
         startingLayer = gameObject.layer;
+
+        outline = GetComponent<Outline>();
+        SetOutlineHidden();
     }
 
+    private void OnEnable()
+    {
+        SetOutlineHidden();
+    }
     private void Start()
     {
         
@@ -60,6 +69,7 @@ public class Growing : MonoBehaviour
     }
     void OnDisable()
     {
+        SetOutlineHidden();
         stepBounceTween?.Pause();
         finalBounceTween?.Pause();
         rotateTween?.Pause();
@@ -103,7 +113,7 @@ public class Growing : MonoBehaviour
             wobble,
             profile.finalDuration,
             8,
-            0.7f)
+            1f)
             .Pause()
             .SetAutoKill(false);
     }
@@ -225,8 +235,11 @@ public class Growing : MonoBehaviour
         }
     }
 
+
     void ResetPlant()
     {
+        SetOutlineHidden();
+
         stepBounceTween.Rewind();
         finalBounceTween.Rewind();
         rotateTween.Rewind();
@@ -239,5 +252,16 @@ public class Growing : MonoBehaviour
         nextGrowthTimer = 0f;
         gameObject.layer = startingLayer;
         hasFullyGrown = false;
+    }
+
+    public void SetOutlineHidden()
+    {
+        if(outline == null)
+        {
+            return;
+        }
+        outline.OutlineMode = Outline.Mode.OutlineHidden;
+        outline.OutlineColor = Color.yellow;
+
     }
 }
