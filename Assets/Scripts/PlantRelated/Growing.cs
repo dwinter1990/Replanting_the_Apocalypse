@@ -29,7 +29,7 @@ public class Growing : MonoBehaviour
     public Quaternion startRotation;
     private float currentScale;
     private float maxScale;
-    private Outline outline;
+    //private Outline outline;
 
     private GameObject spawnedMound;
 
@@ -40,7 +40,6 @@ public class Growing : MonoBehaviour
         ignoreWaterLayer = LayerMask.NameToLayer("IgnoreWater");
         startingLayer = gameObject.layer;
 
-        outline = GetComponent<Outline>();
         SetOutlineHidden();
     }
 
@@ -254,14 +253,14 @@ public class Growing : MonoBehaviour
         hasFullyGrown = false;
     }
 
-    public void SetOutlineHidden()
+    private void SetOutlineHidden()
     {
-        if(outline == null)
-        {
-            return;
-        }
-        outline.OutlineMode = Outline.Mode.OutlineHidden;
-        outline.OutlineColor = Color.yellow;
+        Outline outline = GetComponent<Outline>();
+        if (outline == null) return;
 
+        //outline.OutlineColor = Color.yellow;
+        outline.OutlineMode = Outline.Mode.OutlineHidden;
+        
+        //outline.enabled = false;
     }
 }

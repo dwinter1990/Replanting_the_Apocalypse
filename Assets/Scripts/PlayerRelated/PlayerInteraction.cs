@@ -44,47 +44,79 @@ public class PlayerInteraction : MonoBehaviour
             }
         }
     }
-
     private void Update()
     {
         if (playerCam == null || Mouse.current == null)
         {
+            HideCurrentOutline();
             return;
         }
 
-        Ray objectCast = playerCam.ScreenPointToRay(Mouse.current.position.ReadValue());
+        //if (handManager == null || handManager.GetActiveHandRightType() != HandTypeRight.Harvest)
+        //{
+        //    HideCurrentOutline();
+        //    return;
+        //}
 
+        Ray ray = GetInteractionRay();
         Outline newOutline = null;
-        if (Physics.Raycast(objectCast, out RaycastHit hitinfo, interactDistance))
+        Growing growing = null;
+
+        if (Physics.Raycast(ray, out RaycastHit hit, interactDistance))
         {
-            Growing growing = hitinfo.collider.GetComponent<Growing>();
+            // Same-object lookup (as you requested)
+            growing = hit.collider.GetComponent<Growing>();
             if (growing != null)
-            {
-                newOutline = growing.GetComponent<Outline>();
-                if (newOutline != null)
-                {
-                    Debug.Log("Now looking at: " + hitinfo.collider.gameObject.name);
-                    newOutline.OutlineMode = Outline.Mode.OutlineVisible;
-                    newOutline.OutlineColor = growing.HasFullyGrown ? Color.green : Color.blue;
-                }
-            }
+                newOutline = hit.collider.GetComponent<Outline>();
         }
 
+        // Switched target (or lost target): hide previous
         if (currentOutline != null && currentOutline != newOutline)
         {
-            Debug.Log("no longer looking at: " + hitinfo.collider.gameObject.name);
             currentOutline.OutlineMode = Outline.Mode.OutlineHidden;
+            currentOutline.enabled = false;
+        }
+
+        // Apply live state to current target every frame
+        if (newOutline != null && growing != null)
+        {
+            newOutline.enabled = true;
+            newOutline.OutlineMode = Outline.Mode.OutlineVisible;
+            newOutline.OutlineColor = growing.HasFullyGrown ? Color.green : Color.cyan;
         }
 
         currentOutline = newOutline;
+    }
+
+    private void HideCurrentOutline()
+    {
+        if (currentOutline == null) return;
+
+        currentOutline.OutlineMode = Outline.Mode.OutlineHidden;
+        currentOutline.enabled = false;
+        currentOutline = null;
+    }
+
+    private Ray GetInteractionRay()
+    {
+        bool useCenterScreenRay = Cursor.lockState == CursorLockMode.Locked || !Cursor.visible;
+        if (useCenterScreenRay)
+            return playerCam.ViewportPointToRay(new Vector3(0.5f, 0.4f, 0f));
+
+        return playerCam.ScreenPointToRay(Mouse.current.position.ReadValue());
     }
     IEnumerator TryHarvest()
     {
         while (true)
         {
             yield return new WaitForSeconds(0.25f);
-            // Raycast from camera to mouse position
-            Ray ray = playerCam.ScreenPointToRay(Mouse.current.position.ReadValue());
+            
+            if(playerCam == null || Mouse.current == null)
+            {
+                continue;
+            }
+
+            Ray ray = GetInteractionRay();
             if (Physics.Raycast(ray, out RaycastHit hit, interactDistance))
             {
                 var growing = hit.collider.GetComponent<Growing>();
