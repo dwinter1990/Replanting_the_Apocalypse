@@ -253,11 +253,11 @@ public class Growing : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (firstHarvested)
-        {
-            SeedUnlockMenuUI.Instance.FirstPlantUnlock(originPool.plantType);
-            firstHarvested = false;
-        }
+        //if (firstHarvested)
+        //{
+        //    SeedUnlockMenuUI.Instance.FirstPlantUnlock(originPool.plantType);
+        //    firstHarvested = false;
+        //}
     }
     
 
