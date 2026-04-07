@@ -18,7 +18,7 @@ public class PlantPool : MonoBehaviour
 
     [SerializeField] private GameObject prefab;
     [SerializeField] private int preloadAmount = 20;
-
+    public GameObject Prefab => prefab;
     private Queue<GameObject> pool = new Queue<GameObject>();
 
     [SerializeField] private Transform firstPlacementLocation;
