@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.UI;
 using UnityEngine.UI;
 public class SeedUnlockMenuUI : MonoBehaviour
 {
@@ -239,6 +240,21 @@ public class SeedUnlockMenuUI : MonoBehaviour
         researchPointsLabel.text = "Research Points: " + currentResearchPoints;
     }
 
+    public void FirstPlantUnlock(PlantType type)
+    {
+        Debug.Log("Unlocking plant type: " + type);
+        PlantPoolManager manager = PlantPoolManager.PlantPoolManagerInstance;
+        PlayerStats stats = PlayerStats.Instance;
+
+        if (!manager.TryUnlockNextPool(type))
+            return;
+    }
+
+    private void OnUnlock(ToolType type)
+    {
+        // Implement tool unlocking logic here, similar to plant unlocking
+        Debug.Log("Tool unlock not implemented yet for " + type);
+    }
     private void OnUnlockClicked(PlantType type)
     {
         PlantPoolManager manager = PlantPoolManager.PlantPoolManagerInstance;

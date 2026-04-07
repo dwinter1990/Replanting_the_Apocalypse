@@ -32,7 +32,7 @@ public class Growing : MonoBehaviour
     //private Outline outline;
 
     private GameObject spawnedMound;
-
+    private bool firstHarvested = true;
 
     private void Awake()
     {
@@ -231,6 +231,12 @@ public class Growing : MonoBehaviour
             Debug.LogWarning("Harvesting: " + plantId);
             ResetPlant();
             originPool.Return(gameObject);
+
+            if (firstHarvested)
+            {
+                SeedUnlockMenuUI.Instance.FirstPlantUnlock(originPool.plantType);
+                firstHarvested = false;
+            }
         }
     }
 

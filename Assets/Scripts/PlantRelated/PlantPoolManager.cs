@@ -32,7 +32,7 @@ public class PlantPoolManager : MonoBehaviour
         BuildUnlockPricingLookup();
         RebuildPoolTypeCounts();
         ResetUnlockedCounts();
-        EnsureInitialUnlockState();
+        //EnsureInitialUnlockState();
         RefreshUnlockedPools();
     }
 
@@ -79,7 +79,7 @@ public class PlantPoolManager : MonoBehaviour
     public void RefreshUnlockedPools()
     {
         RebuildPoolTypeCounts();
-        EnsureInitialUnlockState();
+        //EnsureInitialUnlockState();
 
         if (!HasUnlockedPoolForType(selectedType))
             SetFirstAvailableSelectedType();
