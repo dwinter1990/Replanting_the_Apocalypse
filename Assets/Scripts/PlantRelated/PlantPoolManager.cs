@@ -23,6 +23,7 @@ public class PlantPoolManager : MonoBehaviour
     private readonly Dictionary<PlantType, int> unlockedPoolCountByType = new Dictionary<PlantType, int>();
     private readonly Dictionary<PlantType, int> totalPoolCountByType = new Dictionary<PlantType, int>();
     private readonly Dictionary<PlantType, PlantUnlockPricing> unlockPricingLookup = new Dictionary<PlantType, PlantUnlockPricing>();
+    private readonly HashSet<PlantPool> unlockedPools = new HashSet<PlantPool>();
 
     public PlantType selectedType = PlantType.Grass;
 
@@ -32,7 +33,7 @@ public class PlantPoolManager : MonoBehaviour
         BuildUnlockPricingLookup();
         RebuildPoolTypeCounts();
         ResetUnlockedCounts();
-        EnsureInitialUnlockState();
+        //EnsureInitialUnlockState();
         RefreshUnlockedPools();
     }
 
@@ -79,7 +80,7 @@ public class PlantPoolManager : MonoBehaviour
     public void RefreshUnlockedPools()
     {
         RebuildPoolTypeCounts();
-        EnsureInitialUnlockState();
+        //EnsureInitialUnlockState();
 
         if (!HasUnlockedPoolForType(selectedType))
             SetFirstAvailableSelectedType();
@@ -122,8 +123,51 @@ public class PlantPoolManager : MonoBehaviour
         if (!CanUnlockType(type))
             return false;
 
-        unlockedPoolCountByType[type] = GetUnlockedCountForType(type) + 1;
-        Debug.Log("Unlocked " + type + " seed pool " + GetUnlockedCountForType(type) + "/" + GetTotalPoolCountForType(type));
+        //unlockedPoolCountByType[type] = GetUnlockedCountForType(type) + 1;
+        //Debug.Log("Unlocked " + type + " seed pool " + GetUnlockedCountForType(type) + "/" + GetTotalPoolCountForType(type));
+
+        for (int i = 0; i < plantPools.Length; i++)
+        {
+            PlantPool pool = plantPools[i];
+            if (pool == null || pool.plantType != type || IsPoolUnlocked(pool))
+                continue;
+
+            MarkPoolUnlocked(pool);
+            Debug.Log("Unlocked " + type + " seed pool " + (GetUnlockedCountForType(type)) + "/" + GetTotalPoolCountForType(type));
+
+
+            if (!HasUnlockedPoolForType(selectedType))
+                SetFirstAvailableSelectedType();
+
+            return true;
+        }
+        return false;
+    }
+    
+    
+    public bool TryUnlockSpecificPool(PlantPool targetPool)
+    {
+        if (targetPool == null || plantPools == null)
+            return false;
+
+        bool poolExists = false;
+        for (int i = 0; i < plantPools.Length; i++)
+        {
+            if (plantPools[i] == targetPool)
+            {
+                poolExists = true;
+                break;
+            }
+        }
+
+        if (!poolExists)
+            return false;
+
+        if (IsPoolUnlocked(targetPool))
+            return false;
+
+        MarkPoolUnlocked(targetPool);
+        Debug.Log("Unlocked specific " + targetPool.plantType + " seed pool " + GetUnlockedCountForType(targetPool.plantType) + "/" + GetTotalPoolCountForType(targetPool.plantType));
 
         if (!HasUnlockedPoolForType(selectedType))
             SetFirstAvailableSelectedType();
@@ -131,36 +175,74 @@ public class PlantPoolManager : MonoBehaviour
         return true;
     }
 
-    private void EnsureInitialUnlockState()
+public bool TryResolvePoolByPlantId(string plantId, out PlantPool matchingPool)
     {
-        if (GetTotalPoolCountForType(PlantType.Grass) > 0 && GetUnlockedCountForType(PlantType.Grass) == 0)
-            unlockedPoolCountByType[PlantType.Grass] = 1;
-    }
-
-    private bool IsPoolUnlocked(PlantPool pool)
-    {
-        if (pool == null || plantPools == null)
+        matchingPool = null;
+        if (string.IsNullOrWhiteSpace(plantId) || plantPools == null)
             return false;
 
-        int unlockedCountForType = GetUnlockedCountForType(pool.plantType);
-        if (unlockedCountForType <= 0)
-            return false;
-
-        int poolIndexWithinType = 0;
         for (int i = 0; i < plantPools.Length; i++)
         {
-            PlantPool candidate = plantPools[i];
-            if (candidate == null || candidate.plantType != pool.plantType)
+            PlantPool pool = plantPools[i];
+            if (pool == null)
                 continue;
 
-            if (candidate == pool)
-                return poolIndexWithinType < unlockedCountForType;
-
-            poolIndexWithinType++;
+            if (PoolMatchesPlantId(pool, plantId))
+            {
+                matchingPool = pool;
+                return true;
+            }
         }
 
         return false;
     }
+
+    private void EnsureInitialUnlockState()
+    {
+        if (GetTotalPoolCountForType(PlantType.Grass) <= 0 || GetUnlockedCountForType(PlantType.Grass) > 0)
+            return;
+
+        for (int i = 0; i < plantPools.Length; i++)
+        {
+            PlantPool pool = plantPools[i];
+            if (pool != null && pool.plantType == PlantType.Grass)
+            {
+                MarkPoolUnlocked(pool);
+                return;
+            }
+        }
+    }
+
+
+
+    private bool IsPoolUnlocked(PlantPool pool)
+    {
+        return pool != null && unlockedPools.Contains(pool);
+    }
+
+    //{
+    //    if (pool == null || plantPools == null)
+    //        return false;
+
+    //    int unlockedCountForType = GetUnlockedCountForType(pool.plantType);
+    //    if (unlockedCountForType <= 0)
+    //        return false;
+
+    //    int poolIndexWithinType = 0;
+    //    for (int i = 0; i < plantPools.Length; i++)
+    //    {
+    //        PlantPool candidate = plantPools[i];
+    //        if (candidate == null || candidate.plantType != pool.plantType)
+    //            continue;
+
+    //        if (candidate == pool)
+    //            return poolIndexWithinType < unlockedCountForType;
+
+    //        poolIndexWithinType++;
+    //    }
+
+    //    return false;
+    //}
 
     private bool HasUnlockedPoolForType(PlantType type)
     {
@@ -274,6 +356,7 @@ public class PlantPoolManager : MonoBehaviour
     private void ResetUnlockedCounts()
     {
         unlockedPoolCountByType.Clear();
+        unlockedPools.Clear();
 
         foreach (PlantType type in System.Enum.GetValues(typeof(PlantType)))
             unlockedPoolCountByType[type] = 0;
@@ -301,4 +384,27 @@ public class PlantPoolManager : MonoBehaviour
 
         return string.Join(", ", parts) + "; research=" + currentResearchPoints;
     }
+
+    private void MarkPoolUnlocked(PlantPool pool)
+    {
+        if (pool == null || unlockedPools.Contains(pool))
+            return;
+
+        unlockedPools.Add(pool);
+        unlockedPoolCountByType[pool.plantType] = GetUnlockedCountForType(pool.plantType) + 1;
+    }
+
+    private bool PoolMatchesPlantId(PlantPool pool, string plantId)
+    {
+        if (pool == null || pool.Prefab == null || string.IsNullOrWhiteSpace(plantId))
+            return false;
+
+        Growing growing = pool.Prefab.GetComponent<Growing>();
+        if (growing != null && growing.profile != null && growing.profile.name == plantId)
+            return true;
+
+        string prefabName = pool.Prefab.name.Replace("(Clone)", string.Empty).Trim();
+        return prefabName == plantId;
+    }
+
 }

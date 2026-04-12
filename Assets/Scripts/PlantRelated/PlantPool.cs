@@ -10,15 +10,20 @@ public enum PlantType
     Bush,
     Tree
 }
+
+
 public class PlantPool : MonoBehaviour
 {
     public PlantType plantType;
 
     [SerializeField] private GameObject prefab;
     [SerializeField] private int preloadAmount = 20;
-
+    public GameObject Prefab => prefab;
     private Queue<GameObject> pool = new Queue<GameObject>();
 
+    [SerializeField] private Transform firstPlacementLocation;
+    private bool worldPlant = true;
+    public bool IsWorldPlant => worldPlant;
     private void Awake()
     {
         for (int i = 0; i < preloadAmount; i++)
@@ -26,6 +31,15 @@ public class PlantPool : MonoBehaviour
             GameObject obj = Instantiate(prefab);
             obj.SetActive(false);
             pool.Enqueue(obj);
+        }
+        if (firstPlacementLocation == null)
+        {
+            firstPlacementLocation = GetComponentInChildren<Transform>();
+        }
+
+        if (worldPlant)
+        {
+            Get();
         }
     }
 
@@ -51,6 +65,12 @@ public class PlantPool : MonoBehaviour
             growing.SetPool(this);
         }
 
+        if (worldPlant)
+        {
+            obj.transform.position = firstPlacementLocation.position;
+            
+            worldPlant = false;
+        }
         return obj;
     }
 

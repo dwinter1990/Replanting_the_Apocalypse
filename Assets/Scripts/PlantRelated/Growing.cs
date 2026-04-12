@@ -33,7 +33,6 @@ public class Growing : MonoBehaviour
 
     private GameObject spawnedMound;
 
-
     private void Awake()
     {
         tweenQueue = GetComponent<TweenQueue>();
@@ -207,32 +206,53 @@ public class Growing : MonoBehaviour
 
     public void Harvest()
     {
-        if(originPool == null)
-        {
-            Debug.Log("Original pool is null");
-            return;
-        }
+
         if (!hasFullyGrown)
         {
-            Debug.Log(gameObject.name + " is not ready for harvesting");
+            Debug.LogWarning("Plant has no source pool configured for harvesting: " + gameObject.name);
             return;
         }
-        else
-        {
-            string plantId = profile != null ? profile.name : gameObject.name.Replace("(Clone)", string.Empty).Trim();
-            int researchPointsValue = profile != null ? profile.researchPointValue : 1;
+        string plantId = profile != null ? profile.name : gameObject.name.Replace("(Clone)", string.Empty).Trim();
+        int researchPointsValue = profile != null ? profile.researchPointValue : 1;
 
-            HarvestTracker tracker = HarvestTracker.Instance;
+        PlantPool sourcePool = originPool;
+        PlantPoolManager manager = PlantPoolManager.PlantPoolManagerInstance;
+
+        if(sourcePool == null && manager != null)
+        {
+            manager.TryResolvePoolByPlantId(plantId, out sourcePool);
+        }
+
+        if(sourcePool == null)
+        {
+            Debug.LogWarning("Could not find source PlantPool for harvested plant: " + gameObject.name);
+            return;
+        }
+
+        HarvestTracker tracker = HarvestTracker.Instance;
             if (tracker != null)
                 tracker.RecordHarvest(originPool.plantType, plantId, researchPointsValue);
             else
                 Debug.LogWarning("HarvestTracker is missing in the scene; harvest was not tracked.");
 
-            Debug.LogWarning("Harvesting: " + plantId);
-            ResetPlant();
+        if(manager != null && manager.TryUnlockSpecificPool(sourcePool))
+        {
+            Debug.Log("Unlocked new pool for type: " + sourcePool.plantType + ": " + sourcePool.name);
+        }
+
+        Debug.LogWarning("Harvesting: " + plantId);
+        ResetPlant();
+        //Spawn in seeds to collect from harvesting, when configured
+        if (originPool != null)
+        {
             originPool.Return(gameObject);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
+    
 
 
     void ResetPlant()
@@ -257,10 +277,6 @@ public class Growing : MonoBehaviour
     {
         Outline outline = GetComponent<Outline>();
         if (outline == null) return;
-
-        //outline.OutlineColor = Color.yellow;
         outline.OutlineMode = Outline.Mode.OutlineHidden;
-        
-        //outline.enabled = false;
     }
 }

@@ -58,6 +58,11 @@ public class SeedManager : MonoBehaviour
     }
     public void ShootSeed()
     {
+        //if(PlantPoolManager.PlantPoolManagerInstance.selectedType == PlantType)
+        //{
+        //    Debug.LogWarning("No plant type selected, cannot shoot seed!");
+        //    return;
+        //}
         GameObject seed = null;
 
         launcherAnimator.SetTrigger("FireTrigger");

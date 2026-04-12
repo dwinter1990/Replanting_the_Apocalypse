@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
 
@@ -20,9 +20,19 @@ public class WaterHose : MonoBehaviour
     private Collider[] plantBuffer = new Collider[64];
     private float coneDot;
 
+    [Header("WaterGun Settings")]
+    [SerializeField] private int steps = 6;
+    private Vector3 origin;
+    private Vector3 direction;
+    private float maxDistance;
+    private float maxRadius;
+    private int seenCount = 0;
+    private int[] seenIds = new int[64]; 
     private void Awake()
     {
         coneDot = Mathf.Cos(coneAngle * Mathf.Deg2Rad);
+
+
     }
     public void StartSpray()
     {
@@ -46,6 +56,7 @@ public class WaterHose : MonoBehaviour
         {
             StopCoroutine(sprayRoutine);
             sprayRoutine = null;
+
         }
 
         waterGunAnim.SetBool("isFiring", false);
@@ -80,49 +91,80 @@ public class WaterHose : MonoBehaviour
 
     void FireCone()
     {
-        Vector3 center = nozzle.position + nozzle.forward * range;
-        
-        int hitCount = Physics.OverlapSphereNonAlloc(
-            center,
-            range * 0.5f,
-            plantBuffer,
-            plantMask
-        );
+        Vector3 origin = nozzle.position;
+        Vector3 direction = nozzle.forward;
 
-        for (int i = 0; i < hitCount; i++)
+        float maxDistance = range;
+        float maxRadius = range * 0.5f;
+
+        int steps = 6; // tweak for performance vs accuracy
+        int seenCount = 0;
+
+        for (int i = 0; i < steps; i++)
         {
-            Collider col = plantBuffer[i];
+            float t = (float)i / (steps - 1);
 
-            Vector3 dirToTarget =
-                (col.bounds.center - nozzle.position).normalized;
+            Vector3 center = origin + direction * (t * maxDistance);
 
-            float dot = Vector3.Dot(nozzle.forward, dirToTarget);
+            float radius = Mathf.Lerp(0f, maxRadius, t);
 
-            if (dot >= coneDot)
+            int hitCount = Physics.OverlapSphereNonAlloc(
+                center,
+                radius,
+                plantBuffer,
+                plantMask
+            );
+
+            for (int j = 0; j < hitCount; j++)
             {
-                if (col.CompareTag("Plant"))
+                Collider col = plantBuffer[j];
+                int id = col.GetInstanceID();
+
+                // Duplicate check (non-alloc)
+                bool alreadySeen = false;
+                for (int k = 0; k < seenCount; k++)
                 {
-                    if (col.TryGetComponent(out Growing plant))
+                    if (seenIds[k] == id)
                     {
-                        plant.Water();
+                        alreadySeen = true;
+                        break;
                     }
                 }
-                else if (col.CompareTag("Tool"))
+
+                if (alreadySeen)
+                    continue;
+                if (seenCount < seenIds.Length)
                 {
-                    if (col.TryGetComponent(out AutoWaterer autoWaterer))
+                    seenIds[seenCount++] = id;
+                }
+                seenIds[seenCount++] = id;
+
+                Vector3 dirToTarget =
+                    (col.bounds.center - origin).normalized;
+
+                float dot = Vector3.Dot(direction, dirToTarget);
+
+                if (dot >= coneDot)
+                {
+                    if (col.CompareTag("Plant"))
                     {
-                        autoWaterer.RefillWater();
+                        col.GetComponentInParent<Growing>()?.Water();
+                    }
+                    else if (col.CompareTag("Tool"))
+                    {
+                        if (col.TryGetComponent(out AutoWaterer autoWaterer))
+                        {
+                            autoWaterer.RefillWater();
+                        }
                     }
                 }
             }
         }
+        Vector3 left = Quaternion.Euler(0, -coneAngle, 0) * direction;
+        Vector3 right = Quaternion.Euler(0, coneAngle, 0) * direction;
 
-        // Debug cone lines
-        Vector3 left = Quaternion.Euler(0, -coneAngle, 0) * nozzle.forward;
-        Vector3 right = Quaternion.Euler(0, coneAngle, 0) * nozzle.forward;
-
-        Debug.DrawRay(nozzle.position, left * range, Color.green, 0.1f);
-        Debug.DrawRay(nozzle.position, right * range, Color.green, 0.1f);
-        Debug.DrawRay(nozzle.position, nozzle.forward * range, Color.blue, 0.1f);
+        Debug.DrawRay(origin, left * range, Color.green, 0.1f);
+        Debug.DrawRay(origin, right * range, Color.green, 0.1f);
+        Debug.DrawRay(origin, direction * range, Color.blue, 0.1f);
     }
 }
