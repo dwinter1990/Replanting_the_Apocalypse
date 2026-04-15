@@ -21,11 +21,13 @@ public class PlayerInteraction : MonoBehaviour
             if (activeHand == HandTypeRight.Water)
             {
                 waterHose.StartSpray();
+                StopCoroutine("TryHarvest");
             }
             else if (activeHand == HandTypeRight.Harvest)
             {
                 //harvestTry = true;
                 StartCoroutine("TryHarvest");
+                waterHose.StopSpray();
             }
         }
 
@@ -51,12 +53,6 @@ public class PlayerInteraction : MonoBehaviour
             HideCurrentOutline();
             return;
         }
-
-        //if (handManager == null || handManager.GetActiveHandRightType() != HandTypeRight.Harvest)
-        //{
-        //    HideCurrentOutline();
-        //    return;
-        //}
 
         Ray ray = GetInteractionRay();
         Outline newOutline = null;
@@ -122,6 +118,7 @@ public class PlayerInteraction : MonoBehaviour
                 var growing = hit.collider.GetComponent<Growing>();
                 if (growing != null)
                 {
+                    
                     growing.Harvest();
                 }
             }

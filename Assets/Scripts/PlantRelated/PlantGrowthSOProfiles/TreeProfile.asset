@@ -20,7 +20,7 @@ MonoBehaviour:
   researchPointValue: 5
   startScale: {x: 0.02, y: 0.02, z: 0.02}
   minScale: 0.25
-  maxScale: 1
+  maxScale: 0.4
   maxScaleMultiplier: 1
   stepOvershoot: 0.25
   finalOvershoot: 0.4

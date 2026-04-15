@@ -19,8 +19,8 @@ MonoBehaviour:
   growthDuration: 4
   researchPointValue: 1
   startScale: {x: 0.05, y: 0.05, z: 0.05}
-  minScale: 0.5
-  maxScale: 1.2
+  minScale: 0.25
+  maxScale: 0.4
   maxScaleMultiplier: 0.75
   stepOvershoot: 0.15
   finalOvershoot: 0.2
