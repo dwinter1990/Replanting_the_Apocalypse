@@ -33,12 +33,20 @@ public class AutoWaterer : MonoBehaviour
         //waterSpoutPS.emission.enabled = false;
         waterSpoutPS.Stop();
     }
-    private void Start()
-    {
-        SprayWater = StartCoroutine(Watering());
-        sprayTime = 2f;
-    }
+    //private void Start()
+    //{
+    //    SprayWater = StartCoroutine(Watering());
+    //    sprayTime = 2f;
+    //}
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            StartCoroutine(Watering());
+            sprayTime = 2f;
+        }
+    }
     IEnumerator Watering()
     {
         while (true)
@@ -76,10 +84,8 @@ public class AutoWaterer : MonoBehaviour
             Collider col = plantBuffer[i];
             if (col.CompareTag("Plant"))
             {
-                if (col.TryGetComponent(out Growing plant))
-                {
-                    plant.Water();
-                }
+                Debug.Log("AutoWaterer hit a plant: " + col.name + " on " + gameObject.name);
+                col.GetComponentInParent<Growing>()?.Water();
             }
         }
     }

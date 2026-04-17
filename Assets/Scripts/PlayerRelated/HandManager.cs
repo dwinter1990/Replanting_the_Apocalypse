@@ -56,7 +56,7 @@ public class HandManager : MonoBehaviour
             return;
         }
 
-        activeRightHandIndex = (activeLeftHandIndex + 1) % leftHands.Length;
+        activeLeftHandIndex = (activeLeftHandIndex + 1) % leftHands.Length;
 
         UpdateLeftHands();
     }
@@ -82,7 +82,7 @@ public class HandManager : MonoBehaviour
         
     }
 
-    public HandTypeLeft GetActiveHandTypeLeft()
+    public HandTypeLeft GetActiveHandLeftType()
     {
         return leftHands[activeLeftHandIndex].handType;
     }

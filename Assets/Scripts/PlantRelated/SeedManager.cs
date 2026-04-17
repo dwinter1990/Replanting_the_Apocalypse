@@ -17,9 +17,7 @@ public class SeedManager : MonoBehaviour
     [Header("Shoot stats")]
     [SerializeField] float seedSpeed;
     [SerializeField] Transform seedSpawnPoint;
-    [SerializeField] float timeBetweenShots;
-    private float shootTime;
-
+    
     [Header("Launcher animations")]
     [SerializeField] private Animator launcherAnimator;
 
@@ -27,21 +25,6 @@ public class SeedManager : MonoBehaviour
     {
         SMInstance = this;
     }
-    private void Update()
-    {
-        shootTime -= Time.deltaTime;
-    }
-    public void OnShootSeedInput(InputAction.CallbackContext context)
-    {
-        
-        if (context.started && shootTime <= 0f)
-        {
-            ShootSeed();
-            shootTime = timeBetweenShots;
-        }
-        
-    }
-
     public void OnShotTypeChange(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -58,11 +41,6 @@ public class SeedManager : MonoBehaviour
     }
     public void ShootSeed()
     {
-        //if(PlantPoolManager.PlantPoolManagerInstance.selectedType == PlantType)
-        //{
-        //    Debug.LogWarning("No plant type selected, cannot shoot seed!");
-        //    return;
-        //}
         GameObject seed = null;
 
         launcherAnimator.SetTrigger("FireTrigger");

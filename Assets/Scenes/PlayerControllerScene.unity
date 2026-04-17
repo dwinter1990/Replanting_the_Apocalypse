@@ -717,6 +717,7 @@ GameObject:
   - component: {fileID: 155155191}
   - component: {fileID: 155155192}
   - component: {fileID: 155155193}
+  - component: {fileID: 155155194}
   m_Layer: 6
   m_Name: GameManager
   m_TagString: Untagged
@@ -741,7 +742,6 @@ MonoBehaviour:
   payloadPool: {fileID: 1755147665}
   seedSpeed: 10
   seedSpawnPoint: {fileID: 691951509}
-  timeBetweenShots: 0.4
   launcherAnimator: {fileID: 1529270058}
 --- !u!4 &155155186
 Transform:
@@ -896,6 +896,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cdd40bf735a0de4dbb50e2ad5a0cce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &155155194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155155184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97cb9f7e9bac7aa45a41a58c6702813b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  refillStationPrefab: {fileID: 3534365703934901907, guid: 633a4c9e002c0694996fb1a1214bddc2, type: 3}
+  sprinklerPrefab: {fileID: 5848998192987768778, guid: e15c8da40ec9c9843b10091eb79390ef, type: 3}
+  spawnDistance: 5
+  currentEquipment: 1
 --- !u!1 &163173108
 GameObject:
   m_ObjectHideFlags: 0
@@ -1268,63 +1284,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 249748204}
   m_CullTransparentMesh: 1
---- !u!1001 &251378599
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2485907533172412533, guid: e15c8da40ec9c9843b10091eb79390ef, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2485907533172412533, guid: e15c8da40ec9c9843b10091eb79390ef, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -7.72
-      objectReference: {fileID: 0}
-    - target: {fileID: 2485907533172412533, guid: e15c8da40ec9c9843b10091eb79390ef, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -15.89
-      objectReference: {fileID: 0}
-    - target: {fileID: 2485907533172412533, guid: e15c8da40ec9c9843b10091eb79390ef, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2485907533172412533, guid: e15c8da40ec9c9843b10091eb79390ef, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2485907533172412533, guid: e15c8da40ec9c9843b10091eb79390ef, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2485907533172412533, guid: e15c8da40ec9c9843b10091eb79390ef, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2485907533172412533, guid: e15c8da40ec9c9843b10091eb79390ef, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2485907533172412533, guid: e15c8da40ec9c9843b10091eb79390ef, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2485907533172412533, guid: e15c8da40ec9c9843b10091eb79390ef, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5848998192987768778, guid: e15c8da40ec9c9843b10091eb79390ef, type: 3}
-      propertyPath: m_Name
-      value: AutoWaterer
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e15c8da40ec9c9843b10091eb79390ef, type: 3}
 --- !u!1 &252669730
 GameObject:
   m_ObjectHideFlags: 0
@@ -2118,7 +2077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantType: 3
-  prefab: {fileID: 0}
+  prefab: {fileID: 5817427291920771033, guid: bde4c72e314df3b418b380848f9cd87c, type: 3}
   preloadAmount: 10
   firstPlacementLocation: {fileID: 174161704}
 --- !u!114 &493673913
@@ -8633,7 +8592,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1156121082
 Transform:
   m_ObjectHideFlags: 0
@@ -11075,9 +11034,9 @@ GameObject:
   - component: {fileID: 8262117110237035222}
   - component: {fileID: 6944488344123823875}
   - component: {fileID: 9172704036442857089}
+  - component: {fileID: 8737458811758851040}
   - component: {fileID: 1585935980869275012}
   - component: {fileID: 2636181481133057027}
-  - component: {fileID: 8737458811758851040}
   - component: {fileID: 5154328174561001599}
   - component: {fileID: 4819782701100743322}
   - component: {fileID: 5838816703003569800}
@@ -11089,63 +11048,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1001 &2299223659500771051
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2104668251454870812, guid: 633a4c9e002c0694996fb1a1214bddc2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -10.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2104668251454870812, guid: 633a4c9e002c0694996fb1a1214bddc2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -9.39
-      objectReference: {fileID: 0}
-    - target: {fileID: 2104668251454870812, guid: 633a4c9e002c0694996fb1a1214bddc2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.81
-      objectReference: {fileID: 0}
-    - target: {fileID: 2104668251454870812, guid: 633a4c9e002c0694996fb1a1214bddc2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2104668251454870812, guid: 633a4c9e002c0694996fb1a1214bddc2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2104668251454870812, guid: 633a4c9e002c0694996fb1a1214bddc2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2104668251454870812, guid: 633a4c9e002c0694996fb1a1214bddc2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2104668251454870812, guid: 633a4c9e002c0694996fb1a1214bddc2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2104668251454870812, guid: 633a4c9e002c0694996fb1a1214bddc2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2104668251454870812, guid: 633a4c9e002c0694996fb1a1214bddc2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3534365703934901907, guid: 633a4c9e002c0694996fb1a1214bddc2, type: 3}
-      propertyPath: m_Name
-      value: WaterRefillStation
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 633a4c9e002c0694996fb1a1214bddc2, type: 3}
 --- !u!114 &2636181481133057027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11223,6 +11125,8 @@ MonoBehaviour:
   waterHose: {fileID: 5154328174561001599}
   interactDistance: 5
   playerCam: {fileID: 4501362929396128547}
+  callDownEquipment: {fileID: 155155194}
+  timeBetweenShots: 0.25
 --- !u!1 &3906674314978649806
 GameObject:
   m_ObjectHideFlags: 0
@@ -16600,10 +16504,6 @@ MonoBehaviour:
     m_ActionId: f1ba0d36-48eb-4cd5-b651-1c94a6531f70
     m_ActionName: 'Player/Jump[/Keyboard/space]'
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 2776c80d-3c14-4091-8c56-d04ced07a2b0
-    m_ActionName: 'Player/Previous[/Keyboard/1]'
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5838816703003569800}
         m_TargetAssemblyTypeName: HandManager, Assembly-CSharp
@@ -16665,8 +16565,8 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 155155185}
-        m_TargetAssemblyTypeName: SeedManager, Assembly-CSharp
+      - m_Target: {fileID: 3716632514682801498}
+        m_TargetAssemblyTypeName: PlayerInteraction, Assembly-CSharp
         m_MethodName: OnShootSeedInput
         m_Mode: 0
         m_Arguments:
@@ -16731,6 +16631,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 44229c3f-f12e-435e-882c-2ed571749566
     m_ActionName: 'Player/LeftNext[/Keyboard/1]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 155155194}
+        m_TargetAssemblyTypeName: CallDownEquipment, Assembly-CSharp
+        m_MethodName: OnChangeDropEquipment
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 783699e1-9015-4209-82b9-fb72a2934e3c
+    m_ActionName: 'Player/ChangeDropEquipment[/Keyboard/e]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
@@ -16821,8 +16737,6 @@ SceneRoots:
   - {fileID: 2083286246}
   - {fileID: 523748850}
   - {fileID: 1825735970}
-  - {fileID: 2299223659500771051}
   - {fileID: 1977545368}
-  - {fileID: 251378599}
   - {fileID: 838061221}
   - {fileID: 1967745499}

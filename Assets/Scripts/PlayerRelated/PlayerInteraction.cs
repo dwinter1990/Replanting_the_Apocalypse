@@ -9,8 +9,12 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private WaterHose waterHose;
     [SerializeField] private float interactDistance = 5f;
     [SerializeField] private Camera playerCam;
-
+    [SerializeField] private CallDownEquipment callDownEquipment;
+    private float shootTime;
+    [SerializeField] float timeBetweenShots;
     private Outline currentOutline;
+
+
     public void OnAttack(InputAction.CallbackContext context)
     {
         HandTypeRight activeHand = handManager.GetActiveHandRightType();
@@ -46,8 +50,31 @@ public class PlayerInteraction : MonoBehaviour
             }
         }
     }
+
+    public void OnShootSeedInput(InputAction.CallbackContext context)
+    {
+        HandTypeLeft activeHand = handManager.GetActiveHandLeftType();
+        if (activeHand == HandTypeLeft.SeedLauncher)
+        {
+            if (context.performed && shootTime <= 0f)
+            {
+                SeedManager.SMInstance.ShootSeed();
+                shootTime = timeBetweenShots;
+            }
+        }
+        if(activeHand == HandTypeLeft.Placer)
+        {
+            if (context.performed)
+            {
+                CallDownEquipment.CDEInstance.ChoosePlaceForEquipment();
+                Debug.Log("Hand should be placing equipment");
+            }
+        }
+    }
     private void Update()
     {
+        shootTime -= Time.deltaTime;
+
         if (playerCam == null || Mouse.current == null)
         {
             HideCurrentOutline();
@@ -124,4 +151,6 @@ public class PlayerInteraction : MonoBehaviour
             }
         } 
     }
+
+
 }
