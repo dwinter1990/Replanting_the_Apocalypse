@@ -8,7 +8,7 @@ public class CallDownEquipment : MonoBehaviour
     [SerializeField] private GameObject sprinklerPrefab;
 
     [Header("Placement")]
-    [SerializeField] private float spawnDistance = 8f;
+    [SerializeField] private float spawnDistance = 5f;
     [SerializeField] private EquipmentType currentEquipment = EquipmentType.RefillStation;
 
     public static CallDownEquipment CDEInstance;
