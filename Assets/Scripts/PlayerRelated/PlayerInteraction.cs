@@ -2,7 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.UI;
 public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] private HandManager handManager;
@@ -14,7 +14,9 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] float timeBetweenShots;
     private Outline currentOutline;
 
-
+    [Header("Water/Harvest UI Elements")]
+    [SerializeField] private Image waterThisPlant;
+    [SerializeField] private Image harvestThisPlant;
     public void OnAttack(InputAction.CallbackContext context)
     {
         HandTypeRight activeHand = handManager.GetActiveHandRightType();
@@ -75,14 +77,14 @@ public class PlayerInteraction : MonoBehaviour
     {
         shootTime -= Time.deltaTime;
 
-        if (playerCam == null || Mouse.current == null)
-        {
-            HideCurrentOutline();
-            return;
-        }
+        //if (playerCam == null || Mouse.current == null)
+        //{
+        //    HideCurrentOutline();
+        //    return;
+        //}
 
         Ray ray = GetInteractionRay();
-        Outline newOutline = null;
+        //Outline newOutline = null;
         Growing growing = null;
 
         if (Physics.Raycast(ray, out RaycastHit hit, interactDistance))
@@ -90,35 +92,49 @@ public class PlayerInteraction : MonoBehaviour
             // Same-object lookup (as you requested)
             growing = hit.collider.GetComponent<Growing>();
             if (growing != null)
-                newOutline = hit.collider.GetComponent<Outline>();
-        }
+                //newOutline = hit.collider.GetComponent<Outline>();
+                if (growing.HasFullyGrown)
+                {
+                    harvestThisPlant.enabled = true;
+                    waterThisPlant.enabled = false;
+                }
+                else
+                {
+                    harvestThisPlant.enabled = false;
+                    waterThisPlant.enabled = true;
+                }
 
-        // Switched target (or lost target): hide previous
-        if (currentOutline != null && currentOutline != newOutline)
+            //            // Switched target (or lost target): hide previous
+            //            if (currentOutline != null && currentOutline != newOutline)
+            //{
+            //    currentOutline.OutlineMode = Outline.Mode.OutlineHidden;
+            //    currentOutline.enabled = false;
+            //}
+
+            //// Apply live state to current target every frame
+            //if (newOutline != null && growing != null)
+            //{
+            //    newOutline.enabled = true;
+            //    newOutline.OutlineMode = Outline.Mode.OutlineVisible;
+            //    newOutline.OutlineColor = growing.HasFullyGrown ? Color.green : Color.cyan;
+            //}
+
+            //currentOutline = newOutline;
+        }
+        if (growing == null)
         {
-            currentOutline.OutlineMode = Outline.Mode.OutlineHidden;
-            currentOutline.enabled = false;
+            harvestThisPlant.enabled = false;
+            waterThisPlant.enabled = false;
         }
-
-        // Apply live state to current target every frame
-        if (newOutline != null && growing != null)
-        {
-            newOutline.enabled = true;
-            newOutline.OutlineMode = Outline.Mode.OutlineVisible;
-            newOutline.OutlineColor = growing.HasFullyGrown ? Color.green : Color.cyan;
-        }
-
-        currentOutline = newOutline;
     }
+    //private void HideCurrentOutline()
+    //{
+    //    if (currentOutline == null) return;
 
-    private void HideCurrentOutline()
-    {
-        if (currentOutline == null) return;
-
-        currentOutline.OutlineMode = Outline.Mode.OutlineHidden;
-        currentOutline.enabled = false;
-        currentOutline = null;
-    }
+    //    currentOutline.OutlineMode = Outline.Mode.OutlineHidden;
+    //    currentOutline.enabled = false;
+    //    currentOutline = null;
+    //}
 
     private Ray GetInteractionRay()
     {
@@ -145,7 +161,6 @@ public class PlayerInteraction : MonoBehaviour
                 var growing = hit.collider.GetComponent<Growing>();
                 if (growing != null)
                 {
-                    
                     growing.Harvest();
                 }
             }
