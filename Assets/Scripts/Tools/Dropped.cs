@@ -8,24 +8,32 @@ public class Dropped : MonoBehaviour
     [SerializeField] private ParticleSystem impactEffect;
 
     private CinemachineImpulseSource impulseSource;
+
+    private Rigidbody rb;
+    private Animator animator;
     private void Start()
     {
+        if (animator == null)
+        {
+            animator = GetComponentInChildren<Animator>();
+            animator.enabled = false; // Disable the animator to prevent any animations from playing
+        }
         impulseSource = GetComponent<CinemachineImpulseSource>();
 
-        Rigidbody rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
             rb.AddForce(Vector3.down * speed, ForceMode.VelocityChange);
         }
+        rb.isKinematic = false; // Ensure the object is affected by physics
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Ground"))
         {
-            Rigidbody rb = GetComponent<Rigidbody>();
-            if (rb != null)
-            {
+            StartCoroutine(HandleImpact());
+
                 rb.linearVelocity = Vector3.zero; // Stop the object from moving
                 rb.isKinematic = true; // Make it kinematic to prevent further physics interactions
 
@@ -39,8 +47,16 @@ public class Dropped : MonoBehaviour
                 impactEffect.Play(); // Play the impact effect
 
                 impulseSource.GenerateImpulse(); // Trigger the camera shake
-                //CheckPlayerDistance();
-            }
+
         }
+    }
+
+    IEnumerator HandleImpact()
+    {
+        yield return new WaitForSeconds(0.5f); // Wait a short moment to ensure the impact effect is visible
+        animator.enabled = true; // Enable the animator to play the impact animation
+        animator.SetBool("HasHitGround", true); // Play the specific impact animation
+        yield return new WaitForSeconds(2f); // Wait for the animation to finish
+        
     }
 }

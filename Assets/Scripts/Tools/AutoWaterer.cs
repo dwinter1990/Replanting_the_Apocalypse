@@ -23,8 +23,8 @@ public class AutoWaterer : MonoBehaviour
     [SerializeField] private float range;
     [SerializeField] private LayerMask plantLayerMask;
     private HashSet<Growing> wateredThisCycle = new HashSet<Growing>();
-
     private Collider[] plantBuffer = new Collider[30];
+
     private void Awake()
     {
         currentWaterCapacity = maxWaterCapacity;
@@ -32,20 +32,35 @@ public class AutoWaterer : MonoBehaviour
         currentWaterTimer = waterTimer;
         //waterSpoutPS.emission.enabled = false;
         waterSpoutPS.Stop();
-    }
-    //private void Start()
-    //{
-    //    SprayWater = StartCoroutine(Watering());
-    //    sprayTime = 2f;
-    //}
 
+        
+    }
+
+    private void Update()
+    {
+        if (currentWaterCapacity <= 0 && SprayWater != null)
+        {
+            StopCoroutine(SprayWater);
+            waterSpoutPS.Stop();
+
+            if(currentWaterCapacity > 0)
+            {
+                SprayWater = StartCoroutine(Watering());
+            }
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
-        {
-            StartCoroutine(Watering());
-            sprayTime = 2f;
+        { 
+            StartCoroutine(DelayedStartWatering());
         }
+    }
+
+    IEnumerator DelayedStartWatering()
+    {
+        yield return new WaitForSeconds(2.75f); // Delay before starting to water
+        SprayWater = StartCoroutine(Watering());
     }
     IEnumerator Watering()
     {

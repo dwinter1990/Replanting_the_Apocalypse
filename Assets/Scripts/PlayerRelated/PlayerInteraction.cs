@@ -2,9 +2,10 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.UI;
 public class PlayerInteraction : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private HandManager handManager;
     [SerializeField] private WaterHose waterHose;
     [SerializeField] private float interactDistance = 5f;
@@ -13,8 +14,11 @@ public class PlayerInteraction : MonoBehaviour
     private float shootTime;
     [SerializeField] float timeBetweenShots;
     private Outline currentOutline;
+    [SerializeField] private Animator chainSawAnimator;
 
-
+    [Header("Water/Harvest UI Elements")]
+    [SerializeField] private Image waterThisPlant;
+    [SerializeField] private Image harvestThisPlant;
     public void OnAttack(InputAction.CallbackContext context)
     {
         HandTypeRight activeHand = handManager.GetActiveHandRightType();
@@ -47,6 +51,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 //harvestTry = false;
                 StopCoroutine("TryHarvest");
+                chainSawAnimator.SetBool("Harvest", false);
             }
         }
     }
@@ -74,51 +79,32 @@ public class PlayerInteraction : MonoBehaviour
     private void Update()
     {
         shootTime -= Time.deltaTime;
-
-        if (playerCam == null || Mouse.current == null)
-        {
-            HideCurrentOutline();
-            return;
-        }
-
         Ray ray = GetInteractionRay();
-        Outline newOutline = null;
         Growing growing = null;
 
         if (Physics.Raycast(ray, out RaycastHit hit, interactDistance))
         {
-            // Same-object lookup (as you requested)
             growing = hit.collider.GetComponent<Growing>();
             if (growing != null)
-                newOutline = hit.collider.GetComponent<Outline>();
-        }
+                if (growing.HasFullyGrown)
+                {
+                    harvestThisPlant.enabled = true;
+                    waterThisPlant.enabled = false;
+                }
+                else
+                {
+                    harvestThisPlant.enabled = false;
+                    waterThisPlant.enabled = true;
+                }
 
-        // Switched target (or lost target): hide previous
-        if (currentOutline != null && currentOutline != newOutline)
+        }
+        if (growing == null)
         {
-            currentOutline.OutlineMode = Outline.Mode.OutlineHidden;
-            currentOutline.enabled = false;
+            harvestThisPlant.enabled = false;
+            waterThisPlant.enabled = false;
         }
-
-        // Apply live state to current target every frame
-        if (newOutline != null && growing != null)
-        {
-            newOutline.enabled = true;
-            newOutline.OutlineMode = Outline.Mode.OutlineVisible;
-            newOutline.OutlineColor = growing.HasFullyGrown ? Color.green : Color.cyan;
-        }
-
-        currentOutline = newOutline;
     }
 
-    private void HideCurrentOutline()
-    {
-        if (currentOutline == null) return;
-
-        currentOutline.OutlineMode = Outline.Mode.OutlineHidden;
-        currentOutline.enabled = false;
-        currentOutline = null;
-    }
 
     private Ray GetInteractionRay()
     {
@@ -132,6 +118,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         while (true)
         {
+            chainSawAnimator.SetBool("Harvest", true);
             yield return new WaitForSeconds(0.25f);
             
             if(playerCam == null || Mouse.current == null)
@@ -145,11 +132,11 @@ public class PlayerInteraction : MonoBehaviour
                 var growing = hit.collider.GetComponent<Growing>();
                 if (growing != null)
                 {
-                    
                     growing.Harvest();
                 }
             }
-        } 
+        }
+
     }
 
 
