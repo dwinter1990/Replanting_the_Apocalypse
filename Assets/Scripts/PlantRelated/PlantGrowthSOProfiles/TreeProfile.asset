@@ -18,10 +18,10 @@ MonoBehaviour:
   waterMemory: 0.4
   growthDuration: 8
   researchPointValue: 5
-  startScale: {x: 0.02, y: 0.02, z: 0.02}
+  startScale: {x: 1, y: 1, z: 1}
   minScale: 0.25
   maxScale: 0.4
-  maxScaleMultiplier: 1
+  maxScaleMultiplier: 1.5
   stepOvershoot: 0.25
   finalOvershoot: 0.4
   finalDuration: 0.8
