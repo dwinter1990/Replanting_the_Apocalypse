@@ -1,3 +1,4 @@
+using CS.AudioToolkit;
 using System.Collections;
 using UnityEngine;
 
@@ -83,7 +84,7 @@ public class SeedGrenade : MonoBehaviour
                 Debug.LogError("Seed has no Rigidbody!");
                 yield break;
             }
-
+            AudioController.Play("SeedSpray");
             // Constant force = no spiral
             rb.AddForce(direction * seedLaunchForce, ForceMode.Impulse);
 

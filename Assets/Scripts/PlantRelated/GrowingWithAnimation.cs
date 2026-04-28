@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class GrowingWithAnimation : MonoBehaviour
 {
@@ -18,39 +17,35 @@ public class GrowingWithAnimation : MonoBehaviour
     private float nextGrowthTimer;
 
     [Header("Animation settings")]
-    public Vector3 startScale;
     public Quaternion startRotation;
-    private float currentScale;
-    private float maxScale;
-    //private Outline outline;
-    private Animator animator;
     private GameObject spawnedMound;
-
+    private Animator animator;
+    [SerializeField] private string growStateName = "Grow";
+    private int totalSteps = 0;
+    private int currentStep = 0;
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         ignoreWaterLayer = LayerMask.NameToLayer("IgnoreWater");
         startingLayer = gameObject.layer;
     }
     private void Start()
     {
+        if(profile == null)
+        {
+            Debug.LogWarning("GrowthSO profile is not assigned on " + gameObject.name);
+            return;
+        }
         
-            startScale = profile.startScale;
-            startRotation = transform.rotation;
-            transform.localScale = startScale;
+        startRotation = transform.rotation;
+        waterDuration = profile.waterMemory;
+        totalSteps = Mathf.Max(1, Mathf.RoundToInt(profile.growthSteps));
+        stepDuration = profile.growthDuration / totalSteps;
+        currentStep = 0;
+        nextGrowthTimer = 0f;
 
-            waterDuration = profile.waterMemory;
-
-            maxScale = profile.maxScale * Random.Range(profile.minScale, profile.maxScaleMultiplier);
-
-            stepDuration = profile.growthDuration / profile.growthSteps;
-
-            scalePerStep = (maxScale - startScale.x) / profile.growthSteps;
-
-            currentScale = transform.localScale.x;
+        //ApplyGrowthAnimation();
     }
-
-
     public void SetPool(PlantPool pool)
     {
         originPool = pool;
@@ -62,8 +57,14 @@ public class GrowingWithAnimation : MonoBehaviour
         if (hasFullyGrown)
             return;
 
-        GrowOneStep();
+        lastWateredTime = Time.time;
+        if(nextGrowthTimer <= Time.time)
+        {
+            nextGrowthTimer = Time.time + stepDuration;
+        }
+            GrowOneStep();
     }
+
     public bool UpdateGrowth(float time)
     {
         if (hasFullyGrown) 
@@ -83,28 +84,25 @@ public class GrowingWithAnimation : MonoBehaviour
         return true;
     }
 
-    void GrowOneStep()
+    private void GrowOneStep()
     {
-        if (hasFullyGrown)
-        {
-            return;
-        }
-        currentScale += scalePerStep;
+        currentStep = Mathf.Min(currentStep +1, totalSteps);
 
-        if (currentScale >= maxScale * 0.25f && spawnedMound != null)
+        if(spawnedMound != null && currentStep >= Mathf.CeilToInt(totalSteps * 0.25f))
         {
             MoundPool.instance.Return(spawnedMound);
             spawnedMound = null;
         }
+        float normalized = Mathf.Clamp01((float)currentStep / profile.growthSteps);
 
-        if (currentScale >= maxScale)
+        if(currentStep >= totalSteps)
         {
-            currentScale = maxScale;
+            currentStep = totalSteps;
             hasFullyGrown = true;
-
             gameObject.layer = ignoreWaterLayer;
-            return;
         }
+
+        ApplyGrowthAnimation();
 
     }
 
@@ -114,9 +112,16 @@ public class GrowingWithAnimation : MonoBehaviour
     }
 
 
-    private void SetScale(float scale)
+    private void ApplyGrowthAnimation()
     {
-        transform.localScale = Vector3.one * scale;
+        if(animator == null)
+        {
+            return; 
+        }
+
+        float normalized = totalSteps > 0 ? (float)currentStep / totalSteps : 0f;
+        animator.Play(growStateName, 0, Mathf.Clamp01(normalized));
+        animator.Update(0f); // Force the animator to update immediately to reflect the new state
     }
 
     public void Harvest()
@@ -172,12 +177,19 @@ public class GrowingWithAnimation : MonoBehaviour
 
     void ResetPlant()
     {
-        transform.localScale = profile.startScale;
-        transform.rotation = startRotation;
+        currentStep = 0;
+        if(animator != null)
+        {
+            animator.Play(growStateName, 0, 0f);
+            animator.Update(0f); // Force the animator to update immediately to reflect the new state
+        }
 
-        currentScale = startScale.x;
+        transform.rotation = startRotation;
+        currentStep = 0;
         nextGrowthTimer = 0f;
+        lastWateredTime = 0f;
         gameObject.layer = startingLayer;
         hasFullyGrown = false;
+        ApplyGrowthAnimation();
     }
 }

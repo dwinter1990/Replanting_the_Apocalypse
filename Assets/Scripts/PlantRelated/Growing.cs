@@ -38,17 +38,11 @@ public class Growing : MonoBehaviour
         tweenQueue = GetComponent<TweenQueue>();
         ignoreWaterLayer = LayerMask.NameToLayer("IgnoreWater");
         startingLayer = gameObject.layer;
-
-        SetOutlineHidden();
     }
 
-    private void OnEnable()
-    {
-        SetOutlineHidden();
-    }
+
     private void Start()
     {
-        
             startScale = profile.startScale;
             startRotation = transform.rotation;
             transform.localScale = startScale;
@@ -67,7 +61,6 @@ public class Growing : MonoBehaviour
     }
     void OnDisable()
     {
-        SetOutlineHidden();
         stepBounceTween?.Pause();
         finalBounceTween?.Pause();
         rotateTween?.Pause();
@@ -77,7 +70,7 @@ public class Growing : MonoBehaviour
     {
         Vector3 punch = Vector3.up * profile.stepOvershoot;
         stepBounceTween = transform
-            .DOPunchScale(punch, 0.25f, 6, 0.5f)
+            .DOPunchScale(punch, 0.25f, 2, 1f)
             .SetAutoKill(false)
             .Pause();
 
@@ -257,12 +250,7 @@ public class Growing : MonoBehaviour
 
     void ResetPlant()
     {
-        SetOutlineHidden();
-
-        stepBounceTween.Rewind();
-        finalBounceTween.Rewind();
-        rotateTween.Rewind();
-        scaleTween.Rewind();
+        ResetTweens();
 
         transform.localScale = profile.startScale;
         transform.rotation = startRotation;

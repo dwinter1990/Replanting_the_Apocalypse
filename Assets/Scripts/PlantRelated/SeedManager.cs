@@ -1,3 +1,4 @@
+using CS.AudioToolkit;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -17,7 +18,7 @@ public class SeedManager : MonoBehaviour
     [Header("Shoot stats")]
     [SerializeField] float seedSpeed;
     [SerializeField] Transform seedSpawnPoint;
-    
+    private string seedLauncherSound;
     [Header("Launcher animations")]
     [SerializeField] private Animator launcherAnimator;
 
@@ -49,6 +50,7 @@ public class SeedManager : MonoBehaviour
         {
             case ShotType.seed:
                 seed = pool.GetObject();
+                seedLauncherSound = "SeedLauncherShot";
                 break;
 
             case ShotType.grenade:
@@ -59,6 +61,7 @@ public class SeedManager : MonoBehaviour
                 {
                     grenade.payloadPool = payloadPool;
                     grenade.pool = pool;
+                    seedLauncherSound = "SeedGrenadeShot";
                 }
                 break;
         }
@@ -75,6 +78,7 @@ public class SeedManager : MonoBehaviour
         seed.transform.position = seedSpawnPoint.position;
         seed.transform.rotation = seedSpawnPoint.rotation;
 
+        AudioController.Play(seedLauncherSound);
         Rigidbody rb = seed.GetComponent<Rigidbody>();
         if (rb != null)
         {

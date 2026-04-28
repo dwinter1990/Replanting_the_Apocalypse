@@ -124,9 +124,6 @@ PrefabInstance:
       addedObject: {fileID: 1125227051218057778}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7be78e8e0cc4a6b4da213a257bad735e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6772993231653197417}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7be78e8e0cc4a6b4da213a257bad735e, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8727068772884492096}
   m_SourcePrefab: {fileID: 100100000, guid: 7be78e8e0cc4a6b4da213a257bad735e, type: 3}
 --- !u!1 &510478077656126514 stripped
@@ -161,24 +158,6 @@ MonoBehaviour:
   profile: {fileID: 11400000, guid: f071fc539a082a644963c1bfd6e28ad4, type: 2}
   startScale: {x: 0.05, y: 0.05, z: 0.05}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &6772993231653197417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 510478077656126514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 1
-  outlineColor: {r: 0, g: 1, b: 0.96862745, a: 1}
-  outlineWidth: 3
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!64 &8727068772884492096
 MeshCollider:
   m_ObjectHideFlags: 0

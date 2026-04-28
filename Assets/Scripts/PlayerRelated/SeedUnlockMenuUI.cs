@@ -213,9 +213,6 @@ public class SeedUnlockMenuUI : MonoBehaviour
             {
                 entry.label.text = entry.plantType + " Fully Unlocked!";
             }
-
-
-
         }
     }
     private void HandleResearchPointsChanged(int currentResearchPoints)
