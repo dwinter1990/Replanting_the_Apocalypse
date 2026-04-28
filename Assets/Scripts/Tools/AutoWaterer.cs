@@ -1,182 +1,117 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AutoWaterer : MonoBehaviour
 {
-    [Header("Water Particle System")]
+    [Header("Water FX")]
     [SerializeField] private Transform waterSpawnPoint;
     [SerializeField] private ParticleSystem waterSpoutPS;
-    private Coroutine SprayWater;
     [SerializeField] private float sprayDuration = 0.5f;
 
-    [Header("Water Capacity Settings")]
-    private float currentWaterTimer;
-    [SerializeField] private int maxWaterCapacity;
-    private int currentWaterCapacity;
-    [SerializeField] private int waterDrain;
+    [Header("Water Capacity")]
+    [SerializeField] private int maxWaterCapacity = 5;
+    [SerializeField] private int waterDrain = 1;
 
-    [Header("Water Hit Detection")]
-    [SerializeField] private float range;
+    [Header("Plant Detection")]
+    [SerializeField] private float range = 2f;
     [SerializeField] private LayerMask plantLayerMask;
-    private HashSet<Growing> wateredThisCycle = new HashSet<Growing>();
-    private Collider[] plantBuffer = new Collider[30];
-    private bool hasLanded;
-    private bool isWateringActive;
-    private bool outOfWaterTriggered;
-    private int lastCompletedSprayLoop = -1;
-    private Coroutine delayedStartRoutine;
 
-    [Header("Animation Settings")]
+    [Header("Animation")]
     [SerializeField] private Animator animator;
     [SerializeField] private int animationLayer = 0;
-    [SerializeField] private string sprayCycleStateName = "Active";
     [SerializeField] private string idleStateName = "Idle";
+    [SerializeField] private string activeStateName = "Activation";
+    [SerializeField] private string shutdownStateName = "Shutdown";
     [SerializeField] private string hasHitGroundTriggerName = "HasHitGround";
-    [SerializeField] private string isWateringParamName = "IsWatering";
-    [SerializeField] private string isOutOfWaterTriggerName = "IsOutOfWater";
+    [SerializeField] private string isWateringBoolName = "IsWatering";
+    [SerializeField] private string outOfWaterTriggerName = "IsOutOfWater";
+
+    private readonly Collider[] plantBuffer = new Collider[30];
+
+    private int currentWaterCapacity;
+    private int lastCompletedActiveLoop = -1;
+
+    private bool hasLanded;
+    private bool waitingForRefill;
+    private bool pendingEmptyAfterSpray;
+
+    private Coroutine sprayRoutine;
 
     private void Awake()
     {
         currentWaterCapacity = maxWaterCapacity;
 
-        animator = GetComponentInChildren<Animator>();
-
-        waterSpoutPS.Stop();
-
-    }
-
-    private void Update()
-    {
-        if (!hasLanded || animator == null)
+        if (animator == null)
         {
-            return;
+            animator = GetComponentInChildren<Animator>();
         }
 
-        if(currentWaterCapacity <= 0)
-        {
-            StopWateringBecauseEmpty();
-            return;
-        }
-
-        if(!isWateringActive)
-        {
-            StartWateringAnimation();
-        }
-
-        TrySprayOnAnimationCycleEnd();
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            hasLanded = true;
-            animator.SetTrigger("HasHitGround");
-
-            if (delayedStartRoutine != null)
-            {
-                StopCoroutine(delayedStartRoutine);
-            }
-
-            if (currentWaterCapacity > 0)
-            {
-                delayedStartRoutine = StartCoroutine(DelayedStartWatering());
-            }
-        }
-    }
-
-    IEnumerator DelayedStartWatering()
-    {
-        yield return new WaitForSeconds(2f); // Delay before starting to water
-        
-        if(currentWaterCapacity > 0)
-        {
-            StartWateringAnimation();
-        }
-        
-    }
-
-    private void StartWateringAnimation()
-    {
-        if(animator == null || currentWaterCapacity <= 0)
-        {
-            return;
-        }
-        animator.SetTrigger("IsWatering");
-        isWateringActive = true;
-        outOfWaterTriggered = false;
-        lastCompletedSprayLoop = 0;
-    }
-
-    private void StopWateringBecauseEmpty()
-    {
         if (waterSpoutPS != null)
         {
             waterSpoutPS.Stop();
         }
-
-        if (!outOfWaterTriggered)
-        {
-            TrySetBool(isWateringParamName, false);
-            TrySetTrigger(isOutOfWaterTriggerName);
-            PlayIdleState();
-            outOfWaterTriggered = true;
-        }
-
-        isWateringActive = false;
-        lastCompletedSprayLoop = -1;
     }
-    private bool TrySetTrigger(string triggerName)
+
+    private void Update()
     {
-        if (animator == null || string.IsNullOrWhiteSpace(triggerName))
-            return false;
-
-        for (int i = 0; i < animator.parameters.Length; i++)
+        if (!hasLanded || waitingForRefill || animator == null)
         {
-            AnimatorControllerParameter parameter = animator.parameters[i];
-            if (parameter.name != triggerName || parameter.type != AnimatorControllerParameterType.Trigger)
-                continue;
-
-            animator.SetTrigger(triggerName);
-            return true;
+            return;
         }
 
-        return false;
+        TrySprayOnActiveLoopEnd();
     }
 
-    private bool TrySetBool(string boolName, bool value)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (animator == null || string.IsNullOrWhiteSpace(boolName))
-            return false;
-
-        for (int i = 0; i < animator.parameters.Length; i++)
+        if (!collision.gameObject.CompareTag("Ground"))
         {
-            AnimatorControllerParameter parameter = animator.parameters[i];
-            if (parameter.name != boolName || parameter.type != AnimatorControllerParameterType.Bool)
-                continue;
-
-            animator.SetBool(boolName, value);
-            return true;
+            return;
         }
 
-        return false;
+        hasLanded = true;
+        SetBoolOrTrigger(hasHitGroundTriggerName, true);
+
+        if (currentWaterCapacity > 0)
+        {
+            StartWatering();
+        }
+        else
+        {
+            EnterEmptyState();
+        }
     }
 
-    private void TrySprayOnAnimationCycleEnd()
+    private void StartWatering()
+    {
+        if (animator == null || currentWaterCapacity <= 0)
+        {
+            return;
+        }
+
+        waitingForRefill = false;
+        //pendingEmptyAfterSpray = false;
+        lastCompletedActiveLoop = 0;
+
+        SetBoolOrTrigger(outOfWaterTriggerName, false);
+        SetBoolOrTrigger(isWateringBoolName, true);
+    }
+
+    private void TrySprayOnActiveLoopEnd()
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(animationLayer);
-        if (!stateInfo.IsName(sprayCycleStateName))
+        if (!stateInfo.IsName(activeStateName) || stateInfo.normalizedTime < 1f)
+        {
             return;
-
-        if(stateInfo.normalizedTime < 1f)
-            return;
+        }
 
         int completedLoops = Mathf.FloorToInt(stateInfo.normalizedTime);
-        if (completedLoops <= lastCompletedSprayLoop)
+        if (completedLoops <= lastCompletedActiveLoop)
+        {
             return;
+        }
 
-        lastCompletedSprayLoop = completedLoops;
+        lastCompletedActiveLoop = completedLoops;
         SprayOnce();
     }
 
@@ -184,34 +119,39 @@ public class AutoWaterer : MonoBehaviour
     {
         if (currentWaterCapacity <= 0)
         {
-            StopWateringBecauseEmpty();
+            EnterEmptyState();
             return;
         }
 
-        if (waterSpoutPS != null)
-        {
-            waterSpoutPS.Play();
-            StartCoroutine(StopSprayAfterDelay());
-        }
+        PlaySprayFX();
 
         currentWaterCapacity = Mathf.Max(0, currentWaterCapacity - waterDrain);
         WaterHitCheck();
 
         if (currentWaterCapacity <= 0)
         {
-            StopWateringBecauseEmpty();
+            //pendingEmptyAfterSpray = true;
+            EnterEmptyState();
         }
     }
-    private void PlayIdleState()
+
+    private void PlaySprayFX()
     {
-        if (animator == null || string.IsNullOrWhiteSpace(idleStateName))
+        if (waterSpoutPS == null)
         {
             return;
         }
-        
-        animator.Play(idleStateName, animationLayer, 0f);
-        animator.Update(0f);
+
+        waterSpoutPS.Play();
+
+        if (sprayRoutine != null)
+        {
+            StopCoroutine(sprayRoutine);
+        }
+
+        sprayRoutine = StartCoroutine(StopSprayAfterDelay());
     }
+
     private IEnumerator StopSprayAfterDelay()
     {
         yield return new WaitForSeconds(sprayDuration);
@@ -220,43 +160,115 @@ public class AutoWaterer : MonoBehaviour
         {
             waterSpoutPS.Stop();
         }
+
+        sprayRoutine = null;
+
+        //if (pendingEmptyAfterSpray)
+        //{
+        //    EnterEmptyState();
+        //}
     }
-    public void RefillWater()
+
+    private void EnterEmptyState()
     {
-        bool wasEmpty = currentWaterCapacity <= 0;
+        waitingForRefill = true;
+        lastCompletedActiveLoop = -1;
 
-        currentWaterCapacity = Mathf.Min(currentWaterCapacity + 1, maxWaterCapacity);
-        Debug.Log("Water capacity: " + currentWaterCapacity);
-
-        if (wasEmpty)
+        if (animator == null)
         {
-            outOfWaterTriggered = false;
+            return;
+        }
 
-            if (hasLanded)
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(animationLayer);
+        bool isCurrentlyActive = stateInfo.IsName(activeStateName);
+
+        SetBoolOrTrigger(isWateringBoolName, false);
+        SetBoolOrTrigger(hasHitGroundTriggerName, false);
+
+        if (isCurrentlyActive)
+        {
+            SetBoolOrTrigger(outOfWaterTriggerName, true);
+
+            if (!string.IsNullOrWhiteSpace(shutdownStateName))
             {
-                StartWateringAnimation();
+                animator.Play(shutdownStateName, animationLayer, 0f);
+                animator.Update(0f);
             }
         }
     }
 
-
-    public void WaterHitCheck()
+    private void SetBoolOrTrigger(string paramName, bool boolValue)
     {
+        if (animator == null || string.IsNullOrWhiteSpace(paramName))
+        {
+            return;
+        }
+
+        for (int i = 0; i < animator.parameters.Length; i++)
+        {
+            AnimatorControllerParameter parameter = animator.parameters[i];
+            if (parameter.name != paramName)
+            {
+                continue;
+            }
+
+            if (parameter.type == AnimatorControllerParameterType.Bool)
+            {
+                animator.SetBool(paramName, boolValue);
+                return;
+            }
+
+            if (parameter.type == AnimatorControllerParameterType.Trigger)
+            {
+                if (boolValue)
+                {
+                    animator.SetTrigger(paramName);
+                }
+                else
+                {
+                    animator.ResetTrigger(paramName);
+                }
+
+                return;
+            }
+        }
+    }
+
+    public void RefillWater()
+    {
+        bool wasEmpty = currentWaterCapacity <= 0;
+        currentWaterCapacity = Mathf.Min(currentWaterCapacity + 1, maxWaterCapacity);
+
+        if (!wasEmpty || !hasLanded || animator == null)
+        {
+            return;
+        }
+
+        SetBoolOrTrigger(hasHitGroundTriggerName, true);
+        StartWatering();
+    }
+    private void WaterHitCheck()
+    {
+        if (waterSpawnPoint == null)
+        {
+            return;
+        }
+
         int hitCount = Physics.OverlapSphereNonAlloc(
             waterSpawnPoint.position,
             range,
             plantBuffer,
-            plantLayerMask
-            );
+            plantLayerMask);
 
         for (int i = 0; i < hitCount; i++)
         {
             Collider col = plantBuffer[i];
-            if (col.CompareTag("Plant"))
+            if (!col.CompareTag("Plant"))
             {
-                Debug.Log("AutoWaterer hit a plant: " + col.name + " on " + gameObject.name);
-                col.GetComponentInParent<Growing>()?.Water();
+                continue;
             }
+
+            col.GetComponentInParent<Growing>()?.Water();
         }
     }
 }
