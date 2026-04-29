@@ -136,8 +136,5 @@ public class PlayerInteraction : MonoBehaviour
                 }
             }
         }
-
     }
-
-
 }

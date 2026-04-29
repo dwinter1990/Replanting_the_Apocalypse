@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8637805c6e427734284a96ab55e3ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 20
   impactEffect: {fileID: 8290011843410130166, guid: 8eb2e3c5786532445b4883dc095378f7, type: 3}
 --- !u!54 &2867547342061971404
 Rigidbody:
@@ -129,7 +129,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!65 &8501671145373983649
@@ -175,7 +175,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     ImpulseDuration: 0.35
-    ImpulseType: 1
+    ImpulseType: 0
     DissipationRate: 0.179
     RawSignal: {fileID: 0}
     AmplitudeGain: 1
@@ -205,7 +205,7 @@ MonoBehaviour:
     DissipationMode: 2
     DissipationDistance: 100
     PropagationSpeed: 343
-  DefaultVelocity: {x: 0, y: -1, z: 0}
+  DefaultVelocity: {x: 0, y: -0.5, z: 0}
 --- !u!1 &9217924110710109227
 GameObject:
   m_ObjectHideFlags: 0

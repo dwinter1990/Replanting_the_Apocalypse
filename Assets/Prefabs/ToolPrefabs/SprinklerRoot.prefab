@@ -819,7 +819,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!114 &419148020783838346
@@ -834,7 +834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8637805c6e427734284a96ab55e3ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 20
   impactEffect: {fileID: 8290011843410130166, guid: 8eb2e3c5786532445b4883dc095378f7, type: 3}
 --- !u!114 &535260303101194961
 MonoBehaviour:

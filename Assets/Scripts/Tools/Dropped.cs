@@ -4,7 +4,7 @@ using Unity.Cinemachine;
 public class Dropped : MonoBehaviour
 {
     [SerializeField] private float speed;
-
+    private bool isDropping;
     [SerializeField] private ParticleSystem impactEffect;
 
     private CinemachineImpulseSource impulseSource;
@@ -13,6 +13,7 @@ public class Dropped : MonoBehaviour
     private Animator animator;
     private void Start()
     {
+        isDropping = true;
         if (animator == null)
         {
             animator = GetComponentInChildren<Animator>();
@@ -23,9 +24,18 @@ public class Dropped : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.AddForce(Vector3.down * speed, ForceMode.VelocityChange);
+           // rb.AddForce(Vector3.down * speed, ForceMode.VelocityChange);
         }
         rb.isKinematic = false; // Ensure the object is affected by physics
+        transform.Translate(Vector3.down * 90);
+    }
+
+    private void FixedUpdate()
+    {
+        if(isDropping)
+        {
+            rb.AddForce(Vector3.down * speed,ForceMode.Acceleration);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -47,6 +57,7 @@ public class Dropped : MonoBehaviour
                 impactEffect.Play(); // Play the impact effect
 
                 impulseSource.GenerateImpulse(); // Trigger the camera shake
+            isDropping = false;
 
         }
     }
