@@ -41,10 +41,7 @@ public class SeedManager : MonoBehaviour
                 {
                     currentShotType = ShotType.seed;
                 }
-        } else
-        {
-            currentShotType = ShotType.seed;
-        }
+        } 
     }
     public void ShootSeed()
     {
@@ -83,6 +80,7 @@ public class SeedManager : MonoBehaviour
         seed.transform.position = seedSpawnPoint.position;
         seed.transform.rotation = seedSpawnPoint.rotation;
 
+        ObjectivesTutorial.OTInstance.TryShootSeedObjective();
         AudioController.Play(seedLauncherSound);
         Rigidbody rb = seed.GetComponent<Rigidbody>();
         if (rb != null)
@@ -91,4 +89,8 @@ public class SeedManager : MonoBehaviour
         }
     }
 
+    public void UnlockGrenade()
+    {
+        grenadeUnlocked = true;
+    }
 }

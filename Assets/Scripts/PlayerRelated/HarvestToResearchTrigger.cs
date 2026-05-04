@@ -7,13 +7,13 @@ public class HarvestToResearchTrigger : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
-        if (SeedUnlockMenuUI.Instance != null)
+        if (UnlockShop.USInstance != null)
         {
-            SeedUnlockMenuUI.Instance.ShowMenu();
+            UnlockShop.USInstance.ShowMenu();
         }
         else
         {
-            Debug.LogWarning("SeedUnlockMenuUI instance is missing; unlock menu was not shown.");
+            Debug.LogWarning("UnlockShop instance is missing; unlock menu was not shown.");
         }
 
         if (PlayerStats.Instance == null)

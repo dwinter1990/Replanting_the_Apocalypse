@@ -57,12 +57,6 @@ public class HandManager : MonoBehaviour
         }
         if (!context.performed || rightHands.Length == 0) return;
 
-        //if (firstTimeSwapRight)
-        //{
-        //    firstTimeSwapRight = false;
-        //    Debug.Log("First time swapping right hand, should be changing now");
-        //}
-        // Stop watering if the current hand is water
         if (rightHands[activeRightHandIndex].handType == HandTypeRight.Water)
         {
             waterHose.StopSpray();

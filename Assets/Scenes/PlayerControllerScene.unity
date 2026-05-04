@@ -331,7 +331,7 @@ PrefabInstance:
     - target: {fileID: 8343501918300868866, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 155155191}
+      objectReference: {fileID: 0}
     - target: {fileID: 8343501918300868866, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -691,10 +691,11 @@ GameObject:
   - component: {fileID: 155155188}
   - component: {fileID: 155155189}
   - component: {fileID: 155155190}
-  - component: {fileID: 155155191}
   - component: {fileID: 155155192}
   - component: {fileID: 155155193}
   - component: {fileID: 155155194}
+  - component: {fileID: 155155195}
+  - component: {fileID: 155155196}
   m_Layer: 6
   m_Name: GameManager
   m_TagString: Untagged
@@ -817,36 +818,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d4d86078d0a480479a5e70f3aac5f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &155155191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 155155184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed2ceddd226e9d94fa2c496f7173540c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerUI: {fileID: 1537484098}
-  playerInput: {fileID: 8737458811758851040}
-  panelRoot: {fileID: 659516857}
-  closeButton: {fileID: 1400047010}
-  unlockButtons:
-  - plantType: 0
-    button: {fileID: 87657088}
-    label: {fileID: 87657086}
-  - plantType: 2
-    button: {fileID: 1679327814}
-    label: {fileID: 1679327813}
-  - plantType: 1
-    button: {fileID: 449830942}
-    label: {fileID: 449830941}
-  - plantType: 3
-    button: {fileID: 1613502571}
-    label: {fileID: 1613502569}
-  researchPointsLabel: {fileID: 249748206}
 --- !u!114 &155155192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -889,6 +860,50 @@ MonoBehaviour:
   sprinklerPrefab: {fileID: 5677044083236895015, guid: 90f57f0fb68828e419804d9b77c7ff00, type: 3}
   spawnDistance: 5
   currentEquipment: 1
+  SprinklerCharges: 0
+  RefillStationCharges: 0
+--- !u!114 &155155195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155155184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127c7ff7b95551246bf8e83a4e74e4ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerUI: {fileID: 1537484098}
+  playerInput: {fileID: 8737458811758851040}
+  panelRoot: {fileID: 659516857}
+  closeButton: {fileID: 1400047010}
+  shopUnlockButtons:
+  - itemType: 0
+    researchPointCost: 50
+    button: {fileID: 87657088}
+    label: {fileID: 87657086}
+  - itemType: 2
+    researchPointCost: 25
+    button: {fileID: 1679327814}
+    label: {fileID: 1679327813}
+  - itemType: 1
+    researchPointCost: 100
+    button: {fileID: 449830942}
+    label: {fileID: 449830941}
+  researchPointsLabel: {fileID: 249748206}
+--- !u!114 &155155196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155155184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f764fba644ea37844b4e93d146cec064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &163173108
 GameObject:
   m_ObjectHideFlags: 0
@@ -2246,7 +2261,7 @@ PrefabInstance:
     - target: {fileID: 8343501918300868866, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 155155191}
+      objectReference: {fileID: 0}
     - target: {fileID: 8343501918300868866, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -2996,7 +3011,7 @@ GameObject:
   - component: {fileID: 659516860}
   - component: {fileID: 659516859}
   m_Layer: 5
-  m_Name: CanvasSeedUnlockMenuRoot
+  m_Name: CanvasUnlockMenuRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3291,6 +3306,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4913834010104590972, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5517215724370675159, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
       propertyPath: m_text
       value: text
@@ -3314,7 +3333,7 @@ PrefabInstance:
     - target: {fileID: 8343501918300868866, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 155155191}
+      objectReference: {fileID: 0}
     - target: {fileID: 8343501918300868866, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -9036,23 +9055,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55ae3a8094623db4ca95dbca1d52affd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2.53
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55ae3a8094623db4ca95dbca1d52affd, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 55ae3a8094623db4ca95dbca1d52affd, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 55ae3a8094623db4ca95dbca1d52affd, type: 3}
-      propertyPath: m_LocalRotation.y
       value: 0.7072302
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55ae3a8094623db4ca95dbca1d52affd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7069834
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 55ae3a8094623db4ca95dbca1d52affd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 55ae3a8094623db4ca95dbca1d52affd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.7069834
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55ae3a8094623db4ca95dbca1d52affd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9060,7 +9079,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55ae3a8094623db4ca95dbca1d52affd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55ae3a8094623db4ca95dbca1d52affd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -10392,7 +10411,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 155155191}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SeedUnlockMenuUI, Assembly-CSharp
         m_MethodName: HideMenu
         m_Mode: 1
@@ -11086,6 +11105,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4913834010104590972, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5517215724370675159, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
       propertyPath: m_text
       value: text
@@ -11109,7 +11132,7 @@ PrefabInstance:
     - target: {fileID: 8343501918300868866, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 155155191}
+      objectReference: {fileID: 0}
     - target: {fileID: 8343501918300868866, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -11135,33 +11158,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
---- !u!114 &1613502569 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5517215724370675159, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
-  m_PrefabInstance: {fileID: 1613502568}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1613502570 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4099709298039358858, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
   m_PrefabInstance: {fileID: 1613502568}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1613502571 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8343501918300868866, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
-  m_PrefabInstance: {fileID: 1613502568}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1677242991 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b78ab4b5b004b324ba891fbc2088ece0, type: 3}
@@ -11357,7 +11358,7 @@ PrefabInstance:
     - target: {fileID: 8343501918300868866, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 155155191}
+      objectReference: {fileID: 0}
     - target: {fileID: 8343501918300868866, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -12465,14 +12466,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967745498}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.97, y: -10.05, z: 0}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.00000035762784}
+  m_LocalPosition: {x: -3.97, y: -10.05, z: -13.03}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1721990609}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1977545366
 GameObject:
   m_ObjectHideFlags: 0
@@ -18321,7 +18322,7 @@ MonoBehaviour:
   moveSpeed: 5
   waterDrainRate: 10
   waterRefillRate: 20
-  researchPoints: 0
+  researchPoints: 100
 --- !u!114 &5154328174561001599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18847,9 +18848,9 @@ MonoBehaviour:
     m_ActionName: 'Player/Jump[/Keyboard/space]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2038372356669938041}
+      - m_Target: {fileID: 5838816703003569800}
         m_TargetAssemblyTypeName: HandManager, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: OnNext
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

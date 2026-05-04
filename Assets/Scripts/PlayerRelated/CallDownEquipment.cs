@@ -13,6 +13,13 @@ public class CallDownEquipment : MonoBehaviour
 
     public static CallDownEquipment CDEInstance;
 
+    public int SprinklerCharges = 0;
+    public int RefillStationCharges = 0;
+    private enum EquipmentType
+    {
+        RefillStation,
+        Sprinkler
+    }
     private void Awake()
     {
         CDEInstance = this;
@@ -58,10 +65,40 @@ public class CallDownEquipment : MonoBehaviour
             Debug.LogWarning("No prefab assigned for current equipment type.");
             return;
         }
+        if(EquipmentType.Sprinkler == currentEquipment && SprinklerCharges <= 0)
+        {
+            Debug.Log("No sprinkler charges left!");
+            //play sound for no charges left
+            return;
+        }
+        if(EquipmentType.RefillStation == currentEquipment && RefillStationCharges <= 0)
+        {
+            Debug.Log("No refill station charges left!");
+            //play sound for no charges left
+            return;
+        }
 
         Instantiate(selectedPrefab, position + new Vector3(0f, 100f, 0f), Quaternion.identity);
+
+        if (EquipmentType.Sprinkler == currentEquipment)
+        {
+            SprinklerCharges--;
+        }
+        else if (EquipmentType.RefillStation == currentEquipment)
+        {
+            RefillStationCharges--;
+        }
+
     }
 
+    public void AddSprinklerCharge(int chargeAdded)
+    {
+        SprinklerCharges += chargeAdded;
+    }
+    public void AddRefillStationCharge(int chargeAdded)
+    {
+        RefillStationCharges += chargeAdded;
+    }
     private GameObject GetCurrentEquipmentPrefab()
     {
         switch (currentEquipment)

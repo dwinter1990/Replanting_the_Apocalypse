@@ -124,14 +124,12 @@ public class Growing : MonoBehaviour
     {
         if (hasFullyGrown)
         {
-            if(tutorialTriggered == false)
-            {
-                tutorialTriggered = true;
-                objectivesTutorial.FirstPlantFullyWatered();
-            }
+            if (ObjectivesTutorial.OTInstance != null)
+                ObjectivesTutorial.OTInstance.TryTriggerFirstPlantFullyWatered();
+
             return;
         }
-            
+
 
         GrowOneStep();
     }
@@ -219,6 +217,8 @@ public class Growing : MonoBehaviour
             Debug.LogWarning("Plant has no source pool configured for harvesting: " + gameObject.name);
             return;
         }
+        if (ObjectivesTutorial.OTInstance != null)
+            ObjectivesTutorial.OTInstance.TryTriggerFirstPlantHarvested();
 
         string plantId = profile != null ? profile.name : gameObject.name.Replace("(Clone)", string.Empty).Trim();
         int researchPointsValue = profile != null ? profile.researchPointValue : 1;

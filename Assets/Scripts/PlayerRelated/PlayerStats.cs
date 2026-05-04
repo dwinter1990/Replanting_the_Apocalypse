@@ -79,6 +79,10 @@ public class PlayerStats : MonoBehaviour
         {
             PlantPoolManager.PlantPoolManagerInstance.RefreshUnlockedPools();
         }
+        if(ObjectivesTutorial.OTInstance != null && researchPoints >= 50)
+        {
+            ObjectivesTutorial.OTInstance.TryResearchPointsTriggered();
+        }
     }
 
 

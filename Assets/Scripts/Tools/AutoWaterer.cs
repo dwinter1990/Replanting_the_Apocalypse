@@ -26,7 +26,7 @@ public class AutoWaterer : MonoBehaviour
     [SerializeField] private string isWateringBoolName = "IsWatering";
     [SerializeField] private string outOfWaterTriggerName = "IsOutOfWater";
 
-    private readonly Collider[] plantBuffer = new Collider[30];
+    private readonly Collider[] plantBuffer = new Collider[120];
 
     private int currentWaterCapacity;
     private int lastCompletedActiveLoop = -1;
