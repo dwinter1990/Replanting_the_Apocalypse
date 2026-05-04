@@ -898,6 +898,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 163173109}
+  - component: {fileID: 163173110}
+  - component: {fileID: 163173111}
   m_Layer: 0
   m_Name: FirstPlantPos
   m_TagString: Untagged
@@ -914,12 +916,46 @@ Transform:
   m_GameObject: {fileID: 163173108}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -13.48, z: 24.4}
+  m_LocalPosition: {x: 0, y: -5.1, z: 24.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1841861540}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &163173110
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163173108}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &163173111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163173108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 1603947248}
 --- !u!1 &166296610
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,6 +1014,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 174161704}
+  - component: {fileID: 174161706}
+  - component: {fileID: 174161705}
   m_Layer: 0
   m_Name: FirstPlantPos
   m_TagString: Untagged
@@ -1000,6 +1038,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 466062069}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &174161705
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174161703}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &174161706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174161703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 1603947248}
 --- !u!1 &205344525
 GameObject:
   m_ObjectHideFlags: 0
@@ -1270,6 +1342,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 252669731}
+  - component: {fileID: 252669733}
+  - component: {fileID: 252669732}
   m_Layer: 0
   m_Name: FirstPlantPos
   m_TagString: Untagged
@@ -1292,6 +1366,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 419593953}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &252669732
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252669730}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &252669733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252669730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 1603947248}
 --- !u!1 &270864935
 GameObject:
   m_ObjectHideFlags: 0
@@ -1301,6 +1409,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 270864936}
+  - component: {fileID: 270864938}
+  - component: {fileID: 270864937}
   m_Layer: 0
   m_Name: FirstPlantPos
   m_TagString: Untagged
@@ -1323,6 +1433,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 385837176}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &270864937
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270864935}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &270864938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270864935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 1603947248}
 --- !u!1 &279449318
 GameObject:
   m_ObjectHideFlags: 0
@@ -1332,6 +1476,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 279449319}
+  - component: {fileID: 279449321}
+  - component: {fileID: 279449320}
   m_Layer: 0
   m_Name: FirstPlantPos
   m_TagString: Untagged
@@ -1354,6 +1500,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1547090988}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &279449320
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279449318}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &279449321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279449318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 1603947248}
 --- !u!114 &328376493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1377,6 +1557,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 331762686}
+  - component: {fileID: 331762688}
+  - component: {fileID: 331762687}
   m_Layer: 0
   m_Name: FirstPlantPos
   m_TagString: Untagged
@@ -1399,6 +1581,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 924309498}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &331762687
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331762685}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &331762688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331762685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 1603947248}
 --- !u!1 &350992247
 GameObject:
   m_ObjectHideFlags: 0
@@ -1464,7 +1680,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &376297194
 Transform:
   m_ObjectHideFlags: 0
@@ -2909,6 +3125,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 704135269}
+  - component: {fileID: 704135271}
+  - component: {fileID: 704135270}
   m_Layer: 0
   m_Name: FirstPlantPos
   m_TagString: Untagged
@@ -2931,6 +3149,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1937454790}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &704135270
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704135268}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &704135271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704135268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 1603947248}
 --- !u!1001 &714873692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3408,6 +3660,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 807331587}
+  - component: {fileID: 807331589}
+  - component: {fileID: 807331588}
   m_Layer: 0
   m_Name: FirstPlantPos
   m_TagString: Untagged
@@ -3430,6 +3684,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1070709252}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &807331588
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807331586}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &807331589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807331586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 1603947248}
 --- !u!1 &816526032
 GameObject:
   m_ObjectHideFlags: 0
@@ -3576,6 +3864,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 846169865}
+  - component: {fileID: 846169867}
+  - component: {fileID: 846169866}
   m_Layer: 0
   m_Name: FirstPlantPos
   m_TagString: Untagged
@@ -3598,6 +3888,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 538019574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &846169866
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846169864}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &846169867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846169864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 1603947248}
 --- !u!1 &854449705
 GameObject:
   m_ObjectHideFlags: 0
@@ -3607,6 +3931,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 854449706}
+  - component: {fileID: 854449707}
+  - component: {fileID: 854449708}
   m_Layer: 0
   m_Name: FirstPlantPos
   m_TagString: Untagged
@@ -3623,12 +3949,46 @@ Transform:
   m_GameObject: {fileID: 854449705}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 30.23, y: -7.5499997, z: 29.86}
+  m_LocalPosition: {x: 30.23, y: -6.71, z: 29.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 230131758}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &854449707
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854449705}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &854449708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854449705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 1603947248}
 --- !u!1 &875227619
 GameObject:
   m_ObjectHideFlags: 0
@@ -8850,6 +9210,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 977199146}
+  - component: {fileID: 977199148}
+  - component: {fileID: 977199147}
   m_Layer: 0
   m_Name: FirstPlantPos
   m_TagString: Untagged
@@ -8872,6 +9234,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 593819137}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &977199147
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977199145}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &977199148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977199145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 1603947248}
 --- !u!1 &988594794
 GameObject:
   m_ObjectHideFlags: 0
@@ -8917,13 +9313,11 @@ MonoBehaviour:
   - {fileID: 924309499}
   - {fileID: 1070709253}
   - {fileID: 1547090989}
-  - {fileID: 376297195}
   - {fileID: 419593954}
   - {fileID: 466062070}
   - {fileID: 1937454791}
   - {fileID: 538019575}
   - {fileID: 593819138}
-  - {fileID: 0}
   unlockPricingByType: []
   selectedType: 3
 --- !u!4 &988594796
@@ -9350,6 +9744,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1137736214}
+  - component: {fileID: 1137736216}
+  - component: {fileID: 1137736215}
   m_Layer: 0
   m_Name: FirstPlantPos
   m_TagString: Untagged
@@ -9372,6 +9768,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1518246991}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1137736215
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137736213}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1137736216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137736213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 1603947248}
 --- !u!1 &1153009074
 GameObject:
   m_ObjectHideFlags: 0
@@ -9462,6 +9892,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1171373271}
+  - component: {fileID: 1171373273}
+  - component: {fileID: 1171373272}
   m_Layer: 0
   m_Name: FirstPlantPos
   m_TagString: Untagged
@@ -9484,6 +9916,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1068300767}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1171373272
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171373270}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1171373273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171373270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 1603947248}
 --- !u!114 &1190968903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9507,6 +9973,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1212880451}
+  - component: {fileID: 1212880453}
+  - component: {fileID: 1212880452}
   m_Layer: 0
   m_Name: FirstPlantPos
   m_TagString: Untagged
@@ -9529,6 +9997,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1776080436}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1212880452
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212880450}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1212880453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212880450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 1603947248}
 --- !u!1 &1273683673
 GameObject:
   m_ObjectHideFlags: 0
@@ -10420,6 +10922,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialCanvas: {fileID: 2143986819}
   text: {fileID: 567975320}
+  firstPlantTrigger:
+  - {fileID: 163173110}
+  - {fileID: 2036739424}
+  - {fileID: 854449707}
+  - {fileID: 1776740024}
+  - {fileID: 2081527771}
+  - {fileID: 1137736215}
+  - {fileID: 846169866}
+  - {fileID: 1801683001}
+  - {fileID: 331762687}
+  - {fileID: 807331588}
+  - {fileID: 977199147}
+  - {fileID: 279449320}
+  - {fileID: 1171373272}
+  - {fileID: 1757317892}
+  - {fileID: 270864937}
+  - {fileID: 1687388259}
+  - {fileID: 1212880452}
+  - {fileID: 252669732}
+  - {fileID: 174161705}
+  - {fileID: 704135270}
+  characterDelay: 0.05
 --- !u!1 &1611421023
 GameObject:
   m_ObjectHideFlags: 0
@@ -10895,6 +11419,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1687388258}
+  - component: {fileID: 1687388260}
+  - component: {fileID: 1687388259}
   m_Layer: 0
   m_Name: FirstPlantPos
   m_TagString: Untagged
@@ -10911,12 +11437,46 @@ Transform:
   m_GameObject: {fileID: 1687388257}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -5.7699995, z: 115.1}
+  m_LocalPosition: {x: 0, y: -7.56, z: -17.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1987668823}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1687388259
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687388257}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1687388260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687388257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 1603947248}
 --- !u!1 &1700996124
 GameObject:
   m_ObjectHideFlags: 0
@@ -11120,6 +11680,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1757317891}
+  - component: {fileID: 1757317893}
+  - component: {fileID: 1757317892}
   m_Layer: 0
   m_Name: FirstPlantPos
   m_TagString: Untagged
@@ -11142,6 +11704,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1273683674}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1757317892
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757317890}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1757317893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757317890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 1603947248}
 --- !u!1 &1776080434
 GameObject:
   m_ObjectHideFlags: 0
@@ -11200,6 +11796,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1776740023}
+  - component: {fileID: 1776740025}
+  - component: {fileID: 1776740024}
   m_Layer: 0
   m_Name: FirstPlantPos
   m_TagString: Untagged
@@ -11222,6 +11820,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1153009076}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1776740024
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776740022}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1776740025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776740022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 1603947248}
 --- !u!1 &1780686815
 GameObject:
   m_ObjectHideFlags: 0
@@ -11382,6 +12014,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1801683000}
+  - component: {fileID: 1801683002}
+  - component: {fileID: 1801683001}
   m_Layer: 0
   m_Name: FirstPlantPos
   m_TagString: Untagged
@@ -11404,6 +12038,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1524867172}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1801683001
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801682999}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1801683002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801682999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 1603947248}
 --- !u!114 &1823652004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11894,7 +12562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plantType: 0
+  plantType: 2
   prefab: {fileID: 3542532913696547606, guid: e3a9c4d9c932757438442504acf3949b, type: 3}
   preloadAmount: 10
   firstPlacementLocation: {fileID: 1687388258}
@@ -11907,6 +12575,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2036739423}
+  - component: {fileID: 2036739424}
+  - component: {fileID: 2036739425}
   m_Layer: 0
   m_Name: FirstPlantPos
   m_TagString: Untagged
@@ -11923,12 +12593,46 @@ Transform:
   m_GameObject: {fileID: 2036739422}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -32.52, y: -5.5899997, z: 29.86}
+  m_LocalPosition: {x: -32.52, y: -3.15, z: 29.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 350992248}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &2036739424
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036739422}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2036739425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036739422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 1603947248}
 --- !u!1 &2067169041
 GameObject:
   m_ObjectHideFlags: 0
@@ -12136,6 +12840,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2081527770}
+  - component: {fileID: 2081527772}
+  - component: {fileID: 2081527771}
   m_Layer: 0
   m_Name: FirstPlantPos
   m_TagString: Untagged
@@ -12158,6 +12864,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 166296611}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &2081527771
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081527769}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2081527772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081527769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 1603947248}
 --- !u!1 &2083286245
 GameObject:
   m_ObjectHideFlags: 0
@@ -12584,7 +13324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   groundDrag: 5
-  cameraTransform: {fileID: 3466978300603330677}
+  cam: {fileID: 7596377749311586448}
   range: 1000
   centrePoint: {fileID: 1721990609}
 --- !u!1 &2038372356669938041
@@ -12626,6 +13366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76a0739ac38d244e8e8ef91b8a6c595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canSwapDelay: 0.5
 --- !u!4 &2714188751899406268
 Transform:
   m_ObjectHideFlags: 0
@@ -12693,6 +13434,7 @@ MonoBehaviour:
   callDownEquipment: {fileID: 155155194}
   timeBetweenShots: 0.25
   chainSawAnimator: {fileID: 961871046}
+  canShootSeed: 0
   waterThisPlant: {fileID: 1784820666}
   harvestThisPlant: {fileID: 892897896}
 --- !u!1 &3906674314978649806
@@ -17544,7 +18286,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 60
+  field of view: 58.715508
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -17619,12 +18361,14 @@ MonoBehaviour:
     handType: 0
   - handObject: {fileID: 1364663451}
     handType: 1
+  canSwapRight: 0
   waterHose: {fileID: 5154328174561001599}
   leftHands:
   - handObject: {fileID: 1048987456}
     handType: 0
   - handObject: {fileID: 1156121081}
     handType: 1
+  canSwapLeft: 0
 --- !u!4 &6113037093649071149
 Transform:
   m_ObjectHideFlags: 0
@@ -17633,7 +18377,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6323982881698474030}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.000000007450581, w: 1}
   m_LocalPosition: {x: -3.12, y: -7.1, z: 5.1359997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -17820,12 +18564,12 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 60
+    FieldOfView: 58.715508
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
-    ModeOverride: 0
+    ModeOverride: 2
     PhysicalProperties:
       GateFit: 2
       SensorSize: {x: 21.946, y: 16.002}
@@ -18103,9 +18847,9 @@ MonoBehaviour:
     m_ActionName: 'Player/Jump[/Keyboard/space]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5838816703003569800}
+      - m_Target: {fileID: 2038372356669938041}
         m_TargetAssemblyTypeName: HandManager, Assembly-CSharp
-        m_MethodName: OnNext
+        m_MethodName: 
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18118,7 +18862,19 @@ MonoBehaviour:
     m_ActionId: b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba
     m_ActionName: 'Player/Next[/Keyboard/2]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1585935980869275012}
+        m_TargetAssemblyTypeName: FirstPersonController, Assembly-CSharp
+        m_MethodName: OnSprint
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 641cd816-40e6-41b4-8c3d-04687c349290
     m_ActionName: 'Player/Sprint[/Keyboard/leftShift]'
   - m_PersistentCalls:

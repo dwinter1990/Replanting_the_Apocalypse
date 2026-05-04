@@ -29,15 +29,21 @@ public class Growing : MonoBehaviour
     public Quaternion startRotation;
     private float currentScale;
     private float maxScale;
-    //private Outline outline;
 
     private GameObject spawnedMound;
+    [Header("Tutorial settings")]
+    private bool tutorialTriggered = false; // Flag to ensure the tutorial is triggered only once
+    [SerializeField] private ObjectivesTutorial objectivesTutorial; // Reference to the ObjectivesTutorial script
 
     private void Awake()
     {
         tweenQueue = GetComponent<TweenQueue>();
         ignoreWaterLayer = LayerMask.NameToLayer("IgnoreWater");
         startingLayer = gameObject.layer;
+        if(objectivesTutorial == null)
+        {
+            objectivesTutorial = FindAnyObjectByType<ObjectivesTutorial>();
+        }
     }
 
 
@@ -117,7 +123,15 @@ public class Growing : MonoBehaviour
     public void Water()
     {
         if (hasFullyGrown)
+        {
+            if(tutorialTriggered == false)
+            {
+                tutorialTriggered = true;
+                objectivesTutorial.FirstPlantFullyWatered();
+            }
             return;
+        }
+            
 
         GrowOneStep();
     }
@@ -205,6 +219,7 @@ public class Growing : MonoBehaviour
             Debug.LogWarning("Plant has no source pool configured for harvesting: " + gameObject.name);
             return;
         }
+
         string plantId = profile != null ? profile.name : gameObject.name.Replace("(Clone)", string.Empty).Trim();
         int researchPointsValue = profile != null ? profile.researchPointValue : 1;
 
@@ -245,9 +260,6 @@ public class Growing : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
-
-
     void ResetPlant()
     {
         ResetTweens();
@@ -259,12 +271,5 @@ public class Growing : MonoBehaviour
         nextGrowthTimer = 0f;
         gameObject.layer = startingLayer;
         hasFullyGrown = false;
-    }
-
-    private void SetOutlineHidden()
-    {
-        Outline outline = GetComponent<Outline>();
-        if (outline == null) return;
-        outline.OutlineMode = Outline.Mode.OutlineHidden;
     }
 }

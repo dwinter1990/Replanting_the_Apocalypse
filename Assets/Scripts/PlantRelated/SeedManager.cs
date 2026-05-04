@@ -14,7 +14,9 @@ public class SeedManager : MonoBehaviour
     [SerializeField] private ShotType currentShotType;
     public ObjectPool pool;
     public PayloadPool payloadPool;
-    
+    private bool grenadeUnlocked = false;
+    public bool GrenadeUnlocked => grenadeUnlocked;
+
     [Header("Shoot stats")]
     [SerializeField] float seedSpeed;
     [SerializeField] Transform seedSpawnPoint;
@@ -28,16 +30,20 @@ public class SeedManager : MonoBehaviour
     }
     public void OnShotTypeChange(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && grenadeUnlocked)
         {
-            if (currentShotType == ShotType.seed)
-            {
-                currentShotType = ShotType.grenade;
-            }
-            else if(currentShotType == ShotType.grenade)
-            {
-                currentShotType = ShotType.seed;
-            }
+
+                if (currentShotType == ShotType.seed)
+                {
+                    currentShotType = ShotType.grenade;
+                }
+                else if (currentShotType == ShotType.grenade)
+                {
+                    currentShotType = ShotType.seed;
+                }
+        } else
+        {
+            currentShotType = ShotType.seed;
         }
     }
     public void ShootSeed()

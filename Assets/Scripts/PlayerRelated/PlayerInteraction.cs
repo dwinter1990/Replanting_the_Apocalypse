@@ -15,10 +15,26 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] float timeBetweenShots;
     private Outline currentOutline;
     [SerializeField] private Animator chainSawAnimator;
+    public bool canShootSeed = false;
+    private bool CanShootSeed => canShootSeed;
 
     [Header("Water/Harvest UI Elements")]
     [SerializeField] private Image waterThisPlant;
     [SerializeField] private Image harvestThisPlant;
+
+    public static PlayerInteraction PIInstance { get; set; }
+
+    private void Awake()
+    {
+        if (PIInstance != null && PIInstance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            PIInstance = this;
+        }
+    }
     public void OnAttack(InputAction.CallbackContext context)
     {
         HandTypeRight activeHand = handManager.GetActiveHandRightType();
@@ -58,6 +74,10 @@ public class PlayerInteraction : MonoBehaviour
 
     public void OnShootSeedInput(InputAction.CallbackContext context)
     {
+        if(!CanShootSeed)
+        {
+            return;
+        }
         HandTypeLeft activeHand = handManager.GetActiveHandLeftType();
         if (activeHand == HandTypeLeft.SeedLauncher)
         {

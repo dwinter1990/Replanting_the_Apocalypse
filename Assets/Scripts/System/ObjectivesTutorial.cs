@@ -2,50 +2,191 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-
 public class ObjectivesTutorial : MonoBehaviour
 {
-    //This script will handle the tutorial, showing the player how to use each button and introduce the game's mechanics.
+    public static ObjectivesTutorial OTInstance { get; set; }
 
     [Header("Tutorial Settings")]
-    [SerializeField] private Canvas tutorialCanvas; // The canvas group for the tutorial UI
+    [SerializeField] private Canvas tutorialCanvas;
     [SerializeField] private TextMeshProUGUI text;
-    void Start()
+
+    [Header("First plant triggerboxes")]
+    [SerializeField] private Collider[] firstPlantTrigger;
+
+    [Header("Typewriter")]
+    [SerializeField] private float characterDelay = 0.05f;
+
+    private bool tutorialStarted = false;
+    private bool firstPlantFound = false;
+    private bool firstPlantWatered = false;
+
+    // Track running coroutines so we can stop them cleanly.
+    private Coroutine tutorialFlowRoutine;
+    private Coroutine typewriterRoutine;
+
+    private void Awake()
     {
-        StartTutorial();
+        if (OTInstance != null && OTInstance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            OTInstance = this;
+        }
+    }
+
+
+    private void Start()
+    {
+        foreach (Collider trigger in firstPlantTrigger)
+        {
+            if (trigger != null)
+            {
+                trigger.enabled = true;
+                Debug.Log(trigger.name + " trigger enabled.");
+            }
+            else
+            {
+                Debug.LogError("One of the first plant triggers is not assigned in the inspector.");
+            }
+        }
+
+        if (!tutorialStarted)
+        {
+            StartTutorial();
+        }
     }
 
     private void StartTutorial()
     {
-        // Start the tutorial sequence
-        text.text = "Welcome to the game! Let's go through the basics.";
-
-        StartCoroutine(TutorialSequence());
+        tutorialStarted = true;
+        tutorialFlowRoutine = StartCoroutine(TutorialSequence());
     }
-    IEnumerator OneCharacterAtATime(string fullMessage)
+
+    private IEnumerator TutorialSequence()
     {
-        text.text = "";
+        yield return ShowMessage("Welcome to the game! Let's go through the basics.", 3f);
+        yield return ShowMessage("Use WASD to move around.", 3f);
+        yield return ShowMessage("You can use the mouse to look around.", 3f);
+        yield return ShowMessage("Now go find a plant!", 0f);
+    }
+
+    private IEnumerator ShowMessage(string message, float holdTime)
+    {
+        // Stop any currently running typewriter first.
+        if (typewriterRoutine != null)
+        {
+            StopCoroutine(typewriterRoutine);
+            typewriterRoutine = null;
+        }
+
+        typewriterRoutine = StartCoroutine(TypeText(message));
+        yield return typewriterRoutine; // Wait until full sentence is typed.
+
+        if (holdTime > 0f)
+            yield return new WaitForSeconds(holdTime);
+    }
+
+    private IEnumerator TypeText(string fullMessage)
+    {
+        text.text = string.Empty;
+
         foreach (char c in fullMessage)
         {
             text.text += c;
-            yield return new WaitForSeconds(0.05f); // Adjust the speed of the text display here
+            yield return new WaitForSeconds(characterDelay);
+        }
+
+        typewriterRoutine = null;
+    }
+
+    private void StopTutorialCoroutines()
+    {
+        if (tutorialFlowRoutine != null)
+        {
+            StopCoroutine(tutorialFlowRoutine);
+            tutorialFlowRoutine = null;
+        }
+
+        if (typewriterRoutine != null)
+        {
+            StopCoroutine(typewriterRoutine);
+            typewriterRoutine = null;
         }
     }
 
-    IEnumerator TutorialSequence()
+    public void FirstPlantFound()
     {
-        yield return new WaitForSeconds(3f);
-        StartCoroutine(OneCharacterAtATime("Use WASD to move around."));
-        yield return new WaitForSeconds(3f);
-        StartCoroutine(OneCharacterAtATime("You can use the mouse to look around."));
-        yield return new WaitForSeconds(3f);
-        StartCoroutine(OneCharacterAtATime("Now go find a plant!"));
+        if (firstPlantFound) return;
+        firstPlantFound = true;
+        foreach (Collider trigger in firstPlantTrigger)
+        {
+            if (trigger != null)
+            {
+                trigger.enabled = false;
+                Debug.Log(trigger.name + " trigger disabled.");
+            }
+        }
+        // Player jumped ahead => stop current tutorial flow/text immediately.
+        StopTutorialCoroutines();
+
+        tutorialFlowRoutine = StartCoroutine(FirstPlantFoundCoroutine());
     }
-    public IEnumerator FirstPlantFound()
+
+    private IEnumerator FirstPlantFoundCoroutine()
     {
-        StopCoroutine(TutorialSequence()); // Stop the initial tutorial sequence if it's still running
-        StartCoroutine(OneCharacterAtATime("Great job finding the first plant! Now let's learn how to interact with it."));
-        yield return new WaitForSeconds(3f);
-        StartCoroutine(OneCharacterAtATime("With the water gun equipped, you can water the plants by holding left mouse button."));
+        foreach (Collider trigger in firstPlantTrigger)
+        {
+            if (trigger != null)
+            {
+                trigger.enabled = false;
+                Debug.Log(trigger.name + " trigger disabled.");
+            }
+        }
+
+        yield return ShowMessage("Great job finding the first plant! Now let's learn how to interact with it.", 5f);
+        yield return ShowMessage("With the water gun equipped, water plants by holding down the left mouse button.", 0f);
+    }
+
+    public void FirstPlantFullyWatered()
+    {
+        if (firstPlantWatered) return;
+        firstPlantWatered = true;
+
+        // Player jumped ahead => stop any current step.
+        StopTutorialCoroutines();
+
+        tutorialFlowRoutine = StartCoroutine(FirstPlantFullyWateredCoroutine());
+    }
+
+    public void FirstPlantHarvested()
+    {
+        // Player completed the tutorial => stop all coroutines and clear text.
+        StopTutorialCoroutines();
+        text.text = string.Empty;
+        tutorialFlowRoutine = StartCoroutine(FirstPlantHavestedCororoutine());
+    }
+
+    private IEnumerator FirstPlantHavestedCororoutine()
+    {
+        yield return ShowMessage("Congratulations on harvesting your first plant. You're now ready to start replanting the apocalypse!", 5f);
+        PlayerInteraction.PIInstance.canShootSeed = true;
+        yield return ShowMessage("With the Seed Launcher equipped in your left hand, press the Right Mouse Button to launch a seed", 0f);
+    }
+    private IEnumerator FirstPlantFullyWateredCoroutine()
+    {
+        yield return ShowMessage("Well done! You've fully watered the first plant! Now it's time to harvest!", 5f);
+
+        if (HandManager.HMInstance != null)
+        {
+            HandManager.HMInstance.canSwapRight = true;
+        }
+        else
+        {
+            Debug.LogError("HandManager.HMInstance is null. Cannot enable right-hand swapping.");
+        }
+
+        yield return ShowMessage("To harvest a plant, switch to the chainsaw by pressing 2.", 0f);
     }
 }
