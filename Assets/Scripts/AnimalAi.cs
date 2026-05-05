@@ -59,8 +59,9 @@ public class AnimalAI : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
 
         
-        GetWayPoints();
+        waypoints = GetWayPoints();
         Transform target = waypoints[Random.Range(0, waypoints.Length)];
+
         if (agent.enabled && agent.isOnNavMesh)
         {
             agent.SetDestination(target.position);

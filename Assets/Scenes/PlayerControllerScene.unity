@@ -1418,6 +1418,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectivesTutorial: {fileID: 1603947248}
+--- !u!1 &263585254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 263585255}
+  m_Layer: 0
+  m_Name: DeerSpawn2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &263585255
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263585254}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -6.87, z: -409}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2005592624}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &270864935
 GameObject:
   m_ObjectHideFlags: 0
@@ -9011,6 +9042,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 892897894}
   m_CullTransparentMesh: 1
+--- !u!1 &898247016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 898247017}
+  m_Layer: 0
+  m_Name: DeerSpawn0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &898247017
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 898247016}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -388.8, y: 32.04, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2005592624}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &903203871
 GameObject:
   m_ObjectHideFlags: 0
@@ -9889,6 +9951,37 @@ Transform:
   - {fileID: 118482680}
   - {fileID: 1381586415}
   m_Father: {fileID: 8091332356804292609}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1168098857
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1168098858}
+  m_Layer: 0
+  m_Name: DeerSpawn1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1168098858
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168098857}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -8.62, z: 473.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2005592624}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1171373270
 GameObject:
@@ -11173,6 +11266,30 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4099709298039358858, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
   m_PrefabInstance: {fileID: 1613502568}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1620255389 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4257092197195666824, guid: 7cfba6efd9709f34b93e3a33115da6d4, type: 3}
+  m_PrefabInstance: {fileID: 4239143363587373569}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1620255392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620255389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc3135f9b5f7b5478b3a0645904bd2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPoolSize: 10
+  preloadCount: 3
+  doNotDestroyOnLoad: 0
+  sendAwakeStartOnDestroyMessage: 1
+  sendAwakeToInactive: 0
+  sendPoolableActivateDeactivateMessages: 0
+  useReflectionInsteadOfMessages: 0
 --- !u!1 &1677242991 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b78ab4b5b004b324ba891fbc2088ece0, type: 3}
@@ -12256,7 +12373,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fullyGrownGrassRequired: 10
   deerPrefab: {fileID: 2475040351001501742, guid: 528d3119d98e3e140a5fe554de8641cc, type: 3}
-  spawnPoints: []
+  spawnPoints:
+  - {fileID: 898247017}
+  - {fileID: 1168098858}
+  - {fileID: 263585255}
   mapCentre: {x: 0, y: 0, z: 0}
   mapExtents: {x: 50, y: 50}
   navMeshSampleDistance: 5
@@ -12273,7 +12393,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2005592624}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1876134776
@@ -12597,6 +12718,40 @@ MonoBehaviour:
   prefab: {fileID: 3542532913696547606, guid: e3a9c4d9c932757438442504acf3949b, type: 3}
   preloadAmount: 10
   firstPlacementLocation: {fileID: 1687388258}
+--- !u!1 &2005592623
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2005592624}
+  m_Layer: 0
+  m_Name: DeerSpawnPoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2005592624
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005592623}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 898247017}
+  - {fileID: 1168098858}
+  - {fileID: 263585255}
+  m_Father: {fileID: 1843254543}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2036739422
 GameObject:
   m_ObjectHideFlags: 0
@@ -18209,7 +18364,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4257092197195666824, guid: 7cfba6efd9709f34b93e3a33115da6d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1620255392}
   m_SourcePrefab: {fileID: 100100000, guid: 7cfba6efd9709f34b93e3a33115da6d4, type: 3}
 --- !u!20 &4501362929396128547
 Camera:

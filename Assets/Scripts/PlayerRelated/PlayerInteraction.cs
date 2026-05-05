@@ -104,12 +104,13 @@ public class PlayerInteraction : MonoBehaviour
                 isHoldingEquipmentPlacement = true;
                 callDownEquipment.BeginPlacementPreview();
             }
-
+            HandManager.HMInstance.canSwapLeft = false;
             TryUpdateEquipmentPreview();
         }
 
         if (context.canceled)
         {
+            HandManager.HMInstance.canSwapLeft = true;
             isHoldingEquipmentPlacement = false;
             callDownEquipment.ConfirmPlacement();
         }

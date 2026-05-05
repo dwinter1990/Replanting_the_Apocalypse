@@ -159,11 +159,6 @@ public class CallDownEquipment : MonoBehaviour
         Vector3 spawnPosition = position + (Vector3.up * spawnHeight);
         GameObject spawnedEquipment = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
 
-        //Rigidbody spawnedBody = spawnedEquipment.GetComponent<Rigidbody>();
-        //if (spawnedBody != null)
-        //{
-        //    spawnedBody.linearVelocity = Vector3.down * downwardLaunchSpeed;
-        //}
     }
 
     private GameObject GetCurrentEquipmentPrefab()
