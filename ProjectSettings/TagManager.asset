@@ -7,6 +7,10 @@ TagManager:
   - Ground
   - Plant
   - Tool
+  - Grass
+  - Bush
+  - Flower
+  - Tree
   layers:
   - Default
   - TransparentFX

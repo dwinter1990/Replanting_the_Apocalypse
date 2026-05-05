@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class HandManager : MonoBehaviour
 {
+    public static HandManager HMInstance { get; set; }
     [System.Serializable]
     public class RightHand
     {
@@ -19,7 +20,9 @@ public class HandManager : MonoBehaviour
     [Header("Right hand")]
     [SerializeField] private RightHand[] rightHands;
     private int activeRightHandIndex = 0;
-
+    public bool canSwapRight = false;
+    private bool CanSwapRight => canSwapRight; 
+    private bool firstTimeSwapRight = true;
     // References to scripts for actions
     [SerializeField] private WaterHose waterHose;
 
@@ -27,6 +30,19 @@ public class HandManager : MonoBehaviour
     [Header("Left hand")]
     [SerializeField] private LeftHand[] leftHands;
     private int activeLeftHandIndex = 0;
+    public bool canSwapLeft = false;
+    private bool CanSwapLeft => canSwapLeft;
+    private void Awake()
+    {
+        if (HMInstance != null && HMInstance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            HMInstance = this;
+        }
+    }
     private void Start()
     {
         UpdateRightHands();
@@ -35,9 +51,12 @@ public class HandManager : MonoBehaviour
 
     public void OnNext(InputAction.CallbackContext context)
     {
+        if (!CanSwapRight)
+        {
+            return;
+        }
         if (!context.performed || rightHands.Length == 0) return;
 
-        // Stop watering if the current hand is water
         if (rightHands[activeRightHandIndex].handType == HandTypeRight.Water)
         {
             waterHose.StopSpray();
@@ -50,6 +69,10 @@ public class HandManager : MonoBehaviour
 
     public void OnLeftNext(InputAction.CallbackContext context)
     {
+        if(!CanSwapLeft)
+        {
+            return;
+        }
         Debug.Log("Should be changing left hand now");
         if (!context.performed || leftHands.Length == 0)
         {
@@ -66,7 +89,6 @@ public class HandManager : MonoBehaviour
         {
             rightHands[i].handObject.SetActive(i == activeRightHandIndex);
         }
-
     }
     private void UpdateLeftHands()
     {
@@ -78,8 +100,7 @@ public class HandManager : MonoBehaviour
     }
     public HandTypeRight GetActiveHandRightType()
     {
-        return rightHands[activeRightHandIndex].handType;
-        
+        return rightHands[activeRightHandIndex].handType;  
     }
 
     public HandTypeLeft GetActiveHandLeftType()

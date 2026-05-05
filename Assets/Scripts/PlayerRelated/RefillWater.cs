@@ -8,7 +8,7 @@ public class RefillWater : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            PlayerStats.Instance.RefillWater();
+            PlayerStats.PSInstance.RefillWater();
         }
     }
 }

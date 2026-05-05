@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using System.Collections;
+using CS.AudioToolkit;
 
 [RequireComponent(typeof(TweenQueue))]
 public class Growing : MonoBehaviour
@@ -18,6 +19,7 @@ public class Growing : MonoBehaviour
     private float stepDuration;
     private float scalePerStep;
     private float nextGrowthTimer;
+    private bool hasPlayedAudio = false;
 
     [Header("Animation settings")]
     private TweenQueue tweenQueue;
@@ -29,15 +31,21 @@ public class Growing : MonoBehaviour
     public Quaternion startRotation;
     private float currentScale;
     private float maxScale;
-    //private Outline outline;
 
     private GameObject spawnedMound;
+    [Header("Tutorial settings")]
+    private bool tutorialTriggered = false; // Flag to ensure the tutorial is triggered only once
+    [SerializeField] private ObjectivesTutorial objectivesTutorial; // Reference to the ObjectivesTutorial script
 
     private void Awake()
     {
         tweenQueue = GetComponent<TweenQueue>();
         ignoreWaterLayer = LayerMask.NameToLayer("IgnoreWater");
         startingLayer = gameObject.layer;
+        if(objectivesTutorial == null)
+        {
+            objectivesTutorial = FindAnyObjectByType<ObjectivesTutorial>();
+        }
     }
 
 
@@ -117,8 +125,19 @@ public class Growing : MonoBehaviour
     public void Water()
     {
         if (hasFullyGrown)
+        {
+            if (ObjectivesTutorial.OTInstance != null)
+            {
+                ObjectivesTutorial.OTInstance.TryTriggerFirstPlantFullyWatered();
+            }
+            
             return;
+        }
 
+        if (originPool != null && originPool.plantType == PlantType.Grass)
+        {
+            DeerSpawnLogic.DSLInstance.NotifyGrassGrown();
+        }
         GrowOneStep();
     }
     public bool UpdateGrowth(float time)
@@ -205,6 +224,9 @@ public class Growing : MonoBehaviour
             Debug.LogWarning("Plant has no source pool configured for harvesting: " + gameObject.name);
             return;
         }
+        if (ObjectivesTutorial.OTInstance != null)
+            ObjectivesTutorial.OTInstance.TryTriggerFirstPlantHarvested();
+
         string plantId = profile != null ? profile.name : gameObject.name.Replace("(Clone)", string.Empty).Trim();
         int researchPointsValue = profile != null ? profile.researchPointValue : 1;
 
@@ -233,8 +255,13 @@ public class Growing : MonoBehaviour
             Debug.Log("Unlocked new pool for type: " + sourcePool.plantType + ": " + sourcePool.name);
         }
 
+        if(sourcePool.plantType == PlantType.Grass)
+        {
+            DeerSpawnLogic.DSLInstance.NotifyGrassUngrown();
+        }
         Debug.LogWarning("Harvesting: " + plantId);
         ResetPlant();
+
         //Spawn in seeds to collect from harvesting, when configured
         if (originPool != null)
         {
@@ -245,9 +272,6 @@ public class Growing : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
-
-
     void ResetPlant()
     {
         ResetTweens();
@@ -260,11 +284,12 @@ public class Growing : MonoBehaviour
         gameObject.layer = startingLayer;
         hasFullyGrown = false;
     }
-
-    private void SetOutlineHidden()
+    private void Update()
     {
-        Outline outline = GetComponent<Outline>();
-        if (outline == null) return;
-        outline.OutlineMode = Outline.Mode.OutlineHidden;
+        if (hasFullyGrown && !hasPlayedAudio)
+        {
+            AudioController.Play("PlantFullyGrown");
+            hasPlayedAudio = true;
+        }
     }
 }

@@ -15,8 +15,8 @@ public class WaterGlobeUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float current = PlayerStats.Instance.currentWaterCapacity;
-        float max = PlayerStats.Instance.maxWaterCapacity;
+        float current = PlayerStats.PSInstance.currentWaterCapacity;
+        float max = PlayerStats.PSInstance.maxWaterCapacity;
 
         float targetFill = current / max;
 

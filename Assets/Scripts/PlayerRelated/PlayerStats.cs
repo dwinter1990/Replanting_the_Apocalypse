@@ -3,7 +3,7 @@ using System;
 public class PlayerStats : MonoBehaviour
 {
     public static event Action<int> ResearchPointsChanged;
-    public static PlayerStats Instance {get; private set;}
+    public static PlayerStats PSInstance {get; private set;}
     [Header("Watering stats")]
     public float maxWaterCapacity = 100;
     public float currentWaterCapacity;
@@ -15,12 +15,12 @@ public class PlayerStats : MonoBehaviour
     public int researchPoints;
     private void Awake()
     {
-        if(Instance != null && Instance != this)
+        if(PSInstance != null && PSInstance != this)
         {
             Destroy(this.gameObject);
             return;
         }
-        Instance = this;
+        PSInstance = this;
         DontDestroyOnLoad(this.gameObject);
 
         currentWaterCapacity = maxWaterCapacity;
@@ -78,6 +78,10 @@ public class PlayerStats : MonoBehaviour
         if (PlantPoolManager.PlantPoolManagerInstance != null)
         {
             PlantPoolManager.PlantPoolManagerInstance.RefreshUnlockedPools();
+        }
+        if(ObjectivesTutorial.OTInstance != null && researchPoints >= 50)
+        {
+            ObjectivesTutorial.OTInstance.TryResearchPointsTriggered();
         }
     }
 

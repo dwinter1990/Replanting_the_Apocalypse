@@ -27,13 +27,13 @@ public class PlantPoolManager : MonoBehaviour
 
     public PlantType selectedType = PlantType.Grass;
 
+    private bool firstHarvest = true;
     private void Awake()
     {
         PlantPoolManagerInstance = this;
         BuildUnlockPricingLookup();
         RebuildPoolTypeCounts();
         ResetUnlockedCounts();
-        //EnsureInitialUnlockState();
         RefreshUnlockedPools();
     }
 
@@ -80,12 +80,11 @@ public class PlantPoolManager : MonoBehaviour
     public void RefreshUnlockedPools()
     {
         RebuildPoolTypeCounts();
-        //EnsureInitialUnlockState();
 
         if (!HasUnlockedPoolForType(selectedType))
             SetFirstAvailableSelectedType();
 
-        int currentResearch = PlayerStats.Instance != null ? PlayerStats.Instance.researchPoints : 0;
+        int currentResearch = PlayerStats.PSInstance != null ? PlayerStats.PSInstance.researchPoints : 0;
         Debug.Log("Unlocked pools by type -> " + BuildUnlockSummary(currentResearch));
     }
 
@@ -122,9 +121,6 @@ public class PlantPoolManager : MonoBehaviour
     {
         if (!CanUnlockType(type))
             return false;
-
-        //unlockedPoolCountByType[type] = GetUnlockedCountForType(type) + 1;
-        //Debug.Log("Unlocked " + type + " seed pool " + GetUnlockedCountForType(type) + "/" + GetTotalPoolCountForType(type));
 
         for (int i = 0; i < plantPools.Length; i++)
         {
@@ -197,52 +193,10 @@ public bool TryResolvePoolByPlantId(string plantId, out PlantPool matchingPool)
         return false;
     }
 
-    private void EnsureInitialUnlockState()
-    {
-        if (GetTotalPoolCountForType(PlantType.Grass) <= 0 || GetUnlockedCountForType(PlantType.Grass) > 0)
-            return;
-
-        for (int i = 0; i < plantPools.Length; i++)
-        {
-            PlantPool pool = plantPools[i];
-            if (pool != null && pool.plantType == PlantType.Grass)
-            {
-                MarkPoolUnlocked(pool);
-                return;
-            }
-        }
-    }
-
-
-
     private bool IsPoolUnlocked(PlantPool pool)
     {
         return pool != null && unlockedPools.Contains(pool);
     }
-
-    //{
-    //    if (pool == null || plantPools == null)
-    //        return false;
-
-    //    int unlockedCountForType = GetUnlockedCountForType(pool.plantType);
-    //    if (unlockedCountForType <= 0)
-    //        return false;
-
-    //    int poolIndexWithinType = 0;
-    //    for (int i = 0; i < plantPools.Length; i++)
-    //    {
-    //        PlantPool candidate = plantPools[i];
-    //        if (candidate == null || candidate.plantType != pool.plantType)
-    //            continue;
-
-    //        if (candidate == pool)
-    //            return poolIndexWithinType < unlockedCountForType;
-
-    //        poolIndexWithinType++;
-    //    }
-
-    //    return false;
-    //}
 
     private bool HasUnlockedPoolForType(PlantType type)
     {
@@ -269,7 +223,12 @@ public bool TryResolvePoolByPlantId(string plantId, out PlantPool matchingPool)
             PlantPool pool = plantPools[i];
             if (pool != null && IsPoolUnlocked(pool))
             {
-                selectedType = pool.plantType;
+                selectedType = pool.plantType; 
+                if (firstHarvest)
+                {
+                    firstHarvest = false;   
+                    ObjectivesTutorial.OTInstance.FirstPlantHarvested();
+                }
                 return;
             }
         }

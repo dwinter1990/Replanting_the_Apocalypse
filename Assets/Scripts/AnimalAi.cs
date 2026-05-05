@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 public class AnimalAI : MonoBehaviour
@@ -20,6 +21,7 @@ public class AnimalAI : MonoBehaviour
         {
             animator = GetComponentInChildren<Animator>();
         }
+
         waitTime = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length; // Set wait time to the length of the current animation clip
         StartCoroutine("WaitAndMove");
     }
@@ -56,6 +58,8 @@ public class AnimalAI : MonoBehaviour
 
         yield return new WaitForSeconds(waitTime);
 
+        
+        waypoints = GetWayPoints();
         Transform target = waypoints[Random.Range(0, waypoints.Length)];
 
         if (agent.enabled && agent.isOnNavMesh)
@@ -68,4 +72,22 @@ public class AnimalAI : MonoBehaviour
 
         isWaitigAndChoosing = false;
     }
-}
+
+    private Transform[] GetWayPoints()
+    {
+            GameObject[] grassObjects = GameObject.FindGameObjectsWithTag("Grass");
+            List<Transform> targets = new List<Transform>(grassObjects.Length);
+
+            for (int i = 0; i < grassObjects.Length; i++)
+            {
+                if (grassObjects[i] != null)
+                {
+                    targets.Add(grassObjects[i].transform);
+                }
+            }
+
+            return targets.ToArray();
+    }
+} 
+
+
