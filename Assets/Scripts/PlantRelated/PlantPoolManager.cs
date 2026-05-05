@@ -84,7 +84,7 @@ public class PlantPoolManager : MonoBehaviour
         if (!HasUnlockedPoolForType(selectedType))
             SetFirstAvailableSelectedType();
 
-        int currentResearch = PlayerStats.Instance != null ? PlayerStats.Instance.researchPoints : 0;
+        int currentResearch = PlayerStats.PSInstance != null ? PlayerStats.PSInstance.researchPoints : 0;
         Debug.Log("Unlocked pools by type -> " + BuildUnlockSummary(currentResearch));
     }
 

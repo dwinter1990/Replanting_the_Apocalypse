@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using System.Collections;
+using CS.AudioToolkit;
 
 [RequireComponent(typeof(TweenQueue))]
 public class Growing : MonoBehaviour
@@ -18,6 +19,7 @@ public class Growing : MonoBehaviour
     private float stepDuration;
     private float scalePerStep;
     private float nextGrowthTimer;
+    private bool hasPlayedAudio = false;
 
     [Header("Animation settings")]
     private TweenQueue tweenQueue;
@@ -125,8 +127,10 @@ public class Growing : MonoBehaviour
         if (hasFullyGrown)
         {
             if (ObjectivesTutorial.OTInstance != null)
+            {
                 ObjectivesTutorial.OTInstance.TryTriggerFirstPlantFullyWatered();
-
+            }
+            
             return;
         }
 
@@ -279,5 +283,13 @@ public class Growing : MonoBehaviour
         nextGrowthTimer = 0f;
         gameObject.layer = startingLayer;
         hasFullyGrown = false;
+    }
+    private void Update()
+    {
+        if (hasFullyGrown && !hasPlayedAudio)
+        {
+            AudioController.Play("PlantFullyGrown");
+            hasPlayedAudio = true;
+        }
     }
 }

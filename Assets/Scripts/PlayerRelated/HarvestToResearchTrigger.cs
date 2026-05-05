@@ -16,7 +16,7 @@ public class HarvestToResearchTrigger : MonoBehaviour
             Debug.LogWarning("UnlockShop instance is missing; unlock menu was not shown.");
         }
 
-        if (PlayerStats.Instance == null)
+        if (PlayerStats.PSInstance == null)
         {
             Debug.LogWarning("PlayerStats instance is missing. Unable to award research points.");
             return;
@@ -37,7 +37,7 @@ public class HarvestToResearchTrigger : MonoBehaviour
             return;
         }
 
-        PlayerStats.Instance.AddResearchPoints(awardedResearchPoints);
+        PlayerStats.PSInstance.AddResearchPoints(awardedResearchPoints);
         Debug.Log("Converted harvested plants to research points: " + awardedResearchPoints);
     }
 }

@@ -894,6 +894,10 @@ MonoBehaviour:
     researchPointCost: 100
     button: {fileID: 449830942}
     label: {fileID: 449830941}
+  - itemType: 3
+    researchPointCost: 75
+    button: {fileID: 1955640496}
+    label: {fileID: 621207277}
   researchPointsLabel: {fileID: 249748206}
 --- !u!114 &155155196
 MonoBehaviour:
@@ -2637,6 +2641,126 @@ MonoBehaviour:
         RandomStartPosition: 0
         individualSettings:
         - RandomPitch
+    - Name: Error
+      Loop: 0
+      loopSequenceCount: 0
+      loopSequenceOverlap: 0
+      loopSequenceRandomDelay: 0
+      loopSequenceRandomPitch: 0
+      loopSequenceRandomVolume: 0
+      DestroyOnLoad: 1
+      Volume: 1
+      SubItemPickMode: 2
+      MinTimeBetweenPlayCalls: 0.1
+      MaxInstanceCount: 0
+      Delay: 0
+      PitchShift: 0
+      RandomVolume: 0
+      RandomPitch: 0
+      RandomDelay: 0
+      overrideAudioSourceSettings: 0
+      audioSource_MinDistance: 1
+      audioSource_MaxDistance: 500
+      spatialBlend: 0
+      subItems:
+      - SubItemType: 0
+        Probability: 1
+        DisableOtherSubitems: 0
+        ItemModeAudioID: 
+        Clip: {fileID: 8300000, guid: be54423723bfa7f42a3e64248090c448, type: 3}
+        Volume: 1
+        PitchShift: 0
+        Pan2D: 0
+        Delay: 0
+        RandomPitch: 0
+        RandomVolume: 0
+        RandomDelay: 0
+        ClipStopTime: 0
+        ClipStartTime: 0
+        FadeIn: 0
+        FadeOut: 0
+        RandomStartPosition: 0
+        individualSettings: []
+    - Name: Purchase
+      Loop: 0
+      loopSequenceCount: 0
+      loopSequenceOverlap: 0
+      loopSequenceRandomDelay: 0
+      loopSequenceRandomPitch: 0
+      loopSequenceRandomVolume: 0
+      DestroyOnLoad: 1
+      Volume: 1
+      SubItemPickMode: 2
+      MinTimeBetweenPlayCalls: 0.1
+      MaxInstanceCount: 0
+      Delay: 0
+      PitchShift: 0
+      RandomVolume: 0
+      RandomPitch: 0
+      RandomDelay: 0
+      overrideAudioSourceSettings: 0
+      audioSource_MinDistance: 1
+      audioSource_MaxDistance: 500
+      spatialBlend: 0
+      subItems:
+      - SubItemType: 0
+        Probability: 1
+        DisableOtherSubitems: 0
+        ItemModeAudioID: 
+        Clip: {fileID: 8300000, guid: 6b39463dc912a824386ab09eea7cd0e1, type: 3}
+        Volume: 1
+        PitchShift: 0
+        Pan2D: 0
+        Delay: 0
+        RandomPitch: 0
+        RandomVolume: 0
+        RandomDelay: 0
+        ClipStopTime: 0
+        ClipStartTime: 0.25
+        FadeIn: 0
+        FadeOut: 0
+        RandomStartPosition: 0
+        individualSettings: []
+    - Name: PlantFullyGrown
+      Loop: 0
+      loopSequenceCount: 0
+      loopSequenceOverlap: 0
+      loopSequenceRandomDelay: 0
+      loopSequenceRandomPitch: 0
+      loopSequenceRandomVolume: 0
+      DestroyOnLoad: 1
+      Volume: 1
+      SubItemPickMode: 2
+      MinTimeBetweenPlayCalls: 0.25
+      MaxInstanceCount: 0
+      Delay: 0
+      PitchShift: 0
+      RandomVolume: 0
+      RandomPitch: 0
+      RandomDelay: 0
+      overrideAudioSourceSettings: 0
+      audioSource_MinDistance: 1
+      audioSource_MaxDistance: 500
+      spatialBlend: 0
+      subItems:
+      - SubItemType: 0
+        Probability: 1
+        DisableOtherSubitems: 0
+        ItemModeAudioID: 
+        Clip: {fileID: 8300000, guid: 9171c7a879bd10f4092e0988be34c3ed, type: 3}
+        Volume: 1
+        PitchShift: 0
+        Pan2D: 0
+        Delay: 0
+        RandomPitch: 0
+        RandomVolume: 0
+        RandomDelay: 0
+        ClipStopTime: 2.15
+        ClipStartTime: 0.25
+        FadeIn: 0.15
+        FadeOut: 0.15
+        RandomStartPosition: 0
+        individualSettings: []
     _volume: 1
     audioMixerGroup: {fileID: 24300002, guid: ecaaa0cefb274f34a8e4458f7803ad90, type: 2}
   - Name: Music
@@ -2683,7 +2807,7 @@ MonoBehaviour:
         FadeOut: 3
         RandomStartPosition: 0
         individualSettings: []
-    _volume: 1
+    _volume: 0.66
     audioMixerGroup: {fileID: 24300002, guid: ecaaa0cefb274f34a8e4458f7803ad90, type: 2}
   playlists:
   - name: Default
@@ -3002,6 +3126,17 @@ MonoBehaviour:
   prefab: {fileID: 4963340563632248994, guid: 2357cda77139e1b45a88d5374aa5ce3e, type: 3}
   preloadAmount: 10
   firstPlacementLocation: {fileID: 977199146}
+--- !u!114 &621207277 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5517215724370675159, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
+  m_PrefabInstance: {fileID: 1613502568}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &641343616
 GameObject:
   m_ObjectHideFlags: 0
@@ -11210,7 +11345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4913834010104590972, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5517215724370675159, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
       propertyPath: m_text
@@ -12356,7 +12491,6 @@ MonoBehaviour:
   mapCentre: {x: 0, y: 0, z: 0}
   mapExtents: {x: 50, y: 50}
   navMeshSampleDistance: 5
-  grassTag: Grass
 --- !u!4 &1843254543
 Transform:
   m_ObjectHideFlags: 0
@@ -12491,6 +12625,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1955640496 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8343501918300868866, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
+  m_PrefabInstance: {fileID: 1613502568}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1961090444
 PrefabInstance:
   m_ObjectHideFlags: 0

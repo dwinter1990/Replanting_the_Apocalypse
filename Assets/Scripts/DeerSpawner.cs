@@ -19,9 +19,6 @@ public class DeerSpawnLogic : MonoBehaviour
     [SerializeField] private Vector3 mapCentre = Vector3.zero;
     [SerializeField] private Vector2 mapExtents = new Vector2(50f, 50f);
     [SerializeField] private float navMeshSampleDistance = 5f;
-
-    [Header("Tags")]
-    [SerializeField]private string grassTag = "Grass"; 
     
 
     private int fullyGrownGrassCount;

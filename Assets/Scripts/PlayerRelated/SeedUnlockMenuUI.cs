@@ -81,7 +81,7 @@ public class SeedUnlockMenuUI : MonoBehaviour
 
     public void ShowMenu()
     {
-        if (PlantPoolManager.PlantPoolManagerInstance == null || PlayerStats.Instance == null)
+        if (PlantPoolManager.PlantPoolManagerInstance == null || PlayerStats.PSInstance == null)
         {
             Debug.LogWarning("Cannot open seed unlock menu. PlantPoolManager or PlayerStats is missing.");
             return;
@@ -182,7 +182,7 @@ public class SeedUnlockMenuUI : MonoBehaviour
         }
 
         PlantPoolManager manager = PlantPoolManager.PlantPoolManagerInstance;
-        PlayerStats stats = PlayerStats.Instance;
+        PlayerStats stats = PlayerStats.PSInstance;
 
         if (manager == null || stats == null)
             return;
@@ -225,7 +225,7 @@ public class SeedUnlockMenuUI : MonoBehaviour
 
     private void RefreshResearchPointsLabel()
     {
-        int currentResearchPoints = PlayerStats.Instance != null ? PlayerStats.Instance.researchPoints : 0;
+        int currentResearchPoints = PlayerStats.PSInstance != null ? PlayerStats.PSInstance.researchPoints : 0;
         RefreshResearchPointsLabel(currentResearchPoints);
     }
 
@@ -241,7 +241,7 @@ public class SeedUnlockMenuUI : MonoBehaviour
     {
         Debug.Log("Unlocking plant type: " + type);
         PlantPoolManager manager = PlantPoolManager.PlantPoolManagerInstance;
-        PlayerStats stats = PlayerStats.Instance;
+        PlayerStats stats = PlayerStats.PSInstance;
 
         if (!manager.TryUnlockNextPool(type))
             return;
@@ -255,7 +255,7 @@ public class SeedUnlockMenuUI : MonoBehaviour
     private void OnUnlockClicked(PlantType type)
     {
         PlantPoolManager manager = PlantPoolManager.PlantPoolManagerInstance;
-        PlayerStats stats = PlayerStats.Instance;
+        PlayerStats stats = PlayerStats.PSInstance;
 
         if (manager == null || stats == null)
             return;

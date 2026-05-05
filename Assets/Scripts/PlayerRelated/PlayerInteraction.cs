@@ -97,22 +97,25 @@ public class PlayerInteraction : MonoBehaviour
             return;
         }
 
-        if (context.started || context.performed)
+        if (activeHand == HandTypeLeft.Placer)
         {
-            if (!isHoldingEquipmentPlacement)
+            if (context.started || context.performed)
             {
-                isHoldingEquipmentPlacement = true;
-                callDownEquipment.BeginPlacementPreview();
+                if (!isHoldingEquipmentPlacement)
+                {
+                    isHoldingEquipmentPlacement = true;
+                    callDownEquipment.BeginPlacementPreview();
+                }
+                HandManager.HMInstance.canSwapLeft = false;
+                TryUpdateEquipmentPreview();
             }
-            HandManager.HMInstance.canSwapLeft = false;
-            TryUpdateEquipmentPreview();
-        }
 
-        if (context.canceled)
-        {
-            HandManager.HMInstance.canSwapLeft = true;
-            isHoldingEquipmentPlacement = false;
-            callDownEquipment.ConfirmPlacement();
+            if (context.canceled)
+            {
+                HandManager.HMInstance.canSwapLeft = true;
+                isHoldingEquipmentPlacement = false;
+                callDownEquipment.ConfirmPlacement();
+            }
         }
     }
 

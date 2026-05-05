@@ -1,3 +1,4 @@
+using CS.AudioToolkit;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,7 +11,8 @@ public class UnlockShop : MonoBehaviour
     {
         GrenadeUnlock,
         AutoSprinklerCharge,
-        WaterRefillStationCharge
+        WaterRefillStationCharge,
+        PlayerWaterCapacityUpgrade
     }
 
     [System.Serializable]
@@ -82,7 +84,7 @@ public class UnlockShop : MonoBehaviour
 
     public void ShowMenu()
     {
-        if (PlayerStats.Instance == null)
+        if (PlayerStats.PSInstance == null)
         {
             Debug.LogWarning("Cannot open shop. PlayerStats is missing.");
             return;
@@ -149,7 +151,7 @@ public class UnlockShop : MonoBehaviour
 
     private void RefreshResearchPointsLabel()
     {
-        int currentResearchPoints = PlayerStats.Instance != null ? PlayerStats.Instance.researchPoints : 0;
+        int currentResearchPoints = PlayerStats.PSInstance != null ? PlayerStats.PSInstance.researchPoints : 0;
         RefreshResearchPointsLabel(currentResearchPoints);
     }
 
@@ -164,7 +166,7 @@ public class UnlockShop : MonoBehaviour
         if (shopUnlockButtons == null || shopUnlockButtons.Length == 0)
             return;
 
-        PlayerStats stats = PlayerStats.Instance;
+        PlayerStats stats = PlayerStats.PSInstance;
         SeedManager seedManager = SeedManager.SMInstance;
         CallDownEquipment equipment = CallDownEquipment.CDEInstance;
 
@@ -178,15 +180,15 @@ public class UnlockShop : MonoBehaviour
                 continue;
 
             bool canAfford = stats.researchPoints >= entry.researchPointCost;
-            bool canBuy = CanBuyShopItem(entry.itemType, seedManager, equipment);
+            bool canBuy = CanBuyShopItem(entry.itemType, seedManager, equipment,stats);
             entry.button.interactable = canAfford && canBuy;
 
             if (entry.label != null)
-                entry.label.text = BuildShopLabel(entry, seedManager, equipment);
+                entry.label.text = BuildShopLabel(entry, seedManager, equipment, stats);
         }
     }
 
-    private bool CanBuyShopItem(ShopItemType itemType, SeedManager seedManager, CallDownEquipment equipment)
+    private bool CanBuyShopItem(ShopItemType itemType, SeedManager seedManager, CallDownEquipment equipment, PlayerStats stats)
     {
         switch (itemType)
         {
@@ -197,12 +199,14 @@ public class UnlockShop : MonoBehaviour
             case ShopItemType.WaterRefillStationCharge:
                 return equipment != null;
 
+            case ShopItemType.PlayerWaterCapacityUpgrade:
+                return stats != null;
             default:
                 return false;
         }
     }
 
-    private string BuildShopLabel(ShopUnlockButton entry, SeedManager seedManager, CallDownEquipment equipment)
+    private string BuildShopLabel(ShopUnlockButton entry, SeedManager seedManager, CallDownEquipment equipment, PlayerStats stats)
     {
         switch (entry.itemType)
         {
@@ -219,6 +223,9 @@ public class UnlockShop : MonoBehaviour
                 int refillCount = equipment != null ? equipment.RefillStationCharges : 0;
                 return "Buy Water Refill Charge (" + entry.researchPointCost + " RP)\nCharges: " + refillCount;
 
+            case ShopItemType.PlayerWaterCapacityUpgrade:
+                float currentCapacity = stats != null ? stats.maxWaterCapacity : 0;
+                return "Upgrade Water Capacity (" + entry.researchPointCost + " RP)\nCurrent Capacity: " + currentCapacity;
             default:
                 return "Unavailable";
         }
@@ -226,7 +233,7 @@ public class UnlockShop : MonoBehaviour
 
     private void OnShopItemClicked(ShopItemType itemType)
     {
-        PlayerStats stats = PlayerStats.Instance;
+        PlayerStats stats = PlayerStats.PSInstance;
         SeedManager seedManager = SeedManager.SMInstance;
         CallDownEquipment equipment = CallDownEquipment.CDEInstance;
 
@@ -237,24 +244,28 @@ public class UnlockShop : MonoBehaviour
         if (config == null)
             return;
 
-        if (!CanBuyShopItem(itemType, seedManager, equipment))
+        if (!CanBuyShopItem(itemType, seedManager, equipment, stats))
+        {
+            AudioController.Play("Error");
             return;
-
+        }
         if (!stats.TrySpendResearchPoints(config.researchPointCost))
             return;
 
-        bool purchaseApplied = ApplyShopItem(itemType, seedManager, equipment);
+        bool purchaseApplied = ApplyShopItem(itemType, seedManager, equipment, stats);
         if (!purchaseApplied)
         {
             stats.AddResearchPoints(config.researchPointCost);
+            
             return;
         }
 
+        AudioController.Play("Purchase");
         RefreshButtons();
         SelectDefaultButton();
     }
 
-    private bool ApplyShopItem(ShopItemType itemType, SeedManager seedManager, CallDownEquipment equipment)
+    private bool ApplyShopItem(ShopItemType itemType, SeedManager seedManager, CallDownEquipment equipment, PlayerStats stats)
     {
         switch (itemType)
         {
@@ -280,6 +291,13 @@ public class UnlockShop : MonoBehaviour
                 equipment.AddRefillStationCharge(1);
                 ObjectivesTutorial.OTInstance.TryPlacerTutorial();
                 return true;
+
+                case ShopItemType.PlayerWaterCapacityUpgrade:
+                    if (stats == null)
+                        return false;
+
+                    stats.IncreaseWaterCapacity(10); // Example value, adjust as needed
+                    return true;    
 
             default:
                 return false;

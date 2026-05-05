@@ -41,7 +41,7 @@ public class WaterHose : MonoBehaviour
             return;
         }
 
-        if (!PlayerStats.Instance.HasWater())
+        if (!PlayerStats.PSInstance.HasWater())
         {
             return;
         }
@@ -69,15 +69,15 @@ public class WaterHose : MonoBehaviour
 
         while (true)
         {
-            if (!PlayerStats.Instance.HasWater())
+            if (!PlayerStats.PSInstance.HasWater())
             {
                 StopSpray();
                 yield break;
             }
 
-            PlayerStats.Instance.UseWater();
+            PlayerStats.PSInstance.UseWater();
 
-            if (!PlayerStats.Instance.HasWater())
+            if (!PlayerStats.PSInstance.HasWater())
             {
                 StopSpray();
                 yield break;
