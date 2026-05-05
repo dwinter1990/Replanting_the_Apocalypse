@@ -11266,30 +11266,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4099709298039358858, guid: 716dae7d904f47a4fb9fef6fbee7683d, type: 3}
   m_PrefabInstance: {fileID: 1613502568}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1620255389 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4257092197195666824, guid: 7cfba6efd9709f34b93e3a33115da6d4, type: 3}
-  m_PrefabInstance: {fileID: 4239143363587373569}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1620255392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1620255389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afc3135f9b5f7b5478b3a0645904bd2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxPoolSize: 10
-  preloadCount: 3
-  doNotDestroyOnLoad: 0
-  sendAwakeStartOnDestroyMessage: 1
-  sendAwakeToInactive: 0
-  sendPoolableActivateDeactivateMessages: 0
-  useReflectionInsteadOfMessages: 0
 --- !u!1 &1677242991 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b78ab4b5b004b324ba891fbc2088ece0, type: 3}
@@ -18364,10 +18340,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4257092197195666824, guid: 7cfba6efd9709f34b93e3a33115da6d4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1620255392}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cfba6efd9709f34b93e3a33115da6d4, type: 3}
 --- !u!20 &4501362929396128547
 Camera:

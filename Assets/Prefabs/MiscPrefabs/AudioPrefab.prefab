@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4904744653017057719}
   - component: {fileID: 2291348713163506919}
   - component: {fileID: 8488985834500004124}
+  - component: {fileID: 671104119259953494}
   m_Layer: 0
   m_Name: AudioPrefab
   m_TagString: Untagged
@@ -42,7 +43,7 @@ AudioSource:
   m_GameObject: {fileID: 4257092197195666824}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: ecaaa0cefb274f34a8e4458f7803ad90, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -142,3 +143,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8cd7e379c2ccc242af04f0746d2d65b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &671104119259953494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4257092197195666824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc3135f9b5f7b5478b3a0645904bd2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPoolSize: 10
+  preloadCount: 3
+  doNotDestroyOnLoad: 1
+  sendAwakeStartOnDestroyMessage: 1
+  sendAwakeToInactive: 0
+  sendPoolableActivateDeactivateMessages: 1
+  useReflectionInsteadOfMessages: 0

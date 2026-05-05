@@ -62,6 +62,7 @@ public class CallDownEquipment : MonoBehaviour
         if (!Physics.Raycast(placementRay, out RaycastHit hit, maxPlacementDistance))
         {
             hasValidPlacement = false;
+            HandManager.HMInstance.canSwapLeft = true;
             SetPreviewVisible(false);
             return;
         }
