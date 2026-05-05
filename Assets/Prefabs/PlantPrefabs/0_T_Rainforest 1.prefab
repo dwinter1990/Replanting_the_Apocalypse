@@ -63,27 +63,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ada80269432ebd54c8941f95e8df3939, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ada80269432ebd54c8941f95e8df3939, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ada80269432ebd54c8941f95e8df3939, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ada80269432ebd54c8941f95e8df3939, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.962158
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ada80269432ebd54c8941f95e8df3939, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.381775
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ada80269432ebd54c8941f95e8df3939, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -83.61621
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ada80269432ebd54c8941f95e8df3939, type: 3}
       propertyPath: m_LocalRotation.w
@@ -124,6 +124,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ada80269432ebd54c8941f95e8df3939, type: 3}
       propertyPath: m_Name
       value: 0_T_Rainforest 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ada80269432ebd54c8941f95e8df3939, type: 3}
+      propertyPath: m_TagString
+      value: Tree
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -207,6 +211,7 @@ MonoBehaviour:
   profile: {fileID: 11400000, guid: ea528e8da2a62dd44b8cba1141470e28, type: 2}
   startScale: {x: 0.01, y: 0.01, z: 0.01}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
+  objectivesTutorial: {fileID: 0}
 --- !u!65 &3073410801852068079
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -240,3 +245,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 0}

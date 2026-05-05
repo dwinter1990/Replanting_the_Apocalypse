@@ -63,15 +63,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: fda236f201bb64f46b3deb60af0be7d9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.962158
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fda236f201bb64f46b3deb60af0be7d9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.381775
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fda236f201bb64f46b3deb60af0be7d9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -83.61621
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fda236f201bb64f46b3deb60af0be7d9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -108,6 +108,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fda236f201bb64f46b3deb60af0be7d9, type: 3}
       propertyPath: m_Name
       value: 0_B_Yellow flower bush
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fda236f201bb64f46b3deb60af0be7d9, type: 3}
+      propertyPath: m_TagString
+      value: Bush
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -186,6 +190,7 @@ MonoBehaviour:
   profile: {fileID: 11400000, guid: 9a01c5d76ec6fa44abab5697779866a9, type: 2}
   startScale: {x: 0.05, y: 0.05, z: 0.05}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
+  objectivesTutorial: {fileID: 0}
 --- !u!65 &-2509002610137111948
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -219,6 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 0}
 --- !u!4 &4207006670396815788 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fda236f201bb64f46b3deb60af0be7d9, type: 3}

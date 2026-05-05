@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -3330751066225256924}
   m_Layer: 0
   m_Name: 0_T_Rainforest 2
-  m_TagString: Untagged
+  m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,6 +141,7 @@ MonoBehaviour:
   profile: {fileID: 11400000, guid: ea528e8da2a62dd44b8cba1141470e28, type: 2}
   startScale: {x: 0.01, y: 0.01, z: 0.01}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
+  objectivesTutorial: {fileID: 0}
 --- !u!65 &-8813792078419536985
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -174,6 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 0}
 --- !u!1 &6144197887598132580
 GameObject:
   m_ObjectHideFlags: 0

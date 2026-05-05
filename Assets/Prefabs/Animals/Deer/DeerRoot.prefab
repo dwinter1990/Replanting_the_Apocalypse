@@ -206,6 +206,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.000013502342
       objectReference: {fileID: 0}
+    - target: {fileID: -5573474914858922634, guid: f0be686943d91fb4196887bea2231edf, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8105276378c06d546ad9c39c5ebc3b8d, type: 2}
     - target: {fileID: -5234448375175369897, guid: f0be686943d91fb4196887bea2231edf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 1.6064545
@@ -218,6 +222,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.0000032174369
       objectReference: {fileID: 0}
+    - target: {fileID: -4701054957577202186, guid: f0be686943d91fb4196887bea2231edf, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8105276378c06d546ad9c39c5ebc3b8d, type: 2}
     - target: {fileID: -3261312473442988171, guid: f0be686943d91fb4196887bea2231edf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 80.96051
@@ -409,7 +417,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 2ad843e9a94e453478bf5ff635fceb87, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0

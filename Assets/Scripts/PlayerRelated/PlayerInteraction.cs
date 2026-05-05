@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+
 public class PlayerInteraction : MonoBehaviour
 {
     [Header("References")]
@@ -24,6 +25,8 @@ public class PlayerInteraction : MonoBehaviour
 
     public static PlayerInteraction PIInstance { get; set; }
 
+    private bool isHoldingEquipmentPlacement;
+
     private void Awake()
     {
         if (PIInstance != null && PIInstance != this)
@@ -35,11 +38,11 @@ public class PlayerInteraction : MonoBehaviour
             PIInstance = this;
         }
     }
+
     public void OnAttack(InputAction.CallbackContext context)
     {
         HandTypeRight activeHand = handManager.GetActiveHandRightType();
 
-        // Start action when button is pressed
         if (context.performed)
         {
             if (activeHand == HandTypeRight.Water)
@@ -49,13 +52,11 @@ public class PlayerInteraction : MonoBehaviour
             }
             else if (activeHand == HandTypeRight.Harvest)
             {
-                //harvestTry = true;
                 StartCoroutine("TryHarvest");
                 waterHose.StopSpray();
             }
         }
 
-        // Stop action when button is released
         if (context.canceled)
         {
             if (activeHand == HandTypeRight.Water)
@@ -63,9 +64,8 @@ public class PlayerInteraction : MonoBehaviour
                 waterHose.StopSpray();
             }
 
-            if(activeHand == HandTypeRight.Harvest)
+            if (activeHand == HandTypeRight.Harvest)
             {
-                //harvestTry = false;
                 StopCoroutine("TryHarvest");
                 chainSawAnimator.SetBool("Harvest", false);
             }
@@ -74,31 +74,56 @@ public class PlayerInteraction : MonoBehaviour
 
     public void OnShootSeedInput(InputAction.CallbackContext context)
     {
-        if(!CanShootSeed)
-        {
-            return;
-        }
         HandTypeLeft activeHand = handManager.GetActiveHandLeftType();
+
         if (activeHand == HandTypeLeft.SeedLauncher)
         {
+            if (!CanShootSeed)
+            {
+                return;
+            }
+
             if (context.performed && shootTime <= 0f)
             {
                 SeedManager.SMInstance.ShootSeed();
                 shootTime = timeBetweenShots;
             }
+
+            return;
         }
-        if(activeHand == HandTypeLeft.Placer)
+
+        if (activeHand != HandTypeLeft.Placer || callDownEquipment == null)
         {
-            if (context.performed)
+            return;
+        }
+
+        if (context.started || context.performed)
+        {
+            if (!isHoldingEquipmentPlacement)
             {
-                CallDownEquipment.CDEInstance.ChoosePlaceForEquipment();
-                Debug.Log("Hand should be placing equipment");
+                isHoldingEquipmentPlacement = true;
+                callDownEquipment.BeginPlacementPreview();
             }
+
+            TryUpdateEquipmentPreview();
+        }
+
+        if (context.canceled)
+        {
+            isHoldingEquipmentPlacement = false;
+            callDownEquipment.ConfirmPlacement();
         }
     }
+
     private void Update()
     {
         shootTime -= Time.deltaTime;
+
+        if (isHoldingEquipmentPlacement)
+        {
+            TryUpdateEquipmentPreview();
+        }
+
         Ray ray = GetInteractionRay();
         Growing growing = null;
 
@@ -106,6 +131,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             growing = hit.collider.GetComponent<Growing>();
             if (growing != null)
+            {
                 if (growing.HasFullyGrown)
                 {
                     harvestThisPlant.enabled = true;
@@ -116,8 +142,9 @@ public class PlayerInteraction : MonoBehaviour
                     harvestThisPlant.enabled = false;
                     waterThisPlant.enabled = true;
                 }
-
+            }
         }
+
         if (growing == null)
         {
             harvestThisPlant.enabled = false;
@@ -125,23 +152,36 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
+    private void TryUpdateEquipmentPreview()
+    {
+        if (playerCam == null)
+        {
+            return;
+        }
+
+        Ray placementRay = GetInteractionRay();
+        callDownEquipment.UpdatePlacementPreview(placementRay, playerCam.transform.up);
+    }
 
     private Ray GetInteractionRay()
     {
         bool useCenterScreenRay = Cursor.lockState == CursorLockMode.Locked || !Cursor.visible;
         if (useCenterScreenRay)
+        {
             return playerCam.ViewportPointToRay(new Vector3(0.5f, 0.4f, 0f));
+        }
 
         return playerCam.ScreenPointToRay(Mouse.current.position.ReadValue());
     }
+
     IEnumerator TryHarvest()
     {
         while (true)
         {
             chainSawAnimator.SetBool("Harvest", true);
             yield return new WaitForSeconds(0.25f);
-            
-            if(playerCam == null || Mouse.current == null)
+
+            if (playerCam == null || Mouse.current == null)
             {
                 continue;
             }

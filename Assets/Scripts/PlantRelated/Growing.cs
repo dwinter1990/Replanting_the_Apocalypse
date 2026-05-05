@@ -130,7 +130,10 @@ public class Growing : MonoBehaviour
             return;
         }
 
-
+        if (originPool != null && originPool.plantType == PlantType.Grass)
+        {
+            DeerSpawnLogic.DSLInstance.NotifyGrassGrown();
+        }
         GrowOneStep();
     }
     public bool UpdateGrowth(float time)
@@ -248,8 +251,13 @@ public class Growing : MonoBehaviour
             Debug.Log("Unlocked new pool for type: " + sourcePool.plantType + ": " + sourcePool.name);
         }
 
+        if(sourcePool.plantType == PlantType.Grass)
+        {
+            DeerSpawnLogic.DSLInstance.NotifyGrassUngrown();
+        }
         Debug.LogWarning("Harvesting: " + plantId);
         ResetPlant();
+
         //Spawn in seeds to collect from harvesting, when configured
         if (originPool != null)
         {
