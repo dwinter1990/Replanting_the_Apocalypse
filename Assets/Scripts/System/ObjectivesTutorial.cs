@@ -1,14 +1,17 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-
+using DG.Tweening;
+using UnityEngine.UI;
 public class ObjectivesTutorial : MonoBehaviour
 {
     public static ObjectivesTutorial OTInstance { get; set; }
 
-    [Header("Tutorial Settings")]
+    [Header("Tutorial Elements")]
     [SerializeField] private Canvas tutorialCanvas;
     [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private Image backgroundPanel;
+    [SerializeField] private Image edgePanel;
 
     [Header("First plant triggerboxes")]
     [SerializeField] private Collider[] firstPlantTrigger;
@@ -30,6 +33,16 @@ public class ObjectivesTutorial : MonoBehaviour
     private Coroutine tutorialFlowRoutine;
     private Coroutine typewriterRoutine;
 
+    [Header("Tween Settings")]
+    [SerializeField] private float canvasMoveDistance = 300f;
+    [SerializeField] private float canvasMoveDuration = 1f;
+    [SerializeField] private float tutorialDelay = 0.5f; // Delay before starting the tutorial sequence.
+    [SerializeField] private float backgroundPanelWidth = 500f; // Desired width of the background panel.
+    [SerializeField] private float backgroundPanelXpos = 0f; // Desired X position of the background panel.
+
+    [SerializeField] private float edgePanelXpos = 220f; // Desired X position of the edge panel.
+    private Sequence canvasUpSequence;
+
     private void Awake()
     {
         if (OTInstance != null && OTInstance != this)
@@ -40,9 +53,42 @@ public class ObjectivesTutorial : MonoBehaviour
         {
             OTInstance = this;
         }
+
+        text.text = string.Empty; // Ensure text starts empty.
+        CreateTweens();
+        
     }
 
+    private IEnumerator DelayedCanvasUp()
+    {
+        yield return new WaitForSeconds(tutorialDelay); // Small delay to ensure everything is initialized.
+        canvasUpSequence.Play()
+            .OnComplete(() => StartTutorial());
+    }
+    private void CreateTweens()
+    {
+        if(tutorialCanvas == null)
+        {
+            Debug.LogError("Tutorial Canvas is not assigned in the inspector.");
+            return;
+        }
 
+        Vector3 canvasStartPos = tutorialCanvas.transform.localPosition;
+        Vector3 canvasUpPosition = canvasStartPos + Vector3.up * canvasMoveDistance;
+
+        Vector3 backgroundStartPos = backgroundPanel.transform.localPosition;
+        Vector3 backgroundXpos = new Vector3(backgroundPanelXpos, backgroundStartPos.y, backgroundStartPos.z);
+
+        canvasUpSequence?.Kill();
+        canvasUpSequence = DOTween.Sequence()
+            .Append(tutorialCanvas.transform.DOLocalMoveY(canvasUpPosition.y, canvasMoveDuration).SetEase(Ease.OutCubic))
+            .Append(backgroundPanel.transform.DOLocalMoveX(backgroundXpos.x, canvasMoveDuration * 0.5f).SetEase(Ease.OutCubic))
+            .Join(backgroundPanel.rectTransform.DOSizeDelta(new Vector2(backgroundPanelWidth, backgroundPanel.rectTransform.sizeDelta.y), canvasMoveDuration * 0.5f).SetEase(Ease.OutCubic))
+            .Join(edgePanel.rectTransform.DOLocalMoveX(edgePanelXpos, canvasMoveDuration * 0.5f).SetEase(Ease.OutCubic))
+            .SetAutoKill(false)
+            .Pause();
+
+    }
     private void Start()
     {
         foreach (Collider trigger in firstPlantTrigger)
@@ -58,10 +104,8 @@ public class ObjectivesTutorial : MonoBehaviour
             }
         }
 
-        if (!tutorialStarted)
-        {
-            StartTutorial();
-        }
+        StartCoroutine(DelayedCanvasUp());
+
     }
 
     private void StartTutorial()
@@ -72,10 +116,13 @@ public class ObjectivesTutorial : MonoBehaviour
 
     private IEnumerator TutorialSequence()
     {
-        yield return ShowMessage("Welcome to the game! Let's go through the basics.", 3f);
-        yield return ShowMessage("Use WASD to move around.", 3f);
+        yield return ShowMessage("Welcome back to Earth! I'm B.E.R.R.I., your local drop pod AI. Nice to meet you.", 5f);
+        yield return ShowMessage("The planet is in ruins, but with your help, we can bring it back to life!", 5f);
+        yield return ShowMessage("Use WASD to move your long distance drone about your designated area.", 4f);
         yield return ShowMessage("You can use the mouse to look around.", 3f);
-        yield return ShowMessage("Now go find a plant!", 0f);
+        yield return ShowMessage("Now go find a plant!", 3f);
+
+        StopTutorialCoroutines();
     }
 
     private IEnumerator ShowMessage(string message, float holdTime)
@@ -101,6 +148,7 @@ public class ObjectivesTutorial : MonoBehaviour
         foreach (char c in fullMessage)
         {
             text.text += c;
+            
             yield return new WaitForSeconds(characterDelay);
         }
 
@@ -109,6 +157,7 @@ public class ObjectivesTutorial : MonoBehaviour
 
     private void StopTutorialCoroutines()
     {
+
         if (tutorialFlowRoutine != null)
         {
             StopCoroutine(tutorialFlowRoutine);
@@ -120,7 +169,11 @@ public class ObjectivesTutorial : MonoBehaviour
             StopCoroutine(typewriterRoutine);
             typewriterRoutine = null;
         }
+
+        canvasUpSequence.SmoothRewind();
+        text.text = string.Empty;
     }
+
 
     public void FirstPlantFound()
     {
@@ -137,7 +190,9 @@ public class ObjectivesTutorial : MonoBehaviour
         // Player jumped ahead => stop current tutorial flow/text immediately.
         StopTutorialCoroutines();
 
-        tutorialFlowRoutine = StartCoroutine(FirstPlantFoundCoroutine());
+        canvasUpSequence.Restart();
+        canvasUpSequence.OnComplete(() => 
+            tutorialFlowRoutine = StartCoroutine(FirstPlantFoundCoroutine()));
     }
 
 
@@ -169,7 +224,9 @@ public class ObjectivesTutorial : MonoBehaviour
         // Player jumped ahead => stop any current step.
         StopTutorialCoroutines();
 
-        tutorialFlowRoutine = StartCoroutine(FirstPlantFullyWateredCoroutine());
+        canvasUpSequence.Restart();
+        canvasUpSequence.OnComplete(() =>
+        tutorialFlowRoutine = StartCoroutine(FirstPlantFullyWateredCoroutine()));
     }
     public void TryTriggerFirstPlantHarvested()
     {
@@ -182,7 +239,10 @@ public class ObjectivesTutorial : MonoBehaviour
         // Player completed the tutorial => stop all coroutines and clear text.
         StopTutorialCoroutines();
         text.text = string.Empty;
-        tutorialFlowRoutine = StartCoroutine(FirstPlantHavestedCororoutine());
+
+        canvasUpSequence.Restart();
+        canvasUpSequence.OnComplete(() =>
+        tutorialFlowRoutine = StartCoroutine(FirstPlantHavestedCororoutine()));
     }
 
     private IEnumerator FirstPlantHavestedCororoutine()
@@ -204,7 +264,9 @@ public class ObjectivesTutorial : MonoBehaviour
             Debug.LogError("HandManager.HMInstance is null. Cannot enable right-hand swapping.");
         }
 
-        yield return ShowMessage("To harvest a plant, switch to the chainsaw by pressing 2.", 0f);
+        yield return ShowMessage("To harvest a plant, switch to the chainsaw by pressing 2.", 3f);
+
+        StopTutorialCoroutines();
     }
 
     public void TryShootSeedObjective()
@@ -218,12 +280,16 @@ public class ObjectivesTutorial : MonoBehaviour
     {
         // Player jumped ahead => stop current tutorial flow/text immediately.
         StopTutorialCoroutines();
-        tutorialFlowRoutine = StartCoroutine(FirstSeedShotCoroutine());
+
+        canvasUpSequence.Restart();
+        canvasUpSequence.OnComplete(() =>
+        tutorialFlowRoutine = StartCoroutine(FirstSeedShotCoroutine()));
     }
     private IEnumerator FirstSeedShotCoroutine()
     {
         yield return ShowMessage("Great job shooting your first seed! Now you can water the seedling.", 5f);
         yield return ShowMessage("When it's fully grown, you can harvest it and each harvest will gain you Research Points", 5f);
+        StopTutorialCoroutines();
     }
 
     public void TryResearchPointsTriggered()
@@ -237,26 +303,34 @@ public class ObjectivesTutorial : MonoBehaviour
     {
         // Player jumped ahead => stop current tutorial flow/text immediately.
         StopTutorialCoroutines();
-        tutorialFlowRoutine = StartCoroutine(ResearchPointsCoroutine());
+
+        canvasUpSequence.Restart();
+        canvasUpSequence.OnComplete(() =>
+        tutorialFlowRoutine = StartCoroutine(ResearchPointsCoroutine()));
     }
 
     private IEnumerator ResearchPointsCoroutine()
     {
         yield return ShowMessage("Research Points are used to unlock new tools and abilities. You can access the Research Menu by heading to the drop pod computer.", 5f);
-        yield return ShowMessage("Try it out now and see what you can unlock!", 0f);
+        yield return ShowMessage("Try it out now and see what you can unlock!", 4f);
+        StopTutorialCoroutines();
     }
     public void GrenadeTutorial()
     {
         // Player jumped ahead => stop current tutorial flow/text immediately.
         StopTutorialCoroutines();
-        tutorialFlowRoutine = StartCoroutine(GrenadeTutorialCoroutine());
+
+        canvasUpSequence.Restart();
+        canvasUpSequence.OnComplete(() =>
+        tutorialFlowRoutine = StartCoroutine(GrenadeTutorialCoroutine()));
     }
 
     private IEnumerator GrenadeTutorialCoroutine()
     {
         yield return ShowMessage("You've unlocked the Seed Grenade! This powerful tool allows you to plant a seed that will explode after a short delay planting new seedlings in an area.", 5f);
         yield return ShowMessage("To switch to the Seed Grenade, press the Q key while the Seed Launcher is equipped.", 4f);
-        yield return ShowMessage("Then, if you want to launch a single seed, press Q again. You can swap back and forth as much as you like.", 0f);
+        yield return ShowMessage("Then, if you want to launch a single seed, press Q again. You can swap back and forth as much as you like.", 4f);
+        StopTutorialCoroutines();
     }
 
     public void TryPlacerTutorial()
@@ -272,7 +346,9 @@ public class ObjectivesTutorial : MonoBehaviour
     {
         // Player jumped ahead => stop current tutorial flow/text immediately.
         StopTutorialCoroutines();
-        tutorialFlowRoutine = StartCoroutine(PlacerTutorialCoroutine());
+        canvasUpSequence.Restart();
+        canvasUpSequence.OnComplete(() =>
+        tutorialFlowRoutine = StartCoroutine(PlacerTutorialCoroutine()));
         HandManager.HMInstance.canSwapLeft = true;
     }
 
@@ -280,6 +356,8 @@ public class ObjectivesTutorial : MonoBehaviour
     {
         yield return ShowMessage("You've unlocked the Placer! This handy tool allows you to call down equipment from the ship in orbit", 5f);
         yield return ShowMessage("To equip the Placer, press the 1 key to swap back and forth with your Seed Launcher.", 4f);
-        yield return ShowMessage("Then, when you've found a suitable spot, use the Right Mouse Click and we'll send the payload hurtling toward your location!", 0f);
+        yield return ShowMessage("Then, when you've found a suitable spot, use the Right Mouse Click and we'll send the payload hurtling toward your location!", 5f);
+
+        StopTutorialCoroutines();
     }
 }
