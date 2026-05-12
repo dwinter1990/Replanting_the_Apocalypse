@@ -265,8 +265,8 @@ public class ObjectivesTutorial : MonoBehaviour
             Debug.LogError("HandManager.HMInstance is null. Cannot enable right-hand swapping.");
         }
 
-        yield return ShowMessage("To harvest a plant, switch to the chainsaw by pressing 2.", 3f);
-
+        yield return ShowMessage("To harvest a plant, switch to the chainsaw by pressing 2.", 4f);
+        yield return ShowMessage("Hold down the left mouse button while aiming at the base of the plant to harvest it.", 5f);
         StopTutorialCoroutines();
     }
 
@@ -289,7 +289,8 @@ public class ObjectivesTutorial : MonoBehaviour
     private IEnumerator FirstSeedShotCoroutine()
     {
         yield return ShowMessage("Great job shooting your first seed! Now you can water the seedling.", 5f);
-        yield return ShowMessage("When it's fully grown, you can harvest it and each harvest will grant you Research Points", 5f);
+        yield return ShowMessage("To switch back to the water gun, press 2.", 5f);
+        yield return ShowMessage("When it's fully grown you can harvest it and each harvest will grant you Research Points.", 5f);
         StopTutorialCoroutines();
     }
 
@@ -312,7 +313,8 @@ public class ObjectivesTutorial : MonoBehaviour
 
     private IEnumerator ResearchPointsCoroutine()
     {
-        yield return ShowMessage("Research Points are used to unlock new tools and abilities. You can access the Research Menu by heading to the drop pod computer.", 5f);
+        yield return ShowMessage("Research Points are used to unlock new tools and abilities.", 5f);
+        yield return ShowMessage("You can access the Research Menu by heading to the drop pod computer.", 5f);
         yield return ShowMessage("Try it out now and see what you can unlock!", 4f);
         StopTutorialCoroutines();
     }
