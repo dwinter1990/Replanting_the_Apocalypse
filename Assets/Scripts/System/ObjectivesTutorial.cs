@@ -208,7 +208,8 @@ public class ObjectivesTutorial : MonoBehaviour
         }
 
         yield return ShowMessage("Great job finding the first plant! Now let's learn how to interact with it.", 5f);
-        yield return ShowMessage("With the water gun equipped, water plants by holding down the left mouse button.", 0f);
+        yield return ShowMessage("With the water gun equipped, water plants by holding down the left mouse button.", 5f);
+        yield return ShowMessage("Hint: You'll have to aim at the base. Watering the leaves won't help.", 3f);
     }
     public void TryTriggerFirstPlantFullyWatered()
     {
@@ -247,9 +248,9 @@ public class ObjectivesTutorial : MonoBehaviour
 
     private IEnumerator FirstPlantHavestedCororoutine()
     {
-        yield return ShowMessage("Congratulations on harvesting your first plant. You're now ready to start replanting the apocalypse!", 5f);
+        yield return ShowMessage("Congratulations on harvesting your first plant. You can start replanting the apocalypse!", 5f);
         PlayerInteraction.PIInstance.canShootSeed = true;
-        yield return ShowMessage("With the Seed Launcher equipped in your left hand, press the Right Mouse Button to launch a seed", 0f);
+        yield return ShowMessage("Press the Right Mouse Button to launch a seed from the Seed Launcher.", 0f);
     }
     private IEnumerator FirstPlantFullyWateredCoroutine()
     {
@@ -288,7 +289,7 @@ public class ObjectivesTutorial : MonoBehaviour
     private IEnumerator FirstSeedShotCoroutine()
     {
         yield return ShowMessage("Great job shooting your first seed! Now you can water the seedling.", 5f);
-        yield return ShowMessage("When it's fully grown, you can harvest it and each harvest will gain you Research Points", 5f);
+        yield return ShowMessage("When it's fully grown, you can harvest it and each harvest will grant you Research Points", 5f);
         StopTutorialCoroutines();
     }
 
