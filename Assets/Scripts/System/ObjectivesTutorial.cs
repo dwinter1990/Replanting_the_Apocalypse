@@ -59,7 +59,7 @@ public class ObjectivesTutorial : MonoBehaviour
         
     }
 
-    private IEnumerator DelayedCanvasUp()
+    public IEnumerator DelayedCanvasUp()
     {
         yield return new WaitForSeconds(tutorialDelay); // Small delay to ensure everything is initialized.
         canvasUpSequence.Play()
@@ -104,11 +104,11 @@ public class ObjectivesTutorial : MonoBehaviour
             }
         }
 
-        StartCoroutine(DelayedCanvasUp());
+        //StartCoroutine(DelayedCanvasUp());
 
     }
 
-    private void StartTutorial()
+    public void StartTutorial()
     {
         tutorialStarted = true;
         tutorialFlowRoutine = StartCoroutine(TutorialSequence());

@@ -13,6 +13,9 @@ public class PlayerStats : MonoBehaviour
 
     [Header("Research")]
     public int researchPoints;
+
+    private bool CanInteract = false;
+    public bool canInteract => CanInteract;
     private void Awake()
     {
         if(PSInstance != null && PSInstance != this)

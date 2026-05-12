@@ -12,7 +12,7 @@ public class ShowComic : MonoBehaviour
     private void Start()
     {
         fade = GetComponent<Fade>();
-        fade.FadeOut();
+        fade.FadeOut(1f);
 
         comic0.SetActive(false);
         comic1.SetActive(false);
@@ -31,7 +31,7 @@ public class ShowComic : MonoBehaviour
         yield return new WaitForSeconds(comicHoldTimer);
         comic3.SetActive(true);
         yield return new WaitForSeconds(3f);
-        fade.FadeIn();
+        fade.FadeIn(1f);
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("PlayerControllerScene");
     }
