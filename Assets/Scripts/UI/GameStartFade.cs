@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 using CS.AudioToolkit;
 using UnityEngine.Video;
+using Unity.VisualScripting;
+using UnityEngine.InputSystem;
 public class GameStartFade : MonoBehaviour
 {
     private Fade fade;
@@ -26,6 +28,19 @@ public class GameStartFade : MonoBehaviour
         fade.FadeIn(1f);
     }
 
+    public void OnSkip(InputAction.CallbackContext context)
+    {
+        if (context.performed && introVideoClip.isPlaying)
+        {
+            StopAllCoroutines();
+            fade.FadeIn(1f);
+            StartCoroutine(EndOfVideoSequence());
+        }
+        else
+        {
+            return;
+        }
+    }
     private IEnumerator HoldForStart()
     {
         //fade.FadeIn(30f);
@@ -40,16 +55,15 @@ public class GameStartFade : MonoBehaviour
     {
         fade.FadeIn(1f);
         yield return new WaitForSeconds(29f);
-
-        introVideo.enabled = false;
-        introVideoClip.Stop();
-        introVideoClip.enabled = false;
-        
         StartCoroutine(EndOfVideoSequence());
 
     }
     private IEnumerator EndOfVideoSequence()
     {
+        introVideo.enabled = false;
+        introVideoClip.Stop();
+        introVideoClip.enabled = false;
+
         yield return new WaitForSeconds(1f);
         uiCanvas.gameObject.SetActive(true);
         objectivesCanvas.SetActive(true);

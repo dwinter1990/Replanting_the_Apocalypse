@@ -1,106 +1,199 @@
-using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
-public class FirstPersonController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    public float moveSpeed = 5f;
-    public float groundDrag = 5f;
+    [SerializeField] private float walkSpeed = 5f;
+    [SerializeField] private float sprintSpeed = 8f;
+    [SerializeField] private float acceleration = 20f;
+    [SerializeField] private float groundDrag = 5f;
+
+    [Header("Jumping")]
+    [SerializeField] private float jumpImpulse = 5f;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Transform groundCheckPoint;
+    [SerializeField] private float groundCheckRadius = 0.2f;
+    private bool jumpHeld;  
+    private float jumpHoldTimer;
+    [SerializeField] private float maxJumpHoldTime = 2.5f;
 
     [Header("Camera")]
-    public CinemachineCamera cam; // Cinemachine camera or player head
-    private bool isSprinting = false;
-    private Rigidbody rb;
-    private Vector2 moveInput;
+    [SerializeField] private CinemachineCamera cam;
+    [SerializeField] private FirstPersonCameraFeedback cameraFeedback;
 
     [Header("Wifi Range Settings")]
     [SerializeField] private float range = 3f;
-    [SerializeField] Transform centrePoint;
+    [SerializeField] private Transform centrePoint;
+
+    private Rigidbody _rb;
+    private Vector2 _moveInput;
+    private bool _sprintHeld;
+    private bool _wasGrounded;
+
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.linearDamping = groundDrag;
-        rb.freezeRotation = true;
+        _rb = GetComponent<Rigidbody>();
+        _rb.linearDamping = groundDrag;
+        _rb.freezeRotation = true;
+
+        if (cam == null)
+        {
+            cam = FindAnyObjectByType<CinemachineCamera>();
+        }
 
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false; 
-        cam = FindAnyObjectByType<CinemachineCamera>();
+        Cursor.visible = false;
     }
 
-    // Input System callback
     public void OnMove(InputAction.CallbackContext context)
     {
-        moveInput = context.ReadValue<Vector2>();
+        _moveInput = context.ReadValue<Vector2>();
     }
 
     public void OnSprint(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            moveSpeed = 8f; // Increase speed by 50% when sprinting
-            isSprinting = true;
-
-
+            _sprintHeld = true;
         }
         else if (context.canceled)
         {
-            moveSpeed = 5f; // Reset to normal speed when not sprinting
-            isSprinting = false;
+            _sprintHeld = false;
+        }
+    }
 
+    public void OnJump(InputAction.CallbackContext context)
+    {
+
+        if (context.canceled)
+        {
+            jumpHeld = false;
+            jumpHoldTimer = 0f;
+            return;
+        }
+
+        if (!CheckGroundedNow())
+        {
+            return;
+        }
+
+        if (context.started)
+        {
+            cameraFeedback?.NotifyJump();
+
+            Vector3 velocity = _rb.linearVelocity;
+            velocity.y = 0f;
+            _rb.linearVelocity = velocity;
+            _rb.AddForce(Vector3.up * jumpImpulse * PlayerStats.PSInstance.jumpHeightMultiplier, ForceMode.Impulse);
+
+            jumpHeld = true;
+            jumpHoldTimer = maxJumpHoldTime;
+            return;
+        }
+        if (context.performed && jumpHoldTimer >0f)
+        {
+            jumpHeld = true;
         }
     }
 
     private void Update()
     {
-        if (isSprinting)
+        bool isGrounded = CheckGroundedNow();
+
+        if (isGrounded && !_wasGrounded)
         {
-            cam.Lens.FieldOfView = Mathf.Lerp(cam.Lens.FieldOfView, 90f, 1.5f * Time.deltaTime); // Optional: widen FOV for sprinting effect
+            cameraFeedback?.NotifyLand();
         }
-        else if (!isSprinting)
-        {
-            cam.Lens.FieldOfView = Mathf.Lerp(cam.Lens.FieldOfView, 60f, 1.5f * Time.deltaTime); // Reset FOV when not sprinting
-        }
+
+        _wasGrounded = isGrounded;
+
+        bool hasMoveInput = _moveInput.sqrMagnitude > 0.01f;
+        bool isSprinting = _sprintHeld && hasMoveInput && isGrounded;
+        cameraFeedback?.SetMovementState(hasMoveInput, isSprinting);
+        
+
     }
-    
+
     private void FixedUpdate()
     {
-        Vector3 offset = transform.position - centrePoint.position;
-        Vector3 directionFromCentre = offset.normalized;
+        bool isGrounded = CheckGroundedNow();
 
-        // Convert input to movement direction relative to camera
-        Vector3 inputDir = new Vector3(moveInput.x, 0f, moveInput.y);
+        Vector3 inputDir = new Vector3(_moveInput.x, 0f, _moveInput.y);
+        inputDir = Vector3.ClampMagnitude(inputDir, 1f);
 
-        if (inputDir.sqrMagnitude < 0.01f)
-        {
-            rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, Vector3.zero, 0.2f);
-            return;
-        }
-
-        Vector3 camForward = cam.transform.forward;
+        Vector3 camForward = cam != null ? cam.transform.forward : transform.forward;
         camForward.y = 0f;
         camForward.Normalize();
 
-        Vector3 camRight = cam.transform.right;
+        Vector3 camRight = cam != null ? cam.transform.right : transform.right;
         camRight.y = 0f;
         camRight.Normalize();
 
-        Vector3 moveDir = camForward * inputDir.z + camRight * inputDir.x;
-        moveDir.Normalize();
+        Vector3 moveDir = (camForward * inputDir.z + camRight * inputDir.x).normalized;
 
-        Vector3 targetVelocity = moveDir * moveSpeed;
-        Vector3 velocityChange = targetVelocity - rb.linearVelocity;
-        velocityChange.y = 0f; // don’t affect vertical velocity
-
-
-        if (offset.magnitude >= range && Vector3.Dot(moveDir, directionFromCentre) > 0)
+        if (centrePoint != null)
         {
-            moveDir = Vector3.ProjectOnPlane(moveDir, directionFromCentre);
+            Vector3 offset = transform.position - centrePoint.position;
+            Vector3 directionFromCentre = offset.normalized;
+
+            if (offset.magnitude >= range && Vector3.Dot(moveDir, directionFromCentre) > 0f)
+            {
+                moveDir = Vector3.ProjectOnPlane(moveDir, directionFromCentre).normalized;
+            }
         }
 
-        transform.position += moveDir * moveSpeed * Time.fixedDeltaTime;
 
+        float speed = _sprintHeld && isGrounded ? sprintSpeed : walkSpeed;
+        Vector3 targetHorizontalVelocity = moveDir * speed;
+
+        Vector3 current = _rb.linearVelocity;
+        Vector3 currentHorizontal = new Vector3(current.x, 0f, current.z);
+        Vector3 newHorizontal = Vector3.MoveTowards(currentHorizontal, targetHorizontalVelocity, acceleration * Time.fixedDeltaTime);
+
+        _rb.linearVelocity = new Vector3(newHorizontal.x, current.y, newHorizontal.z);
+
+        if (jumpHeld && jumpHoldTimer > 0f)
+        {
+            _rb.AddForce(Vector3.up * PlayerStats.PSInstance.jetpackThrust, ForceMode.Acceleration);
+            jumpHoldTimer -= Time.fixedDeltaTime;
+            Debug.Log("Boosting with jetpack! Remaining boost time: " + jumpHoldTimer.ToString("F2") + " seconds");
+        }
+        _rb.linearDamping = isGrounded && inputDir.sqrMagnitude < 0.01f ? groundDrag : 0f;
+
+        if (isGrounded && _rb.linearVelocity.y <= 0.01f)
+        {
+            jumpHeld = false;
+            jumpHoldTimer = 0f;
+        }
+
+    }
+
+    private bool CheckGroundedNow()
+    {
+        if (groundCheckPoint == null)
+        {
+            return false;
+        }
+
+        return Physics.CheckSphere(
+            groundCheckPoint.position,
+            groundCheckRadius,
+            groundLayer,
+            QueryTriggerInteraction.Ignore
+        );
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (groundCheckPoint == null)
+        {
+            return;
+        }
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckRadius);
     }
 }

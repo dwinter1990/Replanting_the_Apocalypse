@@ -1,9 +1,11 @@
 using UnityEngine;
 using System;
+using System.Collections;
 public class PlayerStats : MonoBehaviour
 {
     public static event Action<int> ResearchPointsChanged;
     public static PlayerStats PSInstance {get; private set;}
+
     [Header("Watering stats")]
     public float maxWaterCapacity = 100;
     public float currentWaterCapacity;
@@ -11,11 +13,26 @@ public class PlayerStats : MonoBehaviour
     public float waterDrainRate;
     public float waterRefillRate;
 
+    [Header("Movement stats")]
+    [SerializeField] public float moveSpeedMultiplier = 1f;
+    [SerializeField] public float jumpHeightMultiplier = 1f;
+
+    [Header("Jetpack stats")]
+    [SerializeField] public float jetpackFuel = 100f;
+    [SerializeField] public float jetpackFuelConsumptionRate = 10f;
+    [SerializeField] public float jetpackFuelRechargeRate = 5f;
+    [SerializeField] public float jetpackThrust = 10f;
+
+    [Header("Power stats")]
+    [SerializeField] public float power = 100f;
+
     [Header("Research")]
     public int researchPoints;
 
     private bool CanInteract = false;
     public bool canInteract => CanInteract;
+
+    
     private void Awake()
     {
         if(PSInstance != null && PSInstance != this)
@@ -30,6 +47,16 @@ public class PlayerStats : MonoBehaviour
         ResearchPointsChanged?.Invoke(researchPoints);
     }
 
+    public IEnumerator ConsumePower()
+    {
+        yield return new WaitForSeconds(0.25f);
+        UsePower(jetpackFuelConsumptionRate);
+    }
+    public void UsePower(float amount)
+    {
+        power -= amount;
+        power = Mathf.Clamp(power, 0, 100);
+    }
     public void IncreaseWaterCapacity(float amount)
     {
         maxWaterCapacity += amount;

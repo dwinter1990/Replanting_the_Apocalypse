@@ -55,9 +55,9 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "f1ba0d36-48eb-4cd5-b651-1c94a6531f70",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 },
                 {
@@ -118,6 +118,15 @@
                     "name": "ChangeDropEquipment",
                     "type": "Button",
                     "id": "783699e1-9015-4209-82b9-fb72a2934e3c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Skip",
+                    "type": "Button",
+                    "id": "251d8c49-edf4-44c8-bfa5-de22f9abd258",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -540,6 +549,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ChangeDropEquipment",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0ec4d5a9-2543-4756-b61c-bf10cc0ee827",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Skip",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
