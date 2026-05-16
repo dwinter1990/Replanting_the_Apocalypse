@@ -131,6 +131,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e295379bdca4864fb902ccaa7fcfc26, type: 3}
       insertIndex: -1
       addedObject: {fileID: -2737626740550430963}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e295379bdca4864fb902ccaa7fcfc26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1833943561706002477}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e295379bdca4864fb902ccaa7fcfc26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5005221419397024683}
   m_SourcePrefab: {fileID: 100100000, guid: 9e295379bdca4864fb902ccaa7fcfc26, type: 3}
 --- !u!1 &7112461853300032871 stripped
 GameObject:
@@ -186,6 +192,7 @@ MonoBehaviour:
   profile: {fileID: 11400000, guid: e812d98703eea294e97962b628ee9b8d, type: 2}
   startScale: {x: 0.01, y: 0.01, z: 0.01}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
+  objectivesTutorial: {fileID: 0}
 --- !u!65 &4862197220932912204
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -219,6 +226,88 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a43869660aa39441b18148168ab6ec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectivesTutorial: {fileID: 0}
+--- !u!114 &-1833943561706002477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7112461853300032871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f199dfbf0d6554296aa8137e588e14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emit: 0
+  raycastDistance: 0.0001
+  layers:
+    serializedVersion: 2
+    m_Bits: 64
+  onlyUseFirstContact: 1
+  delay: 0
+  orientation: 0
+  _camera: {fileID: 0}
+  preview: 0
+  threshold: 50
+  pressureMode: 1
+  pressureMin: 50
+  pressureMax: 100
+  pressureConstant: 1
+  pressureMultiplier: 1
+  offset: 0
+  priority: 0
+  root: {fileID: 0}
+  cooldown: 0
+--- !u!114 &5005221419397024683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7112461853300032871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b36498e7e45483f478ff74ab3f1cb21c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  targetModel: {fileID: 0}
+  group:
+    index: 0
+  targetTexture: {fileID: 0}
+  blendMode:
+    Index: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Texture: {fileID: 0}
+    Kernel: 1
+    Channels: {x: 1, y: 1, z: 1, w: 1}
+  texture: {fileID: 2800000, guid: 6aa8cd82cbdcba1408e176e36e620971, type: 3}
+  shape: {fileID: 0}
+  shapeChannel: 3
+  color: {r: 1, g: 1, b: 1, a: 1}
+  opacity: 1
+  angle: 0
+  scale: {x: 1, y: 1, z: 1}
+  radius: 15
+  hardness: 3
+  wrapping: 1
+  normalFront: 1
+  normalBack: 0
+  normalFade: 0.01
+  tileTexture: {fileID: 0}
+  tileTransform: {fileID: 0}
+  tileOpacity: 1
+  tileTransition: 4
+  findMask: 1
+  findDepthMask: 1
+  modifiers:
+    modifiers: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!4 &7637923496504811485 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9e295379bdca4864fb902ccaa7fcfc26, type: 3}
