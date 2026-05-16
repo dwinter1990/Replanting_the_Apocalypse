@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement PMInstance { get; private set; }
     [Header("Movement")]
     [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float sprintSpeed = 8f;
@@ -16,9 +17,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform groundCheckPoint;
     [SerializeField] private float groundCheckRadius = 0.2f;
+    public bool isGrounded;
+    private bool jumpStarted;
     private bool jumpHeld;  
-    private float jumpHoldTimer;
-    [SerializeField] private float maxJumpHoldTime = 2.5f;
 
     [Header("Camera")]
     [SerializeField] private CinemachineCamera cam;
@@ -31,10 +32,13 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _rb;
     private Vector2 _moveInput;
     private bool _sprintHeld;
+    public bool isSprint => _sprintHeld;
     private bool _wasGrounded;
 
     private void Awake()
     {
+        PMInstance = this;
+
         _rb = GetComponent<Rigidbody>();
         _rb.linearDamping = groundDrag;
         _rb.freezeRotation = true;
@@ -55,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnSprint(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && PlayerStats.PSInstance.currentPower > 0f)
         {
             _sprintHeld = true;
         }
@@ -67,41 +71,27 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (context.started && isGrounded)
+        {
+            jumpStarted = true;
+        }
+        
+
+        if (context.performed && PlayerStats.PSInstance.currentPower > 0f)
+        {
+            jumpHeld = true;
+        }
 
         if (context.canceled)
         {
             jumpHeld = false;
-            jumpHoldTimer = 0f;
             return;
-        }
-
-        if (!CheckGroundedNow())
-        {
-            return;
-        }
-
-        if (context.started)
-        {
-            cameraFeedback?.NotifyJump();
-
-            Vector3 velocity = _rb.linearVelocity;
-            velocity.y = 0f;
-            _rb.linearVelocity = velocity;
-            _rb.AddForce(Vector3.up * jumpImpulse * PlayerStats.PSInstance.jumpHeightMultiplier, ForceMode.Impulse);
-
-            jumpHeld = true;
-            jumpHoldTimer = maxJumpHoldTime;
-            return;
-        }
-        if (context.performed && jumpHoldTimer >0f)
-        {
-            jumpHeld = true;
         }
     }
 
     private void Update()
     {
-        bool isGrounded = CheckGroundedNow();
+        isGrounded = CheckGroundedNow();
 
         if (isGrounded && !_wasGrounded)
         {
@@ -113,13 +103,20 @@ public class PlayerMovement : MonoBehaviour
         bool hasMoveInput = _moveInput.sqrMagnitude > 0.01f;
         bool isSprinting = _sprintHeld && hasMoveInput && isGrounded;
         cameraFeedback?.SetMovementState(hasMoveInput, isSprinting);
-        
 
+        if(isGrounded && !isSprinting)
+        {
+            PlayerStats.PSInstance.StartCoroutine(PlayerStats.PSInstance.PowerRecharge());
+        } 
+        else
+        {
+            PlayerStats.PSInstance.StopCoroutine(PlayerStats.PSInstance.PowerRecharge());
+        }
     }
 
     private void FixedUpdate()
     {
-        bool isGrounded = CheckGroundedNow();
+        isGrounded = CheckGroundedNow();
 
         Vector3 inputDir = new Vector3(_moveInput.x, 0f, _moveInput.y);
         inputDir = Vector3.ClampMagnitude(inputDir, 1f);
@@ -145,8 +142,35 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        if (jumpStarted)
+        {
+            cameraFeedback?.NotifyJump();
+
+            Vector3 velocity = _rb.linearVelocity;
+            velocity.y = 0f;
+            _rb.linearVelocity = velocity;
+            _rb.AddForce(Vector3.up * jumpImpulse * PlayerStats.PSInstance.jumpHeightMultiplier, ForceMode.Impulse);
+            //jumpStarted = false;
+
+            Debug.Log("Jump initiated with impulse: " + (jumpImpulse * PlayerStats.PSInstance.jumpHeightMultiplier).ToString("F2"));
+
+        }
+
+        if (jumpHeld && !isGrounded && PlayerStats.PSInstance.currentPower > 0f)
+        {
+            
+            _rb.AddForce(Vector3.up * PlayerStats.PSInstance.jetpackThrust, ForceMode.Acceleration);
+            Debug.Log("Applying jetpack thrust: " + PlayerStats.PSInstance.jetpackThrust.ToString("F2"));
+            PlayerStats.PSInstance.UsePower(PlayerStats.PSInstance.jetpackFuelConsumptionRate * Time.deltaTime);
+        }
+
+        if(isSprint)
+        {
+            PlayerStats.PSInstance.UsePower(PlayerStats.PSInstance.sprintPowerCost * Time.deltaTime);
+        }
 
         float speed = _sprintHeld && isGrounded ? sprintSpeed : walkSpeed;
+
         Vector3 targetHorizontalVelocity = moveDir * speed;
 
         Vector3 current = _rb.linearVelocity;
@@ -155,18 +179,13 @@ public class PlayerMovement : MonoBehaviour
 
         _rb.linearVelocity = new Vector3(newHorizontal.x, current.y, newHorizontal.z);
 
-        if (jumpHeld && jumpHoldTimer > 0f)
-        {
-            _rb.AddForce(Vector3.up * PlayerStats.PSInstance.jetpackThrust, ForceMode.Acceleration);
-            jumpHoldTimer -= Time.fixedDeltaTime;
-            Debug.Log("Boosting with jetpack! Remaining boost time: " + jumpHoldTimer.ToString("F2") + " seconds");
-        }
         _rb.linearDamping = isGrounded && inputDir.sqrMagnitude < 0.01f ? groundDrag : 0f;
 
         if (isGrounded && _rb.linearVelocity.y <= 0.01f)
         {
+            PlayerStats.PSInstance.PowerRecharge();
+            jumpStarted = false;
             jumpHeld = false;
-            jumpHoldTimer = 0f;
         }
 
     }

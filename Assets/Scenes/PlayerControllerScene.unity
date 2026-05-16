@@ -564,6 +564,7 @@ GameObject:
   - component: {fileID: 106233895}
   - component: {fileID: 106233894}
   - component: {fileID: 106233898}
+  - component: {fileID: 106233899}
   m_Layer: 5
   m_Name: UiCanvas
   m_TagString: Untagged
@@ -670,6 +671,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waterFill: {fileID: 2067169042}
+  animationSpeed: 5
+--- !u!114 &106233899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106233893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 781b465c1a3cfa640978d5a54573bbbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerFill: {fileID: 1447230849}
   animationSpeed: 5
 --- !u!1 &109767192 stripped
 GameObject:
@@ -9809,7 +9824,7 @@ MonoBehaviour:
   m_Color: {r: 0.8006408, g: 0.9811321, b: 0.977365, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -9817,7 +9832,7 @@ MonoBehaviour:
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 1
+  m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -12701,7 +12716,7 @@ MonoBehaviour:
     m_Bits: 64
   groundCheckPoint: {fileID: 6523492977021229708}
   groundCheckRadius: 0.2
-  maxJumpHoldTime: 2.5
+  isGrounded: 0
   cam: {fileID: 3560095906675194323}
   cameraFeedback: {fileID: 9210831610593495812}
   range: 1000
@@ -22405,11 +22420,13 @@ MonoBehaviour:
   waterRefillRate: 20
   moveSpeedMultiplier: 1
   jumpHeightMultiplier: 1.5
+  sprintPowerCost: 5
   jetpackFuel: 100
-  jetpackFuelConsumptionRate: 10
-  jetpackFuelRechargeRate: 5
-  jetpackThrust: 32.2
-  power: 100
+  jetpackFuelConsumptionRate: 50
+  jetpackThrust: 15
+  maxPower: 100
+  currentPower: 100
+  powerRechargeRate: 5
   researchPoints: 100
 --- !u!1001 &5690277140719711076
 PrefabInstance:

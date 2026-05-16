@@ -16,15 +16,16 @@ public class PlayerStats : MonoBehaviour
     [Header("Movement stats")]
     [SerializeField] public float moveSpeedMultiplier = 1f;
     [SerializeField] public float jumpHeightMultiplier = 1f;
-
+    [SerializeField]public float sprintPowerCost = 5f;
     [Header("Jetpack stats")]
     [SerializeField] public float jetpackFuel = 100f;
     [SerializeField] public float jetpackFuelConsumptionRate = 10f;
-    [SerializeField] public float jetpackFuelRechargeRate = 5f;
     [SerializeField] public float jetpackThrust = 10f;
 
     [Header("Power stats")]
-    [SerializeField] public float power = 100f;
+    [SerializeField] public float maxPower = 100f;
+    [SerializeField] public float currentPower;
+    [SerializeField] public float powerRechargeRate = 20f;
 
     [Header("Research")]
     public int researchPoints;
@@ -45,17 +46,24 @@ public class PlayerStats : MonoBehaviour
 
         currentWaterCapacity = maxWaterCapacity;
         ResearchPointsChanged?.Invoke(researchPoints);
+        currentPower = maxPower;
+
+        StartCoroutine(PowerRecharge());
     }
 
-    public IEnumerator ConsumePower()
+    public IEnumerator PowerRecharge()
     {
-        yield return new WaitForSeconds(0.25f);
-        UsePower(jetpackFuelConsumptionRate);
+        while (currentPower < maxPower /*&& PlayerMovement.PMInstance.isGrounded && PlayerMovement.PMInstance.isSprint*/)
+        {
+            yield return new WaitForSeconds(0.25f);
+            currentPower += powerRechargeRate * 0.25f;
+            currentPower = Mathf.Clamp(currentPower, 0, maxPower);
+        }
     }
     public void UsePower(float amount)
     {
-        power -= amount;
-        power = Mathf.Clamp(power, 0, 100);
+        currentPower -= amount;
+        currentPower = Mathf.Clamp(currentPower, 0, maxPower);
     }
     public void IncreaseWaterCapacity(float amount)
     {
