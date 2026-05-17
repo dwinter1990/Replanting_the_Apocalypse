@@ -133,10 +133,13 @@ PrefabInstance:
       addedObject: {fileID: -2737626740550430963}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e295379bdca4864fb902ccaa7fcfc26, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -1833943561706002477}
+      addedObject: {fileID: 5005221419397024683}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e295379bdca4864fb902ccaa7fcfc26, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5005221419397024683}
+      addedObject: {fileID: 1177268752559208301}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e295379bdca4864fb902ccaa7fcfc26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2071551585301809284}
   m_SourcePrefab: {fileID: 100100000, guid: 9e295379bdca4864fb902ccaa7fcfc26, type: 3}
 --- !u!1 &7112461853300032871 stripped
 GameObject:
@@ -192,6 +195,11 @@ MonoBehaviour:
   profile: {fileID: 11400000, guid: e812d98703eea294e97962b628ee9b8d, type: 2}
   startScale: {x: 0.01, y: 0.01, z: 0.01}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
+  triggerGroundPaintAtHalfGrowth: 1
+  groundPaintTrigger: {fileID: 0}
+  onHalfGrown:
+    m_PersistentCalls:
+      m_Calls: []
   objectivesTutorial: {fileID: 0}
 --- !u!65 &4862197220932912204
 BoxCollider:
@@ -227,38 +235,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectivesTutorial: {fileID: 0}
---- !u!114 &-1833943561706002477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7112461853300032871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f199dfbf0d6554296aa8137e588e14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  emit: 0
-  raycastDistance: 0.0001
-  layers:
-    serializedVersion: 2
-    m_Bits: 64
-  onlyUseFirstContact: 1
-  delay: 0
-  orientation: 0
-  _camera: {fileID: 0}
-  preview: 0
-  threshold: 50
-  pressureMode: 1
-  pressureMin: 50
-  pressureMax: 100
-  pressureConstant: 1
-  pressureMultiplier: 1
-  offset: 0
-  priority: 0
-  root: {fileID: 0}
-  cooldown: 0
 --- !u!114 &5005221419397024683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,14 +261,14 @@ MonoBehaviour:
     Kernel: 1
     Channels: {x: 1, y: 1, z: 1, w: 1}
   texture: {fileID: 2800000, guid: 6aa8cd82cbdcba1408e176e36e620971, type: 3}
-  shape: {fileID: 0}
+  shape: {fileID: 2800000, guid: 8998ca0599319e44294743408be44573, type: 3}
   shapeChannel: 3
   color: {r: 1, g: 1, b: 1, a: 1}
   opacity: 1
   angle: 0
   scale: {x: 1, y: 1, z: 1}
   radius: 15
-  hardness: 3
+  hardness: 0.8
   wrapping: 1
   normalFront: 1
   normalBack: 0
@@ -308,6 +284,61 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &1177268752559208301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7112461853300032871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2b68893e0b06b047899a257aa72c1ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  paintOrigin: {fileID: 0}
+  paintOffset: {x: 0, y: 0, z: 0}
+  paintNormal: {x: 0, y: 1, z: 0}
+  preview: 0
+  priority: 0
+  pressure: 1
+  seed: 0
+  rootOverride: {fileID: 0}
+  cwHitCollisions: {fileID: 0}
+  fallbackTarget: {fileID: 0}
+  fallbackMethodName: PaintAtWorldPosition
+--- !u!114 &-2071551585301809284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7112461853300032871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f199dfbf0d6554296aa8137e588e14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emit: 0
+  raycastDistance: 0.0001
+  layers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  onlyUseFirstContact: 1
+  delay: 0
+  orientation: 0
+  _camera: {fileID: 0}
+  preview: 0
+  threshold: 50
+  pressureMode: 1
+  pressureMin: 50
+  pressureMax: 100
+  pressureConstant: 1
+  pressureMultiplier: 1
+  offset: 0
+  priority: 0
+  root: {fileID: 0}
+  cooldown: 0
 --- !u!4 &7637923496504811485 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9e295379bdca4864fb902ccaa7fcfc26, type: 3}

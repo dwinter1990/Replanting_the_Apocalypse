@@ -448,7 +448,7 @@ PrefabInstance:
     - target: {fileID: 4805566442999151358, guid: e6bdff24f8c31014d85970600dd4db68, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 3906202228463615602, guid: 0284282d677f0c046b8b3c93522e56c0, type: 2}
+      objectReference: {fileID: 7723140981024584624, guid: d43ddef545aafa14191e9e28c67dce95, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -599,6 +599,18 @@ PrefabInstance:
     - target: {fileID: 2190130094665207470, guid: de72057068355254da0fc20a61aa97e7, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8452694724585510601, guid: de72057068355254da0fc20a61aa97e7, type: 3}
+      propertyPath: shape
+      value: 
+      objectReference: {fileID: 2800000, guid: 8998ca0599319e44294743408be44573, type: 3}
+    - target: {fileID: 8452694724585510601, guid: de72057068355254da0fc20a61aa97e7, type: 3}
+      propertyPath: radius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8452694724585510601, guid: de72057068355254da0fc20a61aa97e7, type: 3}
+      propertyPath: hardness
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

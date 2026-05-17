@@ -2,6 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Collections;
 using CS.AudioToolkit;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(TweenQueue))]
 public class Growing : MonoBehaviour
@@ -33,6 +34,12 @@ public class Growing : MonoBehaviour
     private float maxScale;
 
     private GameObject spawnedMound;
+
+    [Header("Ground painting trigger")]
+    [SerializeField] private bool triggerGroundPaintAtHalfGrowth = true;
+    [SerializeField] private GroundPaintOnGrowth groundPaintTrigger;
+    [SerializeField] private UnityEvent onHalfGrown;
+    private bool hasTriggeredHalfGrowth;
     [Header("Tutorial settings")]
     private bool tutorialTriggered = false; // Flag to ensure the tutorial is triggered only once
     [SerializeField] private ObjectivesTutorial objectivesTutorial; // Reference to the ObjectivesTutorial script
@@ -42,7 +49,7 @@ public class Growing : MonoBehaviour
         tweenQueue = GetComponent<TweenQueue>();
         ignoreWaterLayer = LayerMask.NameToLayer("IgnoreWater");
         startingLayer = gameObject.layer;
-        if(objectivesTutorial == null)
+        if (objectivesTutorial == null)
         {
             objectivesTutorial = FindAnyObjectByType<ObjectivesTutorial>();
         }
@@ -51,21 +58,21 @@ public class Growing : MonoBehaviour
 
     private void Start()
     {
-            startScale = profile.startScale;
-            startRotation = transform.rotation;
-            transform.localScale = startScale;
+        startScale = profile.startScale;
+        startRotation = transform.rotation;
+        transform.localScale = startScale;
 
-            waterDuration = profile.waterMemory;
+        waterDuration = profile.waterMemory;
 
-            maxScale = profile.maxScale * Random.Range(profile.minScale, profile.maxScaleMultiplier);
+        maxScale = profile.maxScale * Random.Range(profile.minScale, profile.maxScaleMultiplier);
 
-            stepDuration = profile.growthDuration / profile.growthSteps;
+        stepDuration = profile.growthDuration / profile.growthSteps;
 
-            scalePerStep = (maxScale - startScale.x) / profile.growthSteps;
+        scalePerStep = (maxScale - startScale.x) / profile.growthSteps;
 
-            currentScale = transform.localScale.x;
+        currentScale = transform.localScale.x;
 
-            CreateTweens();
+        CreateTweens();
     }
     void OnDisable()
     {
@@ -130,7 +137,7 @@ public class Growing : MonoBehaviour
             {
                 ObjectivesTutorial.OTInstance.TryTriggerFirstPlantFullyWatered();
             }
-            
+
             return;
         }
 
@@ -142,7 +149,7 @@ public class Growing : MonoBehaviour
     }
     public bool UpdateGrowth(float time)
     {
-        if (hasFullyGrown) 
+        if (hasFullyGrown)
         {
             return false;
         }
@@ -172,6 +179,18 @@ public class Growing : MonoBehaviour
             MoundPool.instance.Return(spawnedMound);
             spawnedMound = null;
         }
+        if (!hasTriggeredHalfGrowth && currentScale >= maxScale * 0.5f)
+        {
+            hasTriggeredHalfGrowth = true;
+
+            if (triggerGroundPaintAtHalfGrowth)
+            {
+                groundPaintTrigger?.TriggerPaint();
+            }
+
+            onHalfGrown?.Invoke();
+        }
+
 
         if (currentScale >= maxScale)
         {
@@ -233,29 +252,29 @@ public class Growing : MonoBehaviour
         PlantPool sourcePool = originPool;
         PlantPoolManager manager = PlantPoolManager.PlantPoolManagerInstance;
 
-        if(sourcePool == null && manager != null)
+        if (sourcePool == null && manager != null)
         {
             manager.TryResolvePoolByPlantId(plantId, out sourcePool);
         }
 
-        if(sourcePool == null)
+        if (sourcePool == null)
         {
             Debug.LogWarning("Could not find source PlantPool for harvested plant: " + gameObject.name);
             return;
         }
 
         HarvestTracker tracker = HarvestTracker.Instance;
-            if (tracker != null)
-                tracker.RecordHarvest(originPool.plantType, plantId, researchPointsValue);
-            else
-                Debug.LogWarning("HarvestTracker is missing in the scene; harvest was not tracked.");
+        if (tracker != null)
+            tracker.RecordHarvest(originPool.plantType, plantId, researchPointsValue);
+        else
+            Debug.LogWarning("HarvestTracker is missing in the scene; harvest was not tracked.");
 
-        if(manager != null && manager.TryUnlockSpecificPool(sourcePool))
+        if (manager != null && manager.TryUnlockSpecificPool(sourcePool))
         {
             Debug.Log("Unlocked new pool for type: " + sourcePool.plantType + ": " + sourcePool.name);
         }
 
-        if(sourcePool.plantType == PlantType.Grass)
+        if (sourcePool.plantType == PlantType.Grass)
         {
             DeerSpawnLogic.DSLInstance.NotifyGrassUngrown();
         }
@@ -283,6 +302,7 @@ public class Growing : MonoBehaviour
         nextGrowthTimer = 0f;
         gameObject.layer = startingLayer;
         hasFullyGrown = false;
+        hasTriggeredHalfGrowth = false;
     }
     private void Update()
     {
