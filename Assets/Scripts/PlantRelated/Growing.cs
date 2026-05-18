@@ -40,6 +40,7 @@ public class Growing : MonoBehaviour
     [SerializeField] private GroundPaintOnGrowth groundPaintTrigger;
     [SerializeField] private UnityEvent onHalfGrown;
     private bool hasTriggeredHalfGrowth;
+
     [Header("Tutorial settings")]
     private bool tutorialTriggered = false; // Flag to ensure the tutorial is triggered only once
     [SerializeField] private ObjectivesTutorial objectivesTutorial; // Reference to the ObjectivesTutorial script
@@ -53,6 +54,7 @@ public class Growing : MonoBehaviour
         {
             objectivesTutorial = FindAnyObjectByType<ObjectivesTutorial>();
         }
+        groundPaintTrigger = GetComponentInChildren<GroundPaintOnGrowth>();
     }
 
 
@@ -179,6 +181,7 @@ public class Growing : MonoBehaviour
             MoundPool.instance.Return(spawnedMound);
             spawnedMound = null;
         }
+
         if (!hasTriggeredHalfGrowth && currentScale >= maxScale * 0.5f)
         {
             hasTriggeredHalfGrowth = true;

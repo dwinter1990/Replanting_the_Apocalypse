@@ -141,9 +141,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 81b079dbb5ba9324a84d4e48f0c76a7b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8546731139727576298}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 81b079dbb5ba9324a84d4e48f0c76a7b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2692463840114754111}
   m_SourcePrefab: {fileID: 100100000, guid: 81b079dbb5ba9324a84d4e48f0c76a7b, type: 3}
 --- !u!4 &3854370241441975472 stripped
 Transform:
@@ -183,10 +180,22 @@ MonoBehaviour:
   startScale: {x: 0.05, y: 0.05, z: 0.05}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
   triggerGroundPaintAtHalfGrowth: 1
-  groundPaintTrigger: {fileID: 0}
+  groundPaintTrigger: {fileID: 8546731139727576298}
   onHalfGrown:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8546731139727576298}
+        m_TargetAssemblyTypeName: GroundPaintOnGrowth, Assembly-CSharp
+        m_MethodName: TriggerPaint
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   objectivesTutorial: {fileID: 0}
 --- !u!64 &1244901849381472332
 MeshCollider:
@@ -276,8 +285,8 @@ MonoBehaviour:
   opacity: 1
   angle: 0
   scale: {x: 1, y: 1, z: 1}
-  radius: 15
-  hardness: 0.8
+  radius: 5
+  hardness: 0.25
   wrapping: 1
   normalFront: 1
   normalBack: 0
@@ -313,38 +322,5 @@ MonoBehaviour:
   pressure: 1
   seed: 0
   rootOverride: {fileID: 0}
-  cwHitCollisions: {fileID: 2692463840114754111}
   fallbackTarget: {fileID: 0}
   fallbackMethodName: PaintAtWorldPosition
---- !u!114 &2692463840114754111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4482957381764650506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f199dfbf0d6554296aa8137e588e14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  emit: 0
-  raycastDistance: 0.0001
-  layers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  onlyUseFirstContact: 1
-  delay: 0
-  orientation: 0
-  _camera: {fileID: 0}
-  preview: 0
-  threshold: 50
-  pressureMode: 1
-  pressureMin: 50
-  pressureMax: 100
-  pressureConstant: 1
-  pressureMultiplier: 1
-  offset: 0
-  priority: 0
-  root: {fileID: 0}
-  cooldown: 0

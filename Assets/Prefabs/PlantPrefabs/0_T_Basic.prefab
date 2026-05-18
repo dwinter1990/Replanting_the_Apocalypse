@@ -63,15 +63,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 397973377f8ea9149bd2ae0c7b549c65, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 43.220467
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 397973377f8ea9149bd2ae0c7b549c65, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -11.269349
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 397973377f8ea9149bd2ae0c7b549c65, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 43.480965
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 397973377f8ea9149bd2ae0c7b549c65, type: 3}
       propertyPath: m_LocalRotation.w
@@ -145,9 +145,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 397973377f8ea9149bd2ae0c7b549c65, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3446292804772925209}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 397973377f8ea9149bd2ae0c7b549c65, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -835830926599905284}
   m_SourcePrefab: {fileID: 100100000, guid: 397973377f8ea9149bd2ae0c7b549c65, type: 3}
 --- !u!4 &4856403065558636529 stripped
 Transform:
@@ -209,10 +206,22 @@ MonoBehaviour:
   startScale: {x: 0.01, y: 0.01, z: 0.01}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
   triggerGroundPaintAtHalfGrowth: 1
-  groundPaintTrigger: {fileID: 0}
+  groundPaintTrigger: {fileID: 3446292804772925209}
   onHalfGrown:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3446292804772925209}
+        m_TargetAssemblyTypeName: GroundPaintOnGrowth, Assembly-CSharp
+        m_MethodName: TriggerPaint
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   objectivesTutorial: {fileID: 0}
 --- !u!65 &-3025263673988523011
 BoxCollider:
@@ -280,8 +289,8 @@ MonoBehaviour:
   opacity: 1
   angle: 0
   scale: {x: 1, y: 1, z: 1}
-  radius: 15
-  hardness: 0.8
+  radius: 8
+  hardness: 0.25
   wrapping: 1
   normalFront: 1
   normalBack: 0
@@ -317,38 +326,5 @@ MonoBehaviour:
   pressure: 1
   seed: 0
   rootOverride: {fileID: 0}
-  cwHitCollisions: {fileID: -835830926599905284}
   fallbackTarget: {fileID: 0}
   fallbackMethodName: PaintAtWorldPosition
---- !u!114 &-835830926599905284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5201297440934579531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f199dfbf0d6554296aa8137e588e14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  emit: 0
-  raycastDistance: 0.0001
-  layers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  onlyUseFirstContact: 1
-  delay: 0
-  orientation: 0
-  _camera: {fileID: 0}
-  preview: 0
-  threshold: 50
-  pressureMode: 1
-  pressureMin: 50
-  pressureMax: 100
-  pressureConstant: 1
-  pressureMultiplier: 1
-  offset: 0
-  priority: 0
-  root: {fileID: 0}
-  cooldown: 0
