@@ -1,6 +1,8 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using TMPro;
+using UnityEngine.UI;
 public class PlayerStats : MonoBehaviour
 {
     public static event Action<int> ResearchPointsChanged;
@@ -29,7 +31,7 @@ public class PlayerStats : MonoBehaviour
 
     [Header("Research")]
     public int researchPoints;
-
+    [SerializeField] private TextMeshProUGUI researchPointsText;
     private bool CanInteract = false;
     public bool canInteract => CanInteract;
 
@@ -49,6 +51,8 @@ public class PlayerStats : MonoBehaviour
         currentPower = maxPower;
 
         StartCoroutine(PowerRecharge());
+
+        researchPointsText.text = $"Research points: {researchPoints}";
     }
 
     public IEnumerator PowerRecharge()
@@ -102,6 +106,7 @@ public class PlayerStats : MonoBehaviour
             PlantPoolManager.PlantPoolManagerInstance.RefreshUnlockedPools();
         }
 
+        researchPointsText.text = $"Research points: {researchPoints}";
         return true;
     }
 
@@ -112,7 +117,9 @@ public class PlayerStats : MonoBehaviour
 
         researchPoints += amount;
         Debug.Log("Research points gained: " + amount + ", total: " + researchPoints);
+
         ResearchPointsChanged?.Invoke(researchPoints);
+
         if (PlantPoolManager.PlantPoolManagerInstance != null)
         {
             PlantPoolManager.PlantPoolManagerInstance.RefreshUnlockedPools();
@@ -121,6 +128,9 @@ public class PlayerStats : MonoBehaviour
         {
             ObjectivesTutorial.OTInstance.TryResearchPointsTriggered();
         }
+
+        ResearchPointsPop.RPPInstance.PlayPopAnimation(amount);
+        researchPointsText.text = $"Research points: {researchPoints}";
     }
 
 

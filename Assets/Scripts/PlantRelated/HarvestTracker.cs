@@ -20,7 +20,7 @@ public class HarvestTracker : MonoBehaviour
     private readonly Dictionary<PlantType, int> bankedHarvestedCountByType = new Dictionary<PlantType, int>();
     private readonly HashSet<PlantType> harvestedTypes = new HashSet<PlantType>();
     private readonly HashSet<string> harvestedPlantIds = new HashSet<string>();
-    private int bankedResearchPoints;
+    //private int bankedResearchPoints;
 
     private void Awake()
     {
@@ -43,11 +43,8 @@ public class HarvestTracker : MonoBehaviour
 
         if (!string.IsNullOrWhiteSpace(plantId))
             harvestedPlantIds.Add(plantId);
-
-        int safeResearchPointsValue = Mathf.Max(0, researchPointsValue);
-        bankedResearchPoints += safeResearchPointsValue;
-
-        Debug.Log($"Harvest tracked -> Type: {type}, Lifetime Type Count: {lifetimeHarvestedCountByType[type]}, Banked Plants: {GetBankedHarvestTotalCount()}, Banked Research: {bankedResearchPoints}");
+        Debug.Log($"Harvest tracked -> Type: {type}, Lifetime Type Count: {lifetimeHarvestedCountByType[type]}, Banked Plants: {GetBankedHarvestTotalCount()}");
+        PlayerStats.PSInstance.AddResearchPoints(researchPointsValue);
     }
 
     public int GetHarvestCount(PlantType type)
@@ -68,23 +65,6 @@ public class HarvestTracker : MonoBehaviour
             total += entry.Value;
 
         return total;
-    }
-
-    public int GetBankedResearchPoints()
-    {
-        return bankedResearchPoints;
-    }
-
-    public int ConvertAllBankedHarvestToResearchPoints()
-    {
-        if (bankedResearchPoints <= 0)
-            return 0;
-
-        int awardedResearchPoints = bankedResearchPoints;
-        bankedResearchPoints = 0;
-        bankedHarvestedCountByType.Clear();
-
-        return awardedResearchPoints;
     }
 
     public bool HasHarvestedType(PlantType type)

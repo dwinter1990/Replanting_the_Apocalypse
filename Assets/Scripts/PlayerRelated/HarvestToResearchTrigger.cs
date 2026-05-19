@@ -28,16 +28,5 @@ public class HarvestToResearchTrigger : MonoBehaviour
             Debug.LogWarning("HarvestTracker is missing in the scene. Unable to convert harvested plants.");
             return;
         }
-
-        int awardedResearchPoints = tracker.ConvertAllBankedHarvestToResearchPoints();
-
-        if (awardedResearchPoints <= 0)
-        {
-            Debug.Log("No harvested plants to convert into research points.");
-            return;
-        }
-
-        PlayerStats.PSInstance.AddResearchPoints(awardedResearchPoints);
-        Debug.Log("Converted harvested plants to research points: " + awardedResearchPoints);
     }
 }
