@@ -31,7 +31,7 @@ public class PlayerStats : MonoBehaviour
 
     [Header("Research")]
     public int researchPoints;
-    [SerializeField] private TextMeshProUGUI researchPointsText;
+    //[SerializeField] private TextMeshProUGUI researchPointsText;
     private bool CanInteract = false;
     public bool canInteract => CanInteract;
 
@@ -52,7 +52,7 @@ public class PlayerStats : MonoBehaviour
 
         StartCoroutine(PowerRecharge());
 
-        researchPointsText.text = $"Research points: {researchPoints}";
+        //researchPointsText.text = $"Research points: {researchPoints}";
     }
 
     public IEnumerator PowerRecharge()
@@ -106,7 +106,7 @@ public class PlayerStats : MonoBehaviour
             PlantPoolManager.PlantPoolManagerInstance.RefreshUnlockedPools();
         }
 
-        researchPointsText.text = $"Research points: {researchPoints}";
+        //researchPointsText.text = $"Research points: {researchPoints}";
         return true;
     }
 
@@ -130,7 +130,7 @@ public class PlayerStats : MonoBehaviour
         }
 
         ResearchPointsPop.RPPInstance.PlayPopAnimation(amount);
-        researchPointsText.text = $"Research points: {researchPoints}";
+        //researchPointsText.text = $"Research points: {researchPoints}";
     }
 
 

@@ -22,6 +22,7 @@ public class UnlockShop : MonoBehaviour
         public int researchPointCost = 1;
         public Button button;
         public TMP_Text label;
+        public TMP_Text costLabel;
     }
 
     public static UnlockShop USInstance { get; private set; }
@@ -34,12 +35,15 @@ public class UnlockShop : MonoBehaviour
     [SerializeField] private GameObject panelRoot;
     [SerializeField] private Button closeButton;
     [SerializeField] private ShopUnlockButton[] shopUnlockButtons;
+    [SerializeField] private TMP_Text[] costLabels;
     [SerializeField] private TMP_Text researchPointsLabel;
 
     private GameObject previouslySelectedObject;
     private CursorLockMode previousCursorLockMode;
     private bool previousCursorVisibility;
 
+    [Header("Animations")]
+    [SerializeField] private VideoSelector videoSelector;
     private void Awake()
     {
         if (USInstance != null && USInstance != this)
@@ -61,6 +65,7 @@ public class UnlockShop : MonoBehaviour
         WireShopButtons();
         HideMenu();
         RefreshResearchPointsLabel();
+        InitializeCostLabels();
     }
 
     private void OnDestroy()
@@ -75,6 +80,7 @@ public class UnlockShop : MonoBehaviour
     private void OnEnable()
     {
         PlayerStats.ResearchPointsChanged += HandleResearchPointsChanged;
+        InitializeCostLabels();
     }
 
     private void OnDisable()
@@ -185,8 +191,61 @@ public class UnlockShop : MonoBehaviour
 
             if (entry.label != null)
                 entry.label.text = BuildShopLabel(entry, seedManager, equipment, stats);
+
+
+            RefreshCostLabel(entry, i, canAfford, canBuy);
         }
     }
+
+
+    private void RefreshCostLabel(ShopUnlockButton entry,int index, bool canAfford, bool canBuy)
+    {
+        TMP_Text targetCostLabel = GetCostLabel(entry, index);
+
+        if (costLabels == null || index < 0 || index >= costLabels.Length)
+            return;
+
+        targetCostLabel.text = entry.researchPointCost + " RP";
+
+        if (!canBuy)
+        {
+                targetCostLabel.color = Color.gray;
+                return;
+        }
+
+        targetCostLabel.color = canAfford ? Color.white : Color.red;
+    }
+    private void InitializeCostLabels()
+    {
+        if (shopUnlockButtons == null || shopUnlockButtons.Length == 0)
+            return;
+
+        for (int i = 0; i < shopUnlockButtons.Length; i++)
+        {
+            ShopUnlockButton entry = shopUnlockButtons[i];
+            if (entry == null)
+                continue;
+
+            TMP_Text targetCostLabel = GetCostLabel(entry, i);
+            if (targetCostLabel == null)
+                continue;
+
+            targetCostLabel.text = entry.researchPointCost + " RP";
+        }
+    }
+
+    private TMP_Text GetCostLabel(ShopUnlockButton entry, int index)
+    {
+        if (entry != null && entry.costLabel != null)
+            return entry.costLabel;
+
+        if (costLabels == null || index < 0 || index >= costLabels.Length)
+            return null;
+
+        return costLabels[index];
+    }
+
+
 
     private bool CanBuyShopItem(ShopItemType itemType, SeedManager seedManager, CallDownEquipment equipment, PlayerStats stats)
     {
@@ -213,19 +272,19 @@ public class UnlockShop : MonoBehaviour
             case ShopItemType.GrenadeUnlock:
                 if (seedManager != null && seedManager.GrenadeUnlocked)
                     return "Grenade Unlocked!";
-                return "Unlock Grenade (" + entry.researchPointCost + " RP)";
+                return "Unlock Grenade";
 
             case ShopItemType.AutoSprinklerCharge:
                 int sprinklerCount = equipment != null ? equipment.SprinklerCharges : 0;
-                return "Buy AutoSprinkler Charge (" + entry.researchPointCost + " RP)\nCharges: " + sprinklerCount;
+                return "Buy AutoSprinkler Charge\nCharges: " + sprinklerCount;
 
             case ShopItemType.WaterRefillStationCharge:
                 int refillCount = equipment != null ? equipment.RefillStationCharges : 0;
-                return "Buy Water Refill Charge (" + entry.researchPointCost + " RP)\nCharges: " + refillCount;
+                return "Buy Water Refill Charge\nCharges: " + refillCount;
 
             case ShopItemType.PlayerWaterCapacityUpgrade:
                 float currentCapacity = stats != null ? stats.maxWaterCapacity : 0;
-                return "Upgrade Water Capacity (" + entry.researchPointCost + " RP)\nCurrent Capacity: " + currentCapacity;
+                return "Upgrade Water Capacity\nCurrent Capacity: " + currentCapacity;
             default:
                 return "Unavailable";
         }
