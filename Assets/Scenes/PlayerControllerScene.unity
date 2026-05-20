@@ -5939,7 +5939,7 @@ MonoBehaviour:
   saveName: 
   width: 2048
   height: 2048
-  texture: {fileID: 0}
+  texture: {fileID: 2800000, guid: 8998ca0599319e44294743408be44573, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   format: 0
   mipMaps: 0
@@ -6007,7 +6007,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paintableTexture: {fileID: 1571893358}
-  threshold: 0.02
+  threshold: 1
   speed: 2.5
   blendMode:
     Index: 8
@@ -6015,8 +6015,8 @@ MonoBehaviour:
     Texture: {fileID: 0}
     Kernel: 1
     Channels: {x: 1, y: 1, z: 1, w: 1}
-  blendTexture: {fileID: 0}
-  blendPaintableTexture: {fileID: 0}
+  blendTexture: {fileID: 2800000, guid: 6aa8cd82cbdcba1408e176e36e620971, type: 3}
+  blendPaintableTexture: {fileID: 1571893358}
   blendColor: {r: 1, g: 1, b: 1, a: 1}
   maskTexture: {fileID: 0}
   maskPaintableTexture: {fileID: 0}
@@ -11765,7 +11765,7 @@ Transform:
   m_GameObject: {fileID: 7001419386657939670}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0.678}
+  m_LocalPosition: {x: 0, y: 0, z: 0.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11795,7 +11795,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7001419386657939670}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -11870,7 +11870,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.3
+      scalar: 0.75
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -11923,7 +11923,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 25
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -12624,7 +12624,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 200
+      scalar: 300
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -20836,7 +20836,7 @@ Transform:
   m_GameObject: {fileID: 5473931825482909151}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.004899976, y: -0.062, z: 0.09}
+  m_LocalPosition: {x: -0.004899976, y: -0.062, z: 0.283}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
