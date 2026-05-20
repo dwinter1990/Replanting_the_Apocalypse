@@ -1471,7 +1471,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &205344526
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7375,7 +7375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1805302794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11621,6 +11621,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9041360624099657647, guid: 7aaf8ef50aa0bbf4f8083dbbb639ec65, type: 3}
+      propertyPath: AudioCategories.Array.data[1].AudioItems.Array.data[0].Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9041360624099657647, guid: 7aaf8ef50aa0bbf4f8083dbbb639ec65, type: 3}
+      propertyPath: AudioCategories.Array.data[1].AudioItems.Array.data[0].subItems.Array.data[0].Clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 756b533db7d33ca41b0dd0f6d828e811, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16797,19 +16805,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1810433721823070615, guid: e6bdff24f8c31014d85970600dd4db68, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: -0.00007615199
       objectReference: {fileID: 0}
     - target: {fileID: 1810433721823070615, guid: e6bdff24f8c31014d85970600dd4db68, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.008726132
       objectReference: {fileID: 0}
     - target: {fileID: 1810433721823070615, guid: e6bdff24f8c31014d85970600dd4db68, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.999962
+      value: 0.9999238
       objectReference: {fileID: 0}
     - target: {fileID: 1810433721823070615, guid: e6bdff24f8c31014d85970600dd4db68, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.008726558
+      value: -0.008726225
       objectReference: {fileID: 0}
     - target: {fileID: 1810433721823070615, guid: e6bdff24f8c31014d85970600dd4db68, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -16818,6 +16826,10 @@ PrefabInstance:
     - target: {fileID: 1810433721823070615, guid: e6bdff24f8c31014d85970600dd4db68, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1810433721823070615, guid: e6bdff24f8c31014d85970600dd4db68, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1845807516838377461, guid: e6bdff24f8c31014d85970600dd4db68, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -19010,7 +19022,6 @@ MonoBehaviour:
   currentPower: 100
   powerRechargeRate: 5
   researchPoints: 0
-  researchPointsText: {fileID: 1613744723}
 --- !u!1001 &5690277140719711076
 PrefabInstance:
   m_ObjectHideFlags: 0
