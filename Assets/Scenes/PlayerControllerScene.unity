@@ -5994,6 +5994,34 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   activated: 0
+--- !u!114 &1571893364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571893352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b19996fe106a404bbbb893625488b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  paintableTexture: {fileID: 1571893358}
+  threshold: 0.02
+  speed: 2.5
+  blendMode:
+    Index: 8
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Texture: {fileID: 0}
+    Kernel: 1
+    Channels: {x: 1, y: 1, z: 1, w: 1}
+  blendTexture: {fileID: 0}
+  blendPaintableTexture: {fileID: 0}
+  blendColor: {r: 1, g: 1, b: 1, a: 1}
+  maskTexture: {fileID: 0}
+  maskPaintableTexture: {fileID: 0}
+  maskChannel: 0
+  counter: 0
 --- !u!114 &1603947248 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4649245137958262023, guid: 5aa36805b7eed1a4aab7065f30cefa24, type: 3}
@@ -12330,7 +12358,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 1000
+    maxNumParticles: 500
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 1
     rotation3D: 0
@@ -12596,7 +12624,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 30
+      scalar: 200
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -18026,6 +18054,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2264764276383250867, guid: e6bdff24f8c31014d85970600dd4db68, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1571893358}
+    - targetCorrespondingSourceObject: {fileID: 2264764276383250867, guid: e6bdff24f8c31014d85970600dd4db68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1571893364}
     - targetCorrespondingSourceObject: {fileID: 5074096640933955550, guid: e6bdff24f8c31014d85970600dd4db68, type: 3}
       insertIndex: -1
       addedObject: {fileID: 411744373}
