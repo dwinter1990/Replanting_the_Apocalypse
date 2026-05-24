@@ -53,16 +53,18 @@ Material:
     - _Cull: 2
     - _DstBlend: 10
     - _DstBlendAlpha: 0
-    - _IndirectIntensity: 0
+    - _IndirectIntensity: 1
+    - _MatCapType: 0
     - _Metallic: 0
     - _RampBandsSmoothing: 0.1
-    - _RampSmoothing: 0
+    - _RampSmoothing: 1
     - _RampThreshold: 0.01
     - _ReceiveShadowsOff: 0
     - _RenderingMode: 1
-    - _RimMax: 1.023
-    - _RimMin: 0.563
+    - _RimMax: 1.227
+    - _RimMin: 0
     - _ShadowColorLightAtten: 0
+    - _SingleIndirectColor: 0
     - _SpecularHighlights: 0
     - _SpecularMapType: 1
     - _SpecularToonSize: 0.1
@@ -72,9 +74,12 @@ Material:
     - _Surface: 0
     - _UseAlphaTest: 0
     - _UseEmission: 0
+    - _UseMatCap: 0
     - _UseMobileMode: 0
     - _UseNormalMap: 0
+    - _UseReflections: 0
     - _UseRim: 1
+    - _UseShadowTexture: 0
     - _UseSpecular: 0
     - _ZWrite: 0
     m_Colors:
