@@ -17,6 +17,7 @@ MonoBehaviour:
   growthSteps: 12
   waterMemory: 0.75
   growthDuration: 8
+  harvestTime: 5
   researchPointValue: 5
   startScale: {x: 0.01, y: 0.01, z: 0.01}
   minScale: 0.25

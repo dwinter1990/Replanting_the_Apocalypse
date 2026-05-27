@@ -9,6 +9,7 @@ public class GrowthSO : ScriptableObject
     public float growthSteps = 0.15f;
     public float waterMemory = 0.4f;
     public float growthDuration = 10f;
+    public float harvestTime;
 
     [Header("Research")]
     public int researchPointValue;

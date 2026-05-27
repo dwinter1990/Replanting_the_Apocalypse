@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-
+using Unity.Cinemachine;
 public class UnlockShop : MonoBehaviour
 {
     private enum ShopItemType
@@ -44,6 +44,11 @@ public class UnlockShop : MonoBehaviour
 
     [Header("Animations")]
     [SerializeField] private VideoSelector videoSelector;
+    [SerializeField] private Animator berriAnimator;
+
+    [Header("Cinemachine")]
+    [SerializeField] private CinemachineInputAxisController cinemachineInput;
+
     private void Awake()
     {
         if (USInstance != null && USInstance != this)
@@ -66,6 +71,7 @@ public class UnlockShop : MonoBehaviour
         HideMenu();
         RefreshResearchPointsLabel();
         InitializeCostLabels();
+        berriAnimator.SetBool("IsShopOpen", false);
     }
 
     private void OnDestroy()
@@ -112,6 +118,11 @@ public class UnlockShop : MonoBehaviour
         if (playerInput != null)
             playerInput.SwitchCurrentActionMap("UI");
 
+        if (cinemachineInput != null)
+            cinemachineInput.enabled = false;
+
+        berriAnimator.SetBool("IsShopOpen", true);
+
         RefreshButtons();
         RefreshResearchPointsLabel();
         SelectDefaultButton();
@@ -119,6 +130,7 @@ public class UnlockShop : MonoBehaviour
 
     public void HideMenu()
     {
+
         if (playerUI != null)
             playerUI.SetActive(true);
 
@@ -130,6 +142,15 @@ public class UnlockShop : MonoBehaviour
 
         Cursor.lockState = previousCursorLockMode;
         Cursor.visible = previousCursorVisibility;
+
+        if (cinemachineInput != null)
+            cinemachineInput.enabled = true;
+
+        if (ResearchPointsPop.RPPInstance != null)
+            ResearchPointsPop.RPPInstance.RefreshPlayerResearchPoints();
+
+        berriAnimator.SetBool("IsShopOpen", false);
+
         RestorePreviousSelection();
     }
 

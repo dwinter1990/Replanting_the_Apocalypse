@@ -51,7 +51,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.01
+  m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4967419428766543898
 PrefabInstance:
@@ -67,7 +67,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 397973377f8ea9149bd2ae0c7b549c65, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.269349
+      value: -11.99
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 397973377f8ea9149bd2ae0c7b549c65, type: 3}
       propertyPath: m_LocalPosition.z
@@ -135,9 +135,6 @@ PrefabInstance:
       addedObject: {fileID: -1906801607631592791}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 397973377f8ea9149bd2ae0c7b549c65, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -3025263673988523011}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 397973377f8ea9149bd2ae0c7b549c65, type: 3}
-      insertIndex: -1
       addedObject: {fileID: -4171299713426276318}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 397973377f8ea9149bd2ae0c7b549c65, type: 3}
       insertIndex: -1
@@ -175,7 +172,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6127282102595255592, guid: 397973377f8ea9149bd2ae0c7b549c65, type: 3}
 --- !u!114 &-3136945589455342588
@@ -223,27 +220,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   objectivesTutorial: {fileID: 0}
---- !u!65 &-3025263673988523011
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5201297440934579531}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-4171299713426276318
 MonoBehaviour:
   m_ObjectHideFlags: 0

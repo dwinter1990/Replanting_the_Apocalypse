@@ -51,7 +51,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.16
+  m_Radius: 1.77
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6563235024981439180
 PrefabInstance:
@@ -63,15 +63,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 1120c326d175bfd4bb2a29e4fdef9479, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -14.137383
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1120c326d175bfd4bb2a29e4fdef9479, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -7.995616
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1120c326d175bfd4bb2a29e4fdef9479, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -8.971812
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1120c326d175bfd4bb2a29e4fdef9479, type: 3}
       propertyPath: m_LocalRotation.w
@@ -135,9 +135,6 @@ PrefabInstance:
       addedObject: {fileID: 8705577881166207210}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1120c326d175bfd4bb2a29e4fdef9479, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -6214831378712054637}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1120c326d175bfd4bb2a29e4fdef9479, type: 3}
-      insertIndex: -1
       addedObject: {fileID: -4354418188033923074}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1120c326d175bfd4bb2a29e4fdef9479, type: 3}
       insertIndex: -1
@@ -170,7 +167,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 9091874763089778162, guid: 1120c326d175bfd4bb2a29e4fdef9479, type: 3}
 --- !u!114 &1293619185923380180
@@ -218,27 +215,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   objectivesTutorial: {fileID: 0}
---- !u!65 &-6214831378712054637
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6328721492945571741}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-4354418188033923074
 MonoBehaviour:
   m_ObjectHideFlags: 0
