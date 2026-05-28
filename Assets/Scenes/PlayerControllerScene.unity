@@ -1382,6 +1382,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edd34d2c076af345bdc8da32ec2ec8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &385549753 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3154717140191373990, guid: 1aed522b05769704b9a6acf2b6580ced, type: 3}
+  m_PrefabInstance: {fileID: 3221050942765359546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &385549756 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8539304287927616557, guid: 1aed522b05769704b9a6acf2b6580ced, type: 3}
+  m_PrefabInstance: {fileID: 3221050942765359546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &385549757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385549753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9e0e7d0761658642941ba4f58bce626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decalMat: {fileID: -876546973899608171, guid: e5e935abd6d9a104bb006c758e403e68, type: 3}
+  decalLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  decalLifetime: 5
+  waterGunParticles: {fileID: 385549756}
+  particleHitCount: 0
 --- !u!114 &385837177 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1437175925713370154, guid: 69d0b26b5a8a8684993c811d84ab3c1d, type: 3}
@@ -6579,6 +6608,10 @@ PrefabInstance:
       propertyPath: goBackIndicator
       value: 
       objectReference: {fileID: 783483742}
+    - target: {fileID: 5494448899445370037, guid: 1ad1ce6826a09a14290e68eed03c8221, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7626824230955992411, guid: 1ad1ce6826a09a14290e68eed03c8221, type: 3}
       propertyPath: goBackIndicator
       value: 
@@ -6586,6 +6619,10 @@ PrefabInstance:
     - target: {fileID: 9144392399978196877, guid: 1ad1ce6826a09a14290e68eed03c8221, type: 3}
       propertyPath: m_Name
       value: Desert Map_V2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144392399978196877, guid: 1ad1ce6826a09a14290e68eed03c8221, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6855,10 +6892,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8539304287927616557, guid: 1aed522b05769704b9a6acf2b6580ced, type: 3}
+      propertyPath: SubModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8539304287927616557, guid: 1aed522b05769704b9a6acf2b6580ced, type: 3}
+      propertyPath: SubModule.subEmitters.Array.data[0].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8539304287927616557, guid: 1aed522b05769704b9a6acf2b6580ced, type: 3}
+      propertyPath: SubModule.subEmitters.Array.data[0].emitter
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8602176494454954173, guid: 1aed522b05769704b9a6acf2b6580ced, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3154717140191373990, guid: 1aed522b05769704b9a6acf2b6580ced, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 385549757}
   m_SourcePrefab: {fileID: 100100000, guid: 1aed522b05769704b9a6acf2b6580ced, type: 3}
 --- !u!95 &3255437985467800686 stripped
 Animator:
