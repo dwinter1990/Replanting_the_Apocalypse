@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8818061616666487485}
   - component: {fileID: 7757997535816386399}
   - component: {fileID: 4668428362291900474}
-  - component: {fileID: -8813792078419536985}
   - component: {fileID: -3330751066225256924}
   - component: {fileID: 7426424714657583170}
   - component: {fileID: -9132205523122209572}
@@ -113,7 +112,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2494185979427425891, guid: b39d9f01b328e6342be8b2922157430b, type: 3}
 --- !u!114 &7757997535816386399
@@ -161,27 +160,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   objectivesTutorial: {fileID: 0}
---- !u!65 &-8813792078419536985
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5817427291920771033}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-3330751066225256924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +199,7 @@ MonoBehaviour:
     Kernel: 1
     Channels: {x: 1, y: 1, z: 1, w: 1}
   texture: {fileID: 2800000, guid: 6aa8cd82cbdcba1408e176e36e620971, type: 3}
-  shape: {fileID: 2800000, guid: 8998ca0599319e44294743408be44573, type: 3}
+  shape: {fileID: 2800000, guid: f4178844320880745be3bf1c7bf2a7ff, type: 3}
   shapeChannel: 3
   color: {r: 1, g: 1, b: 1, a: 1}
   opacity: 1

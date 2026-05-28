@@ -18,7 +18,7 @@ public class ResearchPointsPop : MonoBehaviour
 
     private void Start()
     {
-                CreateTween();
+        CreateTween();
     }
     private void CreateTween()
     {
@@ -46,5 +46,15 @@ public class ResearchPointsPop : MonoBehaviour
         tMPText.text = $"+{points}";
 
         RPPopTween.Restart();
+    }
+
+    public void RefreshPlayerResearchPoints()
+    {
+        if (playerResearchPointsText == null || PlayerStats.PSInstance == null)
+        {
+            return;
+        }
+
+        playerResearchPointsText.SetText($"{PlayerStats.PSInstance.researchPoints}");
     }
 }

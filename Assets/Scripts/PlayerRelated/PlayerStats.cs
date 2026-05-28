@@ -100,13 +100,11 @@ public class PlayerStats : MonoBehaviour
 
         Debug.Log("Research points spent: " + amount + ", total: " + researchPoints);
         ResearchPointsChanged?.Invoke(researchPoints);
-
+        
         if (PlantPoolManager.PlantPoolManagerInstance != null)
         {
             PlantPoolManager.PlantPoolManagerInstance.RefreshUnlockedPools();
         }
-
-        //researchPointsText.text = $"Research points: {researchPoints}";
         return true;
     }
 
@@ -130,7 +128,6 @@ public class PlayerStats : MonoBehaviour
         }
 
         ResearchPointsPop.RPPInstance.PlayPopAnimation(amount);
-        //researchPointsText.text = $"Research points: {researchPoints}";
     }
 
 

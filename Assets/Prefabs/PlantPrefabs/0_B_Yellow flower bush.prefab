@@ -131,9 +131,6 @@ PrefabInstance:
       addedObject: {fileID: 9013007003328202081}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fda236f201bb64f46b3deb60af0be7d9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -2509002610137111948}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fda236f201bb64f46b3deb60af0be7d9, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8444156177499299798}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fda236f201bb64f46b3deb60af0be7d9, type: 3}
       insertIndex: -1
@@ -166,7 +163,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1435972613223968293, guid: fda236f201bb64f46b3deb60af0be7d9, type: 3}
 --- !u!114 &6846808976078874262
@@ -214,27 +211,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   objectivesTutorial: {fileID: 0}
---- !u!65 &-2509002610137111948
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3542532913696547606}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8444156177499299798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,7 +250,7 @@ MonoBehaviour:
     Kernel: 1
     Channels: {x: 1, y: 1, z: 1, w: 1}
   texture: {fileID: 2800000, guid: 6aa8cd82cbdcba1408e176e36e620971, type: 3}
-  shape: {fileID: 2800000, guid: 8998ca0599319e44294743408be44573, type: 3}
+  shape: {fileID: 2800000, guid: f4178844320880745be3bf1c7bf2a7ff, type: 3}
   shapeChannel: 3
   color: {r: 1, g: 1, b: 1, a: 1}
   opacity: 1

@@ -61,8 +61,8 @@ Material:
     - _RampThreshold: 0.01
     - _ReceiveShadowsOff: 0
     - _RenderingMode: 1
-    - _RimMax: 1.227
-    - _RimMin: 0
+    - _RimMax: 0.75
+    - _RimMin: 0.172
     - _ShadowColorLightAtten: 0
     - _SingleIndirectColor: 0
     - _SpecularHighlights: 0
@@ -87,7 +87,7 @@ Material:
     - _Color: {r: 0.60691816, g: 0.87717485, b: 1, a: 0.7490196}
     - _EmissionColor: {r: 0.9239999, g: 1.7758155, b: 3.9999995, a: 1}
     - _HColor: {r: 0.17880027, g: 0.9245283, b: 0.9165727, a: 1}
-    - _RimColor: {r: 3.2941177, g: 6.4, b: 6.4, a: 0.6}
+    - _RimColor: {r: 0.8235294, g: 1.6, b: 1.6, a: 0.6}
     - _SColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

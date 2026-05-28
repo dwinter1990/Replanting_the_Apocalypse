@@ -9,20 +9,29 @@ public class PlayerInteraction : MonoBehaviour
     [Header("References")]
     [SerializeField] private HandManager handManager;
     [SerializeField] private WaterHose waterHose;
-    [SerializeField] private float interactDistance = 5f;
-    [SerializeField] private Camera playerCam;
     [SerializeField] private CallDownEquipment callDownEquipment;
+    [SerializeField] private Animator chainSawAnimator;
+
+    [Header("Interaction Settings")]
+    [SerializeField] private float interactDistance = 5f;
+    [SerializeField] private float sphereRadius = 0.35f;
+    [SerializeField] private Camera playerCam;
+    private readonly RaycastHit[] interactionHits = new RaycastHit[8];
+    [SerializeField] private float interactionRadius = 0.5f;
+    private float harvestTime;
+
+    [Header("Seed Shooting Settings")]
     private float shootTime;
     [SerializeField] float timeBetweenShots;
-    private Outline currentOutline;
-    [SerializeField] private Animator chainSawAnimator;
     public bool canShootSeed = false;
     private bool CanShootSeed => canShootSeed;
 
     [Header("Water/Harvest UI Elements")]
     [SerializeField] private Image waterThisPlant;
     [SerializeField] private Image harvestThisPlant;
-
+    [SerializeField] private GameObject harvestFX;
+    private ParticleSystem[] harvestParticles;
+    [SerializeField] private Transform rightArmRoot;
     public static PlayerInteraction PIInstance { get; set; }
 
     private bool isHoldingEquipmentPlacement;
@@ -37,9 +46,10 @@ public class PlayerInteraction : MonoBehaviour
         {
             PIInstance = this;
         }
+
     }
 
-    public void OnAttack(InputAction.CallbackContext context)
+    public void OnRightClick(InputAction.CallbackContext context)
     {
         HandTypeRight activeHand = handManager.GetActiveHandRightType();
 
@@ -49,10 +59,13 @@ public class PlayerInteraction : MonoBehaviour
             {
                 waterHose.StartSpray();
                 StopCoroutine("TryHarvest");
+                StopHarvestFX();
             }
             else if (activeHand == HandTypeRight.Harvest)
             {
-                StartCoroutine("TryHarvest");
+                StopHarvestFX();
+                StartCoroutine(StartHarvestNextFrame());
+                //StartCoroutine("TryHarvest");
                 waterHose.StopSpray();
             }
         }
@@ -68,20 +81,44 @@ public class PlayerInteraction : MonoBehaviour
             {
                 StopCoroutine("TryHarvest");
                 chainSawAnimator.SetBool("Harvest", false);
+                harvestTime = 0f;
+                StopHarvestFX();
             }
         }
     }
+    private IEnumerator StartHarvestNextFrame()
+    {
+        yield return null;
+        StartCoroutine("TryHarvest");
+    }
 
-    public void OnShootSeedInput(InputAction.CallbackContext context)
+    private void CacheHarvestParticles()
+    {
+        if (rightArmRoot != null)
+        {
+            Transform found = rightArmRoot.Find("HarvestHandRoot/HarvestFXRoot");
+
+            if (found != null)
+                harvestFX = found.gameObject;
+        }
+
+        if (harvestFX == null)
+        {
+            harvestParticles = null;
+            return;
+        }
+
+        harvestParticles = harvestFX.GetComponentsInChildren<ParticleSystem>(true);
+    }
+
+    public void OnLeftClick(InputAction.CallbackContext context)
     {
         HandTypeLeft activeHand = handManager.GetActiveHandLeftType();
 
         if (activeHand == HandTypeLeft.SeedLauncher)
         {
             if (!CanShootSeed)
-            {
                 return;
-            }
 
             if (context.performed && shootTime <= 0f)
             {
@@ -93,29 +130,25 @@ public class PlayerInteraction : MonoBehaviour
         }
 
         if (activeHand != HandTypeLeft.Placer || callDownEquipment == null)
-        {
             return;
+
+        if (context.started || context.performed)
+        {
+            if (!isHoldingEquipmentPlacement)
+            {
+                isHoldingEquipmentPlacement = true;
+                callDownEquipment.BeginPlacementPreview();
+            }
+
+            HandManager.HMInstance.canSwapLeft = false;
+            TryUpdateEquipmentPreview();
         }
 
-        if (activeHand == HandTypeLeft.Placer)
+        if (context.canceled)
         {
-            if (context.started || context.performed)
-            {
-                if (!isHoldingEquipmentPlacement)
-                {
-                    isHoldingEquipmentPlacement = true;
-                    callDownEquipment.BeginPlacementPreview();
-                }
-                HandManager.HMInstance.canSwapLeft = false;
-                TryUpdateEquipmentPreview();
-            }
-
-            if (context.canceled)
-            {
-                HandManager.HMInstance.canSwapLeft = true;
-                isHoldingEquipmentPlacement = false;
-                callDownEquipment.ConfirmPlacement();
-            }
+            HandManager.HMInstance.canSwapLeft = true;
+            isHoldingEquipmentPlacement = false;
+            callDownEquipment.ConfirmPlacement();
         }
     }
 
@@ -124,44 +157,59 @@ public class PlayerInteraction : MonoBehaviour
         shootTime -= Time.deltaTime;
 
         if (isHoldingEquipmentPlacement)
-        {
             TryUpdateEquipmentPreview();
-        }
 
         Ray ray = GetInteractionRay();
-        Growing growing = null;
 
-        if (Physics.Raycast(ray, out RaycastHit hit, interactDistance))
+        harvestThisPlant.enabled = false;
+        waterThisPlant.enabled = false;
+
+        int hitCount = Physics.SphereCastNonAlloc(
+            ray,
+            interactionRadius,
+            interactionHits,
+            interactDistance
+        );
+
+        if (hitCount <= 0)
+            return;
+
+        Growing closestGrowing = null;
+        float closestDistance = float.MaxValue;
+
+        for (int i = 0; i < hitCount; i++)
         {
-            growing = hit.collider.GetComponent<Growing>();
-            if (growing != null)
+            Growing candidate = interactionHits[i].collider.GetComponent<Growing>();
+
+            if (candidate == null)
+                continue;
+
+            if (interactionHits[i].distance < closestDistance)
             {
-                if (growing.HasFullyGrown)
-                {
-                    harvestThisPlant.enabled = true;
-                    waterThisPlant.enabled = false;
-                }
-                else
-                {
-                    harvestThisPlant.enabled = false;
-                    waterThisPlant.enabled = true;
-                }
+                closestDistance = interactionHits[i].distance;
+                closestGrowing = candidate;
             }
         }
 
-        if (growing == null)
+        if (closestGrowing == null)
+            return;
+
+        if (closestGrowing.HasFullyGrown)
         {
-            harvestThisPlant.enabled = false;
+            harvestThisPlant.enabled = true;
             waterThisPlant.enabled = false;
+        }
+        else
+        {
+            waterThisPlant.enabled = true;
+            harvestThisPlant.enabled = false;
         }
     }
 
     private void TryUpdateEquipmentPreview()
     {
         if (playerCam == null)
-        {
             return;
-        }
 
         Ray placementRay = GetInteractionRay();
         callDownEquipment.UpdatePlacementPreview(placementRay, playerCam.transform.up);
@@ -170,34 +218,138 @@ public class PlayerInteraction : MonoBehaviour
     private Ray GetInteractionRay()
     {
         bool useCenterScreenRay = Cursor.lockState == CursorLockMode.Locked || !Cursor.visible;
+
         if (useCenterScreenRay)
-        {
             return playerCam.ViewportPointToRay(new Vector3(0.5f, 0.4f, 0f));
-        }
 
         return playerCam.ScreenPointToRay(Mouse.current.position.ReadValue());
     }
 
-    IEnumerator TryHarvest()
+
+    private void PlayHarvestFX()
     {
+        CacheHarvestParticles();
+
+        if (harvestFX == null || !harvestFX.activeInHierarchy)
+            return;
+
+        if (harvestParticles == null)
+            return;
+
+        foreach (ParticleSystem particle in harvestParticles)
+        {
+            if (particle == null)
+                continue;
+
+            if (!particle.gameObject.activeSelf)
+                particle.gameObject.SetActive(true);
+
+            if (!particle.gameObject.activeInHierarchy)
+                continue;
+
+            ParticleSystem.EmissionModule emission = particle.emission;
+            emission.enabled = true;
+
+            if (!particle.isPlaying)
+                particle.Play(true);
+        }
+    }
+
+    private void StopHarvestFX()
+    {
+        CacheHarvestParticles();
+
+        if (harvestParticles == null)
+            return;
+
+        foreach (ParticleSystem particle in harvestParticles)
+        {
+            if (particle == null)
+                continue;
+
+            particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
+    }
+
+
+
+
+    private IEnumerator TryHarvest()
+    {
+        Growing currentHarvestTarget = null;
+
+        chainSawAnimator.SetBool("Harvest", true);
+
         while (true)
         {
-            chainSawAnimator.SetBool("Harvest", true);
             yield return new WaitForSeconds(0.25f);
 
             if (playerCam == null || Mouse.current == null)
             {
+                chainSawAnimator.SetBool("Harvest", false);
+                harvestTime = 0f;
+                currentHarvestTarget = null;
+                StopHarvestFX();
                 continue;
             }
 
             Ray ray = GetInteractionRay();
-            if (Physics.Raycast(ray, out RaycastHit hit, interactDistance))
+
+            int hitCount = Physics.SphereCastNonAlloc(
+                ray,
+                interactionRadius,
+                interactionHits,
+                interactDistance
+            );
+
+            Growing closestGrowing = null;
+            float closestDistance = float.MaxValue;
+
+            for (int i = 0; i < hitCount; i++)
             {
-                var growing = hit.collider.GetComponent<Growing>();
-                if (growing != null)
+                Collider hitCollider = interactionHits[i].collider;
+                Growing growing = hitCollider.GetComponent<Growing>();
+
+                if (growing == null)
+                    continue;
+
+                if (!growing.HasFullyGrown)
+                    continue;
+
+                if (interactionHits[i].distance < closestDistance)
                 {
-                    growing.Harvest();
+                    closestDistance = interactionHits[i].distance;
+                    closestGrowing = growing;
                 }
+            }
+
+            if (closestGrowing == null)
+            {
+                chainSawAnimator.SetBool("Harvest", false);
+                harvestTime = 0f;
+                currentHarvestTarget = null;
+                StopHarvestFX();
+                continue;
+            }
+
+            CacheHarvestParticles();
+            PlayHarvestFX();
+
+            if (currentHarvestTarget != closestGrowing)
+            {
+                currentHarvestTarget = closestGrowing;
+                harvestTime = closestGrowing.profile != null ? closestGrowing.profile.harvestTime : 0f;
+            }
+
+            harvestTime -= 0.25f;
+
+            if (harvestTime <= 0f)
+            {
+                closestGrowing.Harvest();
+
+                harvestTime = 0f;
+                currentHarvestTarget = null;
+                StopHarvestFX();
             }
         }
     }
