@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 public class ObjectivesTutorial : MonoBehaviour
 {
     public static ObjectivesTutorial OTInstance { get; set; }
@@ -40,7 +41,7 @@ public class ObjectivesTutorial : MonoBehaviour
     [SerializeField] private float backgroundPanelWidth = 500f; // Desired width of the background panel.
     [SerializeField] private float backgroundPanelXpos = 0f; // Desired X position of the background panel.
 
-    [SerializeField] private float edgePanelXpos = 220f; // Desired X position of the edge panel.
+    [SerializeField] private float edgePanelXpos = 227f; // Desired X position of the edge panel.
     private Sequence canvasUpSequence;
 
     private void Awake()
@@ -82,9 +83,9 @@ public class ObjectivesTutorial : MonoBehaviour
         canvasUpSequence?.Kill();
         canvasUpSequence = DOTween.Sequence()
             .Append(tutorialCanvas.transform.DOLocalMoveY(canvasUpPosition.y, canvasMoveDuration).SetEase(Ease.OutCubic))
-            .Append(backgroundPanel.transform.DOLocalMoveX(backgroundXpos.x, canvasMoveDuration * 0.5f).SetEase(Ease.OutCubic))
-            .Join(backgroundPanel.rectTransform.DOSizeDelta(new Vector2(backgroundPanelWidth, backgroundPanel.rectTransform.sizeDelta.y), canvasMoveDuration * 0.5f).SetEase(Ease.OutCubic))
-            .Join(edgePanel.rectTransform.DOLocalMoveX(edgePanelXpos, canvasMoveDuration * 0.5f).SetEase(Ease.OutCubic))
+            .Append(backgroundPanel.transform.DOLocalMoveX(backgroundXpos.x, canvasMoveDuration ).SetEase(Ease.OutCubic))
+            .Join(backgroundPanel.rectTransform.DOSizeDelta(new Vector2(backgroundPanelWidth, backgroundPanel.rectTransform.sizeDelta.y), canvasMoveDuration).SetEase(Ease.OutCubic))
+            .Join(edgePanel.rectTransform.DOLocalMoveX(edgePanelXpos, canvasMoveDuration).SetEase(Ease.OutCubic))
             .SetAutoKill(false)
             .Pause();
 
@@ -208,7 +209,7 @@ public class ObjectivesTutorial : MonoBehaviour
         }
 
         yield return ShowMessage("Great job finding the first plant! Now let's learn how to interact with it.", 5f);
-        yield return ShowMessage("With the water gun equipped, water plants by holding down the left mouse button.", 5f);
+        yield return ShowMessage("With the water gun equipped, water plants by holding down the Right Mouse Button.", 5f);
         yield return ShowMessage("Hint: You'll have to aim at the base. Watering the leaves won't help.", 3f);
     }
     public void TryTriggerFirstPlantFullyWatered()
@@ -250,7 +251,7 @@ public class ObjectivesTutorial : MonoBehaviour
     {
         yield return ShowMessage("Congratulations on harvesting your first plant. You can start replanting the apocalypse!", 5f);
         PlayerInteraction.PIInstance.canShootSeed = true;
-        yield return ShowMessage("Press the Right Mouse Button to launch a seed from the Seed Launcher.", 0f);
+        yield return ShowMessage("Press the Left Mouse Button to launch a seed from the Seed Launcher.", 0f);
     }
     private IEnumerator FirstPlantFullyWateredCoroutine()
     {
