@@ -27,6 +27,8 @@ public class PlantPoolManager : MonoBehaviour
 
     public PlantType selectedType = PlantType.Grass;
 
+    private readonly HashSet<PlantType> discoveredPlantTypes = new HashSet<PlantType>();
+
     private bool firstHarvest = true;
     private void Awake()
     {
@@ -310,12 +312,28 @@ public bool TryResolvePoolByPlantId(string plantId, out PlantPool matchingPool)
     }
 
 
+    private void MarkPoolUnlocked(PlantPool pool)
+    {
+        if (pool == null || unlockedPools.Contains(pool))
+            return;
 
+        unlockedPools.Add(pool);
+        unlockedPoolCountByType[pool.plantType] = GetUnlockedCountForType(pool.plantType) + 1;
+
+        bool foundNewType = discoveredPlantTypes.Add(pool.plantType);
+
+        if (foundNewType && discoveredPlantTypes.Count >= 2)
+        {
+            if (ObjectivesTutorial.OTInstance != null)
+                ObjectivesTutorial.OTInstance.TrySecondPlantTypeTriggered();
+        }
+    }
 
     private void ResetUnlockedCounts()
     {
         unlockedPoolCountByType.Clear();
         unlockedPools.Clear();
+        discoveredPlantTypes.Clear();
 
         foreach (PlantType type in System.Enum.GetValues(typeof(PlantType)))
             unlockedPoolCountByType[type] = 0;
@@ -342,15 +360,6 @@ public bool TryResolvePoolByPlantId(string plantId, out PlantPool matchingPool)
         }
 
         return string.Join(", ", parts) + "; research=" + currentResearchPoints;
-    }
-
-    private void MarkPoolUnlocked(PlantPool pool)
-    {
-        if (pool == null || unlockedPools.Contains(pool))
-            return;
-
-        unlockedPools.Add(pool);
-        unlockedPoolCountByType[pool.plantType] = GetUnlockedCountForType(pool.plantType) + 1;
     }
 
     private bool PoolMatchesPlantId(PlantPool pool, string plantId)

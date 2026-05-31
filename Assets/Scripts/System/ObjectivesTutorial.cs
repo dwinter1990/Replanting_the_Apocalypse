@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System;
 public class ObjectivesTutorial : MonoBehaviour
 {
     public static ObjectivesTutorial OTInstance { get; set; }
@@ -29,7 +30,9 @@ public class ObjectivesTutorial : MonoBehaviour
     private bool hasRunPlacerTutorialTriggered;
     private bool firstSeedShotTriggered;
     private bool researchPointsTriggered;
-
+    private bool secondPlantTriggered;
+    public bool _secondPlantTriggered => secondPlantTriggered;
+    
     // Track running coroutines so we can stop them cleanly.
     private Coroutine tutorialFlowRoutine;
     private Coroutine typewriterRoutine;
@@ -120,11 +123,14 @@ public class ObjectivesTutorial : MonoBehaviour
         yield return ShowMessage("Welcome back to Earth! I'm B.E.R.R.I., your local drop pod AI. Nice to meet you.", 5f);
         yield return ShowMessage("The planet is in ruins, but with your help, we can bring it back to life!", 5f);
         yield return ShowMessage("Use WASD to move your long distance drone about your designated area.", 4f);
+        yield return ShowMessage("If you hold SHIFT while moving, you'll go faster.", 3f);
+        yield return ShowMessage("Press SPACEBAR to jump, and hold it to use your jetpack.", 4f);
         yield return ShowMessage("You can use the mouse to look around.", 3f);
         yield return ShowMessage("Now go find a plant!", 3f);
 
         StopTutorialCoroutines();
     }
+
 
     private IEnumerator ShowMessage(string message, float holdTime)
     {
@@ -208,9 +214,10 @@ public class ObjectivesTutorial : MonoBehaviour
             }
         }
 
-        yield return ShowMessage("Great job finding the first plant! Now let's learn how to interact with it.", 5f);
+        yield return ShowMessage("There's a plant nearby, let's find it and I'll tell you how to nurture it.", 5f);
         yield return ShowMessage("With the water gun equipped, water plants by holding down the Right Mouse Button.", 5f);
         yield return ShowMessage("Hint: You'll have to aim at the base. Watering the leaves won't help.", 3f);
+        StopAllCoroutines();
     }
     public void TryTriggerFirstPlantFullyWatered()
     {
@@ -252,10 +259,11 @@ public class ObjectivesTutorial : MonoBehaviour
         yield return ShowMessage("Congratulations on harvesting your first plant. You can start replanting the apocalypse!", 5f);
         PlayerInteraction.PIInstance.canShootSeed = true;
         yield return ShowMessage("Press the Left Mouse Button to launch a seed from the Seed Launcher.", 0f);
+        StopAllCoroutines();
     }
     private IEnumerator FirstPlantFullyWateredCoroutine()
     {
-        yield return ShowMessage("Well done! You've fully watered the first plant! Now it's time to harvest!", 5f);
+        yield return ShowMessage("Well done! You've fully watered the first plant, now it's time to harvest!", 5f);
 
         if (HandManager.HMInstance != null)
         {
@@ -267,7 +275,7 @@ public class ObjectivesTutorial : MonoBehaviour
         }
 
         yield return ShowMessage("To harvest a plant, switch to the chainsaw by pressing 2.", 4f);
-        yield return ShowMessage("Hold down the left mouse button while aiming at the base of the plant to harvest it.", 5f);
+        yield return ShowMessage("Hold down the RIGHT MOUSE BUTTON while aiming at the plant and you'll begin harvesting.", 5f);
         StopTutorialCoroutines();
     }
 
@@ -289,12 +297,37 @@ public class ObjectivesTutorial : MonoBehaviour
     }
     private IEnumerator FirstSeedShotCoroutine()
     {
-        yield return ShowMessage("Great job shooting your first seed! Now you can water the seedling.", 5f);
+        yield return ShowMessage("I am reading that you've fired your first seedling. How does it feel to be responsible for a new life?", 5f);
         yield return ShowMessage("To switch back to the water gun, press 2.", 5f);
         yield return ShowMessage("When it's fully grown you can harvest it and each harvest will grant you Research Points.", 5f);
         StopTutorialCoroutines();
     }
 
+    public void TrySecondPlantTypeTriggered()
+    {
+        if (secondPlantTriggered) 
+        { 
+            return; 
+        }
+        secondPlantTriggered = true;
+        SecondPlantTypeTriggered();
+    }
+
+    private void SecondPlantTypeTriggered()
+    {
+        StopAllCoroutines();
+
+        canvasUpSequence.Restart();
+        canvasUpSequence.OnComplete(() =>
+        tutorialFlowRoutine = StartCoroutine(SecondPlantRoutine()));
+    }
+    private IEnumerator SecondPlantRoutine()
+    {
+        yield return ShowMessage("Getting a little seed library going I see? You're showing great initiative.", 3f);
+        yield return ShowMessage("If you've got the Seed Launcher equipped, you can cycle through your seeds.", 3f);
+        yield return ShowMessage("To do so, simply scroll UP or DOWN on your SCROLL WHEEL", 5f);
+        StopTutorialCoroutines();
+    }
     public void TryResearchPointsTriggered()
     {
         if (researchPointsTriggered) return;

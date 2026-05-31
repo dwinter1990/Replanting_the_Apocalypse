@@ -4594,14 +4594,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handManager: {fileID: 6331476138607074727}
   waterHose: {fileID: 6331476138607074720}
-  interactDistance: 5
-  playerCam: {fileID: 0}
   callDownEquipment: {fileID: 0}
-  timeBetweenShots: 0
   chainSawAnimator: {fileID: 0}
+  interactDistance: 5
+  sphereRadius: 0.35
+  playerCam: {fileID: 0}
+  interactionRadius: 0.5
+  timeBetweenShots: 0
   canShootSeed: 0
   waterThisPlant: {fileID: 0}
   harvestThisPlant: {fileID: 0}
+  harvestFX: {fileID: 0}
+  rightArmRoot: {fileID: 0}
 --- !u!114 &6972790123303850226
 MonoBehaviour:
   m_ObjectHideFlags: 0

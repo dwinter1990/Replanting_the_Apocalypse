@@ -49,6 +49,8 @@ public class UnlockShop : MonoBehaviour
     [Header("Cinemachine")]
     [SerializeField] private CinemachineInputAxisController cinemachineInput;
 
+    [Header("ObjectiveTriggers")]
+    private bool justBoughtGrenade;
     private void Awake()
     {
         if (USInstance != null && USInstance != this)
@@ -273,6 +275,7 @@ public class UnlockShop : MonoBehaviour
         switch (itemType)
         {
             case ShopItemType.GrenadeUnlock:
+                
                 return seedManager != null && !seedManager.GrenadeUnlocked;
 
             case ShopItemType.AutoSprinklerCharge:
@@ -354,6 +357,7 @@ public class UnlockShop : MonoBehaviour
                     return false;
 
                 seedManager.UnlockGrenade();
+                ObjectivesTutorial.OTInstance.GrenadeTutorial();
                 return true;
 
             case ShopItemType.AutoSprinklerCharge:

@@ -35,6 +35,12 @@ public class PlayerMovement : MonoBehaviour
     public bool isSprint => _sprintHeld;
     private bool _wasGrounded;
 
+    private bool _hasMoved;
+    public bool hasMoved => _hasMoved;
+    private bool _hasSprinted;
+    public bool hasSprinted => _hasSprinted;
+    private bool _hasJumped;
+    public bool hasJumped => _hasJumped;
     private void Awake()
     {
         PMInstance = this;
@@ -54,14 +60,24 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (!_hasMoved)
+        {
+            _hasMoved = true;
+        }
         _moveInput = context.ReadValue<Vector2>();
     }
 
     public void OnSprint(InputAction.CallbackContext context)
     {
-        if (context.performed && PlayerStats.PSInstance.currentPower > 0f)
+
+        if (context.performed)
         {
             _sprintHeld = true;
+
+            if (!_hasSprinted)
+            {
+                _hasSprinted = true;
+            }
         }
         else if (context.canceled)
         {
@@ -73,6 +89,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.started && isGrounded)
         {
+            if (!_hasJumped)
+            {
+                _hasJumped = true;
+            }
             jumpStarted = true;
         }
         
@@ -104,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
         bool isSprinting = _sprintHeld && hasMoveInput && isGrounded;
         cameraFeedback?.SetMovementState(hasMoveInput, isSprinting);
 
-        if(isGrounded && !isSprinting)
+        if(isGrounded)
         {
             PlayerStats.PSInstance.StartCoroutine(PlayerStats.PSInstance.PowerRecharge());
         } 
@@ -162,11 +182,6 @@ public class PlayerMovement : MonoBehaviour
             _rb.AddForce(Vector3.up * PlayerStats.PSInstance.jetpackThrust, ForceMode.Acceleration);
             Debug.Log("Applying jetpack thrust: " + PlayerStats.PSInstance.jetpackThrust.ToString("F2"));
             PlayerStats.PSInstance.UsePower(PlayerStats.PSInstance.jetpackFuelConsumptionRate * Time.deltaTime);
-        }
-
-        if(isSprint)
-        {
-            PlayerStats.PSInstance.UsePower(PlayerStats.PSInstance.sprintPowerCost * Time.deltaTime);
         }
 
         float speed = _sprintHeld && isGrounded ? sprintSpeed : walkSpeed;
