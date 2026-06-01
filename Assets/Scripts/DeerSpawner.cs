@@ -14,10 +14,9 @@ public class DeerSpawnLogic : MonoBehaviour
 
     [Header("Spawn Setup")]
     [SerializeField] private GameObject deerPrefab;
-    [SerializeField] private Transform[] spawnPoints;
-    //[SerializeField] private bool spawnOnlyOnce = true;
-    [SerializeField] private Vector3 mapCentre = Vector3.zero;
-    [SerializeField] private Vector2 mapExtents = new Vector2(50f, 50f);
+    [SerializeField] private Vector3 spawnPoint;
+    [SerializeField] private LayerMask groundLayer;
+
     [SerializeField] private float navMeshSampleDistance = 5f;
     
 
@@ -37,7 +36,6 @@ public class DeerSpawnLogic : MonoBehaviour
     {
         fullyGrownGrassCount++;
         Debug.Log($"Fully grown grass count: {fullyGrownGrassCount}");
-        TrySpawnDeer();
     }
 
     public void NotifyGrassUngrown()
@@ -48,7 +46,11 @@ public class DeerSpawnLogic : MonoBehaviour
     public void SetFullyGrownGrassCount(int count)
     {
         fullyGrownGrassCount = Mathf.Max(0, count);
-        TrySpawnDeer();
+        if(fullyGrownGrassCount >= fullyGrownGrassRequired)
+        {
+            Debug.Log($"Fully grown grass count set to {fullyGrownGrassCount}. Ready to spawn deer.");
+            TrySpawnDeer();
+        }
     }
 
     private void TrySpawnDeer()
@@ -63,30 +65,28 @@ public class DeerSpawnLogic : MonoBehaviour
             return;
         }
 
-            if (fullyGrownGrassCount < fullyGrownGrassRequired)
+        if (fullyGrownGrassCount < fullyGrownGrassRequired)
         {
             return;
         }
 
-        Vector3 spawnPosition = GetSpawnPosition();
-        Instantiate(deerPrefab, spawnPosition, Quaternion.identity);
-        hasSpawnedDeer = true;
+
+        GetSpawnPosition();
+        Instantiate(deerPrefab, spawnPoint, Quaternion.identity);
+        fullyGrownGrassCount = 0; // Reset count to allow for future spawns after more grass grows
         Debug.Log("Deer spawned.");
     }
    
 
     private Vector3 GetSpawnPosition()
     {
-        if (spawnPoints != null && spawnPoints.Length > 0)
+        RaycastHit hit;
+        Ray ray = new Ray(transform.position, Vector3.down);
+        if (Physics.Raycast(ray, out hit, 150f, groundLayer))
         {
-            int index = Random.Range(0, spawnPoints.Length);
-            Transform chosenPoint = spawnPoints[index];
-            if (chosenPoint != null)
-            {
-                return chosenPoint.position;
-            }
-        }
 
-        return transform.position;
+            spawnPoint = hit.point;
+        }
+        return spawnPoint;
     }
 }
