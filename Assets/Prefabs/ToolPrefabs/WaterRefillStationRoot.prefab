@@ -1326,10 +1326,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8770252269461717775}
-  - component: {fileID: 2828599295809805573}
   - component: {fileID: 7410674121586109238}
   - component: {fileID: 981427284831313833}
   - component: {fileID: 5460337606143467018}
+  - component: {fileID: 2828599295809805573}
   m_Layer: 0
   m_Name: WaterRefillStationRoot
   m_TagString: Untagged
@@ -1354,20 +1354,6 @@ Transform:
   - {fileID: 2078126110041770217}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2828599295809805573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6909637667764442227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8637805c6e427734284a96ab55e3ff04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 100
-  impactEffect: {fileID: 8290011843410130166, guid: 8eb2e3c5786532445b4883dc095378f7, type: 3}
 --- !u!54 &7410674121586109238
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1469,6 +1455,20 @@ MonoBehaviour:
     DissipationDistance: 100
     PropagationSpeed: 343
   DefaultVelocity: {x: 0, y: -0.5, z: 0}
+--- !u!114 &2828599295809805573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6909637667764442227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8637805c6e427734284a96ab55e3ff04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 100
+  impactEffect: {fileID: 8290011843410130166, guid: 8eb2e3c5786532445b4883dc095378f7, type: 3}
 --- !u!1 &7298818650859864729
 GameObject:
   m_ObjectHideFlags: 0

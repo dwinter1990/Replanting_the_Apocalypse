@@ -52,7 +52,6 @@ public class DecalHitAndSpawn : MonoBehaviour
             collisionEvents
         );
 
-        Debug.Log($"Collided with {other.name}, events: {eventCount}");
         for (int i = 0; i < eventCount; i++)
         {
             particleHitCount++;
@@ -78,8 +77,6 @@ public class DecalHitAndSpawn : MonoBehaviour
         projector.size = decalSize;
 
         StartCoroutine(FadeAndRelease(projector, decalLifetime));
-
-        Debug.Log($"Spawned decal at {projector.transform.position} with normal {particleCollisionEvent.normal}");
     }
 
 

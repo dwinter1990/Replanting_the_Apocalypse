@@ -143,10 +143,7 @@ public class Growing : MonoBehaviour
             return;
         }
 
-        if (originPool != null && originPool.plantType == PlantType.Grass)
-        {
-            DeerSpawnLogic.DSLInstance.NotifyGrassGrown();
-        }
+
         GrowOneStep();
     }
     public bool UpdateGrowth(float time)
@@ -210,6 +207,15 @@ public class Growing : MonoBehaviour
             scaleTween.Restart(true);
 
             gameObject.layer = ignoreWaterLayer;
+
+            if (originPool != null && originPool.plantType == PlantType.Grass)
+            {
+                DeerSpawnLogic.DSLInstance.NotifyGrassGrown();
+            }
+            if (originPool != null && originPool.plantType == PlantType.Bush)
+            {
+                DeerSpawnLogic.DSLInstance.NotifyBushGrown();
+            }
             return;
         }
 

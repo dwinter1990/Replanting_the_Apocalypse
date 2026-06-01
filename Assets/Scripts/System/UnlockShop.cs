@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Unity.Cinemachine;
+using System.Collections;
+using UnityEngine.Video;
 public class UnlockShop : MonoBehaviour
 {
     private enum ShopItemType
@@ -23,6 +25,7 @@ public class UnlockShop : MonoBehaviour
         public Button button;
         public TMP_Text label;
         public TMP_Text costLabel;
+        public VideoClip hoverVideo;
     }
 
     public static UnlockShop USInstance { get; private set; }
@@ -43,6 +46,9 @@ public class UnlockShop : MonoBehaviour
     private bool previousCursorVisibility;
 
     [Header("Animations")]
+    [SerializeField] private VideoPlayer shopPreviewVideoPlayer;
+    [SerializeField] private RawImage shopPreviewImage;
+    [SerializeField] private RenderTexture uiRenderTexture;
     [SerializeField] private VideoSelector videoSelector;
     [SerializeField] private Animator berriAnimator;
 
@@ -68,6 +74,13 @@ public class UnlockShop : MonoBehaviour
             closeButton.onClick.RemoveListener(HideMenu);
             closeButton.onClick.AddListener(HideMenu);
         }
+
+    
+        if (shopPreviewVideoPlayer != null)
+            shopPreviewVideoPlayer.targetTexture = uiRenderTexture;
+
+        if (shopPreviewImage != null)
+            shopPreviewImage.texture = uiRenderTexture;
 
         WireShopButtons();
         HideMenu();
@@ -98,6 +111,8 @@ public class UnlockShop : MonoBehaviour
 
     public void ShowMenu()
     {
+        berriAnimator.SetBool("IsShopOpen", true);
+
         if (PlayerStats.PSInstance == null)
         {
             Debug.LogWarning("Cannot open shop. PlayerStats is missing.");
@@ -123,13 +138,35 @@ public class UnlockShop : MonoBehaviour
         if (cinemachineInput != null)
             cinemachineInput.enabled = false;
 
-        berriAnimator.SetBool("IsShopOpen", true);
+        
 
         RefreshButtons();
         RefreshResearchPointsLabel();
         SelectDefaultButton();
     }
+    private void PlayShopPreviewVideo(ShopUnlockButton entry)
+    {
+        if (entry == null || entry.hoverVideo == null || shopPreviewVideoPlayer == null)
+            return;
 
+        shopPreviewVideoPlayer.clip = entry.hoverVideo;
+        shopPreviewVideoPlayer.Stop();
+        shopPreviewVideoPlayer.Play();
+
+        if (shopPreviewImage != null)
+            shopPreviewImage.enabled = true;
+    }
+
+    private void StopShopPreviewVideo()
+    {
+        if (shopPreviewVideoPlayer == null)
+            return;
+
+        shopPreviewVideoPlayer.Stop();
+
+        if (shopPreviewImage != null)
+            shopPreviewImage.enabled = false;
+    }
     public void HideMenu()
     {
 
@@ -404,7 +441,27 @@ public class UnlockShop : MonoBehaviour
             int capturedIndex = (int)entry.itemType;
             entry.button.onClick.RemoveAllListeners();
             entry.button.onClick.AddListener(() => OnShopItemButtonPressed(capturedIndex));
+
+            WireHoverEvents(entry);
         }
+    }
+    private void WireHoverEvents(ShopUnlockButton entry)
+    {
+        EventTrigger trigger = entry.button.GetComponent<EventTrigger>();
+
+        if (trigger == null)
+            trigger = entry.button.gameObject.AddComponent<EventTrigger>();
+
+        EventTrigger.Entry enterEvent = new EventTrigger.Entry();
+        enterEvent.eventID = EventTriggerType.PointerEnter;
+        enterEvent.callback.AddListener(_ => PlayShopPreviewVideo(entry));
+
+        EventTrigger.Entry exitEvent = new EventTrigger.Entry();
+        exitEvent.eventID = EventTriggerType.PointerExit;
+        exitEvent.callback.AddListener(_ => StopShopPreviewVideo());
+
+        trigger.triggers.Add(enterEvent);
+        trigger.triggers.Add(exitEvent);
     }
     private ShopUnlockButton FindShopItemConfig(ShopItemType itemType)
     {
@@ -446,5 +503,10 @@ public class UnlockShop : MonoBehaviour
     {
         if (EventSystem.current != null)
             EventSystem.current.SetSelectedGameObject(previouslySelectedObject);
+    }
+
+    private IEnumerator MenuWait()
+    {
+        yield return new WaitForSeconds(1.5f);
     }
 }

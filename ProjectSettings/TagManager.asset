@@ -11,6 +11,7 @@ TagManager:
   - Bush
   - Flower
   - Tree
+  - PlantIsHereImage
   layers:
   - Default
   - TransparentFX

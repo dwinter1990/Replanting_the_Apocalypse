@@ -190,8 +190,8 @@ public class ObjectivesTutorial : MonoBehaviour
         {
             if (trigger != null)
             {
-                trigger.enabled = false;
-                Debug.Log(trigger.name + " trigger disabled.");
+                trigger.GetComponent<PlayerGetsNearFirstPlant>().tutorialTriggered = true; // Ensure the trigger's own flag is set to prevent retriggering if the player goes back.
+                Debug.Log(trigger.name + " turning off tutorial trigger: " + trigger.GetComponent<PlayerGetsNearFirstPlant>().tutorialTriggered);
             }
         }
         // Player jumped ahead => stop current tutorial flow/text immediately.
@@ -205,15 +205,6 @@ public class ObjectivesTutorial : MonoBehaviour
 
     private IEnumerator FirstPlantFoundCoroutine()
     {
-        foreach (Collider trigger in firstPlantTrigger)
-        {
-            if (trigger != null)
-            {
-                trigger.enabled = false;
-                Debug.Log(trigger.name + " trigger disabled.");
-            }
-        }
-
         yield return ShowMessage("There's a plant nearby, let's find it and I'll tell you how to nurture it.", 5f);
         yield return ShowMessage("With the water gun equipped, water plants by holding down the Right Mouse Button.", 5f);
         yield return ShowMessage("Hint: You'll have to aim at the base. Watering the leaves won't help.", 3f);

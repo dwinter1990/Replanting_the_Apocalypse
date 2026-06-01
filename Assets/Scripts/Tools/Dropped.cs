@@ -27,14 +27,31 @@ public class Dropped : MonoBehaviour
            // rb.AddForce(Vector3.down * speed, ForceMode.VelocityChange);
         }
         rb.isKinematic = false; // Ensure the object is affected by physics
-        transform.Translate(Vector3.down * 90);
+        //transform.Translate(Vector3.down * 90);
+    }
+
+    private void OnEnable()
+    {
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+
+        if (impulseSource == null)
+        {
+            impulseSource = GetComponent<CinemachineImpulseSource>();
+        }
+        if (rb != null)
+        {
+            rb.isKinematic = false; // Ensure the object is affected by physics when enabled
+        }
     }
 
     private void FixedUpdate()
     {
         if(isDropping)
         {
-            rb.AddForce(Vector3.down * speed,ForceMode.Acceleration);
+            rb.AddForce(Vector3.down * speed, ForceMode.Acceleration);
         }
     }
 
@@ -58,7 +75,7 @@ public class Dropped : MonoBehaviour
 
                 impulseSource.GenerateImpulse(); // Trigger the camera shake
             isDropping = false;
-
+            Destroy(impactEffect.gameObject, 5f); // Destroy the impact effect after it has played
         }
     }
 
