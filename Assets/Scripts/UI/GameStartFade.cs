@@ -12,7 +12,12 @@ public class GameStartFade : MonoBehaviour
     [SerializeField] private GameObject objectivesCanvas;
     [SerializeField] private VideoPlayer introVideoClip;
 
-    
+    [Header("Player Managing")]
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private string gameplayActionMapName = "Player";
+    [SerializeField] private string skipActionName = "Skip";
+
+    private InputAction skipAction;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -22,24 +27,51 @@ public class GameStartFade : MonoBehaviour
         introVideo.enabled = false;
         introVideoClip.enabled = false;
         objectivesCanvas.SetActive(false);
-        
+
+        if (playerInput == null)
+            playerInput = FindFirstObjectByType<PlayerInput>();
+
+        LockInputToSkipOnly();
+
         StartCoroutine(HoldForStart());
 
         fade.FadeIn(1f);
     }
-
-    public void OnSkip(InputAction.CallbackContext context)
+    private void LockInputToSkipOnly()
     {
-        if (context.performed && introVideoClip.isPlaying)
+        if (playerInput == null || playerInput.actions == null)
+            return;
+
+        playerInput.actions.Disable();
+
+        skipAction = playerInput.actions.FindAction(skipActionName, false);
+
+        if (skipAction == null)
         {
-            StopAllCoroutines();
-            fade.FadeIn(1f);
-            StartCoroutine(EndOfVideoSequence());
-        }
-        else
-        {
+            Debug.LogWarning("Could not find Skip action on PlayerInput.");
             return;
         }
+
+        skipAction.ApplyBindingOverride("<Keyboard>/escape");
+        skipAction.Enable();
+    }
+
+    private void UnlockGameplayInput()
+    {
+        if (playerInput == null || playerInput.actions == null)
+            return;
+
+        playerInput.actions.Enable();
+        playerInput.SwitchCurrentActionMap(gameplayActionMapName);
+    }
+    public void OnSkip(InputAction.CallbackContext context)
+    {
+        if (!context.performed || !introVideoClip.isPlaying)
+            return;
+
+        StopAllCoroutines();
+        fade.FadeIn(1f);
+        StartCoroutine(EndOfVideoSequence());
     }
     private IEnumerator HoldForStart()
     {
@@ -64,10 +96,13 @@ public class GameStartFade : MonoBehaviour
         introVideoClip.Stop();
         introVideoClip.enabled = false;
 
+        UnlockGameplayInput();
+
         yield return new WaitForSeconds(1f);
         uiCanvas.gameObject.SetActive(true);
         objectivesCanvas.SetActive(true);
         fade.FadeOut(3f);
+        
         ObjectivesTutorial.OTInstance.StartCoroutine(ObjectivesTutorial.OTInstance.DelayedCanvasUp());
         StartCoroutine(Music());
     }

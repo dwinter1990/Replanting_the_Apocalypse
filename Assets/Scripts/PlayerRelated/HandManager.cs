@@ -1,3 +1,4 @@
+using CS.AudioToolkit;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -88,6 +89,10 @@ public class HandManager : MonoBehaviour
         for (int i = 0; i < rightHands.Length; i++)
         {
             rightHands[i].handObject.SetActive(i == activeRightHandIndex);
+            if(rightHands[i].handType == HandTypeRight.Harvest && i == activeRightHandIndex)
+            {
+                AudioController.Play("ChainsawIdle");
+            }
         }
     }
     private void UpdateLeftHands()

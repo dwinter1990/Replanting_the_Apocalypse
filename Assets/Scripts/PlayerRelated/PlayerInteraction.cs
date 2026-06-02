@@ -20,6 +20,8 @@ public class PlayerInteraction : MonoBehaviour
     private readonly RaycastHit[] interactionHits = new RaycastHit[8];
     [SerializeField] private float interactionRadius = 0.5f;
     private float harvestTime;
+    private Coroutine harvestCoroutine;
+    private Coroutine startHarvestNextFrameCoroutine;
 
     [Header("Seed Shooting Settings")]
     private float shootTime;
@@ -59,16 +61,29 @@ public class PlayerInteraction : MonoBehaviour
             if (activeHand == HandTypeRight.Water)
             {
                 waterHose.StartSpray();
-                StopCoroutine("TryHarvest");
-                StopHarvestFX();
+                StopHarvest();
             }
             else if (activeHand == HandTypeRight.Harvest)
             {
-                StopHarvestFX();
-                StartCoroutine(StartHarvestNextFrame());
-                AudioController.Play("ChainsawIdle");
-                //StartCoroutine("TryHarvest");
+                StartHarvest();
+                AudioController.Stop("ChainsawIdle");
+                AudioController.Play("ChainsawRip");
                 waterHose.StopSpray();
+            }
+        }
+
+        if (context.canceled)
+        {
+            if (activeHand == HandTypeRight.Water)
+            {
+                waterHose.StopSpray();
+            }
+
+            if (activeHand == HandTypeRight.Harvest)
+            {
+                StopHarvest();
+                AudioController.Stop("ChainsawRip");
+                AudioController.Play("ChainsawIdle");
             }
         }
 
@@ -84,6 +99,8 @@ public class PlayerInteraction : MonoBehaviour
             {
                 StopCoroutine("TryHarvest");
                 chainSawAnimator.SetBool("Harvest", false);
+                AudioController.Stop("ChainsawRip");
+                AudioController.Play("ChainsawIdle");
                 harvestTime = 0f;
                 StopHarvestFX();
             }
@@ -92,10 +109,37 @@ public class PlayerInteraction : MonoBehaviour
     private IEnumerator StartHarvestNextFrame()
     {
         yield return null;
-        AudioController.Play("ChainsawRip");
-        StartCoroutine(TryHarvest());
+
+        startHarvestNextFrameCoroutine = null;
+        harvestCoroutine = StartCoroutine(TryHarvest());
+    }
+    private void StartHarvest()
+    {
+        if (harvestCoroutine != null || startHarvestNextFrameCoroutine != null)
+            return;
+
+        StopHarvestFX();
+        startHarvestNextFrameCoroutine = StartCoroutine(StartHarvestNextFrame());
     }
 
+    private void StopHarvest()
+    {
+        if (startHarvestNextFrameCoroutine != null)
+        {
+            StopCoroutine(startHarvestNextFrameCoroutine);
+            startHarvestNextFrameCoroutine = null;
+        }
+
+        if (harvestCoroutine != null)
+        {
+            StopCoroutine(harvestCoroutine);
+            harvestCoroutine = null;
+        }
+
+        chainSawAnimator.SetBool("Harvest", false);
+        harvestTime = 0f;
+        StopHarvestFX();
+    }
     private void CacheHarvestParticles()
     {
         if (rightArmRoot != null)

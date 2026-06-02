@@ -1,3 +1,5 @@
+using CS.AudioToolkit;
+using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -65,8 +67,8 @@ public class PlayerMovement : MonoBehaviour
             _hasMoved = true;
         }
         _moveInput = context.ReadValue<Vector2>();
+       
     }
-
     public void OnSprint(InputAction.CallbackContext context)
     {
 
@@ -100,10 +102,12 @@ public class PlayerMovement : MonoBehaviour
         if (context.performed && PlayerStats.PSInstance.currentPower > 0f)
         {
             jumpHeld = true;
+            AudioController.Play("JetpackThrust");
         }
 
         if (context.canceled)
         {
+            AudioController.Stop("JetpackThrust");
             jumpHeld = false;
             return;
         }
