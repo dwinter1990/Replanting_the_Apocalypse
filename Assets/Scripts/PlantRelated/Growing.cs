@@ -11,6 +11,8 @@ public class Growing : MonoBehaviour
     private PlantPool originPool;
     private int startingLayer;
 
+    public event System.Action<Growing> OnHarvested;
+
     [Header("Watering settings")]
     private bool hasFullyGrown;
     public bool HasFullyGrown => hasFullyGrown;
@@ -208,15 +210,11 @@ public class Growing : MonoBehaviour
 
             gameObject.layer = ignoreWaterLayer;
 
-            if (originPool != null && originPool.plantType == PlantType.Grass)
+            if (originPool != null && AnimalSpawner.ASInstance != null)
             {
-                DeerSpawnLogic.DSLInstance.NotifyGrassGrown();
+                AnimalSpawner.ASInstance.NotifyPlantGrown(originPool.plantType);
             }
-            if (originPool != null && originPool.plantType == PlantType.Bush)
-            {
-                DeerSpawnLogic.DSLInstance.NotifyBushGrown();
-            }
-            return;
+                return;
         }
 
         scaleTween.ChangeEndValue(Vector3.one * currentScale);
@@ -253,8 +251,10 @@ public class Growing : MonoBehaviour
             return;
         }
         if (ObjectivesTutorial.OTInstance != null)
+        {
             ObjectivesTutorial.OTInstance.TryTriggerFirstPlantHarvested();
 
+        }
         string plantId = profile != null ? profile.name : gameObject.name.Replace("(Clone)", string.Empty).Trim();
         int researchPointsValue = profile != null ? profile.researchPointValue : 1;
 
@@ -283,11 +283,15 @@ public class Growing : MonoBehaviour
             Debug.Log("Unlocked new pool for type: " + sourcePool.plantType + ": " + sourcePool.name);
         }
 
-        if (sourcePool.plantType == PlantType.Grass)
+        if (sourcePool != null && AnimalSpawner.ASInstance != null)
         {
-            DeerSpawnLogic.DSLInstance.NotifyGrassUngrown();
+            AnimalSpawner.ASInstance.NotifyPlantUngrown(sourcePool.plantType);
         }
+
         Debug.LogWarning("Harvesting: " + plantId);
+
+        OnHarvested?.Invoke(this);
+
         ResetPlant();
 
         //Spawn in seeds to collect from harvesting, when configured

@@ -1,3 +1,4 @@
+using CS.AudioToolkit;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -65,6 +66,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 StopHarvestFX();
                 StartCoroutine(StartHarvestNextFrame());
+                AudioController.Play("ChainsawIdle");
                 //StartCoroutine("TryHarvest");
                 waterHose.StopSpray();
             }
@@ -75,6 +77,7 @@ public class PlayerInteraction : MonoBehaviour
             if (activeHand == HandTypeRight.Water)
             {
                 waterHose.StopSpray();
+
             }
 
             if (activeHand == HandTypeRight.Harvest)
@@ -89,7 +92,8 @@ public class PlayerInteraction : MonoBehaviour
     private IEnumerator StartHarvestNextFrame()
     {
         yield return null;
-        StartCoroutine("TryHarvest");
+        AudioController.Play("ChainsawRip");
+        StartCoroutine(TryHarvest());
     }
 
     private void CacheHarvestParticles()
@@ -279,7 +283,7 @@ public class PlayerInteraction : MonoBehaviour
         Growing currentHarvestTarget = null;
 
         chainSawAnimator.SetBool("Harvest", true);
-
+        
         while (true)
         {
             yield return new WaitForSeconds(0.25f);

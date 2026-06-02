@@ -6,8 +6,10 @@ public class PlayerGetsNearFirstPlant : MonoBehaviour
     [SerializeField] private ObjectivesTutorial objectivesTutorial; // Reference to the ObjectivesTutorial script
     private Collider triggerCollider; // Reference to the trigger collider
     public bool tutorialTriggered = false; // Flag to ensure the tutorial is triggered only once
-
+    private bool firstPlantHarvested = false; // Flag to track if the first plant has been harvested
     [SerializeField] private RawImage plantIsHereImage;
+
+    private Growing watchedPlant;
     private void Start()
     {
         if (objectivesTutorial == null)
@@ -26,16 +28,20 @@ public class PlayerGetsNearFirstPlant : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !tutorialTriggered)
+        if (other.CompareTag("Player"))
         {
-            Debug.Log("Player is near the first plant! Starting tutorial...");
-            objectivesTutorial.FirstPlantFound();
-            tutorialTriggered = true; // Set the flag to true to prevent retriggering
+            if (!tutorialTriggered)
+            {
+                Debug.Log("Player is near the first plant! Starting tutorial...");
+                objectivesTutorial.FirstPlantFound();
+                tutorialTriggered = true; // Set the flag to true to prevent retriggering
+            }
+            if (!firstPlantHarvested)
+            {
+                plantIsHereImage.transform.position = transform.position + Vector3.up * 2f; // Position the image above the plant
+                plantIsHereImage.gameObject.SetActive(true); // Show the "Plant is here" image
+            }
         }
-
-        plantIsHereImage.transform.position = transform.position + Vector3.up * 2f; // Position the image above the plant
-        plantIsHereImage.gameObject.SetActive(true); // Show the "Plant is here" image
-
     }
 
     private void Update()
@@ -54,6 +60,42 @@ public class PlayerGetsNearFirstPlant : MonoBehaviour
         }
     }
 
+    public void SetWatchedPlant(Growing plant)
+    {
+        if (watchedPlant != null)
+        {
+            watchedPlant.OnHarvested -= HandleWatchedPlantHarvested;
+        }
 
+        watchedPlant = plant;
+
+        if (watchedPlant != null)
+        {
+            watchedPlant.OnHarvested += HandleWatchedPlantHarvested;
+        }
+    }
+
+    private void HandleWatchedPlantHarvested(Growing harvestedPlant)
+    {
+        firstPlantHarvested = true;
+
+        if (plantIsHereImage != null)
+        {
+            plantIsHereImage.gameObject.SetActive(false);
+        }
+
+        if (triggerCollider != null)
+        {
+            triggerCollider.enabled = false;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (watchedPlant != null)
+        {
+            watchedPlant.OnHarvested -= HandleWatchedPlantHarvested;
+        }
+    }
 }
 

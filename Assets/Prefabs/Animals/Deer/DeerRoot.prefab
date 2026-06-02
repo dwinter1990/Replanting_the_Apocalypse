@@ -47,11 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: babadec6a01de7a4baedde8e3618d42d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   speed: 0.5
+  preferredPlantType: 0
   animator: {fileID: 8393419062265590030}
 --- !u!195 &5773587666866029410
 NavMeshAgent:
@@ -72,8 +69,8 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: -0.09
-  m_WalkableMask: 4294967295
+  m_BaseOffset: -0.33
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!54 &-2627563738018116590
 Rigidbody:

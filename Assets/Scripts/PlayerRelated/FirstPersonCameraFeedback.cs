@@ -1,3 +1,4 @@
+using CS.AudioToolkit;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -96,6 +97,7 @@ public class FirstPersonCameraFeedback : MonoBehaviour
     /// </summary>
     public void NotifyLand()
     {
+        AudioController.Play("Landing");
         _targetTilt = landTilt;
     }
 

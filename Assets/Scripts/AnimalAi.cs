@@ -5,9 +5,10 @@ using UnityEngine.AI;
 public class AnimalAI : MonoBehaviour
 {
     [Header("NavMesh Settings")]
-    [SerializeField] private Transform[] waypoints;
+    private Transform[] waypoints;
     [SerializeField] private float speed = 3.5f;
     private NavMeshAgent agent;
+    [SerializeField] private PlantType preferredPlantType; // The type of plant this animal prefers to eat
 
     [Header("Animation Settings")]
     [SerializeField] private Animator animator;
@@ -75,14 +76,14 @@ public class AnimalAI : MonoBehaviour
 
     private Transform[] GetWayPoints()
     {
-            GameObject[] grassObjects = GameObject.FindGameObjectsWithTag("Grass");
-            List<Transform> targets = new List<Transform>(grassObjects.Length);
+            GameObject[] preferredPlants = GameObject.FindGameObjectsWithTag(preferredPlantType.ToString());
+            List<Transform> targets = new List<Transform>(preferredPlants.Length);
 
-            for (int i = 0; i < grassObjects.Length; i++)
+            for (int i = 0; i < preferredPlants.Length; i++)
             {
-                if (grassObjects[i] != null)
+                if (preferredPlants[i] != null)
                 {
-                    targets.Add(grassObjects[i].transform);
+                    targets.Add(preferredPlants[i].transform);
                 }
             }
 

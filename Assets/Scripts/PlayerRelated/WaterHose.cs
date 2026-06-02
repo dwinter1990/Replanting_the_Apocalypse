@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
+using CS.AudioToolkit;
 
 public class WaterHose : MonoBehaviour
 {
@@ -48,6 +49,7 @@ public class WaterHose : MonoBehaviour
 
         sprayRoutine = StartCoroutine(Spray());
         waterParticles.Play();
+        AudioController.Play("SprayWater");
     }
 
     public void StopSpray()
@@ -56,7 +58,7 @@ public class WaterHose : MonoBehaviour
         {
             StopCoroutine(sprayRoutine);
             sprayRoutine = null;
-
+            AudioController.Stop("SprayWater"); 
         }
 
         waterGunAnim.SetBool("isFiring", false);

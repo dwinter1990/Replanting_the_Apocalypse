@@ -64,7 +64,16 @@ public class PlantPool : MonoBehaviour
         {
             growing.SetPool(this);
         }
+        if (worldPlant && firstPlacementLocation != null)
+        {
+            PlayerGetsNearFirstPlant firstPlantTrigger =
+                firstPlacementLocation.GetComponent<PlayerGetsNearFirstPlant>();
 
+            if (firstPlantTrigger != null && growing != null)
+            {
+                firstPlantTrigger.SetWatchedPlant(growing);
+            }
+        }
         if (worldPlant)
         {
             obj.transform.position = firstPlacementLocation.position;
