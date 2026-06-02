@@ -17,8 +17,9 @@ public class Dropped : MonoBehaviour
         if (animator == null)
         {
             animator = GetComponentInChildren<Animator>();
-            animator.enabled = false; // Disable the animator to prevent any animations from playing
+            
         }
+        animator.enabled = false; // Disable the animator to prevent any animations from playing
         impulseSource = GetComponent<CinemachineImpulseSource>();
 
         rb = GetComponent<Rigidbody>();
@@ -75,10 +76,16 @@ public class Dropped : MonoBehaviour
 
                 impulseSource.GenerateImpulse(); // Trigger the camera shake
             isDropping = false;
-            Destroy(impactEffect.gameObject, 5f); // Destroy the impact effect after it has played
+            StartCoroutine(TurnOffImpactFX());
+            impactEffect.gameObject.SetActive(true); // Ensure the impact effect is active
         }
     }
 
+    IEnumerator TurnOffImpactFX()
+    {
+        yield return new WaitForSeconds(3f); // Wait for the impact effect to finish
+        impactEffect.gameObject.SetActive(false); // Deactivate the impact effect
+    }
     IEnumerator HandleImpact()
     {
         yield return new WaitForSeconds(0.5f); // Wait a short moment to ensure the impact effect is visible

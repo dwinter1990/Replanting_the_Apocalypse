@@ -306,7 +306,7 @@ public class ObjectivesTutorial : MonoBehaviour
 
     private void SecondPlantTypeTriggered()
     {
-        StopAllCoroutines();
+        StopTutorialCoroutines();
 
         canvasUpSequence.Restart();
         canvasUpSequence.OnComplete(() =>
